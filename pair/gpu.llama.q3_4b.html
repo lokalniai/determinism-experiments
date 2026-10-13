@@ -1,0 +1,308 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><title>llama.cpp · Qwen3-4B: L40S vs A100 &middot; Determinism</title><link rel=icon href='../favicon.ico' sizes=any><script>try{var t=localStorage.getItem('theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}</script><link rel=preconnect href='https://fonts.googleapis.com'><link rel=preconnect href='https://fonts.gstatic.com' crossorigin><link rel=stylesheet href='https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;500&display=swap'><link rel=stylesheet href='../static/style.css'></head><body><header class=mast><a class=brand href='https://lokalni.ai' aria-label='lokalni.ai'><img class=logo-light src='../static/logo_dark.png' alt='lokalni.ai' width=102 height=32><img class=logo-dark src='../static/logo_light.png' alt='lokalni.ai' width=102 height=32></a><span class=mastsep>&frasl;</span><a class=proj href='https://lokalni.ai/blog/stejny-vstup-stejny-vystup/'>Stejn&yacute; vstup, stejn&yacute; v&yacute;stup</a><span class=spacer></span><button class=tgl type=button data-theme-toggle aria-label='Switch theme' title='Switch theme'><svg class=sun viewBox='0 0 24 24' aria-hidden=true><circle cx=12 cy=12 r=4 /><path d='M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4' /></svg><svg class=moon viewBox='0 0 24 24' aria-hidden=true><path d='M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z' /></svg></button></header><div class=crumb><a href='../index.html'>&larr; results</a></div><div class=picker><div class=pickhd><span class=pickcell>GPU pair</span><span class=spacer></span><a class='nav prev' href='gpu.llama.lfm350m.html'>&larr; prev</a><span class=sub2>4 / 9</span><a class='nav next' href='engine.zia.lfm350m.html'>next &rarr;</a></div><div class=chips><a class='chip split' href='gpu.vllm.lfm350m.html'>vLLM &middot; LFM2.5-350M: L40S vs A100</a><a class='chip split' href='gpu.vllm.q3_4b.html'>vLLM &middot; Qwen3-4B: L40S vs A100</a><a class='chip exact' href='gpu.llama.lfm350m.html'>llama.cpp &middot; LFM2.5-350M: L40S vs A100</a><a class='chip exact on' href='gpu.llama.q3_4b.html'>llama.cpp &middot; Qwen3-4B: L40S vs A100</a><a class='chip split' href='engine.zia.lfm350m.html'>A100 &middot; LFM2.5-350M: llama.cpp vs vLLM</a><a class='chip split' href='engine.alfrid.lfm350m.html'>L40S &middot; LFM2.5-350M: llama.cpp vs vLLM</a><a class='chip split' href='engine.zia.q3_4b.html'>A100 &middot; Qwen3-4B: llama.cpp vs vLLM</a><a class='chip split' href='engine.alfrid.q3_4b.html'>L40S &middot; Qwen3-4B: llama.cpp vs vLLM</a><a class='chip split' href='engine.grogu.qwen35moe.html'>Blackwell &middot; Qwen3.6-35B-A3B: llama.cpp vs vLLM</a></div></div><h1>llama.cpp &middot; Qwen3-4B: L40S vs A100</h1><div class=sub>Repeat 0 of E1a (batch size 1, greedy) on each side: L40S on alfrid6.meta.zcu.cz (job 24604441) and A100 on zia2.cerit-sc.cz (job 24603117). Each side is itself deterministic at batch size 1, so any difference here is the hardware.</div><section class=prompt id=hello><h2>hello <span class=q>Hello! Who are you?</span></h2><div class=same-note>Identical over all 50 tokens.</div><details><summary>full text: both (50 tokens)</summary><div class=doc>Hello! I&#x27;m Qwen, a large-scale language model developed by Alibaba Cloud&#x27;s Tongyi Lab. I can assist you with answering questions, writing stories, creating documents, coding, and more. How can I help you today? 😊</div></details></section><section class=prompt id=fact><h2>fact <span class=q>Explain why the sky is blue during the day and why sunsets are often red or orange. Cover the physics involved and mention how atmospheric conditions such as dust or pollution change the colors.</span></h2><div class=same-note>Identical over all 905 tokens.</div><details><summary>full text: both (905 tokens)</summary><div class=doc>The colors of the sky during the day and at sunset are due to a phenomenon in physics known as **Rayleigh scattering**. This process explains how sunlight interacts with the molecules and small particles in Earth&#x27;s atmosphere.
+
+---
+
+### 🌞 Why the Sky is Blue During the Day
+
+Sunlight, or white light, is made up of different colors, each with a different wavelength. The visible spectrum ranges from short-wavelength violet and blue to longer-wavelength red and orange.
+
+- **Rayleigh scattering** occurs when light interacts with particles much smaller than the wavelength of the light—such as nitrogen and oxygen molecules in the atmosphere.
+- The intensity of scattering is **inversely proportional to the fourth power of the wavelength**:
+  \[
+  I \propto \frac{1}{\lambda^4}
+  \]
+  This means **shorter wavelengths (blue and violet)** are scattered about **10 times more** than longer wavelengths (red and orange).
+
+- As sunlight enters the atmosphere, blue and violet light are scattered in all directions by air molecules. This scattered blue light reaches our eyes from all directions, making the sky appear blue.
+
+- Although violet light is scattered even more than blue, our eyes are less sensitive to violet, and some of it is absorbed by the upper atmosphere (by ozone), so we perceive the sky as blue rather than violet.
+
+---
+
+### 🌅 Why Sunsets Are Red or Orange
+
+At sunset (or sunrise), the sun is near the horizon, so sunlight must pass through a much thicker layer of the atmosphere to reach our eyes.
+
+- As the light travels through more atmosphere, **shorter wavelengths (blue and green)** are scattered out of the direct beam by Rayleigh scattering.
+- The longer wavelengths (red, orange, and yellow) are scattered much less and continue traveling through the atmosphere with less obstruction.
+- As a result, the direct sunlight that reaches us at sunset is dominated by red and orange hues.
+
+This is why the sun appears red or orange during sunrise and sunset.
+
+---
+
+### 🌫️ How Dust, Pollution, and Atmospheric Conditions Change the Colors
+
+Atmospheric particles such as **dust, pollution, water droplets, or aerosols** can alter the colors we see:
+
+1. **Mie Scattering**:
+   - When particles are comparable in size to the wavelength of light (like dust or pollution), the scattering becomes **Mie scattering**, which affects all wavelengths more equally.
+   - Unlike Rayleigh scattering, Mie scattering does not strongly favor blue light.
+   - This can lead to **more uniform, grayish or hazy skies**, and **less vivid blue skies** during the day.
+
+2. **Pollution or Smoke**:
+   - In cities or areas with high pollution, the presence of fine particles can scatter all colors, leading to **duller, grayish skies**.
+   - However, during a sunset, pollution can enhance red or orange hues by scattering blue light away and allowing reds to dominate more clearly.
+
+3. **Haze or Dust Storms**:
+   - Dust storms or volcanic ash can create **intense reds and oranges** at sunset due to increased scattering and absorption of shorter wavelengths.
+   - In some cases, the sky may appear **pink or purple** due to the combination of scattered light and atmospheric particles.
+
+4. **Fog or Clouds**:
+   - Clouds scatter light more uniformly and can create white or gray skies, reducing the visibility of blue or red hues.
+   - However, when the sun is low and clouds are present, they can reflect and enhance red or orange colors.
+
+---
+
+### Summary
+
+| Phenomenon | Cause |
+|----------|-------|
+| Blue sky during the day | Rayleigh scattering of short blue wavelengths by air molecules |
+| Red/orange sunsets | Long-wavelength red/orange light travels through more atmosphere, with blue light scattered away |
+| Dust/pollution effects | Mie scattering reduces blue dominance, can enhance reds or create hazy skies |
+
+✅ In short:  
+**Blue sky = short wavelengths scattered widely during the day**  
+**Red sunsets = long wavelengths pass through more atmosphere with less scattering**  
+**Pollution/dust = alters scattering, can enhance or dull colors depending on particle size and concentration**
+
+This beautiful interplay of light and atmosphere is a classic example of how simple physics governs everyday natural phenomena. 🌍✨</div></details></section><section class=prompt id=story><h2>story <span class=q>Write a short story about a lighthouse keeper on a remote island who finds a message in a bottle that seems to be addressed to them personally.</span></h2><div class=same-note>Identical over all 931 tokens.</div><details><summary>full text: both (931 tokens)</summary><div class=doc>The wind howled across Blackthorn Point, a jagged tooth of rock rising from the churning North Sea. Elias Thorne, the lighthouse keeper, stood at the tall, weathered railing, his breath pluming in the cold air. For twenty-three years, he’d watched the same relentless storm, the same indifferent waves, the same endless expanse of grey. His world was the rhythmic *clack-clack* of the lamp, the groan of the iron tower, and the salt-stung silence of the island.
+
+He’d found the bottle half-buried in the damp sand near the base of the cliff, tucked behind a loose stone. It was small, chipped, the glass cloudy with sea spray. Inside, nestled in a scrap of faded blue cloth, was a single, folded piece of paper. No return address. Just a message, written in a hand that seemed both familiar and strangely distant:
+
+&gt; *To Elias Thorne, Keeper of Blackthorn Point, who sees the sea as a mirror and the sky as a wound:*
+&gt;
+&gt; *I am not who you think. I am the one who watches from the other side of the waves. I have been waiting for you to find this. The light you keep burning is not just for ships. It is a signal. A signal to the ones who are lost, not just at sea, but in the silence between heartbeats. You carry a memory I cannot forget. Find the stone beneath the old oak. It will speak. And when it does, you will know I am not gone. I am simply waiting to be seen.*
+&gt;
+&gt; *— M.*
+
+Elias froze. His hands, usually steady, trembled. *M.* The name was a ghost in his memory. His mother, Margaret. She’d died ten years ago, a year before he’d taken the post. A sudden illness, a quiet passing. He’d buried her on the island’s only hill, near the old oak tree. He’d never spoken of her after that. The sea had always felt like a cold, indifferent witness to her absence.
+
+He stared at the paper, the words burning into his mind. *The light you keep burning is not just for ships.* He’d always thought it was. A duty. A beacon. But now, it felt different. A message. A *call*.
+
+That night, he climbed the hill to the old oak. The wind whispered through its branches like a sigh. Beneath its roots, half-buried in moss and roots, was a smooth, dark stone, worn smooth by centuries of rain. He picked it up. It was warm. And when he pressed it to his palm, a faint vibration pulsed through his bones — not sound, but a sensation, like a memory surfacing.
+
+He closed his eyes. And suddenly, he wasn’t on the hill. He was standing on a shore, not of Blackthorn, but of a different coast — a place he’d never seen. The sky was bruised purple, and the sea was calm, still. A woman stood on the shore, her back to him, her hair like silver in the wind. She turned slowly. Her face was familiar — Margaret’s face, but older, wiser, with eyes that held the depth of the ocean.
+
+“You found it,” she said, her voice soft, like waves on stone.
+
+Elias opened his eyes. He was back on the hill. The stone was cold. The oak stood silent. The wind had died.
+
+He sat on the grass, heart pounding. The message wasn’t from a stranger. It was from *her*. From Margaret. She hadn’t died. She’d been waiting. Not in the grave, but in the silence, in the light, in the sea’s endless watch.
+
+He walked back to the lighthouse. The lamp was burning. He turned it to full beam, not just for ships, but for the sky, for the sea, for the memory of a woman who had loved him in a way he’d never known.
+
+And from that day on, Elias Thorne didn’t just keep the light. He *listened* to it. And sometimes, when the wind was right, he swore he could hear a whisper — not from the sea, but from the stone beneath the oak — a soft, familiar voice saying, *I am here. I am waiting. I am seen.*
+
+And for the first time in twenty-three years, he felt not alone. He felt *known*.</div></details></section><section class=prompt id=math><h2>math <span class=q>A train leaves Plzeň at 8:15 and travels toward Prague at an average speed of 72 km/h. A second train leaves Prague at 8:45 toward Plzeň at 90 km/h. The distance between the two cities along the track is 114 km. At what time do the trains meet, and how far from Plzeň? Solve it step by step and state the final answer clearly.</span></h2><div class=same-note>Identical over all 1024 tokens.</div><details><summary>full text: both (1024 tokens)</summary><div class=doc>Let&#x27;s solve this step by step.
+
+---
+
+### **Given:**
+
+- Distance between Plzeň and Prague: **114 km**
+- Train A (from Plzeň) leaves at **8:15** at **72 km/h**
+- Train B (from Prague) leaves at **8:45** at **90 km/h**
+- We need to find:
+  - The **time** when the two trains meet
+  - The **distance from Plzeň** to the meeting point
+
+---
+
+### **Step 1: Determine how long Train A travels before Train B starts**
+
+Train A starts at 8:15, Train B at 8:45.
+
+Time difference = 8:45 − 8:15 = **30 minutes** = **0.5 hours**
+
+In that time, Train A travels:
+
+$$
+\text{Distance} = \text{Speed} \times \text{Time} = 72 \, \text{km/h} \times 0.5 \, \text{h} = 36 \, \text{km}
+$$
+
+So, when Train B starts at 8:45, the two trains are **36 km apart** (since Train A has already covered 36 km from Plzeň).
+
+---
+
+### **Step 2: After 8:45, both trains are moving toward each other**
+
+Now, both trains are moving toward each other:
+
+- Train A speed: 72 km/h
+- Train B speed: 90 km/h
+- Combined speed:  
+  $$
+  72 + 90 = 162 \, \text{km/h}
+  $$
+
+Remaining distance between them:  
+$$
+114 \, \text{km} - 36 \, \text{km} = 78 \, \text{km}
+$$
+
+Time to meet after 8:45:
+
+$$
+\text{Time} = \frac{\text{Distance}}{\text{Speed}} = \frac{78}{162} \, \text{hours}
+$$
+
+Simplify the fraction:
+
+$$
+\frac{78}{162} = \frac{13}{27} \, \text{hours}
+$$
+
+Convert to minutes:
+
+$$
+\frac{13}{27} \times 60 = \frac{780}{27} \approx 28.888... \, \text{minutes}
+$$
+
+Break it down:
+
+- 28 minutes
+- 0.888... × 60 ≈ 53.33 seconds
+
+So approximately **28 minutes and 53 seconds**
+
+---
+
+### **Step 3: Add this time to 8:45 to get the meeting time**
+
+8:45 + 28 minutes = **9:13**
+
+Then + 53 seconds → **9:13:53**
+
+So, the trains meet at approximately **9:13 and 53 seconds**
+
+But let&#x27;s keep it precise.
+
+---
+
+### **Step 4: Find distance from Plzeň to meeting point**
+
+We can compute this in two ways:
+
+#### **Option 1: Distance traveled by Train A from 8:15 to meeting time**
+
+- Time from 8:15 to meeting time:
+  - From 8:15 to 8:45 = 30 minutes = 0.5 h
+  - From 8:45 to meeting = $ \frac{13}{27} $ h
+  - Total time = $ 0.5 + \frac{13}{27} = \frac{1}{2} + \frac{13}{27} $
+
+Convert to common denominator:
+
+$$
+\frac{1}{2} = \frac{27}{54}, \quad \frac{13}{27} = \frac{26}{54}
+$$
+
+Wait — better to use 54:
+
+$$
+\frac{1}{2} = \frac{27}{54}, \quad \frac{13}{27} = \frac{26}{54}
+$$
+
+So total = $ \frac{27 + 26}{54} = \frac{53}{54} $ hours? Wait — no:
+
+Wait: $ \frac{1}{2} = \frac{27}{54} $?  
+No: $ \frac{1}{2} = \frac{27}{54} $ is wrong.
+
+Actually:
+
+- $ \frac{1}{2} = \frac{27}{54} $? → 27/54 = 1/2 →</div></details></section><section class=prompt id=code><h2>code <span class=q>Write a Python function `parse_iso8601(s: str)` that parses an ISO 8601 timestamp such as `2026-10-12T14:03:07.250+02:00` into a tuple (year, month, day, hour, minute, second, microsecond, utc_offset_minutes) without using the datetime module. Validate the input and raise ValueError on malformed strings. Include a few pytest test cases.</span></h2><div class=same-note>Identical over all 1024 tokens.</div><details><summary>full text: both (1024 tokens)</summary><div class=doc>```python
+import re
+from typing import Tuple, ValueError
+
+def parse_iso8601(s: str) -&gt; Tuple[int, int, int, int, int, int, int, int]:
+    &quot;&quot;&quot;
+    Parse an ISO 8601 timestamp string into a tuple (year, month, day, hour, minute, 
+    second, microsecond, utc_offset_minutes).
+    
+    Args:
+        s: ISO 8601 formatted string (e.g., &quot;2026-10-12T14:03:07.250+02:00&quot;)
+    
+    Returns:
+        Tuple of (year, month, day, hour, minute, second, microsecond, utc_offset_minutes)
+    
+    Raises:
+        ValueError: If the input string is malformed or does not conform to ISO 8601 format
+    &quot;&quot;&quot;
+    
+    # Validate input
+    if not isinstance(s, str):
+        raise ValueError(&quot;Input must be a string&quot;)
+    
+    if not s or s.isspace():
+        raise ValueError(&quot;Input string cannot be empty or contain only whitespace&quot;)
+    
+    # Define the expected pattern for ISO 8601 with timezone offset
+    # Format: YYYY-MM-DDTHH:MM:SS.sss[+-]HH:MM
+    pattern = r&#x27;^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})\.(\d{3})([+-])(\d{2}):(\d{2})$&#x27;
+    
+    match = re.match(pattern, s)
+    
+    if not match:
+        # Try without microseconds (e.g., &quot;2026-10-12T14:03:07+02:00&quot;)
+        pattern_no_micro = r&#x27;^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})([+-])(\d{2}):(\d{2})$&#x27;
+        match_no_micro = re.match(pattern_no_micro, s)
+        if not match_no_micro:
+            raise ValueError(f&quot;Invalid ISO 8601 format: {s}&quot;)
+        
+        # Extract values from the no-microsecond version
+        year, month, day, hour, minute, second, tz_sign, tz_hour, tz_minute = match_no_micro.groups()
+        
+        # Microsecond is 0
+        microsecond = 0
+        
+        # Parse timezone offset
+        offset_minutes = int(tz_hour) * 60 + int(tz_minute) * (-1 if tz_sign == &#x27;-&#x27; else 1)
+        
+        # Validate date components
+        if not (1 &lt;= int(month) &lt;= 12):
+            raise ValueError(f&quot;Invalid month: {month}&quot;)
+        if not (1 &lt;= int(day) &lt;= 31):
+            raise ValueError(f&quot;Invalid day: {day}&quot;)
+        
+        # Validate time components
+        if not (0 &lt;= int(hour) &lt;= 23):
+            raise ValueError(f&quot;Invalid hour: {hour}&quot;)
+        if not (0 &lt;= int(minute) &lt;= 59):
+            raise ValueError(f&quot;Invalid minute: {minute}&quot;)
+        if not (0 &lt;= int(second) &lt;= 59):
+            raise ValueError(f&quot;Invalid second: {second}&quot;)
+        
+        return (
+            int(year), int(month), int(day),
+            int(hour), int(minute), int(second),
+            microsecond, offset_minutes
+        )
+    
+    # Extract values from the full pattern (with microseconds)
+    year, month, day, hour, minute, second, microsecond, tz_sign, tz_hour, tz_minute = match.groups()
+    
+    # Parse timezone offset
+    offset_minutes = int(tz_hour) * 60 + int(tz_minute) * (-1 if tz_sign == &#x27;-&#x27; else 1)
+    
+    # Validate date components
+    if not (1 &lt;= int(month) &lt;= 12):
+        raise ValueError(f&quot;Invalid month: {month}&quot;)
+    if not (1 &lt;= int(day) &lt;= 31):
+        raise ValueError(f&quot;Invalid day: {day}&quot;)
+    
+    # Validate time components
+    if not (0 &lt;= int(hour) &lt;= 23):
+        raise ValueError(f&quot;Invalid hour: {hour}&quot;)
+    if not (0 &lt;= int(minute) &lt;= 59):
+        raise ValueError(f&quot;Invalid minute: {minute}&quot;)
+    if not (0 &lt;= int(second) &lt;= 59):
+        raise ValueError(f&quot;Invalid second: {second}&quot;)
+    
+    # Validate microsecond (must be 3 digits)
+    if not (0 &lt;= int(microsecond) &lt;= 999):
+        raise ValueError(f&quot;Invalid microsecond: {microsecond}&quot;)
+    
+    return (
+        int(year), int(month), int(day),
+        int(hour), int</div></details></section><script>document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-theme-toggle]');if(!b)return;var d=document.documentElement,n=d.getAttribute('data-theme')==='dark'?'light':'dark';if(n==='dark')d.setAttribute('data-theme','dark');else d.removeAttribute('data-theme');try{localStorage.setItem('theme',n);}catch(err){}});</script><script>document.addEventListener('keydown',function(e){if(e.altKey||e.ctrlKey||e.metaKey||e.shiftKey)return;var t=e.target;if(t&&(t.tagName==='INPUT'||t.tagName==='TEXTAREA'||t.isContentEditable))return;var a=document.querySelector(e.key==='ArrowLeft'?'a.nav.prev':e.key==='ArrowRight'?'a.nav.next':'_');if(a){location.href=a.href;}});(function(){var c=document.querySelector('.chip.on');if(c&&c.scrollIntoView)c.scrollIntoView({block:'nearest'});})();</script></body></html>

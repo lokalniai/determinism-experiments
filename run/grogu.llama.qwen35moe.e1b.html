@@ -1,0 +1,261 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><title>e1b Qwen3.6-35B-A3B · llama.cpp · Blackwell &middot; Determinism</title><link rel=icon href='../favicon.ico' sizes=any><script>try{var t=localStorage.getItem('theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}</script><link rel=preconnect href='https://fonts.googleapis.com'><link rel=preconnect href='https://fonts.gstatic.com' crossorigin><link rel=stylesheet href='https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;500&display=swap'><link rel=stylesheet href='../static/style.css'></head><body><header class=mast><a class=brand href='https://lokalni.ai' aria-label='lokalni.ai'><img class=logo-light src='../static/logo_dark.png' alt='lokalni.ai' width=102 height=32><img class=logo-dark src='../static/logo_light.png' alt='lokalni.ai' width=102 height=32></a><span class=mastsep>&frasl;</span><a class=proj href='https://lokalni.ai/blog/stejny-vstup-stejny-vystup/'>Stejn&yacute; vstup, stejn&yacute; v&yacute;stup</a><span class=spacer></span><button class=tgl type=button data-theme-toggle aria-label='Switch theme' title='Switch theme'><svg class=sun viewBox='0 0 24 24' aria-hidden=true><circle cx=12 cy=12 r=4 /><path d='M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4' /></svg><svg class=moon viewBox='0 0 24 24' aria-hidden=true><path d='M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z' /></svg></button></header><div class=crumb><a href='../index.html'>&larr; results</a></div><div class=picker><div class=pickhd><span class=pickcell>e1b</span><span class=sub2>Qwen3.6-35B-A3B &middot; llama.cpp &middot; Blackwell</span><span class=spacer></span><a class='nav prev' href='grogu.llama.qwen35moe.e1a.html'>&larr; prev</a><span class=sub2>74 / 78</span><a class='nav next' href='grogu.llama.qwen35moe.e2_np1.html'>next &rarr;</a></div><div class=legend><span><i class='chipi exact'></i>every run is the reference</span><span><i class='chipi shift'></i>one output, not the reference</span><span><i class='chipi split'></i>several outputs</span></div><div class=strip><div class=grow><span class=glab>A100 &middot; vLLM &middot; LFM2.5-350M</span><div class=chips><a class='chip exact' href='zia.vllm.lfm350m.e1a.html' title='batch size 1: match 1.00, 1 output(s)'>e1a</a><a class='chip exact' href='zia.vllm.lfm350m.e1b.html' title='10 restarts: match 1.00, 1 output(s)'>e1b</a><a class='chip exact' href='zia.vllm.lfm350m.e1c.html' title='separate job: match 1.00, 1 output(s)'>e1c</a><a class='chip split' href='zia.vllm.lfm350m.e2_bs2.first.html' title='batch of 2, target first: match 0.02, 10 output(s)'>e2_bs2&middot;F</a><a class='chip split' href='zia.vllm.lfm350m.e2_bs2.last.html' title='batch of 2, target last: match 0.24, 8 output(s)'>e2_bs2&middot;L</a><a class='chip split' href='zia.vllm.lfm350m.e2_bs4.first.html' title='batch of 4, target first: match 0.06, 9 output(s)'>e2_bs4&middot;F</a><a class='chip split' href='zia.vllm.lfm350m.e2_bs4.last.html' title='batch of 4, target last: match 0.40, 10 output(s)'>e2_bs4&middot;L</a><a class='chip split' href='zia.vllm.lfm350m.e2_bs8.first.html' title='batch of 8, target first: match 0.38, 7 output(s)'>e2_bs8&middot;F</a><a class='chip split' href='zia.vllm.lfm350m.e2_bs8.last.html' title='batch of 8, target last: match 0.32, 8 output(s)'>e2_bs8&middot;L</a><a class='chip shift' href='zia.vllm.lfm350m.e2_pc.html' title='prefix cache: match 0.40, 1 output(s)'>e2_pc</a><a class='chip exact' href='zia.vllm.lfm350m.e2_srv0.html' title='server, idle: match 1.00, 1 output(s)'>e2_srv0</a><a class='chip split' href='zia.vllm.lfm350m.e2_srv4.html' title='server, 4 clients: match 0.38, 10 output(s)'>e2_srv4</a><a class='chip shift' href='zia.vllm.lfm350m.e3_eager.html' title='eager mode: match 0.00, 1 output(s)'>e3_eager</a><a class='chip shift' href='zia.vllm.lfm350m.e3_triton.html' title='Triton attention: match 0.20, 1 output(s)'>e3_triton</a><a class='chip exact' href='zia.vllm.lfm350m.e5_t07.html' title='sampling T=0.7: match 1.00, 1 output(s)'>e5_t07</a><a class='chip exact' href='zia.vllm.lfm350m.e5_t10.html' title='sampling T=1.0: match 1.00, 1 output(s)'>e5_t10</a></div></div><div class=grow><span class=glab>A100 &middot; vLLM &middot; Qwen3-4B</span><div class=chips><a class='chip exact' href='zia.vllm.q3_4b.e1a.html' title='batch size 1: match 1.00, 1 output(s)'>e1a</a><a class='chip exact' href='zia.vllm.q3_4b.e1b.html' title='10 restarts: match 1.00, 1 output(s)'>e1b</a><a class='chip exact' href='zia.vllm.q3_4b.e1c.html' title='separate job: match 1.00, 1 output(s)'>e1c</a><a class='chip split' href='zia.vllm.q3_4b.e2_bs2.first.html' title='batch of 2, target first: match 0.20, 8 output(s)'>e2_bs2&middot;F</a><a class='chip split' href='zia.vllm.q3_4b.e2_bs2.last.html' title='batch of 2, target last: match 0.20, 7 output(s)'>e2_bs2&middot;L</a><a class='chip split' href='zia.vllm.q3_4b.e2_bs4.first.html' title='batch of 4, target first: match 0.20, 8 output(s)'>e2_bs4&middot;F</a><a class='chip split' href='zia.vllm.q3_4b.e2_bs4.last.html' title='batch of 4, target last: match 0.20, 9 output(s)'>e2_bs4&middot;L</a><a class='chip split' href='zia.vllm.q3_4b.e2_bs8.first.html' title='batch of 8, target first: match 0.20, 9 output(s)'>e2_bs8&middot;F</a><a class='chip split' href='zia.vllm.q3_4b.e2_bs8.last.html' title='batch of 8, target last: match 0.20, 10 output(s)'>e2_bs8&middot;L</a><a class='chip exact' href='zia.vllm.q3_4b.e2bi_bs1.html' title='invariant, batch 1: match 1.00, 1 output(s)'>e2bi_bs1</a><a class='chip exact' href='zia.vllm.q3_4b.e2bi_bs2.first.html' title='invariant, batch 2, target first: match 1.00, 1 output(s)'>e2bi_bs2&middot;F</a><a class='chip exact' href='zia.vllm.q3_4b.e2bi_bs2.last.html' title='invariant, batch 2, target last: match 1.00, 1 output(s)'>e2bi_bs2&middot;L</a><a class='chip exact' href='zia.vllm.q3_4b.e2bi_bs4.first.html' title='invariant, batch 4, target first: match 1.00, 1 output(s)'>e2bi_bs4&middot;F</a><a class='chip exact' href='zia.vllm.q3_4b.e2bi_bs4.last.html' title='invariant, batch 4, target last: match 1.00, 1 output(s)'>e2bi_bs4&middot;L</a><a class='chip exact' href='zia.vllm.q3_4b.e2bi_bs8.first.html' title='invariant, batch 8, target first: match 1.00, 1 output(s)'>e2bi_bs8&middot;F</a><a class='chip exact' href='zia.vllm.q3_4b.e2bi_bs8.last.html' title='invariant, batch 8, target last: match 1.00, 1 output(s)'>e2bi_bs8&middot;L</a><a class='chip split' href='zia.vllm.q3_4b.e2_pc.html' title='prefix cache: match 0.28, 2 output(s)'>e2_pc</a><a class='chip exact' href='zia.vllm.q3_4b.e2_srv0.html' title='server, idle: match 1.00, 1 output(s)'>e2_srv0</a><a class='chip split' href='zia.vllm.q3_4b.e2_srv4.html' title='server, 4 clients: match 0.20, 10 output(s)'>e2_srv4</a><a class='chip shift' href='zia.vllm.q3_4b.e3_eager.html' title='eager mode: match 0.20, 1 output(s)'>e3_eager</a><a class='chip shift' href='zia.vllm.q3_4b.e3_triton.html' title='Triton attention: match 0.20, 1 output(s)'>e3_triton</a><a class='chip exact' href='zia.vllm.q3_4b.e5_t07.html' title='sampling T=0.7: match 1.00, 1 output(s)'>e5_t07</a><a class='chip exact' href='zia.vllm.q3_4b.e5_t10.html' title='sampling T=1.0: match 1.00, 1 output(s)'>e5_t10</a></div></div><div class=grow><span class=glab>A100 &middot; llama.cpp &middot; LFM2.5-350M</span><div class=chips><a class='chip exact' href='zia.llama.lfm350m.e1a.html' title='batch size 1: match 1.00, 1 output(s)'>e1a</a><a class='chip exact' href='zia.llama.lfm350m.e1b.html' title='10 restarts: match 1.00, 1 output(s)'>e1b</a><a class='chip exact' href='zia.llama.lfm350m.e1c.html' title='separate job: match 1.00, 1 output(s)'>e1c</a><a class='chip exact' href='zia.llama.lfm350m.e2_np1.html' title='1 slot, 3 clients: match 1.00, 1 output(s)'>e2_np1</a><a class='chip split' href='zia.llama.lfm350m.e2_np4.html' title='4 slots, 3 clients: match 0.54, 5 output(s)'>e2_np4</a><a class='chip shift' href='zia.llama.lfm350m.e3_fa_off.html' title='flash attn off: match 0.80, 1 output(s)'>e3_fa_off</a><a class='chip exact' href='zia.llama.lfm350m.e5_t07.html' title='sampling T=0.7: match 1.00, 1 output(s)'>e5_t07</a><a class='chip exact' href='zia.llama.lfm350m.e5_t10.html' title='sampling T=1.0: match 1.00, 1 output(s)'>e5_t10</a></div></div><div class=grow><span class=glab>A100 &middot; llama.cpp &middot; Qwen3-4B</span><div class=chips><a class='chip exact' href='zia.llama.q3_4b.e1a.html' title='batch size 1: match 1.00, 1 output(s)'>e1a</a><a class='chip exact' href='zia.llama.q3_4b.e1b.html' title='10 restarts: match 1.00, 1 output(s)'>e1b</a><a class='chip exact' href='zia.llama.q3_4b.e1c.html' title='separate job: match 1.00, 1 output(s)'>e1c</a><a class='chip exact' href='zia.llama.q3_4b.e2_np1.html' title='1 slot, 3 clients: match 1.00, 1 output(s)'>e2_np1</a><a class='chip split' href='zia.llama.q3_4b.e2_np4.html' title='4 slots, 3 clients: match 0.46, 9 output(s)'>e2_np4</a><a class='chip shift' href='zia.llama.q3_4b.e3_fa_off.html' title='flash attn off: match 0.80, 1 output(s)'>e3_fa_off</a><a class='chip exact' href='zia.llama.q3_4b.e5_t07.html' title='sampling T=0.7: match 1.00, 1 output(s)'>e5_t07</a><a class='chip exact' href='zia.llama.q3_4b.e5_t10.html' title='sampling T=1.0: match 1.00, 1 output(s)'>e5_t10</a></div></div><div class=grow><span class=glab>L40S &middot; vLLM &middot; LFM2.5-350M</span><div class=chips><a class='chip exact' href='alfrid.vllm.lfm350m.e1a.html' title='batch size 1: match 1.00, 1 output(s)'>e1a</a></div></div><div class=grow><span class=glab>L40S &middot; vLLM &middot; Qwen3-4B</span><div class=chips><a class='chip exact' href='alfrid.vllm.q3_4b.e1a.html' title='batch size 1: match 1.00, 1 output(s)'>e1a</a></div></div><div class=grow><span class=glab>L40S &middot; llama.cpp &middot; LFM2.5-350M</span><div class=chips><a class='chip exact' href='alfrid.llama.lfm350m.e1a.html' title='batch size 1: match 1.00, 1 output(s)'>e1a</a></div></div><div class=grow><span class=glab>L40S &middot; llama.cpp &middot; Qwen3-4B</span><div class=chips><a class='chip exact' href='alfrid.llama.q3_4b.e1a.html' title='batch size 1: match 1.00, 1 output(s)'>e1a</a></div></div><div class=grow><span class=glab>Blackwell &middot; vLLM &middot; Qwen3.6-35B-A3B</span><div class=chips><a class='chip split' href='grogu.vllm.qwen35moe.e1a.html' title='batch size 1: match 0.26, 10 output(s)'>e1a</a><a class='chip split' href='grogu.vllm.qwen35moe.e1b.html' title='10 restarts: match 0.18, 10 output(s)'>e1b</a><a class='chip split' href='grogu.vllm.qwen35moe.e2_bs2.first.html' title='batch of 2, target first: match 0.10, 10 output(s)'>e2_bs2&middot;F</a><a class='chip split' href='grogu.vllm.qwen35moe.e2_bs2.last.html' title='batch of 2, target last: match 0.08, 10 output(s)'>e2_bs2&middot;L</a><a class='chip split' href='grogu.vllm.qwen35moe.e2_bs4.first.html' title='batch of 4, target first: match 0.04, 10 output(s)'>e2_bs4&middot;F</a><a class='chip split' href='grogu.vllm.qwen35moe.e2_bs4.last.html' title='batch of 4, target last: match 0.00, 10 output(s)'>e2_bs4&middot;L</a><a class='chip split' href='grogu.vllm.qwen35moe.e2_bs8.first.html' title='batch of 8, target first: match 0.10, 10 output(s)'>e2_bs8&middot;F</a><a class='chip split' href='grogu.vllm.qwen35moe.e2_bs8.last.html' title='batch of 8, target last: match 0.08, 10 output(s)'>e2_bs8&middot;L</a><a class='chip split' href='grogu.vllm.qwen35moe.e2_pc.html' title='prefix cache: match 0.20, 10 output(s)'>e2_pc</a><a class='chip split' href='grogu.vllm.qwen35moe.e2_srv0.html' title='server, idle: match 0.20, 10 output(s)'>e2_srv0</a><a class='chip split' href='grogu.vllm.qwen35moe.e2_srv4.html' title='server, 4 clients: match 0.06, 10 output(s)'>e2_srv4</a><a class='chip split' href='grogu.vllm.qwen35moe.e5_t07.html' title='sampling T=0.7: match 0.22, 10 output(s)'>e5_t07</a><a class='chip split' href='grogu.vllm.qwen35moe.e5_t10.html' title='sampling T=1.0: match 0.10, 10 output(s)'>e5_t10</a></div></div><div class=grow><span class=glab>Blackwell &middot; llama.cpp &middot; Qwen3.6-35B-A3B</span><div class=chips><a class='chip exact' href='grogu.llama.qwen35moe.e1a.html' title='batch size 1: match 1.00, 1 output(s)'>e1a</a><a class='chip exact on' href='grogu.llama.qwen35moe.e1b.html' title='10 restarts: match 1.00, 1 output(s)'>e1b</a><a class='chip exact' href='grogu.llama.qwen35moe.e2_np1.html' title='1 slot, 3 clients: match 1.00, 1 output(s)'>e2_np1</a><a class='chip split' href='grogu.llama.qwen35moe.e2_np4.html' title='4 slots, 3 clients: match 0.18, 10 output(s)'>e2_np4</a><a class='chip exact' href='grogu.llama.qwen35moe.e5_t07.html' title='sampling T=0.7: match 1.00, 1 output(s)'>e5_t07</a><a class='chip exact' href='grogu.llama.qwen35moe.e5_t10.html' title='sampling T=1.0: match 1.00, 1 output(s)'>e5_t10</a></div></div></div></div><h1>Qwen3.6-35B-A3B &middot; llama.cpp &middot; Blackwell: 10 restarts</h1><div class=sub>batch size 1, 10 fresh engine processes, one pass each. Reference: repeat 0 of <a href='grogu.llama.qwen35moe.e1a.html'>e1a</a> (batch size 1) on the same GPU, engine and model. Qwen3.6-35B-A3B (MoE, NVFP4) on RTX PRO 6000 Blackwell (grogu).</div><div class=metrics><div class=metric><span class=k>match</span><span class='v exact'>1.00</span></div><div class=metric><span class=k>outputs</span><span class='v exact'>1</span></div><div class=metric><span class=k>div@</span><span class='v '>-</span></div><div class=metric><span class=k>gap</span><span class='v '>-</span></div><div class=metric><span class=k>runs</span><span class='v '>50</span></div><div class=metric><span class=k>mean length</span><span class='v '>772</span></div></div><details><summary>configuration and environment</summary><pre class=env>{
+ &quot;hosts&quot;: [
+  &quot;grogu2.cerit-sc.cz&quot;
+ ],
+ &quot;jobs&quot;: [
+  &quot;24602769&quot;
+ ],
+ &quot;config&quot;: {
+  &quot;server&quot;: {
+   &quot;np&quot;: 1,
+   &quot;fa&quot;: &quot;on&quot;
+  },
+  &quot;req&quot;: {
+   &quot;temperature&quot;: -1.0
+  },
+  &quot;fillers&quot;: 0
+ },
+ &quot;env&quot;: {
+  &quot;host&quot;: &quot;grogu2.cerit-sc.cz&quot;,
+  &quot;gpu&quot;: &quot;NVIDIA RTX PRO 6000 Blackwell Server Edition, 610.57.04, 12.0, 97887 MiB, GPU-12cea7a0-af51-dd62-080f-583ed952d602, 00000000:01:00.0&quot;,
+  &quot;engine&quot;: &quot;llama.cpp&quot;,
+  &quot;llama_version&quot;: &quot;version: 0.6.0-dev (build 1, commit d812350)\nbuilt with GNU 13.3.0 for Linux x86_64&quot;,
+  &quot;gguf&quot;: &quot;/auto/plzen1/home/kasnezde/projects/determinism/models/qwen3.6-35b-a3b-nvfp4.gguf&quot;
+ }
+}</pre></details><section class=prompt id=hello><h2>hello <span class=q>Hello! Who are you?</span></h2><div class=reps><span class=lab>runs</span><span class='rep same' title='identical to the reference'>s0 <b>=</b></span><span class='rep same' title='identical to the reference'>s1 <b>=</b></span><span class='rep same' title='identical to the reference'>s2 <b>=</b></span><span class='rep same' title='identical to the reference'>s3 <b>=</b></span><span class='rep same' title='identical to the reference'>s4 <b>=</b></span><span class='rep same' title='identical to the reference'>s5 <b>=</b></span><span class='rep same' title='identical to the reference'>s6 <b>=</b></span><span class='rep same' title='identical to the reference'>s7 <b>=</b></span><span class='rep same' title='identical to the reference'>s8 <b>=</b></span><span class='rep same' title='identical to the reference'>s9 <b>=</b></span></div><div class=same-note>10 of 10 runs are identical to the reference (30 tokens).</div><details><summary>full text: reference (30 tokens)</summary><div class=doc>Hello! I am Qwen, a large language model independently developed by Alibaba Group&#x27;s Tongyi Lab. 
+
+How can I help you today?</div></details></section><section class=prompt id=fact><h2>fact <span class=q>Explain why the sky is blue during the day and why sunsets are often red or orange. Cover the physics involved and mention how atmospheric conditions such as dust or pollution change the colors.</span></h2><div class=reps><span class=lab>runs</span><span class='rep same' title='identical to the reference'>s0 <b>=</b></span><span class='rep same' title='identical to the reference'>s1 <b>=</b></span><span class='rep same' title='identical to the reference'>s2 <b>=</b></span><span class='rep same' title='identical to the reference'>s3 <b>=</b></span><span class='rep same' title='identical to the reference'>s4 <b>=</b></span><span class='rep same' title='identical to the reference'>s5 <b>=</b></span><span class='rep same' title='identical to the reference'>s6 <b>=</b></span><span class='rep same' title='identical to the reference'>s7 <b>=</b></span><span class='rep same' title='identical to the reference'>s8 <b>=</b></span><span class='rep same' title='identical to the reference'>s9 <b>=</b></span></div><div class=same-note>10 of 10 runs are identical to the reference (1024 tokens).</div><details><summary>full text: reference (1024 tokens)</summary><div class=doc>The colors of the sky and sunsets are primarily governed by a physical phenomenon known as **Rayleigh scattering**. This process describes how light interacts with particles in the Earth&#x27;s atmosphere.
+
+Here is a step-by-step deduction of the physics involved, followed an analysis of how atmospheric conditions alter these colors.
+
+### 1. The Physics of Rayleigh Scattering
+
+#### The Nature of Sunlight
+Sunlight appears white, but it is actually a mixture of all colors in the visible spectrum. Each color corresponds to a specific wavelength of light:
+*   **Violet/Blue:** Short wavelengths ($\approx 400\text{--}450$ nm).
+*   **Red/Orange:** Long wavelengths ($\approx 600\text{--}700$ nm).
+
+#### Interaction with the Atmosphere
+The Earth&#x27;s atmosphere is composed mostly of nitrogen ($N_2$) and oxygen ($O_2$) molecules. These molecules are much smaller than the wavelengths of visible light.
+
+When sunlight enters the atmosphere, it collides with these gas molecules. According to the physics of **Rayleigh scattering**, the intensity of scattered light ($I$) is inversely proportional to the fourth power of the wavelength ($\lambda$):
+
+$$ I \propto \frac{1}{\lambda^4} $$
+
+This equation implies that shorter wavelengths (blue/violet) are scattered much more strongly than longer wavelengths (red/orange). Specifically, blue light is scattered roughly 10 times more effectively than red light.
+
+### 2. Why the Sky is Blue (Daytime)
+
+During the middle of the day, the sun is high in the sky, and sunlight travels through a relatively thin layer of the atmosphere to reach your eyes.
+
+1.  **Scattering:** As sunlight hits the nitrogen and oxygen molecules, the short-wavelength blue light is scattered in all directions (up, down, sideways).
+2.  **Perception:** Because this blue light is scattered everywhere, when you look up at any part of the sky (away from the sun), your eyes detect this scattered blue light.
+3.  **Why not Violet?** Although violet light has an even shorter wavelength than blue and is scattered even more, the sky does not appear violet for two reasons:
+    *   The sun emits less violet light than blue light.
+    *   The human eye is much more sensitive to blue light than violet light.
+
+**Conclusion:** The sky appears blue because blue light is scattered by atmospheric molecules in all directions, filling the sky with this color.
+
+### 3. Why Sunsets are Red or Orange
+
+Sunsets occur when the sun is near the horizon. In this position, sunlight must travel through a much thicker layer of the atmosphere to reach the observer&#x27;s eyes compared to when the sun is overhead.
+
+1.  **Increased Path Length:** The path length through the atmosphere can be up to 30–40 times longer at sunset than at noon.
+2.  **Cumulative Scattering:** As light travels this long distance, the short-wavelength blue and green light are scattered out of the direct beam almost entirely. By the time the light reaches your eyes, very little blue remains in the direct line of sight.
+3.  **Transmission of Long Wavelengths:** The longer wavelengths (red, orange, and yellow) are scattered much less. Therefore, they pass through the thick atmosphere more easily and reach the observer directly.
+
+**Conclusion:** Sunsets appear red or orange because the atmosphere has filtered out the blue light via scattering, leaving only the longer red and orange wavelengths to reach the observer.
+
+### 4. The Impact of Atmospheric Conditions (Dust, Pollution, Volcanoes)
+
+The presence of larger particles in the atmosphere—such as dust, smoke, pollution, or volcanic ash—significantly alters the scattering process. This introduces a different type of scattering called **Mie scattering**.
+
+#### Mie Scattering
+*   **Particle Size:** Mie scattering occurs when particles are roughly the same size as or larger than the wavelength of light (e.g., water droplets, dust, soot).
+*   **Wavelength Dependence:** Unlike Rayleigh scattering, Mie scattering is not strongly dependent on wavelength. It scatters all wavelengths of visible light relatively equally.
+
+#### How Conditions Change Colors:
+1.  **Enhanced Red/Orange (High Pollution/Dust):**
+    *   If the atmosphere contains a high concentration of fine dust or pollution, these particles absorb and scatter even more of the shorter wavelengths (blue/green) before they can reach the observer.
+    *   This leaves an even higher proportion of red and orange light, resulting in intensely vibrant, deep red sunsets.
+    *   *Example:* Wildfires produce smoke that creates spectacular red sunsets globally.
+
+2.  **White/Grey Skies (Heavy Haze or Clouds):**
+    *  </div></details></section><section class=prompt id=story><h2>story <span class=q>Write a short story about a lighthouse keeper on a remote island who finds a message in a bottle that seems to be addressed to them personally.</span></h2><div class=reps><span class=lab>runs</span><span class='rep same' title='identical to the reference'>s0 <b>=</b></span><span class='rep same' title='identical to the reference'>s1 <b>=</b></span><span class='rep same' title='identical to the reference'>s2 <b>=</b></span><span class='rep same' title='identical to the reference'>s3 <b>=</b></span><span class='rep same' title='identical to the reference'>s4 <b>=</b></span><span class='rep same' title='identical to the reference'>s5 <b>=</b></span><span class='rep same' title='identical to the reference'>s6 <b>=</b></span><span class='rep same' title='identical to the reference'>s7 <b>=</b></span><span class='rep same' title='identical to the reference'>s8 <b>=</b></span><span class='rep same' title='identical to the reference'>s9 <b>=</b></span></div><div class=same-note>10 of 10 runs are identical to the reference (760 tokens).</div><details><summary>full text: reference (760 tokens)</summary><div class=doc>The wind on Blackrock Island didn’t just blow; it screamed. It was a constant, ragged companion to Elias Thorne, who had spent the last twenty years as the solitary keeper of the lighthouse that stood like a jagged tooth against the gray horizon.
+
+Elias knew the rhythm of the sea better than he knew his own heartbeat. He knew the smell of the coming storm, the taste of the salt on the morning air, and the specific groan of the iron stairs when the humidity rose. But he did not know the bottle.
+
+It was a Tuesday, or perhaps a Thursday—the days blurred into a monochrome loop of polishing brass and trimming wicks—when the tide receded unusually far, exposing the slick, black rocks that usually remained submerged. Elias, checking the perimeter for erosion, spotted a glint of green glass half-buried in the kelp.
+
+He picked it up. It was heavy, thick glass, sealed with wax that had cracked with age. There was no cork, just a tight seal of resin. Curiosity, a sensation he hadn’t felt in years, prickled at his skin. He took it inside the lantern room, the warm glow of the Fresnel lens reflecting off the curved surface.
+
+With a pair of pliers, he carefully broke the seal. The paper inside was brittle, yellowed by decades of salt and sun, but the ink remained dark and legible.
+
+Elias unfolded it with trembling hands. He expected a pirate’s treasure map, or perhaps a sailor’s last will. Instead, he read:
+
+*“To Elias Thorne,*
+*If you are reading this, the storm has passed. The light is still on. Do not let it go out. The sea remembers what the land forgets. — A Friend.”*
+
+Elias stared at the paper. The handwriting was elegant, looping, and familiar. Too familiar. It was the same hand that had signed his commission papers twenty years ago. The same hand that had written the letter telling him his wife, Clara, had died in the fire at their home in Portsmouth, a fire that had consumed everything but his guilt.
+
+He had never told anyone he came to Blackrock. He had never signed his name on any public document that could have been intercepted. He had chosen this isolation specifically to escape the past, to vanish into the fog.
+
+His heart hammered against his ribs. He looked out the window. The sea was calm, a sheet of hammered silver under the moon. No ships. No boats. Just the endless, indifferent horizon.
+
+Who was the friend? Had Clara survived? No, that was impossible. He had seen the ashes. Had someone followed him? The island was accessible only by a monthly supply boat, and the captain knew nothing of his past.
+
+Elias folded the note and placed it in his pocket. He climbed the stairs to the lantern room and checked the mechanism. The gears turned smoothly. The light swept across the water, a steady, rhythmic pulse. *On. Off. On. Off.*
+
+He realized then that the message wasn’t a threat. It was a reminder. The sea had kept his secret, but it had also kept his connection. He was not as alone as he thought. Someone, somewhere, knew his name. Someone knew his pain.
+
+For the first time in twenty years, Elias Thorne did not feel the crushing weight of isolation. He felt a strange, terrifying warmth. He lit a fresh wick, adjusted the lens, and watched the beam cut through the dark. The storm might have passed, but the mystery had just begun. And for the first time in decades, Elias looked forward to tomorrow.</div></details></section><section class=prompt id=math><h2>math <span class=q>A train leaves Plzeň at 8:15 and travels toward Prague at an average speed of 72 km/h. A second train leaves Prague at 8:45 toward Plzeň at 90 km/h. The distance between the two cities along the track is 114 km. At what time do the trains meet, and how far from Plzeň? Solve it step by step and state the final answer clearly.</span></h2><div class=reps><span class=lab>runs</span><span class='rep same' title='identical to the reference'>s0 <b>=</b></span><span class='rep same' title='identical to the reference'>s1 <b>=</b></span><span class='rep same' title='identical to the reference'>s2 <b>=</b></span><span class='rep same' title='identical to the reference'>s3 <b>=</b></span><span class='rep same' title='identical to the reference'>s4 <b>=</b></span><span class='rep same' title='identical to the reference'>s5 <b>=</b></span><span class='rep same' title='identical to the reference'>s6 <b>=</b></span><span class='rep same' title='identical to the reference'>s7 <b>=</b></span><span class='rep same' title='identical to the reference'>s8 <b>=</b></span><span class='rep same' title='identical to the reference'>s9 <b>=</b></span></div><div class=same-note>10 of 10 runs are identical to the reference (1024 tokens).</div><details><summary>full text: reference (1024 tokens)</summary><div class=doc>Here is the step-by-step solution to determine when and where the two trains meet.
+
+### Step 1: Analyze the initial conditions
+
+*   **Distance between Plzeň and Prague ($D$):** $114$ km.
+*   **Train A (Plzeň to Prague):**
+    *   Departure time: $8:15$
+    *   Speed ($v_A$): $72$ km/h
+*   **Train B (Prague to Plzeň):**
+    *   Departure time: $8:45$
+    *   Speed ($v_B$): $90$ km/h
+
+### Step 2: Calculate the head start of Train A
+
+Train A leaves at $8:15$, and Train B leaves at $8:45$. We need to find out how far Train A has traveled by the time Train B starts.
+
+*   Time difference ($\Delta t$): From $8:15$ to $8:45$ is $30$ minutes.
+*   Convert minutes to hours: $30 \text{ minutes} = 0.5 \text{ hours}$.
+*   Distance covered by Train A in this time ($d_{headstart}$):
+    $$d_{headstart} = v_A \times \Delta t$$
+    $$d_{headstart} = 72 \text{ km/h} \times 0.5 \text{ h} = 36 \text{ km}$$
+
+So, at $8:45$, Train A is $36$ km away from Plzeň, and the remaining distance between the two trains is:
+$$D_{remaining} = 114 \text{ km} - 36 \text{ km} = 78 \text{ km}$$
+
+### Step 3: Calculate the time until they meet after 8:45
+
+Now, both trains are moving towards each other. We calculate the time ($t$) it takes for them to cover the remaining $78$ km.
+
+*   Since they are moving towards each other, their relative speed ($v_{rel}$) is the sum of their individual speeds:
+    $$v_{rel} = v_A + v_B$$
+    $$v_{rel} = 72 \text{ km/h} + 90 \text{ km/h} = 162 \text{ km/h}$$
+
+*   Calculate the time ($t$) to cover the remaining distance:
+    $$t = \frac{D_{remaining}}{v_{rel}}$$
+    $$t = \frac{78 \text{ km}}{162 \text{ km/h}}$$
+
+    Simplifying the fraction:
+    $$t = \frac{78}{162} = \frac{13}{27} \text{ hours}$$
+
+*   Convert this time into minutes:
+    $$t_{minutes} = \frac{13}{27} \times 60 \text{ minutes}$$
+    $$t_{minutes} = \frac{780}{27} \approx 28.89 \text{ minutes}$$
+
+    Let&#x27;s keep it precise for the final calculation. $\frac{780}{27}$ minutes simplifies to $\frac{260}{9}$ minutes, which is $28$ minutes and $\frac{8}{9}$ of a minute.
+    $\frac{8}{9}$ of a minute is $\frac{8}{9} \times 60$ seconds $= \frac{480}{9} \approx 53.33$ seconds.
+
+    So, the travel time after 8:45 is approximately **28 minutes and 53 seconds**.
+
+### Step 4: Determine the meeting time
+
+*   Start time for the combined travel: $8:45$
+*   Duration: $28$ minutes and $53$ seconds (approx)
+
+$$8:45:00 + 28 \text{ min } 53 \text{ sec} = 9:13:53$$
+
+Rounding to the nearest minute, the trains meet at approximately **9:14**.
+
+### Step 5: Calculate the distance from Plzeň
+
+The question asks for the distance from Plzeň. This is the total distance Train A has traveled from its departure at 8:15 until the meeting time.
+
+*   Total time Train A traveled ($T_A$):
+    $$T_A = \text{Head start time} + \text{Combined travel time}$$
+    $$T_A = 0.5 \text{ hours} + \frac{1</div></details></section><section class=prompt id=code><h2>code <span class=q>Write a Python function `parse_iso8601(s: str)` that parses an ISO 8601 timestamp such as `2026-10-12T14:03:07.250+02:00` into a tuple (year, month, day, hour, minute, second, microsecond, utc_offset_minutes) without using the datetime module. Validate the input and raise ValueError on malformed strings. Include a few pytest test cases.</span></h2><div class=reps><span class=lab>runs</span><span class='rep same' title='identical to the reference'>s0 <b>=</b></span><span class='rep same' title='identical to the reference'>s1 <b>=</b></span><span class='rep same' title='identical to the reference'>s2 <b>=</b></span><span class='rep same' title='identical to the reference'>s3 <b>=</b></span><span class='rep same' title='identical to the reference'>s4 <b>=</b></span><span class='rep same' title='identical to the reference'>s5 <b>=</b></span><span class='rep same' title='identical to the reference'>s6 <b>=</b></span><span class='rep same' title='identical to the reference'>s7 <b>=</b></span><span class='rep same' title='identical to the reference'>s8 <b>=</b></span><span class='rep same' title='identical to the reference'>s9 <b>=</b></span></div><div class=same-note>10 of 10 runs are identical to the reference (1024 tokens).</div><details><summary>full text: reference (1024 tokens)</summary><div class=doc>```python
+import re
+
+
+def parse_iso8601(s: str) -&gt; tuple:
+    &quot;&quot;&quot;
+    Parse an ISO 8601 timestamp string into a tuple:
+    (year, month, day, hour, minute, second, microsecond, utc_offset_minutes)
+    
+    Raises ValueError on malformed strings.
+    &quot;&quot;&quot;
+    if not isinstance(s, str):
+        raise ValueError(&quot;Input must be a string&quot;)
+    
+    # Pattern to match ISO 8601 format: YYYY-MM-DDTHH:MM:SS.ffffff±HH:MM or Z
+    # We need to handle various formats:
+    # - With timezone offset: +HH:MM or -HH:MM or Z
+    # - With fractional seconds: .fff, .fffff, etc.
+    # - Without fractional seconds
+    
+    pattern = r&#x27;^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(?:\.(\d+))?(Z|[+-]\d{2}:\d{2})$&#x27;
+    
+    match = re.match(pattern, s)
+    if not match:
+        raise ValueError(f&quot;Invalid ISO 8601 format: {s}&quot;)
+    
+    year = int(match.group(1))
+    month = int(match.group(2))
+    day = int(match.group(3))
+    hour = int(match.group(4))
+    minute = int(match.group(5))
+    second = int(match.group(6))
+    fractional = match.group(7)
+    tz_part = match.group(8)
+    
+    # Validate ranges
+    if not (1 &lt;= month &lt;= 12):
+        raise ValueError(f&quot;Invalid month: {month}&quot;)
+    if not (1 &lt;= day &lt;= 31):
+        raise ValueError(f&quot;Invalid day: {day}&quot;)
+    if not (0 &lt;= hour &lt;= 23):
+        raise ValueError(f&quot;Invalid hour: {hour}&quot;)
+    if not (0 &lt;= minute &lt;= 59):
+        raise ValueError(f&quot;Invalid minute: {minute}&quot;)
+    if not (0 &lt;= second &lt;= 59):
+        raise ValueError(f&quot;Invalid second: {second}&quot;)
+    
+    # Parse fractional seconds to microseconds
+    if fractional is not None:
+        # Pad or truncate to 6 digits for microseconds
+        frac_str = fractional.ljust(6, &#x27;0&#x27;)[:6]
+        microsecond = int(frac_str)
+    else:
+        microsecond = 0
+    
+    # Parse timezone offset
+    if tz_part == &#x27;Z&#x27;:
+        utc_offset_minutes = 0
+    else:
+        # tz_part is like +02:00 or -05:30
+        sign = 1 if tz_part[0] == &#x27;+&#x27; else -1
+        tz_hours = int(tz_part[1:3])
+        tz_minutes = int(tz_part[4:6])
+        if not (0 &lt;= tz_hours &lt;= 23):
+            raise ValueError(f&quot;Invalid timezone hours: {tz_hours}&quot;)
+        if not (0 &lt;= tz_minutes &lt;= 59):
+            raise ValueError(f&quot;Invalid timezone minutes: {tz_minutes}&quot;)
+        utc_offset_minutes = sign * (tz_hours * 60 + tz_minutes)
+    
+    return (year, month, day, hour, minute, second, microsecond, utc_offset_minutes)
+
+
+# Test cases
+if __name__ == &quot;__main__&quot;:
+    import pytest
+    
+    def test_basic_iso8601():
+        result = parse_iso8601(&quot;2026-10-12T14:03:07.250+02:00&quot;)
+        assert result == (2026, 10, 12, 14, 3, 7, 250000, 120)
+    
+    def test_utc_zulu():
+        result = parse_iso8601(&quot;2026-10-12T14:03:07Z&quot;)
+        assert result == (2026, 10, 12, 14, 3, 7, 0, 0)
+    
+    def test_negative_offset():
+        result = parse_iso8601(&quot;2026-10-12T14:03:07.123456-05:30&quot;)
+        assert result == (2026, 10, 12, 14, 3, 7, 123456, -330</div></details></section><script>document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-theme-toggle]');if(!b)return;var d=document.documentElement,n=d.getAttribute('data-theme')==='dark'?'light':'dark';if(n==='dark')d.setAttribute('data-theme','dark');else d.removeAttribute('data-theme');try{localStorage.setItem('theme',n);}catch(err){}});</script><script>document.addEventListener('keydown',function(e){if(e.altKey||e.ctrlKey||e.metaKey||e.shiftKey)return;var t=e.target;if(t&&(t.tagName==='INPUT'||t.tagName==='TEXTAREA'||t.isContentEditable))return;var a=document.querySelector(e.key==='ArrowLeft'?'a.nav.prev':e.key==='ArrowRight'?'a.nav.next':'_');if(a){location.href=a.href;}});(function(){var c=document.querySelector('.chip.on');if(c&&c.scrollIntoView)c.scrollIntoView({block:'nearest'});})();</script></body></html>

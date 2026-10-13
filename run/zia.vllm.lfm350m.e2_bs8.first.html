@@ -1,0 +1,991 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><title>e2_bs8 LFM2.5-350M · vLLM · A100 &middot; Determinism</title><link rel=icon href='../favicon.ico' sizes=any><script>try{var t=localStorage.getItem('theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}</script><link rel=preconnect href='https://fonts.googleapis.com'><link rel=preconnect href='https://fonts.gstatic.com' crossorigin><link rel=stylesheet href='https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;500&display=swap'><link rel=stylesheet href='../static/style.css'></head><body><header class=mast><a class=brand href='https://lokalni.ai' aria-label='lokalni.ai'><img class=logo-light src='../static/logo_dark.png' alt='lokalni.ai' width=102 height=32><img class=logo-dark src='../static/logo_light.png' alt='lokalni.ai' width=102 height=32></a><span class=mastsep>&frasl;</span><a class=proj href='https://lokalni.ai/blog/stejny-vstup-stejny-vystup/'>Stejn&yacute; vstup, stejn&yacute; v&yacute;stup</a><span class=spacer></span><button class=tgl type=button data-theme-toggle aria-label='Switch theme' title='Switch theme'><svg class=sun viewBox='0 0 24 24' aria-hidden=true><circle cx=12 cy=12 r=4 /><path d='M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4' /></svg><svg class=moon viewBox='0 0 24 24' aria-hidden=true><path d='M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z' /></svg></button></header><div class=crumb><a href='../index.html'>&larr; results</a></div><div class=picker><div class=pickhd><span class=pickcell>e2_bs8 &middot; first</span><span class=sub2>LFM2.5-350M &middot; vLLM &middot; A100</span><span class=spacer></span><a class='nav prev' href='zia.vllm.lfm350m.e2_bs4.last.html'>&larr; prev</a><span class=sub2>8 / 78</span><a class='nav next' href='zia.vllm.lfm350m.e2_bs8.last.html'>next &rarr;</a></div><div class=legend><span><i class='chipi exact'></i>every run is the reference</span><span><i class='chipi shift'></i>one output, not the reference</span><span><i class='chipi split'></i>several outputs</span></div><div class=strip><div class=grow><span class=glab>A100 &middot; vLLM &middot; LFM2.5-350M</span><div class=chips><a class='chip exact' href='zia.vllm.lfm350m.e1a.html' title='batch size 1: match 1.00, 1 output(s)'>e1a</a><a class='chip exact' href='zia.vllm.lfm350m.e1b.html' title='10 restarts: match 1.00, 1 output(s)'>e1b</a><a class='chip exact' href='zia.vllm.lfm350m.e1c.html' title='separate job: match 1.00, 1 output(s)'>e1c</a><a class='chip split' href='zia.vllm.lfm350m.e2_bs2.first.html' title='batch of 2, target first: match 0.02, 10 output(s)'>e2_bs2&middot;F</a><a class='chip split' href='zia.vllm.lfm350m.e2_bs2.last.html' title='batch of 2, target last: match 0.24, 8 output(s)'>e2_bs2&middot;L</a><a class='chip split' href='zia.vllm.lfm350m.e2_bs4.first.html' title='batch of 4, target first: match 0.06, 9 output(s)'>e2_bs4&middot;F</a><a class='chip split' href='zia.vllm.lfm350m.e2_bs4.last.html' title='batch of 4, target last: match 0.40, 10 output(s)'>e2_bs4&middot;L</a><a class='chip split on' href='zia.vllm.lfm350m.e2_bs8.first.html' title='batch of 8, target first: match 0.38, 7 output(s)'>e2_bs8&middot;F</a><a class='chip split' href='zia.vllm.lfm350m.e2_bs8.last.html' title='batch of 8, target last: match 0.32, 8 output(s)'>e2_bs8&middot;L</a><a class='chip shift' href='zia.vllm.lfm350m.e2_pc.html' title='prefix cache: match 0.40, 1 output(s)'>e2_pc</a><a class='chip exact' href='zia.vllm.lfm350m.e2_srv0.html' title='server, idle: match 1.00, 1 output(s)'>e2_srv0</a><a class='chip split' href='zia.vllm.lfm350m.e2_srv4.html' title='server, 4 clients: match 0.38, 10 output(s)'>e2_srv4</a><a class='chip shift' href='zia.vllm.lfm350m.e3_eager.html' title='eager mode: match 0.00, 1 output(s)'>e3_eager</a><a class='chip shift' href='zia.vllm.lfm350m.e3_triton.html' title='Triton attention: match 0.20, 1 output(s)'>e3_triton</a><a class='chip exact' href='zia.vllm.lfm350m.e5_t07.html' title='sampling T=0.7: match 1.00, 1 output(s)'>e5_t07</a><a class='chip exact' href='zia.vllm.lfm350m.e5_t10.html' title='sampling T=1.0: match 1.00, 1 output(s)'>e5_t10</a></div></div><div class=grow><span class=glab>A100 &middot; vLLM &middot; Qwen3-4B</span><div class=chips><a class='chip exact' href='zia.vllm.q3_4b.e1a.html' title='batch size 1: match 1.00, 1 output(s)'>e1a</a><a class='chip exact' href='zia.vllm.q3_4b.e1b.html' title='10 restarts: match 1.00, 1 output(s)'>e1b</a><a class='chip exact' href='zia.vllm.q3_4b.e1c.html' title='separate job: match 1.00, 1 output(s)'>e1c</a><a class='chip split' href='zia.vllm.q3_4b.e2_bs2.first.html' title='batch of 2, target first: match 0.20, 8 output(s)'>e2_bs2&middot;F</a><a class='chip split' href='zia.vllm.q3_4b.e2_bs2.last.html' title='batch of 2, target last: match 0.20, 7 output(s)'>e2_bs2&middot;L</a><a class='chip split' href='zia.vllm.q3_4b.e2_bs4.first.html' title='batch of 4, target first: match 0.20, 8 output(s)'>e2_bs4&middot;F</a><a class='chip split' href='zia.vllm.q3_4b.e2_bs4.last.html' title='batch of 4, target last: match 0.20, 9 output(s)'>e2_bs4&middot;L</a><a class='chip split' href='zia.vllm.q3_4b.e2_bs8.first.html' title='batch of 8, target first: match 0.20, 9 output(s)'>e2_bs8&middot;F</a><a class='chip split' href='zia.vllm.q3_4b.e2_bs8.last.html' title='batch of 8, target last: match 0.20, 10 output(s)'>e2_bs8&middot;L</a><a class='chip exact' href='zia.vllm.q3_4b.e2bi_bs1.html' title='invariant, batch 1: match 1.00, 1 output(s)'>e2bi_bs1</a><a class='chip exact' href='zia.vllm.q3_4b.e2bi_bs2.first.html' title='invariant, batch 2, target first: match 1.00, 1 output(s)'>e2bi_bs2&middot;F</a><a class='chip exact' href='zia.vllm.q3_4b.e2bi_bs2.last.html' title='invariant, batch 2, target last: match 1.00, 1 output(s)'>e2bi_bs2&middot;L</a><a class='chip exact' href='zia.vllm.q3_4b.e2bi_bs4.first.html' title='invariant, batch 4, target first: match 1.00, 1 output(s)'>e2bi_bs4&middot;F</a><a class='chip exact' href='zia.vllm.q3_4b.e2bi_bs4.last.html' title='invariant, batch 4, target last: match 1.00, 1 output(s)'>e2bi_bs4&middot;L</a><a class='chip exact' href='zia.vllm.q3_4b.e2bi_bs8.first.html' title='invariant, batch 8, target first: match 1.00, 1 output(s)'>e2bi_bs8&middot;F</a><a class='chip exact' href='zia.vllm.q3_4b.e2bi_bs8.last.html' title='invariant, batch 8, target last: match 1.00, 1 output(s)'>e2bi_bs8&middot;L</a><a class='chip split' href='zia.vllm.q3_4b.e2_pc.html' title='prefix cache: match 0.28, 2 output(s)'>e2_pc</a><a class='chip exact' href='zia.vllm.q3_4b.e2_srv0.html' title='server, idle: match 1.00, 1 output(s)'>e2_srv0</a><a class='chip split' href='zia.vllm.q3_4b.e2_srv4.html' title='server, 4 clients: match 0.20, 10 output(s)'>e2_srv4</a><a class='chip shift' href='zia.vllm.q3_4b.e3_eager.html' title='eager mode: match 0.20, 1 output(s)'>e3_eager</a><a class='chip shift' href='zia.vllm.q3_4b.e3_triton.html' title='Triton attention: match 0.20, 1 output(s)'>e3_triton</a><a class='chip exact' href='zia.vllm.q3_4b.e5_t07.html' title='sampling T=0.7: match 1.00, 1 output(s)'>e5_t07</a><a class='chip exact' href='zia.vllm.q3_4b.e5_t10.html' title='sampling T=1.0: match 1.00, 1 output(s)'>e5_t10</a></div></div><div class=grow><span class=glab>A100 &middot; llama.cpp &middot; LFM2.5-350M</span><div class=chips><a class='chip exact' href='zia.llama.lfm350m.e1a.html' title='batch size 1: match 1.00, 1 output(s)'>e1a</a><a class='chip exact' href='zia.llama.lfm350m.e1b.html' title='10 restarts: match 1.00, 1 output(s)'>e1b</a><a class='chip exact' href='zia.llama.lfm350m.e1c.html' title='separate job: match 1.00, 1 output(s)'>e1c</a><a class='chip exact' href='zia.llama.lfm350m.e2_np1.html' title='1 slot, 3 clients: match 1.00, 1 output(s)'>e2_np1</a><a class='chip split' href='zia.llama.lfm350m.e2_np4.html' title='4 slots, 3 clients: match 0.54, 5 output(s)'>e2_np4</a><a class='chip shift' href='zia.llama.lfm350m.e3_fa_off.html' title='flash attn off: match 0.80, 1 output(s)'>e3_fa_off</a><a class='chip exact' href='zia.llama.lfm350m.e5_t07.html' title='sampling T=0.7: match 1.00, 1 output(s)'>e5_t07</a><a class='chip exact' href='zia.llama.lfm350m.e5_t10.html' title='sampling T=1.0: match 1.00, 1 output(s)'>e5_t10</a></div></div><div class=grow><span class=glab>A100 &middot; llama.cpp &middot; Qwen3-4B</span><div class=chips><a class='chip exact' href='zia.llama.q3_4b.e1a.html' title='batch size 1: match 1.00, 1 output(s)'>e1a</a><a class='chip exact' href='zia.llama.q3_4b.e1b.html' title='10 restarts: match 1.00, 1 output(s)'>e1b</a><a class='chip exact' href='zia.llama.q3_4b.e1c.html' title='separate job: match 1.00, 1 output(s)'>e1c</a><a class='chip exact' href='zia.llama.q3_4b.e2_np1.html' title='1 slot, 3 clients: match 1.00, 1 output(s)'>e2_np1</a><a class='chip split' href='zia.llama.q3_4b.e2_np4.html' title='4 slots, 3 clients: match 0.46, 9 output(s)'>e2_np4</a><a class='chip shift' href='zia.llama.q3_4b.e3_fa_off.html' title='flash attn off: match 0.80, 1 output(s)'>e3_fa_off</a><a class='chip exact' href='zia.llama.q3_4b.e5_t07.html' title='sampling T=0.7: match 1.00, 1 output(s)'>e5_t07</a><a class='chip exact' href='zia.llama.q3_4b.e5_t10.html' title='sampling T=1.0: match 1.00, 1 output(s)'>e5_t10</a></div></div><div class=grow><span class=glab>L40S &middot; vLLM &middot; LFM2.5-350M</span><div class=chips><a class='chip exact' href='alfrid.vllm.lfm350m.e1a.html' title='batch size 1: match 1.00, 1 output(s)'>e1a</a></div></div><div class=grow><span class=glab>L40S &middot; vLLM &middot; Qwen3-4B</span><div class=chips><a class='chip exact' href='alfrid.vllm.q3_4b.e1a.html' title='batch size 1: match 1.00, 1 output(s)'>e1a</a></div></div><div class=grow><span class=glab>L40S &middot; llama.cpp &middot; LFM2.5-350M</span><div class=chips><a class='chip exact' href='alfrid.llama.lfm350m.e1a.html' title='batch size 1: match 1.00, 1 output(s)'>e1a</a></div></div><div class=grow><span class=glab>L40S &middot; llama.cpp &middot; Qwen3-4B</span><div class=chips><a class='chip exact' href='alfrid.llama.q3_4b.e1a.html' title='batch size 1: match 1.00, 1 output(s)'>e1a</a></div></div><div class=grow><span class=glab>Blackwell &middot; vLLM &middot; Qwen3.6-35B-A3B</span><div class=chips><a class='chip split' href='grogu.vllm.qwen35moe.e1a.html' title='batch size 1: match 0.26, 10 output(s)'>e1a</a><a class='chip split' href='grogu.vllm.qwen35moe.e1b.html' title='10 restarts: match 0.18, 10 output(s)'>e1b</a><a class='chip split' href='grogu.vllm.qwen35moe.e2_bs2.first.html' title='batch of 2, target first: match 0.10, 10 output(s)'>e2_bs2&middot;F</a><a class='chip split' href='grogu.vllm.qwen35moe.e2_bs2.last.html' title='batch of 2, target last: match 0.08, 10 output(s)'>e2_bs2&middot;L</a><a class='chip split' href='grogu.vllm.qwen35moe.e2_bs4.first.html' title='batch of 4, target first: match 0.04, 10 output(s)'>e2_bs4&middot;F</a><a class='chip split' href='grogu.vllm.qwen35moe.e2_bs4.last.html' title='batch of 4, target last: match 0.00, 10 output(s)'>e2_bs4&middot;L</a><a class='chip split' href='grogu.vllm.qwen35moe.e2_bs8.first.html' title='batch of 8, target first: match 0.10, 10 output(s)'>e2_bs8&middot;F</a><a class='chip split' href='grogu.vllm.qwen35moe.e2_bs8.last.html' title='batch of 8, target last: match 0.08, 10 output(s)'>e2_bs8&middot;L</a><a class='chip split' href='grogu.vllm.qwen35moe.e2_pc.html' title='prefix cache: match 0.20, 10 output(s)'>e2_pc</a><a class='chip split' href='grogu.vllm.qwen35moe.e2_srv0.html' title='server, idle: match 0.20, 10 output(s)'>e2_srv0</a><a class='chip split' href='grogu.vllm.qwen35moe.e2_srv4.html' title='server, 4 clients: match 0.06, 10 output(s)'>e2_srv4</a><a class='chip split' href='grogu.vllm.qwen35moe.e5_t07.html' title='sampling T=0.7: match 0.22, 10 output(s)'>e5_t07</a><a class='chip split' href='grogu.vllm.qwen35moe.e5_t10.html' title='sampling T=1.0: match 0.10, 10 output(s)'>e5_t10</a></div></div><div class=grow><span class=glab>Blackwell &middot; llama.cpp &middot; Qwen3.6-35B-A3B</span><div class=chips><a class='chip exact' href='grogu.llama.qwen35moe.e1a.html' title='batch size 1: match 1.00, 1 output(s)'>e1a</a><a class='chip exact' href='grogu.llama.qwen35moe.e1b.html' title='10 restarts: match 1.00, 1 output(s)'>e1b</a><a class='chip exact' href='grogu.llama.qwen35moe.e2_np1.html' title='1 slot, 3 clients: match 1.00, 1 output(s)'>e2_np1</a><a class='chip split' href='grogu.llama.qwen35moe.e2_np4.html' title='4 slots, 3 clients: match 0.18, 10 output(s)'>e2_np4</a><a class='chip exact' href='grogu.llama.qwen35moe.e5_t07.html' title='sampling T=0.7: match 1.00, 1 output(s)'>e5_t07</a><a class='chip exact' href='grogu.llama.qwen35moe.e5_t10.html' title='sampling T=1.0: match 1.00, 1 output(s)'>e5_t10</a></div></div></div></div><h1>LFM2.5-350M &middot; vLLM &middot; A100: batch of 8, target first</h1><div class=sub>target in an offline batch of 8 with random fillers. Reference: repeat 0 of <a href='zia.vllm.lfm350m.e1a.html'>e1a</a> (batch size 1) on the same GPU, engine and model. LFM2.5-350M (dense, BF16) on A100-SXM4-40GB (zia).</div><div class=metrics><div class=metric><span class=k>match</span><span class='v '>0.38</span></div><div class=metric><span class=k>outputs</span><span class='v split'>7</span></div><div class=metric><span class=k>div@</span><span class='v '>46</span></div><div class=metric><span class=k>gap</span><span class='v '>0.125</span></div><div class=metric><span class=k>runs</span><span class='v '>50</span></div><div class=metric><span class=k>mean length</span><span class='v '>362</span></div><div class=metric><span class=k>tok/s</span><span class='v '>1634</span></div></div><details><summary>configuration and environment</summary><pre class=env>{
+ &quot;hosts&quot;: [
+  &quot;zia4.cerit-sc.cz&quot;
+ ],
+ &quot;jobs&quot;: [
+  &quot;24602570&quot;
+ ],
+ &quot;config&quot;: {
+  &quot;engine&quot;: {
+   &quot;dtype&quot;: &quot;auto&quot;,
+   &quot;max_model_len&quot;: 4096,
+   &quot;seed&quot;: 1234,
+   &quot;gpu_memory_utilization&quot;: 0.85,
+   &quot;enable_prefix_caching&quot;: false,
+   &quot;generation_config&quot;: &quot;vllm&quot;
+  },
+  &quot;sp&quot;: {
+   &quot;temperature&quot;: 0.0,
+   &quot;logprobs&quot;: 20,
+   &quot;max_tokens&quot;: 1024
+  },
+  &quot;bs&quot;: 8
+ },
+ &quot;env&quot;: {
+  &quot;host&quot;: &quot;zia4.cerit-sc.cz&quot;,
+  &quot;gpu&quot;: &quot;NVIDIA A100-SXM4-40GB, 610.57.04, 8.0, 40960 MiB, GPU-c71d6a1b-bd9d-ec2a-bb07-3aebe5610d01, 00000000:AF:00.0&quot;,
+  &quot;engine&quot;: &quot;vllm&quot;,
+  &quot;vllm_version&quot;: &quot;0.31.0&quot;,
+  &quot;engine_kwargs&quot;: {
+   &quot;model&quot;: &quot;9e6c6ccf47cd318696e137d381a7ded8fe4df09f&quot;,
+   &quot;dtype&quot;: &quot;auto&quot;,
+   &quot;max_model_len&quot;: 4096,
+   &quot;seed&quot;: 1234,
+   &quot;gpu_memory_utilization&quot;: 0.85,
+   &quot;enable_prefix_caching&quot;: false,
+   &quot;generation_config&quot;: &quot;vllm&quot;
+  },
+  &quot;batch_invariant&quot;: &quot;0&quot;,
+  &quot;torch&quot;: &quot;2.13.0+cu130&quot;,
+  &quot;torch_cuda&quot;: &quot;13.0&quot;
+ }
+}</pre></details><section class=prompt id=hello><h2>hello <span class=q>Hello! Who are you?</span></h2><div class=reps><span class=lab>runs</span><span class='rep same' title='identical to the reference'>r0 <b>=</b></span><span class='rep same' title='identical to the reference'>r1 <b>=</b></span><span class='rep same' title='identical to the reference'>r2 <b>=</b></span><span class='rep same' title='identical to the reference'>r3 <b>=</b></span><span class='rep same' title='identical to the reference'>r4 <b>=</b></span><span class='rep same' title='identical to the reference'>r5 <b>=</b></span><a class='rep diff' href='#hello-A' title='output A, differs at token 46'>r6 <b>A</b></a><a class='rep diff' href='#hello-A' title='output A, differs at token 46'>r7 <b>A</b></a><span class='rep same' title='identical to the reference'>r8 <b>=</b></span><span class='rep same' title='identical to the reference'>r9 <b>=</b></span></div><div class=same-note>8 of 10 runs are identical to the reference (62 tokens).</div><div class=var id=hello-A><div class=varhd><span class=id>output A</span><span>2 runs</span><span class=mono>r6 r7</span><span>differs at token <b>46</b> &middot; reference gap 0.000</span><span class=mono>&quot; about&quot; &rarr; &quot; such&quot;</span></div><div class=vbody><div class=txt><span class=ctx>I’m an AI language model created by **Liquid AI**. I was developed by a research and engineering team at Liquid AI and belong to the **Liquid Foundation Models** family.  
+
+Other details</span></div><div class=cols><div class=col><h3>reference</h3><div class=txt><span class=hitwrap tabindex=0><mark class=dv> about</mark><span class=tip><b>token 46 &middot; reference top-2 gap 0.000</b><span class=cand><span class=h>token</span><span class='h r'>reference</span><span class='h r'>output A</span><span class='pick'>&quot; about&quot;</span><span class='r pick'>-0.858</span><span class='r pick'>-0.932</span><span class='pick'>&quot; such&quot;</span><span class='r pick'>-0.858</span><span class='r pick'>-0.807</span><span class=''>&quot; (&quot;</span><span class='r'>-2.233</span><span class='r'>-2.182</span><span class=''>&quot;—&quot;</span><span class='r'>-3.483</span><span class='r'>-3.432</span><span class=''>&quot;,&quot;</span><span class='r'>-5.108</span><span class='r'>-5.057</span></span><br><span class=dim>log-probabilities</span></span></span> my architecture, training data, or additional specifications have not been specified.</div></div><div class=col><h3>output A</h3><div class=txt><span class=hitwrap tabindex=0><mark class=dv> such</mark><span class=tip><b>token 46 &middot; reference top-2 gap 0.000</b><span class=cand><span class=h>token</span><span class='h r'>reference</span><span class='h r'>output A</span><span class='pick'>&quot; about&quot;</span><span class='r pick'>-0.858</span><span class='r pick'>-0.932</span><span class='pick'>&quot; such&quot;</span><span class='r pick'>-0.858</span><span class='r pick'>-0.807</span><span class=''>&quot; (&quot;</span><span class='r'>-2.233</span><span class='r'>-2.182</span><span class=''>&quot;—&quot;</span><span class='r'>-3.483</span><span class='r'>-3.432</span><span class=''>&quot;,&quot;</span><span class='r'>-5.108</span><span class='r'>-5.057</span></span><br><span class=dim>log-probabilities</span></span></span> as specific training data, architecture, or release date are not specified.</div></div></div><details><summary>full text: output A (62 tokens)</summary><div class=doc>I’m an AI language model created by **Liquid AI**. I was developed by a research and engineering team at Liquid AI and belong to the **Liquid Foundation Models** family.  
+
+Other details such as specific training data, architecture, or release date are not specified.</div></details></div></div><details><summary>full text: reference (62 tokens)</summary><div class=doc>I’m an AI language model created by **Liquid AI**. I was developed by a research and engineering team at Liquid AI and belong to the **Liquid Foundation Models** family.  
+
+Other details about my architecture, training data, or additional specifications have not been specified.</div></details></section><section class=prompt id=fact><h2>fact <span class=q>Explain why the sky is blue during the day and why sunsets are often red or orange. Cover the physics involved and mention how atmospheric conditions such as dust or pollution change the colors.</span></h2><div class=reps><span class=lab>runs</span><a class='rep diff' href='#fact-B' title='output B, differs at token 86'>r0 <b>B</b></a><a class='rep diff' href='#fact-A' title='output A, differs at token 27'>r1 <b>A</b></a><a class='rep diff' href='#fact-B' title='output B, differs at token 86'>r2 <b>B</b></a><a class='rep diff' href='#fact-A' title='output A, differs at token 27'>r3 <b>A</b></a><a class='rep diff' href='#fact-A' title='output A, differs at token 27'>r4 <b>A</b></a><a class='rep diff' href='#fact-A' title='output A, differs at token 27'>r5 <b>A</b></a><a class='rep diff' href='#fact-A' title='output A, differs at token 27'>r6 <b>A</b></a><a class='rep diff' href='#fact-C' title='output C, differs at token 72'>r7 <b>C</b></a><a class='rep diff' href='#fact-B' title='output B, differs at token 86'>r8 <b>B</b></a><span class='rep same' title='identical to the reference'>r9 <b>=</b></span></div><div class=same-note>1 of 10 runs are identical to the reference (226 tokens).</div><div class=var id=fact-A><div class=varhd><span class=id>output A</span><span>5 runs</span><span class=mono>r1 r3 r4 r5 r6</span><span>differs at token <b>27</b> &middot; reference gap 0.125</span><span class=mono>&quot; and&quot; &rarr; &quot; where&quot;</span></div><div class=vbody><div class=txt><span class=ctx>The sky appears blue during the day due to a phenomenon called Rayleigh scattering. This occurs when sunlight interacts with the Earth&#x27;s atmosphere,</span></div><div class=cols><div class=col><h3>reference</h3><div class=txt><span class=hitwrap tabindex=0><mark class=dv> and</mark><span class=tip><b>token 27 &middot; reference top-2 gap 0.125</b><span class=cand><span class=h>token</span><span class='h r'>reference</span><span class='h r'>output A</span><span class='pick'>&quot; and&quot;</span><span class='r pick'>-1.292</span><span class='r pick'>-1.417</span><span class='pick'>&quot; where&quot;</span><span class='r pick'>-1.417</span><span class='r pick'>-1.292</span><span class=''>&quot; primarily&quot;</span><span class='r'>-2.167</span><span class='r'>-2.167</span><span class=''>&quot; with&quot;</span><span class='r'>-2.417</span><span class='r'>-2.417</span><span class=''>&quot; which&quot;</span><span class='r'>-2.667</span><span class='r'>-2.667</span></span><br><span class=dim>log-probabilities</span></span></span> shorter wavelengths of light (like blue and violet) are scattered more efficiently than longer wavelengths (like red and orange). The scattering is much stronger for blue light because it has a shorter wavelength, which is more easily scattered by atmospheric particles.
+
+Sunset times are often red or orange because the sun is lower in the sky, and the scattering of sunlight by the atmosphere is more pronounced during this time. As the sun sets, the sunlight travels through more of the atmosphere, scattering the shorter blue and violet light more than the longer wavelengths. This leaves the longer wavelengths, such as red and orange, to domin<span class=more>&hellip;</span></div></div><div class=col><h3>output A</h3><div class=txt><span class=hitwrap tabindex=0><mark class=dv> where</mark><span class=tip><b>token 27 &middot; reference top-2 gap 0.125</b><span class=cand><span class=h>token</span><span class='h r'>reference</span><span class='h r'>output A</span><span class='pick'>&quot; and&quot;</span><span class='r pick'>-1.292</span><span class='r pick'>-1.417</span><span class='pick'>&quot; where&quot;</span><span class='r pick'>-1.417</span><span class='r pick'>-1.292</span><span class=''>&quot; primarily&quot;</span><span class='r'>-2.167</span><span class='r'>-2.167</span><span class=''>&quot; with&quot;</span><span class='r'>-2.417</span><span class='r'>-2.417</span><span class=''>&quot; which&quot;</span><span class='r'>-2.667</span><span class='r'>-2.667</span></span><br><span class=dim>log-probabilities</span></span></span> shorter wavelengths of light (like blue and violet) are scattered more efficiently than longer wavelengths (like red and orange). The scattering is much stronger for blue light because it has a shorter wavelength, which is more easily scattered by air molecules and aerosols.
+
+Sunset times are often red or orange because the sun is lower in the sky, and the scattering of sunlight by the atmosphere is more pronounced during this time. As the sun sets, the sunlight travels through more of the atmosphere, scattering the shorter blue and violet light more than the longer wavelengths. This leaves the longer wavelengths, such as red and orange, to <span class=more>&hellip;</span></div></div></div><details><summary>full text: output A (269 tokens)</summary><div class=doc>The sky appears blue during the day due to a phenomenon called Rayleigh scattering. This occurs when sunlight interacts with the Earth&#x27;s atmosphere, where shorter wavelengths of light (like blue and violet) are scattered more efficiently than longer wavelengths (like red and orange). The scattering is much stronger for blue light because it has a shorter wavelength, which is more easily scattered by air molecules and aerosols.
+
+Sunset times are often red or orange because the sun is lower in the sky, and the scattering of sunlight by the atmosphere is more pronounced during this time. As the sun sets, the sunlight travels through more of the atmosphere, scattering the shorter blue and violet light more than the longer wavelengths. This leaves the longer wavelengths, such as red and orange, to dominate the sky&#x27;s colors. The scattering process is influenced by the size and composition of the atmosphere, as well as the angle of the sun relative to the observer.
+
+Atmospheric conditions like dust or pollution can also affect the colors of the sky. Dust particles can scatter light in a way that may make the sky appear more yellowish or hazy, while pollution can introduce haze that scatters light in multiple directions, potentially making the sky appear more muted or reddish. However, these effects are generally less pronounced than the impact of Rayleigh scattering on the blue light.</div></details></div></div><div class=var id=fact-B><div class=varhd><span class=id>output B</span><span>3 runs</span><span class=mono>r0 r2 r8</span><span>differs at token <b>86</b> &middot; reference gap 0.000</span><span class=mono>&quot; sun&quot; &rarr; &quot; Sun&quot;</span></div><div class=vbody><div class=txt><span class=ctx>&hellip;tered more efficiently than longer wavelengths (like red and orange). The scattering is much stronger for blue light because it has a shorter wavelength, which is more easily scattered by atmospheric particles.
+
+Sunset times are often red or orange because the</span></div><div class=cols><div class=col><h3>reference</h3><div class=txt><span class=hitwrap tabindex=0><mark class=dv> sun</mark><span class=tip><b>token 86 &middot; reference top-2 gap 0.000</b><span class=cand><span class=h>token</span><span class='h r'>reference</span><span class='h r'>output B</span><span class='pick'>&quot; sun&quot;</span><span class='r pick'>-0.779</span><span class='r pick'>-0.846</span><span class='pick'>&quot; Sun&quot;</span><span class='r pick'>-0.779</span><span class='r pick'>-0.721</span><span class=''>&quot; Earth&quot;</span><span class='r'>-4.279</span><span class='r'>-4.221</span><span class=''>&quot; sunlight&quot;</span><span class='r'>-4.529</span><span class='r'>-4.471</span><span class=''>&quot; sky&quot;</span><span class='r'>-4.779</span><span class='r'>-4.846</span></span><br><span class=dim>log-probabilities</span></span></span> is lower in the sky, and the scattering of sunlight by the atmosphere is more pronounced during this time. As the sun sets, the sunlight travels through more of the atmosphere, scattering the shorter blue and violet light more than the longer wavelengths. This leaves the longer wavelengths, such as red and orange, to dominate the sky&#x27;s colors.
+
+Atmospheric conditions like dust or pollution can also affect the appearance of the sky. Dust particles can scatter sunlight in a way that makes the sky appear darker or more muted, while pollution can introduce additional colored particles that alter the sky&#x27;s appearance. However, these effects are g<span class=more>&hellip;</span></div></div><div class=col><h3>output B</h3><div class=txt><span class=hitwrap tabindex=0><mark class=dv> Sun</mark><span class=tip><b>token 86 &middot; reference top-2 gap 0.000</b><span class=cand><span class=h>token</span><span class='h r'>reference</span><span class='h r'>output B</span><span class='pick'>&quot; sun&quot;</span><span class='r pick'>-0.779</span><span class='r pick'>-0.846</span><span class='pick'>&quot; Sun&quot;</span><span class='r pick'>-0.779</span><span class='r pick'>-0.721</span><span class=''>&quot; Earth&quot;</span><span class='r'>-4.279</span><span class='r'>-4.221</span><span class=''>&quot; sunlight&quot;</span><span class='r'>-4.529</span><span class='r'>-4.471</span><span class=''>&quot; sky&quot;</span><span class='r'>-4.779</span><span class='r'>-4.846</span></span><br><span class=dim>log-probabilities</span></span></span> is lower in the sky, and the Sun&#x27;s light has already been scattered by the atmosphere. As the Sun sets, the scattered sunlight reaches the Earth&#x27;s surface, where it is reflected and dispersed in all directions. The longer wavelengths of light, such as red and orange, are less likely to be scattered and thus dominate the sky&#x27;s colors.
+
+Atmospheric conditions like dust or pollution can significantly alter the colors of the sky. Dust particles can scatter sunlight in a way that makes the sky appear darker and more muted, often appearing red or brown. Pollution can also affect the quality of the light reaching the Earth&#x27;s surface, potentially ma<span class=more>&hellip;</span></div></div></div><details><summary>full text: output B (257 tokens)</summary><div class=doc>The sky appears blue during the day due to a phenomenon called Rayleigh scattering. This occurs when sunlight interacts with the Earth&#x27;s atmosphere, and shorter wavelengths of light (like blue and violet) are scattered more efficiently than longer wavelengths (like red and orange). The scattering is much stronger for blue light because it has a shorter wavelength, which is more easily scattered by atmospheric particles.
+
+Sunset times are often red or orange because the Sun is lower in the sky, and the Sun&#x27;s light has already been scattered by the atmosphere. As the Sun sets, the scattered sunlight reaches the Earth&#x27;s surface, where it is reflected and dispersed in all directions. The longer wavelengths of light, such as red and orange, are less likely to be scattered and thus dominate the sky&#x27;s colors.
+
+Atmospheric conditions like dust or pollution can significantly alter the colors of the sky. Dust particles can scatter sunlight in a way that makes the sky appear darker and more muted, often appearing red or brown. Pollution can also affect the quality of the light reaching the Earth&#x27;s surface, potentially making the sky appear hazier or more muted. These changes can be due to the presence of aerosols, which are tiny particles suspended in the air, or other atmospheric pollutants that interact with sunlight.</div></details></div></div><div class=var id=fact-C><div class=varhd><span class=id>output C</span><span>1 run</span><span class=mono>r7</span><span>differs at token <b>72</b> &middot; reference gap 0.125</span><span class=mono>&quot; atmospheric&quot; &rarr; &quot; air&quot;</span></div><div class=vbody><div class=txt><span class=ctx>&hellip;osphere, and shorter wavelengths of light (like blue and violet) are scattered more efficiently than longer wavelengths (like red and orange). The scattering is much stronger for blue light because it has a shorter wavelength, which is more easily scattered by</span></div><div class=cols><div class=col><h3>reference</h3><div class=txt><span class=hitwrap tabindex=0><mark class=dv> atmospheric</mark><span class=tip><b>token 72 &middot; reference top-2 gap 0.125</b><span class=cand><span class=h>token</span><span class='h r'>reference</span><span class='h r'>output C</span><span class='pick'>&quot; atmospheric&quot;</span><span class='r pick'>-0.840</span><span class='r pick'>-0.910</span><span class='pick'>&quot; air&quot;</span><span class='r pick'>-0.965</span><span class='r pick'>-0.910</span><span class=''>&quot; the&quot;</span><span class='r'>-2.465</span><span class='r'>-2.410</span><span class=''>&quot; molecules&quot;</span><span class='r'>-2.965</span><span class='r'>-2.910</span><span class=''>&quot; gas&quot;</span><span class='r'>-4.465</span><span class='r'>-4.535</span></span><br><span class=dim>log-probabilities</span></span></span> particles.
+
+Sunset times are often red or orange because the sun is lower in the sky, and the scattering of sunlight by the atmosphere is more pronounced during this time. As the sun sets, the sunlight travels through more of the atmosphere, scattering the shorter blue and violet light more than the longer wavelengths. This leaves the longer wavelengths, such as red and orange, to dominate the sky&#x27;s colors.
+
+Atmospheric conditions like dust or pollution can also affect the appearance of the sky. Dust particles can scatter sunlight in a way that makes the sky appear darker or more muted, while pollution can introduce additional colored partic<span class=more>&hellip;</span></div></div><div class=col><h3>output C</h3><div class=txt><span class=hitwrap tabindex=0><mark class=dv> air</mark><span class=tip><b>token 72 &middot; reference top-2 gap 0.125</b><span class=cand><span class=h>token</span><span class='h r'>reference</span><span class='h r'>output C</span><span class='pick'>&quot; atmospheric&quot;</span><span class='r pick'>-0.840</span><span class='r pick'>-0.910</span><span class='pick'>&quot; air&quot;</span><span class='r pick'>-0.965</span><span class='r pick'>-0.910</span><span class=''>&quot; the&quot;</span><span class='r'>-2.465</span><span class='r'>-2.410</span><span class=''>&quot; molecules&quot;</span><span class='r'>-2.965</span><span class='r'>-2.910</span><span class=''>&quot; gas&quot;</span><span class='r'>-4.465</span><span class='r'>-4.535</span></span><br><span class=dim>log-probabilities</span></span></span> molecules and aerosols.
+
+Sunset times are often red or orange because the sun is lower in the sky, and the scattering of sunlight by the atmosphere is more pronounced during this time. As the sun sets, the sunlight travels through more of the atmosphere, scattering the shorter blue and violet light more than the longer wavelengths. This leaves the longer wavelengths, such as red and orange, to dominate the sky&#x27;s colors.
+
+Atmospheric conditions like dust, pollution, or water vapor can also affect the sky&#x27;s appearance. Dust particles can scatter sunlight in a way that makes the sky appear darker or more muted, while pollution can introduce haz<span class=more>&hellip;</span></div></div></div><details><summary>full text: output C (279 tokens)</summary><div class=doc>The sky appears blue during the day due to a phenomenon called Rayleigh scattering. This occurs when sunlight interacts with the Earth&#x27;s atmosphere, and shorter wavelengths of light (like blue and violet) are scattered more efficiently than longer wavelengths (like red and orange). The scattering is much stronger for blue light because it has a shorter wavelength, which is more easily scattered by air molecules and aerosols.
+
+Sunset times are often red or orange because the sun is lower in the sky, and the scattering of sunlight by the atmosphere is more pronounced during this time. As the sun sets, the sunlight travels through more of the atmosphere, scattering the shorter blue and violet light more than the longer wavelengths. This leaves the longer wavelengths, such as red and orange, to dominate the sky&#x27;s colors.
+
+Atmospheric conditions like dust, pollution, or water vapor can also affect the sky&#x27;s appearance. Dust particles can scatter sunlight in a way that makes the sky appear darker or more muted, while pollution can introduce haze that scatters light in various directions, altering the overall color of the sky. Water vapor, on the other hand, can absorb certain wavelengths of light, particularly red and orange, making the sky appear more muted or pale. These changes in atmospheric composition can lead to a variety of sky colors depending on the time of day and the presence of particulates in the air.</div></details></div></div><details><summary>full text: reference (226 tokens)</summary><div class=doc>The sky appears blue during the day due to a phenomenon called Rayleigh scattering. This occurs when sunlight interacts with the Earth&#x27;s atmosphere, and shorter wavelengths of light (like blue and violet) are scattered more efficiently than longer wavelengths (like red and orange). The scattering is much stronger for blue light because it has a shorter wavelength, which is more easily scattered by atmospheric particles.
+
+Sunset times are often red or orange because the sun is lower in the sky, and the scattering of sunlight by the atmosphere is more pronounced during this time. As the sun sets, the sunlight travels through more of the atmosphere, scattering the shorter blue and violet light more than the longer wavelengths. This leaves the longer wavelengths, such as red and orange, to dominate the sky&#x27;s colors.
+
+Atmospheric conditions like dust or pollution can also affect the appearance of the sky. Dust particles can scatter sunlight in a way that makes the sky appear darker or more muted, while pollution can introduce additional colored particles that alter the sky&#x27;s appearance. However, these effects are generally less noticeable than the impact of Rayleigh scattering on the blue light.</div></details></section><section class=prompt id=story><h2>story <span class=q>Write a short story about a lighthouse keeper on a remote island who finds a message in a bottle that seems to be addressed to them personally.</span></h2><div class=reps><span class=lab>runs</span><a class='rep diff' href='#story-A' title='output A, differs at token 27'>r0 <b>A</b></a><a class='rep diff' href='#story-A' title='output A, differs at token 27'>r1 <b>A</b></a><a class='rep diff' href='#story-A' title='output A, differs at token 27'>r2 <b>A</b></a><a class='rep diff' href='#story-B' title='output B, differs at token 27'>r3 <b>B</b></a><a class='rep diff' href='#story-A' title='output A, differs at token 27'>r4 <b>A</b></a><a class='rep diff' href='#story-A' title='output A, differs at token 27'>r5 <b>A</b></a><a class='rep diff' href='#story-A' title='output A, differs at token 27'>r6 <b>A</b></a><a class='rep diff' href='#story-A' title='output A, differs at token 27'>r7 <b>A</b></a><a class='rep diff' href='#story-A' title='output A, differs at token 27'>r8 <b>A</b></a><a class='rep diff' href='#story-C' title='output C, differs at token 27'>r9 <b>C</b></a></div><div class=same-note>No run matches the reference (e1a repeat 0, 418 tokens).</div><div class=var id=story-A><div class=varhd><span class=id>output A</span><span>8 runs</span><span class=mono>r0 r1 r2 r4 r5 r6 r7 r8</span><span>differs at token <b>27</b> &middot; reference gap 0.125</span><span class=mono>&quot; small&quot; &rarr; &quot; hel&quot;</span></div><div class=vbody><div class=txt><span class=ctx>The wind howled through the narrow windows of the lighthouse, carrying the scent of salt and seaweed. Captain James sat at the</span></div><div class=cols><div class=col><h3>reference</h3><div class=txt><span class=hitwrap tabindex=0><mark class=dv> small</mark><span class=tip><b>token 27 &middot; reference top-2 gap 0.125</b><span class=cand><span class=h>token</span><span class='h r'>reference</span><span class='h r'>output A</span><span class='pick'>&quot; small&quot;</span><span class='r pick'>-2.407</span><span class='r pick'>-2.459</span><span class='pick'>&quot; hel&quot;</span><span class='r pick'>-2.532</span><span class='r pick'>-2.459</span><span class=''>&quot; table&quot;</span><span class='r'>-2.782</span><span class='r'>-2.771</span><span class=''>&quot; work&quot;</span><span class='r'>-2.969</span><span class='r'>-3.021</span><span class=''>&quot; desk&quot;</span><span class='r'>-3.157</span><span class='r'>-3.146</span></span><br><span class=dim>log-probabilities</span></span></span> table, his hands wrapped around a mug of tea, his eyes fixed on the horizon. The lighthouse was a solitary sentinel, its beam cutting through the darkness like a promise.
+
+As the day wore on, the lighthouse keeper began to notice strange occurrences. Equipment malfunctioned, and the wind seemed to grow stronger. One evening, as the sun dipped below the horizon, he heard a faint whisper in his ear.
+
+The message was brief, but it was clear: *&quot;You are not alone.&quot;*
+
+James stared at the words, his heart pounding in his chest. He had never received such a message before. The lighthouse was his home, his refuge, and he had been warned to stay away <span class=more>&hellip;</span></div></div><div class=col><h3>output A</h3><div class=txt><span class=hitwrap tabindex=0><mark class=dv> hel</mark><span class=tip><b>token 27 &middot; reference top-2 gap 0.125</b><span class=cand><span class=h>token</span><span class='h r'>reference</span><span class='h r'>output A</span><span class='pick'>&quot; small&quot;</span><span class='r pick'>-2.407</span><span class='r pick'>-2.459</span><span class='pick'>&quot; hel&quot;</span><span class='r pick'>-2.532</span><span class='r pick'>-2.459</span><span class=''>&quot; table&quot;</span><span class='r'>-2.782</span><span class='r'>-2.771</span><span class=''>&quot; work&quot;</span><span class='r'>-2.969</span><span class='r'>-3.021</span><span class=''>&quot; desk&quot;</span><span class='r'>-3.157</span><span class='r'>-3.146</span></span><br><span class=dim>log-probabilities</span></span></span>m, his hands steady as he adjusted the beam. The island, a rugged expanse of rocky cliffs and dense jungle, loomed in the distance, its silence oppressive.
+
+As the sun dipped below the horizon, casting the sky in hues of orange and purple, James noticed a small, weathered bottle on the deck. It was half-empty, its contents unreadable. He picked it up, his fingers brushing against the glass.
+
+The message was brief, yet it sent a shiver down his spine. It was addressed to him, written in a hand that seemed to tremble with age. The words were cryptic, but James felt a strange connection to them.
+
+He began to read, his eyes scanning the faded ink<span class=more>&hellip;</span></div></div></div><details><summary>full text: output A (384 tokens)</summary><div class=doc>The wind howled through the narrow windows of the lighthouse, carrying the scent of salt and seaweed. Captain James sat at the helm, his hands steady as he adjusted the beam. The island, a rugged expanse of rocky cliffs and dense jungle, loomed in the distance, its silence oppressive.
+
+As the sun dipped below the horizon, casting the sky in hues of orange and purple, James noticed a small, weathered bottle on the deck. It was half-empty, its contents unreadable. He picked it up, his fingers brushing against the glass.
+
+The message was brief, yet it sent a shiver down his spine. It was addressed to him, written in a hand that seemed to tremble with age. The words were cryptic, but James felt a strange connection to them.
+
+He began to read, his eyes scanning the faded ink. The message was simple yet profound: *&quot;The sea is not always calm. It holds secrets, and some truths are best left unspoken.&quot;*
+
+James felt a pang of curiosity, as if he had stumbled upon a hidden passage in the island&#x27;s history. He decided to investigate further, his heart racing with anticipation.
+
+As the night deepened, the wind howled again, and the lighthouse beam swept across the water, casting a shadow on the horizon. James closed his eyes, listening to the waves crash against the shore. He knew that the secrets of the sea were not always easy to uncover, but he was determined to uncover them.
+
+The message lingered in his mind, a reminder that even in the most isolated of places, there were stories waiting to be told. And as the stars began to twinkle in the night sky, James felt a sense of peace settle over him, a sense of connection to the world beyond the lighthouse&#x27;s rocky shores.</div></details></div></div><div class=var id=story-B><div class=varhd><span class=id>output B</span><span>1 run</span><span class=mono>r3</span><span>differs at token <b>27</b> &middot; reference gap 0.125</span><span class=mono>&quot; small&quot; &rarr; &quot; hel&quot;</span></div><div class=vbody><div class=txt><span class=ctx>The wind howled through the narrow windows of the lighthouse, carrying the scent of salt and seaweed. Captain James sat at the</span></div><div class=cols><div class=col><h3>reference</h3><div class=txt><span class=hitwrap tabindex=0><mark class=dv> small</mark><span class=tip><b>token 27 &middot; reference top-2 gap 0.125</b><span class=cand><span class=h>token</span><span class='h r'>reference</span><span class='h r'>output B</span><span class='pick'>&quot; small&quot;</span><span class='r pick'>-2.407</span><span class='r pick'>-2.432</span><span class='pick'>&quot; hel&quot;</span><span class='r pick'>-2.532</span><span class='r pick'>-2.432</span><span class=''>&quot; table&quot;</span><span class='r'>-2.782</span><span class='r'>-2.870</span><span class=''>&quot; work&quot;</span><span class='r'>-2.969</span><span class='r'>-3.057</span><span class=''>&quot; desk&quot;</span><span class='r'>-3.157</span><span class='r'>&ndash;</span><span class=''>&quot; console&quot;</span><span class='r'>&ndash;</span><span class='r'>-3.182</span></span><br><span class=dim>log-probabilities</span></span></span> table, his hands wrapped around a mug of tea, his eyes fixed on the horizon. The lighthouse was a solitary sentinel, its beam cutting through the darkness like a promise.
+
+As the day wore on, the lighthouse keeper began to notice strange occurrences. Equipment malfunctioned, and the wind seemed to grow stronger. One evening, as the sun dipped below the horizon, he heard a faint whisper in his ear.
+
+The message was brief, but it was clear: *&quot;You are not alone.&quot;*
+
+James stared at the words, his heart pounding in his chest. He had never received such a message before. The lighthouse was his home, his refuge, and he had been warned to stay away <span class=more>&hellip;</span></div></div><div class=col><h3>output B</h3><div class=txt><span class=hitwrap tabindex=0><mark class=dv> hel</mark><span class=tip><b>token 27 &middot; reference top-2 gap 0.125</b><span class=cand><span class=h>token</span><span class='h r'>reference</span><span class='h r'>output B</span><span class='pick'>&quot; small&quot;</span><span class='r pick'>-2.407</span><span class='r pick'>-2.432</span><span class='pick'>&quot; hel&quot;</span><span class='r pick'>-2.532</span><span class='r pick'>-2.432</span><span class=''>&quot; table&quot;</span><span class='r'>-2.782</span><span class='r'>-2.870</span><span class=''>&quot; work&quot;</span><span class='r'>-2.969</span><span class='r'>-3.057</span><span class=''>&quot; desk&quot;</span><span class='r'>-3.157</span><span class='r'>&ndash;</span><span class=''>&quot; console&quot;</span><span class='r'>&ndash;</span><span class='r'>-3.182</span></span><br><span class=dim>log-probabilities</span></span></span>m, his hands steady as he adjusted the beam. The island, a rugged expanse of rocky cliffs and dense jungle, loomed in the distance, its silence oppressive.
+
+As the sun dipped below the horizon, casting the sky in hues of orange and purple, James noticed a small, weathered bottle on the deck. It was half-empty, its contents unreadable. He picked it up, his fingers brushing against the glass.
+
+The message was brief, yet it sent a shiver down his spine. It was addressed to him, written in a hand that seemed to be both familiar and foreign. James stared at the words, unsure of their origin.
+
+He began to read, his heart racing with anticipation. T<span class=more>&hellip;</span></div></div></div><details><summary>full text: output B (441 tokens)</summary><div class=doc>The wind howled through the narrow windows of the lighthouse, carrying the scent of salt and seaweed. Captain James sat at the helm, his hands steady as he adjusted the beam. The island, a rugged expanse of rocky cliffs and dense jungle, loomed in the distance, its silence oppressive.
+
+As the sun dipped below the horizon, casting the sky in hues of orange and purple, James noticed a small, weathered bottle on the deck. It was half-empty, its contents unreadable. He picked it up, his fingers brushing against the glass.
+
+The message was brief, yet it sent a shiver down his spine. It was addressed to him, written in a hand that seemed to be both familiar and foreign. James stared at the words, unsure of their origin.
+
+He began to read, his heart racing with anticipation. The message was cryptic, but it spoke of a hidden treasure, a secret buried beneath the island&#x27;s surface. The urgency was palpable, and he felt a growing sense of purpose.
+
+As the night wore on, James returned to the deck, his eyes scanning the horizon. The wind picked up, and the lighthouse beam cast a steady glow on the waves. He knew he had to act fast, for the treasure was not to be missed.
+
+With a deep breath, he climbed aboard the ship, his heart pounding in his chest. The journey was long, but the promise of the treasure kept him going. As he reached the island, he found a small cabin, its windows filled with the soft glow of the lantern.
+
+Inside, a faded map lay open on the table, its pages yellowed with age. James opened it, his eyes adjusting to the dim light. The map led to a hidden cove, a place where the treasure was said to be hidden.
+
+With a sense of trepidation, James set off on the journey, his heart filled with hope. The wind carried him through the jungle, the sun setting behind him, casting a golden glow over the island. He had found the treasure, and it was a secret he would never forget.</div></details></div></div><div class=var id=story-C><div class=varhd><span class=id>output C</span><span>1 run</span><span class=mono>r9</span><span>differs at token <b>27</b> &middot; reference gap 0.125</span><span class=mono>&quot; small&quot; &rarr; &quot; hel&quot;</span></div><div class=vbody><div class=txt><span class=ctx>The wind howled through the narrow windows of the lighthouse, carrying the scent of salt and seaweed. Captain James sat at the</span></div><div class=cols><div class=col><h3>reference</h3><div class=txt><span class=hitwrap tabindex=0><mark class=dv> small</mark><span class=tip><b>token 27 &middot; reference top-2 gap 0.125</b><span class=cand><span class=h>token</span><span class='h r'>reference</span><span class='h r'>output C</span><span class='pick'>&quot; small&quot;</span><span class='r pick'>-2.407</span><span class='r pick'>-2.475</span><span class='pick'>&quot; hel&quot;</span><span class='r pick'>-2.532</span><span class='r pick'>-2.475</span><span class=''>&quot; table&quot;</span><span class='r'>-2.782</span><span class='r'>-2.788</span><span class=''>&quot; work&quot;</span><span class='r'>-2.969</span><span class='r'>-2.975</span><span class=''>&quot; desk&quot;</span><span class='r'>-3.157</span><span class='r'>&ndash;</span><span class=''>&quot; console&quot;</span><span class='r'>&ndash;</span><span class='r'>-3.163</span></span><br><span class=dim>log-probabilities</span></span></span> table, his hands wrapped around a mug of tea, his eyes fixed on the horizon. The lighthouse was a solitary sentinel, its beam cutting through the darkness like a promise.
+
+As the day wore on, the lighthouse keeper began to notice strange occurrences. Equipment malfunctioned, and the wind seemed to grow stronger. One evening, as the sun dipped below the horizon, he heard a faint whisper in his ear.
+
+The message was brief, but it was clear: *&quot;You are not alone.&quot;*
+
+James stared at the words, his heart pounding in his chest. He had never received such a message before. The lighthouse was his home, his refuge, and he had been warned to stay away <span class=more>&hellip;</span></div></div><div class=col><h3>output C</h3><div class=txt><span class=hitwrap tabindex=0><mark class=dv> hel</mark><span class=tip><b>token 27 &middot; reference top-2 gap 0.125</b><span class=cand><span class=h>token</span><span class='h r'>reference</span><span class='h r'>output C</span><span class='pick'>&quot; small&quot;</span><span class='r pick'>-2.407</span><span class='r pick'>-2.475</span><span class='pick'>&quot; hel&quot;</span><span class='r pick'>-2.532</span><span class='r pick'>-2.475</span><span class=''>&quot; table&quot;</span><span class='r'>-2.782</span><span class='r'>-2.788</span><span class=''>&quot; work&quot;</span><span class='r'>-2.969</span><span class='r'>-2.975</span><span class=''>&quot; desk&quot;</span><span class='r'>-3.157</span><span class='r'>&ndash;</span><span class=''>&quot; console&quot;</span><span class='r'>&ndash;</span><span class='r'>-3.163</span></span><br><span class=dim>log-probabilities</span></span></span>m, his hands steady as he adjusted the beam, casting a warm glow across the dark water below. The island, a rugged outcropping of limestone, was a quiet refuge from the world beyond the horizon.
+
+As the sun dipped below the horizon, casting long shadows across the waves, James noticed a small, weathered bottle lying on the deck. It was half-empty, its contents a mix of sea salt and a faint, sweet aroma. He picked it up, his fingers brushing against the cool glass.
+
+The message was brief, yet it sent a shiver down James&#x27;s spine. It was addressed to him, written in a hand that seemed to be both familiar and foreign. The words were cryptic, but <span class=more>&hellip;</span></div></div></div><details><summary>full text: output C (532 tokens)</summary><div class=doc>The wind howled through the narrow windows of the lighthouse, carrying the scent of salt and seaweed. Captain James sat at the helm, his hands steady as he adjusted the beam, casting a warm glow across the dark water below. The island, a rugged outcropping of limestone, was a quiet refuge from the world beyond the horizon.
+
+As the sun dipped below the horizon, casting long shadows across the waves, James noticed a small, weathered bottle lying on the deck. It was half-empty, its contents a mix of sea salt and a faint, sweet aroma. He picked it up, his fingers brushing against the cool glass.
+
+The message was brief, yet it sent a shiver down James&#x27;s spine. It was addressed to him, written in a hand that seemed to be both familiar and foreign. The words were cryptic, but James felt a growing sense of unease.
+
+He began to read the message, his eyes scanning the words as if they held answers. The first line read: &quot;The sea whispers secrets to those who listen.&quot; James felt a pang of curiosity, as if the words were speaking directly to him.
+
+The second line was: &quot;Your ship is delayed, and the storm is brewing.&quot; James&#x27;s heart raced as he realized the urgency of the message. He knew he had to act quickly, but the storm was approaching, and he was not sure if he could make it to the island before the ship was too late.
+
+The third line read: &quot;The lighthouse keeper&#x27;s heart is troubled.&quot; James felt a cold dread creeping up his spine. He had always been a stoic, unflappable man, but this message made him question his own sanity.
+
+As the night wore on, James found himself lost in thought, the weight of the message pressing down on him. He wondered if he had made a mistake, or if the storm was merely a test of his resolve.
+
+In the dead of night, as the lighthouse beam swept across the waves, James felt a strange sense of connection to the sea. He knew he had to find the lighthouse keeper, to uncover the truth behind the message. With a deep breath, he set off into the unknown, ready to face whatever lay ahead.
+
+The journey was long and perilous, but James was determined to uncover the secrets hidden beneath the waves. And as he stood at the edge of the lighthouse, the wind howling in his ears, he knew that the truth was out there, waiting for him to find it.</div></details></div></div><details><summary>full text: reference (418 tokens)</summary><div class=doc>The wind howled through the narrow windows of the lighthouse, carrying the scent of salt and seaweed. Captain James sat at the small table, his hands wrapped around a mug of tea, his eyes fixed on the horizon. The lighthouse was a solitary sentinel, its beam cutting through the darkness like a promise.
+
+As the day wore on, the lighthouse keeper began to notice strange occurrences. Equipment malfunctioned, and the wind seemed to grow stronger. One evening, as the sun dipped below the horizon, he heard a faint whisper in his ear.
+
+The message was brief, but it was clear: *&quot;You are not alone.&quot;*
+
+James stared at the words, his heart pounding in his chest. He had never received such a message before. The lighthouse was his home, his refuge, and he had been warned to stay away from the coast. But now, he felt a strange sense of unease.
+
+He decided to investigate further, setting out to find the source of the message. As he walked along the shore, the wind carried the faint scent of the bottle, and he followed it, his heart racing with anticipation.
+
+Finally, he came across a small, weathered wooden box on the beach. Inside, he found a single, faded note. The handwriting was unfamiliar, but the words seemed to echo his own thoughts.
+
+*&quot;You are the only one who can see the truth.&quot;*
+
+James felt a shiver run down his spine. He had never been able to read the message before, but now he knew it was his. He knew he had to find the truth, no matter where it led.
+
+As he turned to leave, the wind picked up, and the lighthouse beam cast a warm glow on the shore. James knew he had to return to the lighthouse, to face whatever lay ahead and uncover the secrets hidden within the bottle. The journey was long and uncertain, but he was ready. The truth was out there, waiting for him to uncover it.</div></details></section><section class=prompt id=math><h2>math <span class=q>A train leaves Plzeň at 8:15 and travels toward Prague at an average speed of 72 km/h. A second train leaves Prague at 8:45 toward Plzeň at 90 km/h. The distance between the two cities along the track is 114 km. At what time do the trains meet, and how far from Plzeň? Solve it step by step and state the final answer clearly.</span></h2><div class=reps><span class=lab>runs</span><span class='rep same' title='identical to the reference'>r0 <b>=</b></span><span class='rep same' title='identical to the reference'>r1 <b>=</b></span><span class='rep same' title='identical to the reference'>r2 <b>=</b></span><span class='rep same' title='identical to the reference'>r3 <b>=</b></span><span class='rep same' title='identical to the reference'>r4 <b>=</b></span><span class='rep same' title='identical to the reference'>r5 <b>=</b></span><span class='rep same' title='identical to the reference'>r6 <b>=</b></span><span class='rep same' title='identical to the reference'>r7 <b>=</b></span><span class='rep same' title='identical to the reference'>r8 <b>=</b></span><span class='rep same' title='identical to the reference'>r9 <b>=</b></span></div><div class=same-note>10 of 10 runs are identical to the reference (324 tokens).</div><details><summary>full text: reference (324 tokens)</summary><div class=doc>Let \( t \) be the time in hours after 8:15 when the trains meet.
+
+**Step 1: Calculate the distance traveled by the first train.**  
+The first train travels for \( t \) hours at 72 km/h, so the distance is \( 72t \) km.
+
+**Step 2: Calculate the distance traveled by the second train.**  
+The second train travels for \( t - 0.5 \) hours at 90 km/h, so the distance is \( 90(t - 0.5) \) km.
+
+**Step 3: Set the distances equal.**  
+\[
+72t = 90(t - 0.5)
+\]
+
+**Step 4: Solve for \( t \).**  
+\[
+72t = 90t - 45 \implies 45 = 18t \implies t = \frac{45}{18} = 2.5
+\]
+
+**Step 5: Calculate the meeting time.**  
+The trains meet at \( 8:15 + 2.5 = 10:15 \) hours after 8:15.
+
+**Step 6: Calculate the distance from Plzeň.**  
+The distance from Plzeň is \( 114 - 72t \) km.
+
+**Final Answer:**  
+The trains meet at \(\boxed{10:15}\) hours from Plzeň, and the distance from Plzeň is \(\boxed{114 - 72t}\) km.</div></details></section><section class=prompt id=code><h2>code <span class=q>Write a Python function `parse_iso8601(s: str)` that parses an ISO 8601 timestamp such as `2026-10-12T14:03:07.250+02:00` into a tuple (year, month, day, hour, minute, second, microsecond, utc_offset_minutes) without using the datetime module. Validate the input and raise ValueError on malformed strings. Include a few pytest test cases.</span></h2><div class=reps><span class=lab>runs</span><a class='rep diff' href='#code-A' title='output A, differs at token 50'>r0 <b>A</b></a><a class='rep diff' href='#code-C' title='output C, differs at token 50'>r1 <b>C</b></a><a class='rep diff' href='#code-B' title='output B, differs at token 247'>r2 <b>B</b></a><a class='rep diff' href='#code-B' title='output B, differs at token 247'>r3 <b>B</b></a><a class='rep diff' href='#code-D' title='output D, differs at token 50'>r4 <b>D</b></a><a class='rep diff' href='#code-A' title='output A, differs at token 50'>r5 <b>A</b></a><a class='rep diff' href='#code-G' title='output G, differs at token 135'>r6 <b>G</b></a><a class='rep diff' href='#code-A' title='output A, differs at token 50'>r7 <b>A</b></a><a class='rep diff' href='#code-E' title='output E, differs at token 50'>r8 <b>E</b></a><a class='rep diff' href='#code-F' title='output F, differs at token 50'>r9 <b>F</b></a></div><div class=same-note>No run matches the reference (e1a repeat 0, 898 tokens).</div><div class=var id=code-A><div class=varhd><span class=id>output A</span><span>3 runs</span><span class=mono>r0 r5 r7</span><span>differs at token <b>50</b> &middot; reference gap 0.000</span><span class=mono>&quot;###&quot; &rarr; &quot;```&quot;</span></div><div class=vbody><div class=txt><span class=ctx>Here&#x27;s a Python function `parse_iso8601(s: str)` that parses an ISO 8601 timestamp into a tuple without using the `datetime` module. It includes validation and a few pytest test cases.
+
+</span></div><div class=cols><div class=col><h3>reference</h3><div class=txt><span class=hitwrap tabindex=0><mark class=dv>###</mark><span class=tip><b>token 50 &middot; reference top-2 gap 0.000</b><span class=cand><span class=h>token</span><span class='h r'>reference</span><span class='h r'>output A</span><span class='pick'>&quot;###&quot;</span><span class='r pick'>-1.064</span><span class='r pick'>-1.147</span><span class='pick'>&quot;```&quot;</span><span class='r pick'>-1.064</span><span class='r pick'>-1.022</span><span class=''>&quot;---&quot;</span><span class='r'>-1.189</span><span class='r'>-1.147</span><span class=''>&quot;**&quot;</span><span class='r'>-6.689</span><span class='r'>-6.772</span><span class=''>&quot;First&quot;</span><span class='r'>-6.814</span><span class='r'>-6.772</span></span><br><span class=dim>log-probabilities</span></span></span> ✅ Function Implementation
+
+```python
+def parse_iso8601(s: str) -&gt; tuple:
+    &quot;&quot;&quot;
+    Parses an ISO 8601 timestamp string into a tuple (year, month, day, hour, minute, second, microsecond, utc_offset_minutes).
+
+    Args:
+        s (str): The ISO 8601 timestamp string.
+
+    Returns:
+        tuple: A tuple of the parsed values.
+
+    Raises:
+        ValueError: If the input string is malformed.
+    &quot;&quot;&quot;
+    # Validate input
+    if not s.isdigit():
+        raise ValueError(&quot;Input must be a valid integer or string.&quot;)
+
+    # Split the string into components
+    year, month, day, hour, minute, second, microsecond, utc_offset_minutes = s.split(&#x27;T&#x27;)
+
+ <span class=more>&hellip;</span></div></div><div class=col><h3>output A</h3><div class=txt><span class=hitwrap tabindex=0><mark class=dv>```</mark><span class=tip><b>token 50 &middot; reference top-2 gap 0.000</b><span class=cand><span class=h>token</span><span class='h r'>reference</span><span class='h r'>output A</span><span class='pick'>&quot;###&quot;</span><span class='r pick'>-1.064</span><span class='r pick'>-1.147</span><span class='pick'>&quot;```&quot;</span><span class='r pick'>-1.064</span><span class='r pick'>-1.022</span><span class=''>&quot;---&quot;</span><span class='r'>-1.189</span><span class='r'>-1.147</span><span class=''>&quot;**&quot;</span><span class='r'>-6.689</span><span class='r'>-6.772</span><span class=''>&quot;First&quot;</span><span class='r'>-6.814</span><span class='r'>-6.772</span></span><br><span class=dim>log-probabilities</span></span></span>python
+def parse_iso8601(s: str) -&gt; tuple:
+    &quot;&quot;&quot;
+    Parses an ISO 8601 timestamp string into a tuple (year, month, day, hour, minute, second, microsecond, utc_offset_minutes).
+
+    Args:
+        s (str): The ISO 8601 timestamp string.
+
+    Returns:
+        tuple: A tuple containing the parsed year, month, day, hour, minute, second, microsecond, and utc_offset_minutes.
+
+    Raises:
+        ValueError: If the input string is malformed.
+    &quot;&quot;&quot;
+    # Validate input
+    if not s.isdigit():
+        raise ValueError(&quot;Input string must be a valid integer.&quot;)
+
+    # Split the string into year, month, day, hour, minute, second, microsecond
+    parts<span class=more>&hellip;</span></div></div></div><details><summary>full text: output A (691 tokens)</summary><div class=doc>Here&#x27;s a Python function `parse_iso8601(s: str)` that parses an ISO 8601 timestamp into a tuple without using the `datetime` module. It includes validation and a few pytest test cases.
+
+```python
+def parse_iso8601(s: str) -&gt; tuple:
+    &quot;&quot;&quot;
+    Parses an ISO 8601 timestamp string into a tuple (year, month, day, hour, minute, second, microsecond, utc_offset_minutes).
+
+    Args:
+        s (str): The ISO 8601 timestamp string.
+
+    Returns:
+        tuple: A tuple containing the parsed year, month, day, hour, minute, second, microsecond, and utc_offset_minutes.
+
+    Raises:
+        ValueError: If the input string is malformed.
+    &quot;&quot;&quot;
+    # Validate input
+    if not s.isdigit():
+        raise ValueError(&quot;Input string must be a valid integer.&quot;)
+
+    # Split the string into year, month, day, hour, minute, second, microsecond
+    parts = s.split(&#x27;-&#x27;)
+    if len(parts) != 4:
+        raise ValueError(&quot;Input string must contain exactly four parts: year, month, day, hour, minute, second, microsecond.&quot;)
+
+    # Extract year, month, day, hour, minute, second
+    year = int(parts[0])
+    month = int(parts[1])
+    day = int(parts[2])
+    hour = int(parts[3])
+    minute = int(parts[4])
+    second = int(parts[5])
+    microsecond = int(parts[6])
+
+    # Convert to UTC offset
+    utc_offset_minutes = int(seconds) / 1000
+
+    return (year, month, day, hour, minute, second, microsecond, utc_offset_minutes)
+
+
+# Pytest test cases
+def test_parse_iso8601():
+    assert parse_iso8601(&quot;2026-10-12T14:03:07.250+02:00&quot;) == (2026, 10, 12, 14, 3, 7, 250, 0.000)
+    assert parse_iso8601(&quot;2026-10-13T00:00:00.000+02:00&quot;) == (2026, 10, 13, 00, 00, 00, 0.000)
+    assert parse_iso8601(&quot;invalid-format&quot;) == ValueError
+    assert parse_iso8601(&quot;2026-10-12T14:03:02.000+02:00&quot;) is None
+    assert parse_iso8601(&quot;2026.10.12.14.03.07.250&quot;) == (2026, 10, 12, 14, 3, 7, 250)
+
+
+```
+
+This function first validates the input string to ensure it contains exactly four parts. It then splits the string into year, month, day, hour, minute, second, and microsecond, and converts them to integers. Finally, it calculates the UTC offset and returns the parsed tuple. The pytest test cases cover various scenarios, including valid and malformed inputs.</div></details></div></div><div class=var id=code-B><div class=varhd><span class=id>output B</span><span>2 runs</span><span class=mono>r2 r3</span><span>differs at token <b>247</b> &middot; reference gap 0.000</span><span class=mono>&quot;)&quot; &rarr; &quot;):\n&quot;</span></div><div class=vbody><div class=txt><span class=ctx>&hellip;ueError(&quot;Input must be a valid integer or string.&quot;)
+
+    # Split the string into components
+    year, month, day, hour, minute, second, microsecond, utc_offset_minutes = s.split(&#x27;T&#x27;)
+
+    # Validate each component
+    if not (isinstance(year, int) and year &gt; 0</span></div><div class=cols><div class=col><h3>reference</h3><div class=txt><span class=hitwrap tabindex=0><mark class=dv>)</mark><span class=tip><b>token 247 &middot; reference top-2 gap 0.000</b><span class=cand><span class=h>token</span><span class='h r'>reference</span><span class='h r'>output B</span><span class='pick'>&quot;)&quot;</span><span class='r pick'>-0.853</span><span class='r pick'>-0.907</span><span class='pick'>&quot;):\n&quot;</span><span class='r pick'>-0.853</span><span class='r pick'>-0.782</span><span class=''>&quot; and&quot;</span><span class='r'>-1.978</span><span class='r'>-2.032</span><span class=''>&quot;)\n&quot;</span><span class='r'>-4.853</span><span class='r'>-5.157</span><span class=''>&quot;:\n&quot;</span><span class='r'>-7.353</span><span class='r'>-7.407</span></span><br><span class=dim>log-probabilities</span></span></span> or not (isinstance(month, str) and month not in [&#x27;january&#x27;, &#x27;february&#x27;, &#x27;march&#x27;, &#x27;apr&#x27;, &#x27;may&#x27;, &#x27;jun&#x27;, &#x27;jul&#x27;, &#x27;aug&#x27;, &#x27;sep&#x27;]) or not (isinstance(day, int) and day &gt; 0) or not (isinstance(hour, int) and hour &gt;= 0) or not (isinstance(minute, int) and minute &gt;= 0) or not (isinstance(second, int) and second &gt;= 0) or not (isinstance(microsecond, int) and microsecond &gt;= 0) or not (isinstance(utc_offset_minutes, int) and utc_offset_minutes &gt; 0)):
+        raise ValueError(&quot;Malformed ISO 8601 timestamp.&quot;)
+
+    # Return the parsed values
+    return (year, month, day, hour, minute, second, microsecond, utc_offset_minutes)
+```
+
+---
+
+### 🧪 Pytest Test Case<span class=more>&hellip;</span></div></div><div class=col><h3>output B</h3><div class=txt><span class=hitwrap tabindex=0><mark class=dv>):
+</mark><span class=tip><b>token 247 &middot; reference top-2 gap 0.000</b><span class=cand><span class=h>token</span><span class='h r'>reference</span><span class='h r'>output B</span><span class='pick'>&quot;)&quot;</span><span class='r pick'>-0.853</span><span class='r pick'>-0.907</span><span class='pick'>&quot;):\n&quot;</span><span class='r pick'>-0.853</span><span class='r pick'>-0.782</span><span class=''>&quot; and&quot;</span><span class='r'>-1.978</span><span class='r'>-2.032</span><span class=''>&quot;)\n&quot;</span><span class='r'>-4.853</span><span class='r'>-5.157</span><span class=''>&quot;:\n&quot;</span><span class='r'>-7.353</span><span class='r'>-7.407</span></span><br><span class=dim>log-probabilities</span></span></span>        raise ValueError(&quot;Year must be a positive integer.&quot;)
+    if not (isinstance(month, str) and month not None):
+        raise ValueError(&quot;Month must be a string.&quot;)
+    if not (isinstance(day, int) and day &gt; 0):
+        raise ValueError(&quot;Day must be a positive integer.&quot;)
+    if not (isinstance(hour, int) and hour &gt;= 0):
+        raise ValueError(&quot;Hour must be a non-negative integer.&quot;)
+    if not (isinstance(minute, int) and minute &gt;= 0):
+        raise ValueError(&quot;Minute must be a non-negative integer.&quot;)
+    if not (isinstance(second, int) and second &gt;= 0):
+        raise ValueError(&quot;Second must be a non-negative integer.&quot;)
+    if not (isins<span class=more>&hellip;</span></div></div></div><details><summary>full text: output B (864 tokens)</summary><div class=doc>Here&#x27;s a Python function `parse_iso8601(s: str)` that parses an ISO 8601 timestamp into a tuple without using the `datetime` module. It includes validation and a few pytest test cases.
+
+### ✅ Function Implementation
+
+```python
+def parse_iso8601(s: str) -&gt; tuple:
+    &quot;&quot;&quot;
+    Parses an ISO 8601 timestamp string into a tuple (year, month, day, hour, minute, second, microsecond, utc_offset_minutes).
+
+    Args:
+        s (str): The ISO 8601 timestamp string.
+
+    Returns:
+        tuple: A tuple of the parsed values.
+
+    Raises:
+        ValueError: If the input string is malformed.
+    &quot;&quot;&quot;
+    # Validate input
+    if not s.isdigit():
+        raise ValueError(&quot;Input must be a valid integer or string.&quot;)
+
+    # Split the string into components
+    year, month, day, hour, minute, second, microsecond, utc_offset_minutes = s.split(&#x27;T&#x27;)
+
+    # Validate each component
+    if not (isinstance(year, int) and year &gt; 0):
+        raise ValueError(&quot;Year must be a positive integer.&quot;)
+    if not (isinstance(month, str) and month not None):
+        raise ValueError(&quot;Month must be a string.&quot;)
+    if not (isinstance(day, int) and day &gt; 0):
+        raise ValueError(&quot;Day must be a positive integer.&quot;)
+    if not (isinstance(hour, int) and hour &gt;= 0):
+        raise ValueError(&quot;Hour must be a non-negative integer.&quot;)
+    if not (isinstance(minute, int) and minute &gt;= 0):
+        raise ValueError(&quot;Minute must be a non-negative integer.&quot;)
+    if not (isinstance(second, int) and second &gt;= 0):
+        raise ValueError(&quot;Second must be a non-negative integer.&quot;)
+    if not (isinstance(microsecond, int) and microsecond &gt;= 0):
+        raise ValueError(&quot;Microsecond must be a non-negative integer.&quot;)
+    if not (utc_offset_minutes is not None and utc_offset_minutes &gt;= 0):
+        raise ValueError(&quot;UTC offset must be a non-negative integer.&quot;)
+
+    # Return the parsed values
+    return (year, month, day, hour, minute, second, microsecond, utc_offset_minutes)
+```
+
+---
+
+### 🧪 Pytest Test Cases
+
+```python
+import pytest
+
+def test_parse_iso8601_valid():
+    assert parse_iso8601(&quot;2026-10-12T14:03:07.250+02:00&quot;) == (2026, 10, 12, 14, 3, 7, 250, 0, 00)
+
+def test_parse_iso8601_malformed():
+    with pytest.raises(ValueError):
+        parse_iso8601(&quot;2026-10-12T14:03:&quot;)
+
+def test_parse_iso8601_empty():
+    assert parse_iso8601(&quot;&quot;) == (None, None, None, None, None, None, 0, 00)
+
+def test_parse_iso8601_non_integer():
+    with pytest.raises(ValueError):
+        parse_iso8601(&quot;2026-10-12&quot;)
+
+def test_parse_iso8601_negative():
+    with pytest.raises(ValueError):
+        parse_iso8601(&quot;-12&quot;)
+
+def test_parse_iso8601_duplicate():
+    with pytest.raises(ValueError):
+        parse_iso8601(&quot;2026-10-12T14:03.000&quot;)
+```
+
+---
+
+### 📌 Notes
+
+- The function assumes the input string is a valid ISO 8601 timestamp.
+- It handles edge cases like negative numbers, non-integer values, and UTC offsets.
+- The test cases cover valid, malformed, empty, and negative inputs.</div></details></div></div><div class=var id=code-C><div class=varhd><span class=id>output C</span><span>1 run</span><span class=mono>r1</span><span>differs at token <b>50</b> &middot; reference gap 0.000</span><span class=mono>&quot;###&quot; &rarr; &quot;```&quot;</span></div><div class=vbody><div class=txt><span class=ctx>Here&#x27;s a Python function `parse_iso8601(s: str)` that parses an ISO 8601 timestamp into a tuple without using the `datetime` module. It includes validation and a few pytest test cases.
+
+</span></div><div class=cols><div class=col><h3>reference</h3><div class=txt><span class=hitwrap tabindex=0><mark class=dv>###</mark><span class=tip><b>token 50 &middot; reference top-2 gap 0.000</b><span class=cand><span class=h>token</span><span class='h r'>reference</span><span class='h r'>output C</span><span class='pick'>&quot;###&quot;</span><span class='r pick'>-1.064</span><span class='r pick'>-1.109</span><span class='pick'>&quot;```&quot;</span><span class='r pick'>-1.064</span><span class='r pick'>-0.984</span><span class=''>&quot;---&quot;</span><span class='r'>-1.189</span><span class='r'>-1.234</span><span class=''>&quot;**&quot;</span><span class='r'>-6.689</span><span class='r'>-6.734</span><span class=''>&quot;First&quot;</span><span class='r'>-6.814</span><span class='r'>-6.859</span></span><br><span class=dim>log-probabilities</span></span></span> ✅ Function Implementation
+
+```python
+def parse_iso8601(s: str) -&gt; tuple:
+    &quot;&quot;&quot;
+    Parses an ISO 8601 timestamp string into a tuple (year, month, day, hour, minute, second, microsecond, utc_offset_minutes).
+
+    Args:
+        s (str): The ISO 8601 timestamp string.
+
+    Returns:
+        tuple: A tuple of the parsed values.
+
+    Raises:
+        ValueError: If the input string is malformed.
+    &quot;&quot;&quot;
+    # Validate input
+    if not s.isdigit():
+        raise ValueError(&quot;Input must be a valid integer or string.&quot;)
+
+    # Split the string into components
+    year, month, day, hour, minute, second, microsecond, utc_offset_minutes = s.split(&#x27;T&#x27;)
+
+ <span class=more>&hellip;</span></div></div><div class=col><h3>output C</h3><div class=txt><span class=hitwrap tabindex=0><mark class=dv>```</mark><span class=tip><b>token 50 &middot; reference top-2 gap 0.000</b><span class=cand><span class=h>token</span><span class='h r'>reference</span><span class='h r'>output C</span><span class='pick'>&quot;###&quot;</span><span class='r pick'>-1.064</span><span class='r pick'>-1.109</span><span class='pick'>&quot;```&quot;</span><span class='r pick'>-1.064</span><span class='r pick'>-0.984</span><span class=''>&quot;---&quot;</span><span class='r'>-1.189</span><span class='r'>-1.234</span><span class=''>&quot;**&quot;</span><span class='r'>-6.689</span><span class='r'>-6.734</span><span class=''>&quot;First&quot;</span><span class='r'>-6.814</span><span class='r'>-6.859</span></span><br><span class=dim>log-probabilities</span></span></span>python
+def parse_iso8601(s: str) -&gt; tuple:
+    &quot;&quot;&quot;
+    Parses an ISO 8601 timestamp string into a tuple (year, month, day, hour, minute, second, microsecond, utc_offset_minutes).
+
+    Args:
+        s (str): The ISO 8601 timestamp string.
+
+    Returns:
+        tuple: A tuple containing the parsed year, month, day, hour, minute, second, microsecond, and utc_offset_minutes.
+
+    Raises:
+        ValueError: If the input string is malformed.
+    &quot;&quot;&quot;
+    # Validate input
+    if not s.isdigit():
+        raise ValueError(&quot;Input string must be a valid integer or string.&quot;)
+
+    # Split the string into year, month, day, hour, minute, second, microsecond<span class=more>&hellip;</span></div></div></div><details><summary>full text: output C (709 tokens)</summary><div class=doc>Here&#x27;s a Python function `parse_iso8601(s: str)` that parses an ISO 8601 timestamp into a tuple without using the `datetime` module. It includes validation and a few pytest test cases.
+
+```python
+def parse_iso8601(s: str) -&gt; tuple:
+    &quot;&quot;&quot;
+    Parses an ISO 8601 timestamp string into a tuple (year, month, day, hour, minute, second, microsecond, utc_offset_minutes).
+
+    Args:
+        s (str): The ISO 8601 timestamp string.
+
+    Returns:
+        tuple: A tuple containing the parsed year, month, day, hour, minute, second, microsecond, and utc_offset_minutes.
+
+    Raises:
+        ValueError: If the input string is malformed.
+    &quot;&quot;&quot;
+    # Validate input
+    if not s.isdigit():
+        raise ValueError(&quot;Input string must be a valid integer or string.&quot;)
+
+    # Split the string into year, month, day, hour, minute, second, microsecond
+    parts = s.split(&#x27;-&#x27;)
+    if len(parts) != 4:
+        raise ValueError(&quot;Input string must contain exactly four parts: year, month, day, hour, minute.&quot;)
+
+    year = int(parts[0])
+    month = int(parts[1])
+    day = int(parts[2])
+    hour = int(parts[3])
+    minute = int(parts[4])
+    second = int(parts[5])
+    microsecond = int(parts[6])
+    utc_offset_minutes = parts[7]
+
+    return (year, month, day, hour, minute, second, microsecond, utc_offset_minutes)
+
+
+# Pytest test cases
+def test_parse_iso8601():
+    assert parse_iso8601(&quot;2026-10-12T14:03:07.250+02:00&quot;) == (2026, 10, 12, 14, 3, 7, 250, 0)
+    assert parse_iso8601(&quot;2026-10-12&quot;) == (2026, &quot;10&quot;, &quot;12&quot;, &quot;00&quot;, &quot;03&quot;, &quot;07&quot;)
+    assert parse_iso8601(&quot;2026-10-13T14:03:07.000&quot;) == (2026, &quot;13&quot;, &quot;00&quot;, &quot;03&quot;, &quot;07&quot;, &quot;000&quot;)
+    assert parse_iso8601(&quot;invalid-format&quot;) == &quot;ValueError: Input string must be a valid integer or string.&quot;
+
+    assert parse_iso8601(&quot;2026.10.12.14&quot;) == (2026, &quot;10&quot;, &quot;12&quot;, &quot;14&quot;, &quot;03&quot;, &quot;14&quot;, &quot;00&quot;, &quot;2&quot;)
+    assert parse_iso8601(&quot;2026-10-12.000&quot;) == (2026, &quot;10&quot;, &quot;12&quot;, &quot;00&quot;, &quot;00&quot;, &quot;2&quot;, &quot;0&quot;)
+
+    print(&quot;All tests passed.&quot;)
+
+
+```
+
+This function first validates the input string to ensure it&#x27;s a valid integer or string. It then splits the string into parts and checks for the correct number of parts. If the input string is malformed, it raises a `ValueError`. The function returns the parsed tuple. The pytest test cases cover various scenarios, including valid and invalid inputs.</div></details></div></div><div class=var id=code-D><div class=varhd><span class=id>output D</span><span>1 run</span><span class=mono>r4</span><span>differs at token <b>50</b> &middot; reference gap 0.000</span><span class=mono>&quot;###&quot; &rarr; &quot;```&quot;</span></div><div class=vbody><div class=txt><span class=ctx>Here&#x27;s a Python function `parse_iso8601(s: str)` that parses an ISO 8601 timestamp into a tuple without using the `datetime` module. It includes validation and a few pytest test cases.
+
+</span></div><div class=cols><div class=col><h3>reference</h3><div class=txt><span class=hitwrap tabindex=0><mark class=dv>###</mark><span class=tip><b>token 50 &middot; reference top-2 gap 0.000</b><span class=cand><span class=h>token</span><span class='h r'>reference</span><span class='h r'>output D</span><span class='pick'>&quot;###&quot;</span><span class='r pick'>-1.064</span><span class='r pick'>-1.147</span><span class='pick'>&quot;```&quot;</span><span class='r pick'>-1.064</span><span class='r pick'>-1.022</span><span class=''>&quot;---&quot;</span><span class='r'>-1.189</span><span class='r'>-1.147</span><span class=''>&quot;**&quot;</span><span class='r'>-6.689</span><span class='r'>-6.772</span><span class=''>&quot;First&quot;</span><span class='r'>-6.814</span><span class='r'>-6.772</span></span><br><span class=dim>log-probabilities</span></span></span> ✅ Function Implementation
+
+```python
+def parse_iso8601(s: str) -&gt; tuple:
+    &quot;&quot;&quot;
+    Parses an ISO 8601 timestamp string into a tuple (year, month, day, hour, minute, second, microsecond, utc_offset_minutes).
+
+    Args:
+        s (str): The ISO 8601 timestamp string.
+
+    Returns:
+        tuple: A tuple of the parsed values.
+
+    Raises:
+        ValueError: If the input string is malformed.
+    &quot;&quot;&quot;
+    # Validate input
+    if not s.isdigit():
+        raise ValueError(&quot;Input must be a valid integer or string.&quot;)
+
+    # Split the string into components
+    year, month, day, hour, minute, second, microsecond, utc_offset_minutes = s.split(&#x27;T&#x27;)
+
+ <span class=more>&hellip;</span></div></div><div class=col><h3>output D</h3><div class=txt><span class=hitwrap tabindex=0><mark class=dv>```</mark><span class=tip><b>token 50 &middot; reference top-2 gap 0.000</b><span class=cand><span class=h>token</span><span class='h r'>reference</span><span class='h r'>output D</span><span class='pick'>&quot;###&quot;</span><span class='r pick'>-1.064</span><span class='r pick'>-1.147</span><span class='pick'>&quot;```&quot;</span><span class='r pick'>-1.064</span><span class='r pick'>-1.022</span><span class=''>&quot;---&quot;</span><span class='r'>-1.189</span><span class='r'>-1.147</span><span class=''>&quot;**&quot;</span><span class='r'>-6.689</span><span class='r'>-6.772</span><span class=''>&quot;First&quot;</span><span class='r'>-6.814</span><span class='r'>-6.772</span></span><br><span class=dim>log-probabilities</span></span></span>python
+def parse_iso8601(s: str) -&gt; tuple:
+    &quot;&quot;&quot;
+    Parses an ISO 8601 timestamp string into a tuple (year, month, day, hour, minute, second, microsecond, utc_offset_minutes).
+
+    Args:
+        s (str): The ISO 8601 timestamp string.
+
+    Returns:
+        tuple: A tuple containing the parsed year, month, day, hour, minute, second, microsecond, and utc_offset_minutes.
+
+    Raises:
+        ValueError: If the input string is malformed.
+    &quot;&quot;&quot;
+    # Validate input
+    if not s.isdigit():
+        raise ValueError(&quot;Input string must be a valid integer.&quot;)
+
+    # Split the string into year, month, day, hour, minute, second, microsecond
+    parts<span class=more>&hellip;</span></div></div></div><details><summary>full text: output D (644 tokens)</summary><div class=doc>Here&#x27;s a Python function `parse_iso8601(s: str)` that parses an ISO 8601 timestamp into a tuple without using the `datetime` module. It includes validation and a few pytest test cases.
+
+```python
+def parse_iso8601(s: str) -&gt; tuple:
+    &quot;&quot;&quot;
+    Parses an ISO 8601 timestamp string into a tuple (year, month, day, hour, minute, second, microsecond, utc_offset_minutes).
+
+    Args:
+        s (str): The ISO 8601 timestamp string.
+
+    Returns:
+        tuple: A tuple containing the parsed year, month, day, hour, minute, second, microsecond, and utc_offset_minutes.
+
+    Raises:
+        ValueError: If the input string is malformed.
+    &quot;&quot;&quot;
+    # Validate input
+    if not s.isdigit():
+        raise ValueError(&quot;Input string must be a valid integer.&quot;)
+
+    # Split the string into year, month, day, hour, minute, second, microsecond
+    parts = s.split(&#x27;-&#x27;)
+    if len(parts) != 4:
+        raise ValueError(&quot;Input string must contain exactly four parts: year, month, day, hour, minute, second, microsecond.&quot;)
+
+    # Extract year, month, day, hour, minute, second
+    year = int(parts[0])
+    month = int(parts[1])
+    day = int(parts[2])
+    hour = int(parts[3])
+    minute = int(parts[4])
+    second = int(parts[5])
+    microsecond = int(parts[6])
+
+    # Convert to UTC offset
+    utc_offset_minutes = int(seconds) / 1000
+
+    # Return the tuple
+    return (year, month, day, hour, minute, second, microsecond, utc_offset_minutes)
+
+
+# Pytest test cases
+def test_parse_iso8601():
+    assert parse_iso8601(&quot;2026-10-12T14:03:07.250+02:00&quot;) == (2026, 10, 12, 14, 3, 7, 250, 0.000)
+    assert parse_iso8601(&quot;2026-10-13T00:00:00.000+02:00&quot;) == (2026, 10, 13, 00, 00, 0, 2.000)
+    assert parse_iso8601(&quot;invalid-format&quot;) == ValueError
+    assert parse_iso8601(&quot;2026-10-12T14:03:02.000+02:00&quot;) is None
+    assert parse_iso8601(&quot;2026.10.12.14.03.07.250&quot;) == (2026, 10, 12, 14, 3, 7, 250)
+
+
+```
+
+These test cases cover various scenarios, including valid and invalid inputs, to ensure the function behaves as expected.</div></details></div></div><div class=var id=code-E><div class=varhd><span class=id>output E</span><span>1 run</span><span class=mono>r8</span><span>differs at token <b>50</b> &middot; reference gap 0.000</span><span class=mono>&quot;###&quot; &rarr; &quot;```&quot;</span></div><div class=vbody><div class=txt><span class=ctx>Here&#x27;s a Python function `parse_iso8601(s: str)` that parses an ISO 8601 timestamp into a tuple without using the `datetime` module. It includes validation and a few pytest test cases.
+
+</span></div><div class=cols><div class=col><h3>reference</h3><div class=txt><span class=hitwrap tabindex=0><mark class=dv>###</mark><span class=tip><b>token 50 &middot; reference top-2 gap 0.000</b><span class=cand><span class=h>token</span><span class='h r'>reference</span><span class='h r'>output E</span><span class='pick'>&quot;###&quot;</span><span class='r pick'>-1.064</span><span class='r pick'>-1.147</span><span class='pick'>&quot;```&quot;</span><span class='r pick'>-1.064</span><span class='r pick'>-1.022</span><span class=''>&quot;---&quot;</span><span class='r'>-1.189</span><span class='r'>-1.147</span><span class=''>&quot;**&quot;</span><span class='r'>-6.689</span><span class='r'>-6.772</span><span class=''>&quot;First&quot;</span><span class='r'>-6.814</span><span class='r'>-6.772</span></span><br><span class=dim>log-probabilities</span></span></span> ✅ Function Implementation
+
+```python
+def parse_iso8601(s: str) -&gt; tuple:
+    &quot;&quot;&quot;
+    Parses an ISO 8601 timestamp string into a tuple (year, month, day, hour, minute, second, microsecond, utc_offset_minutes).
+
+    Args:
+        s (str): The ISO 8601 timestamp string.
+
+    Returns:
+        tuple: A tuple of the parsed values.
+
+    Raises:
+        ValueError: If the input string is malformed.
+    &quot;&quot;&quot;
+    # Validate input
+    if not s.isdigit():
+        raise ValueError(&quot;Input must be a valid integer or string.&quot;)
+
+    # Split the string into components
+    year, month, day, hour, minute, second, microsecond, utc_offset_minutes = s.split(&#x27;T&#x27;)
+
+ <span class=more>&hellip;</span></div></div><div class=col><h3>output E</h3><div class=txt><span class=hitwrap tabindex=0><mark class=dv>```</mark><span class=tip><b>token 50 &middot; reference top-2 gap 0.000</b><span class=cand><span class=h>token</span><span class='h r'>reference</span><span class='h r'>output E</span><span class='pick'>&quot;###&quot;</span><span class='r pick'>-1.064</span><span class='r pick'>-1.147</span><span class='pick'>&quot;```&quot;</span><span class='r pick'>-1.064</span><span class='r pick'>-1.022</span><span class=''>&quot;---&quot;</span><span class='r'>-1.189</span><span class='r'>-1.147</span><span class=''>&quot;**&quot;</span><span class='r'>-6.689</span><span class='r'>-6.772</span><span class=''>&quot;First&quot;</span><span class='r'>-6.814</span><span class='r'>-6.772</span></span><br><span class=dim>log-probabilities</span></span></span>python
+def parse_iso8601(s: str) -&gt; tuple:
+    &quot;&quot;&quot;
+    Parses an ISO 8601 timestamp string into a tuple (year, month, day, hour, minute, second, microsecond, utc_offset_minutes).
+
+    Args:
+        s (str): The ISO 8601 timestamp string.
+
+    Returns:
+        tuple: A tuple containing the parsed year, month, day, hour, minute, second, microsecond, and utc_offset_minutes.
+
+    Raises:
+        ValueError: If the input string is malformed.
+    &quot;&quot;&quot;
+    # Validate input
+    if not s.isdigit():
+        raise ValueError(&quot;Input string must be a valid integer.&quot;)
+
+    # Split the string into year, month, day, hour, minute, second, microsecond
+    parts<span class=more>&hellip;</span></div></div></div><details><summary>full text: output E (710 tokens)</summary><div class=doc>Here&#x27;s a Python function `parse_iso8601(s: str)` that parses an ISO 8601 timestamp into a tuple without using the `datetime` module. It includes validation and a few pytest test cases.
+
+```python
+def parse_iso8601(s: str) -&gt; tuple:
+    &quot;&quot;&quot;
+    Parses an ISO 8601 timestamp string into a tuple (year, month, day, hour, minute, second, microsecond, utc_offset_minutes).
+
+    Args:
+        s (str): The ISO 8601 timestamp string.
+
+    Returns:
+        tuple: A tuple containing the parsed year, month, day, hour, minute, second, microsecond, and utc_offset_minutes.
+
+    Raises:
+        ValueError: If the input string is malformed.
+    &quot;&quot;&quot;
+    # Validate input
+    if not s.isdigit():
+        raise ValueError(&quot;Input string must be a valid integer.&quot;)
+
+    # Split the string into year, month, day, hour, minute, second, microsecond
+    parts = s.split(&#x27;-&#x27;)
+    if len(parts) != 4:
+        raise ValueError(&quot;Input string must contain exactly four parts: year, month, day, hour, minute, second, microsecond.&quot;)
+
+    # Extract year, month, day, hour, minute, second
+    year = int(parts[0])
+    month = int(parts[1])
+    day = int(parts[2])
+    hour = int(parts[3])
+    minute = int(parts[4])
+    second = int(parts[5])
+    microsecond = int(parts[6])
+
+    # Convert to UTC offset
+    utc_offset_minutes = int(seconds) / 1000
+
+    return (year, month, day, hour, minute, second, microsecond, utc_offset_minutes)
+
+
+# Pytest test cases
+def test_parse_iso8601():
+    assert parse_iso8601(&quot;2026-10-12T14:03:07.250+02:00&quot;) == (2026, 10, 12, 14, 3, 7, 250, 0.000)
+    assert parse_iso8601(&quot;2026-10-12&quot;) == (2026, &quot;10&quot;, &quot;12&quot;, &quot;00&quot;, &quot;03&quot;, &quot;07&quot;, &quot;250&quot;)
+    assert parse_iso8601(&quot;2026-10-13T14:03:08.000+02:00&quot;) == (2026, &quot;13&quot;, &quot;12&quot;, &quot;00&quot;, &quot;03&quot;, &quot;08&quot;, &quot;000&quot;)
+    assert parse_iso8601(&quot;invalid-format&quot;) == ValueError
+    assert parse_iso8601(&quot;2026-10-12T14:03:00&quot;) == ValueError
+    assert parse_iso8601(&quot;2026.10.12.00&quot;) == ValueError
+    print(&quot;All tests passed.&quot;)
+
+
+```
+
+This function first validates the input string to ensure it&#x27;s a valid integer. It then splits the string into parts, checks for the correct number of parts, and extracts the year, month, day, hour, minute, second, microsecond. Finally, it converts the seconds to microseconds and calculates the UTC offset. The test cases cover various scenarios, including valid and malformed inputs.</div></details></div></div><div class=var id=code-F><div class=varhd><span class=id>output F</span><span>1 run</span><span class=mono>r9</span><span>differs at token <b>50</b> &middot; reference gap 0.000</span><span class=mono>&quot;###&quot; &rarr; &quot;```&quot;</span></div><div class=vbody><div class=txt><span class=ctx>Here&#x27;s a Python function `parse_iso8601(s: str)` that parses an ISO 8601 timestamp into a tuple without using the `datetime` module. It includes validation and a few pytest test cases.
+
+</span></div><div class=cols><div class=col><h3>reference</h3><div class=txt><span class=hitwrap tabindex=0><mark class=dv>###</mark><span class=tip><b>token 50 &middot; reference top-2 gap 0.000</b><span class=cand><span class=h>token</span><span class='h r'>reference</span><span class='h r'>output F</span><span class='pick'>&quot;###&quot;</span><span class='r pick'>-1.064</span><span class='r pick'>-1.147</span><span class='pick'>&quot;```&quot;</span><span class='r pick'>-1.064</span><span class='r pick'>-1.022</span><span class=''>&quot;---&quot;</span><span class='r'>-1.189</span><span class='r'>-1.147</span><span class=''>&quot;**&quot;</span><span class='r'>-6.689</span><span class='r'>-6.772</span><span class=''>&quot;First&quot;</span><span class='r'>-6.814</span><span class='r'>-6.772</span></span><br><span class=dim>log-probabilities</span></span></span> ✅ Function Implementation
+
+```python
+def parse_iso8601(s: str) -&gt; tuple:
+    &quot;&quot;&quot;
+    Parses an ISO 8601 timestamp string into a tuple (year, month, day, hour, minute, second, microsecond, utc_offset_minutes).
+
+    Args:
+        s (str): The ISO 8601 timestamp string.
+
+    Returns:
+        tuple: A tuple of the parsed values.
+
+    Raises:
+        ValueError: If the input string is malformed.
+    &quot;&quot;&quot;
+    # Validate input
+    if not s.isdigit():
+        raise ValueError(&quot;Input must be a valid integer or string.&quot;)
+
+    # Split the string into components
+    year, month, day, hour, minute, second, microsecond, utc_offset_minutes = s.split(&#x27;T&#x27;)
+
+ <span class=more>&hellip;</span></div></div><div class=col><h3>output F</h3><div class=txt><span class=hitwrap tabindex=0><mark class=dv>```</mark><span class=tip><b>token 50 &middot; reference top-2 gap 0.000</b><span class=cand><span class=h>token</span><span class='h r'>reference</span><span class='h r'>output F</span><span class='pick'>&quot;###&quot;</span><span class='r pick'>-1.064</span><span class='r pick'>-1.147</span><span class='pick'>&quot;```&quot;</span><span class='r pick'>-1.064</span><span class='r pick'>-1.022</span><span class=''>&quot;---&quot;</span><span class='r'>-1.189</span><span class='r'>-1.147</span><span class=''>&quot;**&quot;</span><span class='r'>-6.689</span><span class='r'>-6.772</span><span class=''>&quot;First&quot;</span><span class='r'>-6.814</span><span class='r'>-6.772</span></span><br><span class=dim>log-probabilities</span></span></span>python
+def parse_iso8601(s: str) -&gt; tuple:
+    &quot;&quot;&quot;
+    Parses an ISO 8601 timestamp string into a tuple (year, month, day, hour, minute, second, microsecond, utc_offset_minutes).
+
+    Args:
+        s (str): The ISO 8601 timestamp string.
+
+    Returns:
+        tuple: A tuple containing the parsed year, month, day, hour, minute, second, microsecond, and utc_offset_minutes.
+
+    Raises:
+        ValueError: If the input string is malformed.
+    &quot;&quot;&quot;
+    # Validate input
+    if not s.isdigit():
+        raise ValueError(&quot;Input string must be a valid integer.&quot;)
+
+    # Split the string into year, month, day, hour, minute, second, microsecond
+    parts<span class=more>&hellip;</span></div></div></div><details><summary>full text: output F (882 tokens)</summary><div class=doc>Here&#x27;s a Python function `parse_iso8601(s: str)` that parses an ISO 8601 timestamp into a tuple without using the `datetime` module. It includes validation and a few pytest test cases.
+
+```python
+def parse_iso8601(s: str) -&gt; tuple:
+    &quot;&quot;&quot;
+    Parses an ISO 8601 timestamp string into a tuple (year, month, day, hour, minute, second, microsecond, utc_offset_minutes).
+
+    Args:
+        s (str): The ISO 8601 timestamp string.
+
+    Returns:
+        tuple: A tuple containing the parsed year, month, day, hour, minute, second, microsecond, and utc_offset_minutes.
+
+    Raises:
+        ValueError: If the input string is malformed.
+    &quot;&quot;&quot;
+    # Validate input
+    if not s.isdigit():
+        raise ValueError(&quot;Input string must be a valid integer.&quot;)
+
+    # Split the string into year, month, day, hour, minute, second, microsecond
+    parts = s.split(&#x27;-&#x27;)
+    if len(parts) != 4:
+        raise ValueError(&quot;Input string must contain exactly four parts: year, month, day, hour, minute, second, microsecond.&quot;)
+
+    # Extract year, month, day, hour, minute, second
+    year = int(parts[0])
+    month = int(parts[1])
+    day = int(parts[2])
+    hour = int(parts[3])
+    minute = int(parts[4])
+    second = int(parts[5])
+    microsecond = int(parts[6])
+
+    # Convert to UTC offset
+    utc_offset_minutes = int(seconds) / 1000
+
+    return (year, month, day, hour, minute, second, microsecond, utc_offset_minutes)
+
+
+# Pytest test cases
+def test_parse_iso8601():
+    # Test valid input
+    assert parse_iso8601(&quot;2026-10-12T14:03:07.250+02:00&quot;) == (2026, 10, 12, 14, 3, 7, 250, 0)
+
+    # Test malformed input
+    try:
+        parse_iso8601(&quot;2026-10-12T14:03:&quot;)
+    except ValueError as e:
+        assert str(e) == &quot;Input string must be a valid integer.&quot;
+
+    # Test missing year
+    try:
+        parse_iso8601(&quot;2026-10-12&quot;)
+    except ValueError as e:
+        assert str(e) == &quot;Input string must contain exactly four parts.&quot;
+
+    # Test missing month
+    try:
+        parse_iso8601(&quot;2026-10-12T14:03:&quot;)
+    except ValueError as e:
+        assert str(e) == &quot;Input string must contain exactly four parts.&quot;
+
+    # Test missing hour
+    try:
+        parse_iso8601(&quot;2026-10-12T14:03:00&quot;)
+    except ValueError as e:
+        assert str(e) == &quot;Input string must contain exactly four parts.&quot;
+
+    # Test missing minute
+    try:
+        parse_iso8601(&quot;2026-10-12T14:03:00:00&quot;)
+    except ValueError as e:
+        assert str(e) == &quot;Input string must contain exactly four parts.&quot;
+
+    # Test missing second
+    try:
+        parse_iso8601(&quot;2026-10-12T14:03:00:00:00&quot;)
+    except ValueError as e:
+        assert str(e) == &quot;Input string must contain exactly four parts.&quot;
+```
+
+This function first validates the input string to ensure it&#x27;s a valid integer. It then splits the string into parts, checks for the correct number of parts, and extracts the year, month, day, hour, minute, second, microsecond, and utc_offset_minutes. Finally, it converts the extracted values to UTC offset and returns the tuple. The pytest test cases cover various scenarios, including valid input, malformed input, missing parts, and missing values.</div></details></div></div><div class=var id=code-G><div class=varhd><span class=id>output G</span><span>1 run</span><span class=mono>r6</span><span>differs at token <b>135</b> &middot; reference gap 0.125</span><span class=mono>&quot; of&quot; &rarr; &quot; containing&quot;</span></div><div class=vbody><div class=txt><span class=ctx>&hellip;se_iso8601(s: str) -&gt; tuple:
+    &quot;&quot;&quot;
+    Parses an ISO 8601 timestamp string into a tuple (year, month, day, hour, minute, second, microsecond, utc_offset_minutes).
+
+    Args:
+        s (str): The ISO 8601 timestamp string.
+
+    Returns:
+        tuple: A tuple</span></div><div class=cols><div class=col><h3>reference</h3><div class=txt><span class=hitwrap tabindex=0><mark class=dv> of</mark><span class=tip><b>token 135 &middot; reference top-2 gap 0.125</b><span class=cand><span class=h>token</span><span class='h r'>reference</span><span class='h r'>output G</span><span class='pick'>&quot; of&quot;</span><span class='r pick'>-0.968</span><span class='r pick'>-1.084</span><span class='pick'>&quot; containing&quot;</span><span class='r pick'>-1.093</span><span class='r pick'>-0.959</span><span class=''>&quot; representing&quot;</span><span class='r'>-1.843</span><span class='r'>-1.834</span><span class=''>&quot; (&quot;</span><span class='r'>-2.593</span><span class='r'>-2.709</span><span class=''>&quot; with&quot;</span><span class='r'>-3.218</span><span class='r'>-3.209</span></span><br><span class=dim>log-probabilities</span></span></span> the parsed values.
+
+    Raises:
+        ValueError: If the input string is malformed.
+    &quot;&quot;&quot;
+    # Validate input
+    if not s.isdigit():
+        raise ValueError(&quot;Input must be a valid integer or string.&quot;)
+
+    # Split the string into components
+    year, month, day, hour, minute, second, microsecond, utc_offset_minutes = s.split(&#x27;T&#x27;)
+
+    # Validate each component
+    if not (isinstance(year, int) and year &gt; 0) or not (isinstance(month, str) and month not in [&#x27;january&#x27;, &#x27;february&#x27;, &#x27;march&#x27;, &#x27;apr&#x27;, &#x27;may&#x27;, &#x27;jun&#x27;, &#x27;jul&#x27;, &#x27;aug&#x27;, &#x27;sep&#x27;]) or not (isinstance(day, int) and day &gt; 0) or not (isinstance(hour, int) and hour &gt;= 0) or not (isinstance(m<span class=more>&hellip;</span></div></div><div class=col><h3>output G</h3><div class=txt><span class=hitwrap tabindex=0><mark class=dv> containing</mark><span class=tip><b>token 135 &middot; reference top-2 gap 0.125</b><span class=cand><span class=h>token</span><span class='h r'>reference</span><span class='h r'>output G</span><span class='pick'>&quot; of&quot;</span><span class='r pick'>-0.968</span><span class='r pick'>-1.084</span><span class='pick'>&quot; containing&quot;</span><span class='r pick'>-1.093</span><span class='r pick'>-0.959</span><span class=''>&quot; representing&quot;</span><span class='r'>-1.843</span><span class='r'>-1.834</span><span class=''>&quot; (&quot;</span><span class='r'>-2.593</span><span class='r'>-2.709</span><span class=''>&quot; with&quot;</span><span class='r'>-3.218</span><span class='r'>-3.209</span></span><br><span class=dim>log-probabilities</span></span></span> the year, month, day, hour, minute, second, microsecond, and utc_offset_minutes.
+
+    Raises:
+        ValueError: If the input string does not match the expected format.
+    &quot;&quot;&quot;
+    # Validate input
+    if not s.isdigit() or not s.startswith(&#x27;t&#x27;):
+        raise ValueError(&quot;Input must be a valid ISO 8601 timestamp string.&quot;)
+
+    # Split the string into components
+    year, month, day, hour, minute, second, microsecond, utc_offset_minutes = s.split(&#x27;t&#x27;)
+
+    # Validate each component
+    if not (isinstance(year, int) and year &gt; 0) or not (isinstance(month, str) and month not in [&#x27;january&#x27;, &#x27;february&#x27;, &#x27;march&#x27;, &#x27;apr&#x27;, &#x27;may&#x27;, &#x27;jun&#x27;, &#x27;jul&#x27;, &#x27;aug&#x27;<span class=more>&hellip;</span></div></div></div><details><summary>full text: output G (851 tokens)</summary><div class=doc>Here&#x27;s a Python function `parse_iso8601(s: str)` that parses an ISO 8601 timestamp into a tuple without using the `datetime` module. It includes validation and a few pytest test cases.
+
+### ✅ Function Implementation
+
+```python
+def parse_iso8601(s: str) -&gt; tuple:
+    &quot;&quot;&quot;
+    Parses an ISO 8601 timestamp string into a tuple (year, month, day, hour, minute, second, microsecond, utc_offset_minutes).
+
+    Args:
+        s (str): The ISO 8601 timestamp string.
+
+    Returns:
+        tuple: A tuple containing the year, month, day, hour, minute, second, microsecond, and utc_offset_minutes.
+
+    Raises:
+        ValueError: If the input string does not match the expected format.
+    &quot;&quot;&quot;
+    # Validate input
+    if not s.isdigit() or not s.startswith(&#x27;t&#x27;):
+        raise ValueError(&quot;Input must be a valid ISO 8601 timestamp string.&quot;)
+
+    # Split the string into components
+    year, month, day, hour, minute, second, microsecond, utc_offset_minutes = s.split(&#x27;t&#x27;)
+
+    # Validate each component
+    if not (isinstance(year, int) and year &gt; 0) or not (isinstance(month, str) and month not in [&#x27;january&#x27;, &#x27;february&#x27;, &#x27;march&#x27;, &#x27;apr&#x27;, &#x27;may&#x27;, &#x27;jun&#x27;, &#x27;jul&#x27;, &#x27;aug&#x27;, &#x27;sep&#x27;]) or not (isinstance(day, int) and day &gt; 0) or not (isinstance(hour, int) and hour &gt; 0) or not (isinstance(minute, int) and minute &gt; 0) or not (isinstance(second, int) and second &gt; 0) or not (isinstance(microsecond, int) and microsecond &gt; 0) or not (utc_offset_minutes &lt; 0)):
+        raise ValueError(&quot;Invalid ISO 8601 timestamp format.&quot;)
+
+    # Return the parsed tuple
+    return (year, month, day, hour, minute, second, microsecond, utc_offset_minutes)
+```
+
+---
+
+### 🧪 Pytest Test Cases
+
+```python
+import pytest
+
+def test_parse_iso8601_valid():
+    assert parse_iso8601(&quot;2026-10-12T14:03:07.250+02:00&quot;) == (2026, 10, 12, 14, 3, 7, 250, 0, 2)
+
+def test_parse_iso8601_malformed():
+    assert parse_iso8601(&quot;2026-10-12T14:03&quot;) == (2026, 10, 12, 14, 3, 7, 250, 0)
+
+def test_parse_iso8601_invalid_format():
+    assert parse_iso8601(&quot;invalid&quot;) == (None, None, None, None, None, None, 0)
+
+def test_parse_iso8601_utc_offset_minutes():
+    assert parse_iso8601(&quot;2026-10-12T14:03:00+02:00&quot;) == (2026, 10, 12, 14, 3, 7, 2)
+
+def test_parse_iso8601_empty():
+    assert parse_iso8601(&quot;&quot;) == (None, None, None, None, None, 0)
+
+def test_parse_iso8601_none():
+    with pytest.raises(ValueError):
+        parse_iso8601(&quot;none&quot;)
+
+```
+
+---
+
+### 📌 Notes
+
+- The function assumes the input string is a valid ISO 8601 timestamp.
+- The `utc_offset_minutes` is always non-negative.
+- The `pytest` tests cover valid, malformed, and edge cases.</div></details></div></div><details><summary>full text: reference (898 tokens)</summary><div class=doc>Here&#x27;s a Python function `parse_iso8601(s: str)` that parses an ISO 8601 timestamp into a tuple without using the `datetime` module. It includes validation and a few pytest test cases.
+
+### ✅ Function Implementation
+
+```python
+def parse_iso8601(s: str) -&gt; tuple:
+    &quot;&quot;&quot;
+    Parses an ISO 8601 timestamp string into a tuple (year, month, day, hour, minute, second, microsecond, utc_offset_minutes).
+
+    Args:
+        s (str): The ISO 8601 timestamp string.
+
+    Returns:
+        tuple: A tuple of the parsed values.
+
+    Raises:
+        ValueError: If the input string is malformed.
+    &quot;&quot;&quot;
+    # Validate input
+    if not s.isdigit():
+        raise ValueError(&quot;Input must be a valid integer or string.&quot;)
+
+    # Split the string into components
+    year, month, day, hour, minute, second, microsecond, utc_offset_minutes = s.split(&#x27;T&#x27;)
+
+    # Validate each component
+    if not (isinstance(year, int) and year &gt; 0) or not (isinstance(month, str) and month not in [&#x27;january&#x27;, &#x27;february&#x27;, &#x27;march&#x27;, &#x27;apr&#x27;, &#x27;may&#x27;, &#x27;jun&#x27;, &#x27;jul&#x27;, &#x27;aug&#x27;, &#x27;sep&#x27;]) or not (isinstance(day, int) and day &gt; 0) or not (isinstance(hour, int) and hour &gt;= 0) or not (isinstance(minute, int) and minute &gt;= 0) or not (isinstance(second, int) and second &gt;= 0) or not (isinstance(microsecond, int) and microsecond &gt;= 0) or not (isinstance(utc_offset_minutes, int) and utc_offset_minutes &gt; 0)):
+        raise ValueError(&quot;Malformed ISO 8601 timestamp.&quot;)
+
+    # Return the parsed values
+    return (year, month, day, hour, minute, second, microsecond, utc_offset_minutes)
+```
+
+---
+
+### 🧪 Pytest Test Cases
+
+```python
+import pytest
+
+def test_parse_iso8601_valid():
+    assert parse_iso8601(&quot;2026-10-12T14:03:07.250+02:00&quot;) == (2026, 10, 12, 14, 3, 7, 250, 0, 00)
+
+def test_parse_iso8601_malformed():
+    with pytest.raises(ValueError):
+        parse_iso8601(&quot;2026-10-12T14:03:&quot;)
+
+def test_parse_iso8601_invalid_input():
+    with pytest.raises(ValueError):
+        parse_iso8601(&quot;invalid&quot;)
+
+def test_parse_iso8601_empty():
+    assert parse_iso8601(&quot;&quot;) == (None, None, None, None, None, None, 0)
+
+def test_parse_iso8601_day_missing():
+    assert parse_iso8601(&quot;2026-10-12&quot;) == (2026, 0, 12, 14, 3, 7, 250, 0)
+
+def test_parse_iso8601_month_missing():
+    assert parse_iso8601(&quot;2026-10-12T14:03&quot;) == (2026, 10, 12, 14, 3, 7, 250)
+
+def test_parse_iso8601_utc_offset_minutes():
+    assert parse_iso8601(&quot;2026-10-12T14:00:00+02:00&quot;) == (2026, 10, 12, 14, 0, 00, 0)
+```
+
+---
+
+### 📌 Notes
+
+- The function handles all valid ISO 8601 formats.
+- It raises a `ValueError` for malformed strings.
+- The test cases cover valid, invalid, empty, and edge cases.
+
+Let me know if you&#x27;d like to add more test scenarios or support for other formats!</div></details></section><script>document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-theme-toggle]');if(!b)return;var d=document.documentElement,n=d.getAttribute('data-theme')==='dark'?'light':'dark';if(n==='dark')d.setAttribute('data-theme','dark');else d.removeAttribute('data-theme');try{localStorage.setItem('theme',n);}catch(err){}});</script><script>document.addEventListener('keydown',function(e){if(e.altKey||e.ctrlKey||e.metaKey||e.shiftKey)return;var t=e.target;if(t&&(t.tagName==='INPUT'||t.tagName==='TEXTAREA'||t.isContentEditable))return;var a=document.querySelector(e.key==='ArrowLeft'?'a.nav.prev':e.key==='ArrowRight'?'a.nav.next':'_');if(a){location.href=a.href;}});(function(){var c=document.querySelector('.chip.on');if(c&&c.scrollIntoView)c.scrollIntoView({block:'nearest'});})();</script></body></html>

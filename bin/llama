@@ -1,0 +1,10 @@
+#!/bin/bash
+# Wrapper with the llama.app CLI shape used by src/run_llama.py ("llama serve ...", "llama version")
+# around the source build of llama-server, run inside the container it was built in.
+D=/storage/plzen1/home/kasnezde/projects/determinism/llama.cpp-b11429
+IMAGE=$(cat "$D/IMAGE")
+case $1 in
+    serve) shift; exec singularity exec --nv "$IMAGE" "$D/bin/llama-server" "$@" ;;
+    version) exec singularity exec --nv "$IMAGE" "$D/bin/llama-server" --version 2>&1 ;;
+    *) echo >&2 "usage: llama serve|version ..."; exit 2 ;;
+esac

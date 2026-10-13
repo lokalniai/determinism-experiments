@@ -1,0 +1,30 @@
+{"id": "f00", "messages": [{"role": "user", "content": "What is the capital of Australia?"}]}
+{"id": "f01", "messages": [{"role": "user", "content": "Summarize the plot of Romeo and Juliet in three sentences."}]}
+{"id": "f02", "messages": [{"role": "user", "content": "Write a haiku about autumn rain."}]}
+{"id": "f03", "messages": [{"role": "user", "content": "Explain the difference between TCP and UDP to a junior developer, with examples of when to use each."}]}
+{"id": "f04", "messages": [{"role": "user", "content": "List ten common houseplants that tolerate low light and briefly describe how to care for each."}]}
+{"id": "f05", "messages": [{"role": "user", "content": "Translate into German: 'The meeting has been moved to Thursday afternoon because the projector is broken.'"}]}
+{"id": "f06", "messages": [{"role": "user", "content": "Write a SQL query that returns the five customers with the highest total order value in 2025, given tables customers(id, name) and orders(id, customer_id, amount, created_at)."}]}
+{"id": "f07", "messages": [{"role": "user", "content": "What causes the seasons on Earth? Many people think it is the distance from the Sun; explain why that is wrong."}]}
+{"id": "f08", "messages": [{"role": "user", "content": "Draft a polite email to a landlord asking for the heating to be repaired before winter."}]}
+{"id": "f09", "messages": [{"role": "user", "content": "Give me a recipe for a simple vegetarian lentil soup, including quantities for four people."}]}
+{"id": "f10", "messages": [{"role": "user", "content": "Is 391 a prime number? Show your reasoning."}]}
+{"id": "f11", "messages": [{"role": "user", "content": "Describe the water cycle in detail, including evaporation, condensation, precipitation and collection, and how human activity affects it."}]}
+{"id": "f12", "messages": [{"role": "user", "content": "Write a bash one-liner that finds the ten largest files under the current directory."}]}
+{"id": "f13", "messages": [{"role": "user", "content": "Compare the strengths and weaknesses of renewable energy sources: solar, wind, hydro and geothermal."}]}
+{"id": "f14", "messages": [{"role": "user", "content": "Tell me a joke about programmers."}]}
+{"id": "f15", "messages": [{"role": "user", "content": "Explain what a hash table is and how collisions are handled, then implement a minimal one in Python using separate chaining."}]}
+{"id": "f16", "messages": [{"role": "user", "content": "Write a limerick about a cat who learned to code."}]}
+{"id": "f17", "messages": [{"role": "user", "content": "What were the main causes of the First World War? Give a balanced overview of the political, economic and military factors."}]}
+{"id": "f18", "messages": [{"role": "user", "content": "How many seconds are there in a leap year?"}]}
+{"id": "f19", "messages": [{"role": "user", "content": "Write a short dialogue between a detective and a suspect who claims to have been at the cinema during the crime."}]}
+{"id": "f20", "messages": [{"role": "user", "content": "Explain gradient descent intuitively and then give the update rule for linear regression with mean squared error."}]}
+{"id": "f21", "messages": [{"role": "user", "content": "Name five famous Czech composers and one notable work by each."}]}
+{"id": "f22", "messages": [{"role": "user", "content": "Write a JavaScript function that debounces another function, and explain when debouncing is useful."}]}
+{"id": "f23", "messages": [{"role": "user", "content": "Plan a three-day itinerary for a first visit to Vienna on a modest budget."}]}
+{"id": "f24", "messages": [{"role": "user", "content": "What is the derivative of x^3 * sin(x)?"}]}
+{"id": "f25", "messages": [{"role": "user", "content": "Write a product description for a waterproof hiking backpack aimed at weekend hikers."}]}
+{"id": "f26", "messages": [{"role": "user", "content": "Explain the Monty Hall problem and why switching doors is the better strategy."}]}
+{"id": "f27", "messages": [{"role": "user", "content": "Give a step-by-step guide to changing a flat bicycle tyre."}]}
+{"id": "f28", "messages": [{"role": "user", "content": "Write a Rust function that reverses the words in a sentence while keeping punctuation attached to its word."}]}
+{"id": "f29", "messages": [{"role": "user", "content": "Describe the life cycle of a star like the Sun, from formation to its final state."}]}
