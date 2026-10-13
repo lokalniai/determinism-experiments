@@ -36,7 +36,7 @@ ROOT = HERE.parent
 DATA = ROOT / "results" / "site_data.json.gz"
 ASSETS = HERE / "assets"
 
-POST_URL = "https://lokalni.ai/blog/stejny-vstup-stejny-vystup/"
+POST_URL = "https://lokalni.ai/blog/determinismus/"
 POST_TITLE = "Stejn&yacute; vstup, stejn&yacute; v&yacute;stup"
 REPO_URL = "https://github.com/lokalniai/determinism-experiments"
 

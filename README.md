@@ -5,7 +5,7 @@ same input gives the same output in LLM inference engines, run on MetaCentrum
 GPUs.
 
 - [💻 **Interactive viewer of the runs**](https://lokalniai.github.io/determinism-experiments/)
-- [🖋 **Blogpost (in Czech)**](https://lokalni.ai/blog/stejny-vstup-stejny-vystup/)
+- [🖋 **Blogpost (in Czech)**](https://lokalni.ai/blog/determinismus/)
 - [📄 **Report**](REPORT.md) · [experiment plan](EXPERIMENTS.md)
 
 ---
