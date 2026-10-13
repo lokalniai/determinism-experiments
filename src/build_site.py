@@ -150,6 +150,7 @@ CSS = """
 --bad:#c2003f;--good:#5c6b0c;
 --dv-line:#c2003f;--dv-bg:rgba(194,0,63,.13);
 --track:rgba(31,33,28,.09);
+--s1:#0079a6;--s2:#d08a1a;--s3:#c2003f;
 --sans:'Barlow',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
 --cond:'Barlow Condensed','Barlow Semi Condensed',var(--sans);
 --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
@@ -161,6 +162,7 @@ CSS = """
 --bad:#ff005e;--good:#dcff00;
 --dv-line:#ff005e;--dv-bg:rgba(255,0,94,.22);
 --track:rgba(248,248,242,.07);
+--s1:#1fa5b5;--s2:#c08300;--s3:#ee2f6c;
 }
 *{box-sizing:border-box}
 html,body{overflow-x:hidden}
@@ -401,6 +403,37 @@ font-size:.78rem;color:var(--muted);margin-bottom:.25rem}
 .dctx{overflow-wrap:anywhere;line-height:1.75;font-size:.9rem;white-space:pre-wrap}
 .dctx .dim{color:var(--muted)}
 .arrow{color:var(--muted);margin:0 .25rem}
+/* pie grid: each setting's runs, split by whether they reproduce the reference */
+.pgrid{display:grid;grid-template-columns:minmax(6.5rem,1.1fr) repeat(3,minmax(0,1fr));
+gap:0 .6rem;align-items:center}
+.ph{font-family:var(--cond);font-weight:600;font-size:.85rem;text-transform:uppercase;
+letter-spacing:.05em;color:var(--muted);padding-bottom:.3rem;white-space:nowrap;
+overflow:hidden;text-overflow:ellipsis}
+.psect{grid-column:1/-1;font-family:var(--cond);font-weight:600;font-size:.85rem;
+text-transform:uppercase;letter-spacing:.07em;color:var(--muted);
+margin:.9rem 0 .1rem;padding-bottom:.2rem;border-bottom:1px solid var(--line)}
+.pname{font-size:.88rem;line-height:1.3;padding:.35rem 0;border-bottom:1px solid var(--line);
+align-self:stretch;display:flex;flex-direction:column;justify-content:center}
+.pname .org{color:var(--muted);font-size:.72rem;font-family:var(--mono)}
+.pcell{display:flex;align-items:center;gap:.5rem;padding:.35rem 0;color:inherit;
+border-bottom:1px solid var(--line);align-self:stretch;min-width:0}
+a.pcell:hover{text-decoration:none}
+a.pcell:hover .pie{transform:scale(1.08)}
+.pcell.na{color:var(--muted);font-size:.8rem;gap:.4rem}
+.pie{width:38px;height:38px;flex:none;transition:transform .12s ease}
+.pie path,.pie circle{stroke:var(--bg);stroke-width:1.2;stroke-linejoin:round}
+.s1{fill:var(--s1)}.s2{fill:var(--s2)}.s3{fill:var(--s3)}
+.pv{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+.pv b{font-family:var(--mono);font-variant-numeric:tabular-nums;font-weight:500;font-size:.85rem}
+.pv .uq{width:auto}
+.pcell .tip{top:calc(100% - .2rem)}
+.pcell.end .tip{left:auto;right:0}
+.tip .pk{display:block;font-family:var(--mono);font-size:.76rem;font-variant-numeric:tabular-nums}
+.pk i,.legend i.s1,.legend i.s2,.legend i.s3{display:inline-block;width:.7rem;height:.7rem;
+border-radius:50%;margin-right:.4rem;vertical-align:-.05rem}
+.pk i.s1,.legend i.s1{background:var(--s1)}.pk i.s2,.legend i.s2{background:var(--s2)}
+.pk i.s3,.legend i.s3{background:var(--s3)}
+@media(max-width:560px){.pcell{flex-direction:column;align-items:flex-start;gap:.15rem}}
 .note{color:var(--muted);font-size:.85rem;margin-top:1.4rem;
 border-top:1px solid var(--line);padding-top:.7rem;max-width:78ch;text-wrap:pretty}
 """
@@ -572,24 +605,26 @@ class Site:
 
     # ── index ────────────────────────────────────────────────────────────────
 
-    def bar(self, c, model, up) -> str:
-        tag = MODEL_TAG[model]
+    def pie_cell(self, c, model, end: bool = False) -> str:
         if c is None:
-            return (f"<div class=brow><span class=tag>{tag}</span><div class=track></div>"
-                    f"<span class=val>&ndash;</span><span class='uq na'>not run</span></div>")
+            return "<div class='pcell na'>&ndash;<span class=pv>not run</span></div>"
         m = c["metrics"]
-        v = float(m["match"])
-        st = state(c)
+        same, rec, once = breakdown(c)
         uq = f"{m['uniq']} output{'s' if m['uniq'] > 1 else ''}"
-        return (f"<a class=brow href='{up}run/{slug(c)}.html' title='{esc(exp_label(c))}'>"
-                f"<span class=tag>{tag}</span><div class=track><div class='bar {MODEL_CLS[model]}' "
-                f"style='width:{v * 100:.1f}%'></div></div>"
-                f"<span class=val>{m['match']}</span><span class='uq {st}'>{uq}</span></a>")
+        t = (f"<span class=tip><b>{esc(html.unescape(MODEL[model]))} &middot; {esc(html.unescape(exp_label(c)))}</b>"
+             f"<span class=pk><i class=s1></i>{same} identical to the reference</span>"
+             f"<span class=pk><i class=s2></i>{rec} differ, output recurs</span>"
+             f"<span class=pk><i class=s3></i>{once} differ, one-off</span>"
+             f"<span class=dim>of {m['n']} runs &middot; at most {uq} per prompt</span></span>")
+        return (f"<a class='pcell hitwrap{' end' if end else ''}' href='run/{slug(c)}.html'>{pie_svg(same, rec, once)}"
+                f"<span class=pv><b>{m['match']}</b><span class='uq {state(c)}'>{uq}</span></span>{t}</a>")
 
     def engine_chart(self, eng: str) -> str:
+        head = "".join(f"<div class=ph title='{MODEL_SUB[m]}'>{MODEL[m]}</div>" for m in MODEL_ORDER)
         out = [f"<div class=hd><h2>{ENG[eng]}</h2><span class=sub2>A100 for the dense models, "
-               f"Blackwell for the MoE</span></div><div class=chart>"]
-        for head, exps in SECTIONS:
+               f"Blackwell for the MoE</span></div>"
+               f"<div class=pgrid><div class=ph></div>{head}"]
+        for title, exps in SECTIONS:
             rows = []
             for exp in exps:
                 for pos in ("first", "last", "-"):
@@ -598,11 +633,11 @@ class Site:
                     if not any(cs.values()):
                         continue
                     label = EXPS[exp][0] + (f" <span class=org>target {pos}</span>" if pos != "-" else "")
-                    bars = "".join(self.bar(cs[m], m, "") for m in MODEL_ORDER)
-                    rows.append(f"<div class=crow><div class=cname title='{esc(html.unescape(EXPS[exp][1]))}'>"
-                                f"{label}<br><span class=org>{exp}</span></div><div class=bars>{bars}</div></div>")
+                    rows.append(f"<div class=pname title='{esc(html.unescape(EXPS[exp][1]))}'>{label}"
+                                f"<br><span class=org>{exp}</span></div>"
+                                + "".join(self.pie_cell(cs[m], m, m == MODEL_ORDER[-1]) for m in MODEL_ORDER))
             if rows:
-                out.append(f"<div class=sect>{head}</div>" + "".join(rows))
+                out.append(f"<div class=psect>{title}</div>" + "".join(rows))
         out.append("</div>")
         return "".join(out)
 
@@ -708,21 +743,14 @@ class Site:
             f"{''.join(rows)}</table></div>")
 
     def index(self) -> str:
-        n = sum(c["metrics"]["n"] for c in self.configs)
         body = [
-            "<h1>Same input, same output?</h1>",
-            "<div class=sub>The same five prompts, token for token, sent ten times to vLLM 0.31 and "
-            "llama.cpp b11429 under different conditions: batch size, concurrent load, engine settings, "
-            f"GPU. {n:,} completions from three models on MetaCentrum GPUs. Greedy decoding unless stated. "
-            f"<a href='{REPO_URL}/blob/main/REPORT.md'>Full report</a> &middot; "
-            f"<a href='{REPO_URL}'>data and code</a></div>",
-            "<div class=legend>"
-            + "".join(f"<span><i class={MODEL_CLS[m]}></i>{MODEL[m]} <span class=sub2>{MODEL_SUB[m]}</span></span>"
-                      for m in MODEL_ORDER)
-            + "</div>",
+            "<div class=legend><span><i class=s1></i>identical to the reference</span>"
+            "<span><i class=s2></i>differs from it, but the same output recurs in another run</span>"
+            "<span><i class=s3></i>differs, one-off output</span></div>",
             f"<div class=domcols><div>{self.engine_chart('vllm')}</div><div>{self.engine_chart('llama')}</div></div>",
             "<div class=caveat><dl class=leg>"
-            "<dt>bar</dt> <dd>match rate: share of runs whose tokens equal the reference, all of them</dd>"
+            "<dt>pie</dt> <dd>every run of a setting (5 prompts &times; 10 repeats), by whether its tokens equal the "
+            "reference; the number beside it is that share, the match rate</dd>"
             "<dt>outputs</dt> <dd>distinct completions of one prompt (most over the 5 prompts); "
             "1 = deterministic, even when it is not the reference's</dd>"
             "<dt>reference</dt> <dd>repeat 0 at batch size 1 on the same GPU, engine and model "
@@ -1022,6 +1050,43 @@ class Site:
             filters, "".join(items), js,
         ]
         return page("Divergence points", "".join(body), "", tab="div")
+
+
+def breakdown(c: dict) -> tuple[int, int, int]:
+    """Runs of a config: identical to the reference / differing with an output another run also
+    produced / differing with an output of their own."""
+    same = rec = once = 0
+    for p in c["prompts"].values():
+        for v in p["variants"]:
+            k = len(v["members"])
+            if v["div"] is None:
+                same += k
+            elif k > 1:
+                rec += k
+            else:
+                once += k
+    return same, rec, once
+
+
+def pie_svg(*counts: int) -> str:
+    """Slices clockwise from 12 o'clock, one per count, separated by a surface-coloured gap."""
+    import math
+    tot = sum(counts)
+    r, cx = 17, 18
+    parts, a0 = [], -math.pi / 2
+    for i, n in enumerate(counts, 1):
+        if not n:
+            continue
+        if n == tot:
+            parts.append(f"<circle class=s{i} cx={cx} cy={cx} r={r} />")
+            break
+        a1 = a0 + 2 * math.pi * n / tot
+        x0, y0 = cx + r * math.cos(a0), cx + r * math.sin(a0)
+        x1, y1 = cx + r * math.cos(a1), cx + r * math.sin(a1)
+        parts.append(f"<path class=s{i} d='M{cx} {cx}L{x0:.2f} {y0:.2f}A{r} {r} 0 "
+                     f"{1 if a1 - a0 > math.pi else 0} 1 {x1:.2f} {y1:.2f}Z' />")
+        a0 = a1
+    return f"<svg class=pie viewBox='0 0 36 36' aria-hidden=true>{''.join(parts)}</svg>"
 
 
 def pslug(k) -> str:
