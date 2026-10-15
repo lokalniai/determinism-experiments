@@ -1,11 +1,20 @@
 """Unpacks results/*.tar.gz and summarizes determinism metrics into results/summary.md.
 
-Reference for each (gpu, engine, model): repeat 0 of e1a (for e2bi_*: repeat 0 of e2bi_bs1; for e5_*:
-repeat 0 of the same experiment). Metrics per group of runs:
+Experiments (EXPERIMENTS.md), each 5 prompts x 10 repeats:
+  E1  e1, e1_t07, e1_t10   batch size 1 in one process: greedy, seeded sampling at T=0.7 / 1.0
+  E2  e2_bs{2,4,8}         vLLM offline batch with fillers, target first
+      e2_np{2,4,8}         llama.cpp --parallel N with N-1 concurrent filler clients
+  E3  e3_bs{1,2,4,8}       vLLM VLLM_BATCH_INVARIANT=1, batch sizes as in E2 (Qwen3-4B only)
+  E4  e4                   e1 (greedy) on L40S instead of A100, dense models
+
+Reference for each prompt: repeat 0 of e1 on the model's reference GPU, same engine and model;
+except e1_t07/e1_t10 (repeat 0 of the same setting) and e3_* (repeat 0 of e3_bs1).
+Metrics per setting:
   match   fraction of runs whose token sequence equals the reference
   uniq    number of distinct completions per prompt (max over prompts)
   div@    median first-divergence position among runs that diverge
   gap     median gap between the top-2 logprobs of the reference at the divergence position
+  tok_s   vLLM only: median whole-batch tokens/s (batch size 1: the single request)
 """
 import json
 import statistics
@@ -18,6 +27,16 @@ PROJ = Path(__file__).resolve().parent.parent
 RES = PROJ / "results"
 EXT = RES / "extracted"
 
+REF_GPU = {"lfm350m": "zia", "q3_4b": "zia", "qwen35moe": "grogu"}  # A100; the MoE runs on Blackwell only
+EXP_ORDER = ["e1", "e1_t07", "e1_t10", "e2_bs2", "e2_bs4", "e2_bs8", "e2_np2", "e2_np4", "e2_np8",
+             "e3_bs1", "e3_bs2", "e3_bs4", "e3_bs8", "e4"]
+# Names the runners used before 2026-10-15. Raw experiments not listed here or in EXP_ORDER
+# (restarts, separate jobs, prefix cache, server load, --parallel 1, engine knobs, smoke tests)
+# were dropped from the plan and are skipped.
+ALIAS = {"e1a": "e1", "e5_t07": "e1_t07", "e5_t10": "e1_t10",
+         **{f"e2bi_bs{b}": f"e3_bs{b}" for b in (1, 2, 4, 8)}}
+MODEL_ORDER = ["lfm350m", "q3_4b", "qwen35moe"]  # qwen4b (Qwen3.5-4B) appears only in smoke tests
+
 
 def unpack():
     EXT.mkdir(exist_ok=True)
@@ -27,26 +46,49 @@ def unpack():
                 t.extractall(EXT, filter="data")
 
 
-# "qwen4b" (Qwen3.5-4B) was replaced by q3_4b; e0 is the smoke test. Neither goes into the report.
-SKIP_MODELS = {"qwen4b"}
-SKIP_EXPS = {"e0"}
+def normalize(r, gpu):
+    """Maps a raw record onto the current plan in place; False if it is not part of it."""
+    exp = ALIAS.get(r["exp"], r["exp"])
+    if r["model"] not in REF_GPU or exp not in EXP_ORDER or r.get("position", "first") != "first":
+        return False
+    if gpu != REF_GPU[r["model"]]:
+        if exp != "e1":
+            return False
+        exp = "e4"
+    r.update(exp=exp, gpu=gpu)
+    r.pop("position", None)
+    r.pop("restart", None)
+    return True
+
+
+def runs():
+    """(run dir, gpu cluster, host) for every unpacked job."""
+    for run in sorted(p for p in EXT.iterdir() if p.is_dir()):
+        host = next((json.loads(f.read_text()).get("host") for f in run.glob("env.*.json")), None)
+        yield run, run.name.split(".", 2)[2], host
+
+
+def iter_records():
+    """Every record of the current plan, in full, with its gpu, run and host."""
+    for run, gpu, host in runs():
+        for f in sorted(run.glob("*.jsonl")):
+            for line in open(f):
+                r = json.loads(line)
+                if normalize(r, gpu):
+                    r.update(run=run.name, host=host)
+                    yield r
 
 
 def load():
-    recs, hosts = [], {}
-    for run in sorted(p for p in EXT.iterdir() if p.is_dir()):
-        _, _, gpu = run.name.split(".", 2)
-        for f in run.glob("env.*.json"):
-            hosts.setdefault(run.name, json.loads(f.read_text()).get("host"))
-        for f in run.glob("*.jsonl"):
-            for line in open(f):
-                r = json.loads(line)
-                if r["model"] in SKIP_MODELS or r["exp"] in SKIP_EXPS:
-                    continue
-                r["gpu"] = gpu
-                r["run"] = run.name
-                r["host"] = hosts.get(run.name)
-                recs.append(r)
+    """iter_records() without the bulk: logprobs only for possible references, and only the top 2
+    (all the gap metric reads), no text."""
+    recs = []
+    for r in iter_records():
+        tops = r.pop("top_logprobs")
+        r["top_logprobs"] = [t[:2] if t else t for t in tops] if r["rep"] == 0 and r["exp"] != "e4" else None
+        for k in ("sampled_logprobs", "text", "timings"):
+            r.pop(k, None)
+        recs.append(r)
     return recs
 
 
@@ -66,28 +108,43 @@ def top2_gap(ref, pos):
 
 
 def ref_exp(exp):
-    if exp.startswith("e2bi_"):
-        return "e2bi_bs1"
-    if exp.startswith("e5_") or exp == "e0":
+    if exp.startswith("e3_"):
+        return "e3_bs1"
+    if exp.startswith("e1_t"):
         return exp
-    return "e1a"
+    return "e1"
+
+
+def ref_key(engine, model, exp, prompt_id):
+    return (engine, model, ref_exp(exp), prompt_id)
+
+
+def refs_of(recs):
+    """Repeat 0 of every setting run on the model's reference GPU, keyed like ref_key()."""
+    refs = {}
+    for r in recs:
+        if r["rep"] == 0 and r["exp"] != "e4":
+            refs.setdefault((r["engine"], r["model"], r["exp"], r["prompt_id"]), r)
+    return refs
+
+
+def setting_key(c):
+    return (EXP_ORDER.index(c["exp"]), c["engine"] != "vllm", MODEL_ORDER.index(c["model"]))
 
 
 def summarize(recs):
     by = defaultdict(list)
     for r in recs:
-        by[(r["gpu"], r["engine"], r["model"], r["exp"], r.get("position", "-"))].append(r)
-    refs = {}
-    for r in recs:
-        if r["rep"] == 0 and r.get("restart", 0) == 0 and r.get("position", "-") in ("-", "first"):
-            refs.setdefault((r["gpu"], r["engine"], r["model"], r["exp"], r["prompt_id"]), r)
-
+        by[(r["engine"], r["model"], r["exp"])].append(r)
+    refs = refs_of(recs)
     rows = []
-    for (gpu, eng, model, exp, pos), rs in sorted(by.items()):
+    for (eng, model, exp), rs in by.items():
+        if len({r["run"] for r in rs}) > 1:
+            sys.exit(f"{exp} {eng} {model}: records from more than one job {sorted({r['run'] for r in rs})}")
         matches, divs, gaps, uniq = [], [], [], defaultdict(set)
         for r in rs:
             uniq[r["prompt_id"]].add(tuple(r["token_ids"]))
-            ref = refs.get((gpu, eng, model, ref_exp(exp), r["prompt_id"]))
+            ref = refs.get(ref_key(eng, model, exp, r["prompt_id"]))
             if ref is None:
                 continue
             d = first_div(ref["token_ids"], r["token_ids"])
@@ -97,9 +154,10 @@ def summarize(recs):
                 g = top2_gap(ref, d)
                 if g is not None:
                     gaps.append(g)
-        tps = [r["batch_tok_per_s"] for r in rs if "batch_tok_per_s" in r]
+        tps = [r.get("batch_tok_per_s", len(r["token_ids"]) / r["t_wall"]) for r in rs
+               if r["engine"] == "vllm"]  # llama.cpp timings are skewed by the concurrent fillers
         rows.append(dict(
-            gpu=gpu, engine=eng, model=model, exp=exp, pos=pos, n=len(rs),
+            exp=exp, engine=eng, model=model, gpu=rs[0]["gpu"], n=len(rs),
             match=f"{sum(matches) / len(matches):.2f}" if matches else "n/a",
             uniq=max(len(v) for v in uniq.values()),
             div=f"{statistics.median(divs):.0f}" if divs else "-",
@@ -107,27 +165,10 @@ def summarize(recs):
             tok_s=f"{statistics.median(tps):.0f}" if tps else "",
             mean_len=f"{statistics.mean(len(r['token_ids']) for r in rs):.0f}",
         ))
-    return rows
+    return sorted(rows, key=setting_key)
 
 
-def cross(recs, key_fn, label):
-    """Compares e1a repeat-0 outputs across a dimension (gpu or engine)."""
-    ref = {}
-    for r in recs:
-        if r["exp"] == "e1a" and r["rep"] == 0:
-            ref[(r["gpu"], r["engine"], r["model"], r["prompt_id"])] = r
-    groups = defaultdict(dict)
-    for (gpu, eng, model, pid), r in ref.items():
-        k, v = key_fn(gpu, eng, model)
-        groups[(k, pid)][v] = r
-    lines = [f"\n## Cross-{label} (e1a, repeat 0)\n", f"| group | prompt | {label} pair | first divergence |", "|---|---|---|---|"]
-    for (k, pid), d in sorted(groups.items()):
-        names = sorted(d)
-        for i in range(len(names)):
-            for j in range(i + 1, len(names)):
-                fd = first_div(d[names[i]]["token_ids"], d[names[j]]["token_ids"])
-                lines.append(f"| {k} | {pid} | {names[i]} vs {names[j]} | {'identical' if fd is None else fd} |")
-    return lines
+COLS = ["exp", "engine", "model", "gpu", "n", "match", "uniq", "div", "gap", "tok_s", "mean_len"]
 
 
 def main():
@@ -136,15 +177,15 @@ def main():
     if not recs:
         sys.exit("no records")
     rows = summarize(recs)
-    cols = ["gpu", "engine", "model", "exp", "pos", "n", "match", "uniq", "div", "gap", "tok_s", "mean_len"]
     out = ["# Determinism results (auto-generated by src/analyze.py)\n",
-           "| " + " | ".join(cols) + " |", "|" + "---|" * len(cols)]
-    out += ["| " + " | ".join(str(r[c]) for c in cols) + " |" for r in rows]
-    out += ["\n## Nodes per experiment (E1a/E1c)\n", "| engine | model | exp | node | run |", "|---|---|---|---|---|"]
-    out += sorted({f"| {r['engine']} | {r['model']} | {r['exp']} | {r['host']} | {r['run']} |"
-                   for r in recs if r["exp"] in ("e1a", "e1c")})
-    out += cross(recs, lambda g, e, m: (f"{e}/{m}", g), "gpu")
-    out += cross(recs, lambda g, e, m: (f"{g}/{m}", e), "engine")
+           "| " + " | ".join(COLS) + " |", "|" + "---|" * len(COLS)]
+    out += ["| " + " | ".join(str(r[c]) for c in COLS) + " |" for r in rows]
+    out += ["\n## Nodes\n", "| exp | engine | model | node | job |", "|---|---|---|---|---|"]
+    seen = {}
+    for r in recs:
+        seen.setdefault((r["exp"], r["engine"], r["model"]), (r["host"], r["run"]))
+    out += [f"| {e} | {g} | {m} | {h} | {run} |"
+            for (e, g, m), (h, run) in sorted(seen.items(), key=lambda kv: setting_key(dict(zip(("exp", "engine", "model"), kv[0]))))]
     (RES / "summary.md").write_text("\n".join(out) + "\n")
     print("\n".join(out))
 

@@ -1,0 +1,950 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><title>Qwen3-4B · llama.cpp · --parallel 4 · A100 &middot; Determinism</title><link rel=icon href='../favicon.ico' sizes=any><script>try{var t=localStorage.getItem('theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}</script><link rel=preconnect href='https://fonts.googleapis.com'><link rel=preconnect href='https://fonts.gstatic.com' crossorigin><link rel=stylesheet href='https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;500&display=swap'><link rel=stylesheet href='../static/style.css'></head><body><header class=mast><a class=brand href='https://lokalni.ai' aria-label='lokalni.ai'><img class=logo-light src='../static/logo_dark.png' alt='lokalni.ai' width=102 height=32><img class=logo-dark src='../static/logo_light.png' alt='lokalni.ai' width=102 height=32></a><span class='mastsep p'>&frasl;</span><a class=proj href='https://lokalni.ai/blog/determinismus/'>Stejn&yacute; vstup, stejn&yacute; v&yacute;stup</a><span class=mastsep>&frasl;</span><a class=here href='../index.html'>Qwen3-4B &middot; llama.cpp &middot; <code>--parallel 4</code> &middot; A100</a><span class=spacer></span><button class=tgl type=button data-theme-toggle aria-label='Switch theme' title='Switch theme'><svg class=sun viewBox='0 0 24 24' aria-hidden=true><circle cx=12 cy=12 r=4 /><path d='M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4' /></svg><svg class=moon viewBox='0 0 24 24' aria-hidden=true><path d='M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z' /></svg></button></header><section class=pr id=hello><p class=pq><b>hello</b><span>Hello! Who are you?</span></p><div class=outs><div class=o><div class=oh>reference: E1 greedy, r0 &middot; 50 tokens &middot; <b>r0&ndash;9</b> identical</div><div class=ot>Hello! I&#x27;m Qwen, a large-scale language model developed by Alibaba Cloud&#x27;s Tongyi Lab. I can assist you with answering questions, writing stories, creating documents, coding, and more. How can I help you today? 😊</div></div></div></section><section class=pr id=fact><p class=pq><b>fact</b><span>Explain why the sky is blue during the day and why sunsets are often red or orange. Cover the physics involved and mention how atmospheric conditions such as dust or pollution change the colors.</span></p><div class=outs><div class=o><div class=oh>reference: E1 greedy, r0 &middot; 905 tokens &middot; <b>r8</b> identical</div><div class=ot>The colors of the sky during the day and at sunset are due to a phenomenon in physics known as **Rayleigh scattering**. This process explains how sunlight interacts with the molecules and small particles in Earth&#x27;s atmosphere.
+
+---
+
+### 🌞 Why the Sky is Blue During the Day
+
+Sunlight, or white light, is made up of different colors, each with a different wavelength. The visible spectrum ranges from short-wavelength violet and blue to longer-wavelength red and orange.
+
+- **Rayleigh scattering** occurs when light interacts with particles much smaller than the wavelength of the light—such as nitrogen and oxygen molecules in the atmosphere.
+- The intensity of scattering is **inversely proportional to the fourth power of the wavelength**:
+  \[
+  I \propto \frac{1}{\lambda^4}
+  \]
+  This means **shorter wavelengths (blue and violet)** are scattered about **10 times more** than longer wavelengths (red and orange).
+
+- As sunlight enters the atmosphere, blue and violet light are scattered in all directions by air molecules. This scattered blue light reaches our eyes from all directions, making the sky appear blue.
+
+- Although violet light is scattered even more than blue, our eyes are less sensitive to violet, and some of it is absorbed by the upper atmosphere (by ozone), so we perceive the sky as blue rather than violet.
+
+---
+
+### 🌅 Why Sunsets Are Red or Orange
+
+At sunset (or sunrise), the sun is near the horizon, so sunlight must pass through a much thicker layer of the atmosphere to reach our eyes.
+
+- As the light travels through more atmosphere, **shorter wavelengths (blue and green)** are scattered out of the direct beam by Rayleigh scattering.
+- The longer wavelengths (red, orange, and yellow) are scattered much less and continue traveling through the atmosphere with less obstruction.
+- As a result, the direct sunlight that reaches us at sunset is dominated by red and orange hues.
+
+This is why the sun appears red or orange during sunrise and sunset.
+
+---
+
+### 🌫️ How Dust, Pollution, and Atmospheric Conditions Change the Colors
+
+Atmospheric particles such as **dust, pollution, water droplets, or aerosols** can alter the colors we see:
+
+1. **Mie Scattering**:
+   - When particles are comparable in size to the wavelength of light (like dust or pollution), the scattering becomes **Mie scattering**, which affects all wavelengths more equally.
+   - Unlike Rayleigh scattering, Mie scattering does not strongly favor blue light.
+   - This can lead to **more uniform, grayish or hazy skies**, and **less vivid blue skies** during the day.
+
+2. **Pollution or Smoke**:
+   - In cities or areas with high pollution, the presence of fine particles can scatter all colors, leading to **duller, grayish skies**.
+   - However, during a sunset, pollution can enhance red or orange hues by scattering blue light away and allowing reds to dominate more clearly.
+
+3. **Haze or Dust Storms**:
+   - Dust storms or volcanic ash can create **intense reds and oranges** at sunset due to increased scattering and absorption of shorter wavelengths.
+   - In some cases, the sky may appear **pink or purple** due to the combination of scattered light and atmospheric particles.
+
+4. **Fog or Clouds**:
+   - Clouds scatter light more uniformly and can create white or gray skies, reducing the visibility of blue or red hues.
+   - However, when the sun is low and clouds are present, they can reflect and enhance red or orange colors.
+
+---
+
+### Summary
+
+| Phenomenon | Cause |
+|----------|-------|
+| Blue sky during the day | Rayleigh scattering of short blue wavelengths by air molecules |
+| Red/orange sunsets | Long-wavelength red/orange light travels through more atmosphere, with blue light scattered away |
+| Dust/pollution effects | Mie scattering reduces blue dominance, can enhance reds or create hazy skies |
+
+✅ In short:  
+**Blue sky = short wavelengths scattered widely during the day**  
+**Red sunsets = long wavelengths pass through more atmosphere with less scattering**  
+**Pollution/dust = alters scattering, can enhance or dull colors depending on particle size and concentration**
+
+This beautiful interplay of light and atmosphere is a classic example of how simple physics governs everyday natural phenomena. 🌍✨</div></div><div class='o diff'><div class=oh><b>r0</b> &middot; differs from token 197 &middot; 930 tokens</div><div class=ot><span class=ctx>&hellip;frac{1}{\lambda^4}
+  \]
+  This means **shorter wavelengths (blue and violet)** are scattered about **10 times more** than longer wavelengths (red and orange).
+
+</span><mark>As a result:
+- Blue light is scattered in all directions by the atmosphere, making the sky appear blue to observers on the ground.
+- Violet light is scattered even more than blue, but our eyes are less sensitive to violet, and some of it is absorbed by the upper atmosphere, so blue dominates the perceived color.
+
+👉 **Conclusion**: The sky appears blue because blue light is scattered more efficiently by atmospheric molecules than other colors.
+
+---
+
+### 🌅 Why Sunsets Are Red or Orange
+
+At sunset (or sunrise), the Sun is near the horizon, so sunlight must pass through a much thicker layer of the atmosphere to reach the observer.
+
+- As light travels through more atmosphere, **shorter wavelengths (blue and green)** are scattered out of the direct beam by Rayleigh scattering.
+- The longer wavelengths (red, orange, yellow) are scattered much less and continue to travel through the atmosphere with less loss.
+- As a result, the direct sunlight reaching your eyes is dominated by red and orange hues.
+
+👉 **Conclusion**: At sunset, the blue light is scattered away, leaving the red and orange colors visible.
+
+---
+
+### 🌫️ How Dust, Pollution, and Atmospheric Conditions Change the Colors
+
+Atmospheric particles such as **dust, pollution, water droplets, or aerosols** can alter the colors we see:
+
+1. **Mie Scattering**:
+   - When particles are comparable in size to the wavelength of light (like dust or pollution), scattering becomes **Mie scattering**, which affects all wavelengths more equally.
+   - Unlike Rayleigh scattering, Mie scattering does not strongly favor blue light.
+   - This can lead to **more uniform, grayish or hazy skies** and can **reduce the blue color** of the sky during the day.
+
+2. **Pollution or Smoke**:
+   - In cities or areas with high pollution, the sky may appear **dull gray or yellowish** during the day.
+   - At sunset, pollution can enhance red or orange hues due to increased scattering and absorption of blue light, sometimes creating **intense red sunsets**.
+
+3. **Haze or Dust Storms**:
+   - Dust storms or volcanic ash can scatter light in a way that makes the sky appear **yellow or orange**, even during the day.
+   - These conditions can also make sunsets appear **more vivid or dramatic** due to increased particulate scattering.
+
+4. **Water Droplets (e.g., fog, clouds)**:
+   - Clouds scatter all wavelengths equally, so they appear white or gray.
+   - However, when sunlight passes through thin clouds or fog, the scattering can enhance reds and oranges, especially at sunset.
+
+---
+
+### Summary
+
+| Condition | Effect on Sky Color |
+|---------|----------------------|
+| **Clear day** | Blue sky due to Rayleigh scattering of short wavelengths |
+| **Sunset/sunrise** | Red/orange due to long-path scattering removing blue light |
+| **Pollution/dust** | Reduced blue, more gray or orange hues; enhanced reds at sunset |
+| **Mie scattering (large particles)** | Less blue, more uniform scattering across wavelengths |
+
+---
+
+✅ In short:  
+**The sky is blue because blue light is scattered more by air molecules. At sunset, sunlight travels through more atmosphere, scattering away the blue light, leaving reds and oranges. Dust and pollution alter this by scattering all wavelengths more evenly, changing the overall color appearance.**
+
+This beautiful interplay of light and atmosphere is a classic example of how simple physics governs everyday natural phenomena. 🌍✨</mark></div></div><div class='o diff'><div class=oh><b>r1&ndash;3</b> &middot; differs from token 24 &middot; 891 tokens</div><div class=ot><span class=ctx>The colors of the sky during the day and at sunset are due to a phenomenon in physics known as **Rayleigh scattering</span><mark>**, which describes how light interacts with molecules and small particles in the Earth&#x27;s atmosphere.
+
+---
+
+### 🌞 Why the Sky is Blue During the Day
+
+1. **Sunlight is made of all colors**  
+   Sunlight, or white light, is composed of a spectrum of colors—each with a different wavelength. The visible spectrum ranges from short-wavelength violet and blue to long-wavelength red and orange.
+
+2. **Rayleigh Scattering**  
+   When sunlight enters the atmosphere, it collides with gas molecules (like nitrogen and oxygen). These molecules are much smaller than the wavelengths of visible light.  
+   According to **Rayleigh&#x27;s law**, the amount of scattering is **inversely proportional to the fourth power of the wavelength**:
+   \[
+   I \propto \frac{1}{\lambda^4}
+   \]
+   This means **shorter wavelengths (blue and violet)** are scattered much more than longer wavelengths (red, orange, yellow).
+
+3. **Blue light is scattered more**  
+   Since blue light has a shorter wavelength (~450 nm) than red (~650 nm), it is scattered about **10 times more** than red light.  
+   This scattered blue light reaches our eyes from all directions, making the sky appear blue during the day.
+
+4. **Why not violet?**  
+   Violet light has an even shorter wavelength and is scattered even more than blue. However, the sun emits less violet light, and our eyes are less sensitive to violet. Also, some violet light is absorbed by the upper atmosphere. So, blue dominates our perception.
+
+---
+
+### 🌅 Why Sunsets Are Red or Orange
+
+At sunset, the sun is low on the horizon, so sunlight must pass through a much **thicker layer of the atmosphere** before reaching our eyes.
+
+1. **Longer path = more scattering**  
+   As light travels through more atmosphere, shorter wavelengths (blue and green) are scattered out of the direct path.  
+   The blue and green light is scattered away from the line of sight, leaving mostly the **longer wavelengths**—red, orange, and yellow—traveling directly to our eyes.
+
+2. **Result: Red/orange sky**  
+   The remaining light that reaches us at sunset is dominated by red and orange hues, giving the sky a warm, vibrant color.
+
+---
+
+### 🌫️ How Dust, Pollution, and Atmospheric Conditions Change Colors
+
+- **Dust, pollution, and aerosols** (like smoke or haze) can alter the scattering behavior:
+  - These particles are **larger** than gas molecules and scatter light differently. They scatter **all wavelengths more equally**, a phenomenon called **Mie scattering**.
+  - Mie scattering is less dependent on wavelength, so it can **reduce the blue color** and make the sky appear **gray, hazy, or yellowish**.
+  - In polluted or dusty conditions, sunsets may appear **duller or more yellow/orange**, and the daytime sky may look **less blue** due to increased scattering of all colors.
+
+- **Haze or fog** can also reduce contrast and make the sky appear whitish or gray, especially during midday, because the scattering is more uniform.
+
+- **Clean, clear air** enhances Rayleigh scattering, leading to vivid blue skies and vibrant red sunsets.
+
+---
+
+### Summary
+
+| Condition | Effect on Sky Color |
+|---------|----------------------|
+| **Daytime (clear sky)** | Blue due to Rayleigh scattering of short blue wavelengths |
+| **Sunset/sunrise** | Red/orange because longer wavelengths pass through more atmosphere with less scattering |
+| **Pollution/dust** | Reduces blue scattering, dulls colors, may make sunsets less vivid or skies gray |
+
+---
+
+✅ In short:  
+**The sky is blue because blue light scatters more in the atmosphere. At sunset, the path of sunlight is longer, so blue light is scattered away, leaving red and orange light visible. Dust and pollution alter this by scattering all wavelengths more evenly, reducing the vividness of colors.**
+
+This beautiful phenomenon is a direct result of the physics of light and the composition of our atmosphere. 🌍✨</mark></div></div><div class='o diff'><div class=oh><b>r4&ndash;5</b> &middot; differs from token 24 &middot; 891 tokens</div><div class=ot><span class=ctx>The colors of the sky during the day and at sunset are due to a phenomenon in physics known as **Rayleigh scattering</span><mark>**, which describes how light interacts with molecules and small particles in the Earth&#x27;s atmosphere.
+
+---
+
+### 🌞 Why the Sky is Blue During the Day
+
+1. **Sunlight is made of all colors**  
+   Sunlight, or white light, is composed of a spectrum of colors—each with a different wavelength. The visible spectrum ranges from short-wavelength violet and blue to long-wavelength red and orange.
+
+2. **Rayleigh Scattering**  
+   When sunlight enters the atmosphere, it collides with gas molecules (like nitrogen and oxygen). These molecules are much smaller than the wavelengths of visible light.  
+   According to **Rayleigh&#x27;s law**, the amount of scattering is **inversely proportional to the fourth power of the wavelength**:
+   \[
+   I \propto \frac{1}{\lambda^4}
+   \]
+   This means **shorter wavelengths (blue and violet)** are scattered much more than longer wavelengths (red, orange, yellow).
+
+3. **Blue light is scattered more**  
+   Since blue light has a shorter wavelength (~450 nm) than red (~650 nm), it is scattered about **10 times more** than red light.  
+   This scattered blue light reaches our eyes from all directions, making the sky appear blue during the day.
+
+4. **Why not violet?**  
+   Violet light has an even shorter wavelength and is scattered even more than blue. However, the sun emits less violet light, and our eyes are less sensitive to violet. Also, some violet light is absorbed by the upper atmosphere. So, blue dominates our perception.
+
+---
+
+### 🌅 Why Sunsets Are Red or Orange
+
+At sunset, the sun is low on the horizon, so sunlight must pass through a much **thicker layer of the atmosphere** to reach our eyes.
+
+1. **Longer path = more scattering**  
+   As light travels through more atmosphere, shorter wavelengths (blue and green) are scattered out of the direct path.  
+   The blue and green light is scattered away from the line of sight, leaving mostly the **longer wavelengths**—red, orange, and yellow—traveling directly to our eyes.
+
+2. **Result: Red/orange sky**  
+   The remaining light that reaches us at sunset is dominated by red and orange hues, giving the sky a warm, vibrant color.
+
+---
+
+### 🌫️ How Dust, Pollution, and Atmospheric Conditions Change Colors
+
+- **Dust, pollution, and aerosols** (like smoke or haze) can alter the scattering behavior:
+  - These particles are **larger** than gas molecules and scatter light differently. They scatter **all wavelengths more equally**, a phenomenon called **Mie scattering**.
+  - Mie scattering is less dependent on wavelength, so it can **reduce the blue color** and make the sky appear **gray, hazy, or yellowish**.
+  - In polluted or dusty conditions, sunsets may appear **duller or more yellow/orange**, and the daytime sky may look **less blue** due to increased scattering of all colors.
+
+- **Haze or fog** can also reduce contrast and make the sky appear whitish or gray, especially during midday, because the scattering is more uniform.
+
+- **Clean, clear air** enhances Rayleigh scattering, leading to vivid blue skies and vibrant red sunsets.
+
+---
+
+### Summary
+
+| Condition | Effect on Sky Color |
+|---------|----------------------|
+| **Daytime (clear sky)** | Blue due to Rayleigh scattering of short blue wavelengths |
+| **Sunset/sunrise** | Red/orange because longer wavelengths pass through more atmosphere with less scattering |
+| **Pollution/dust** | Reduces blue scattering, dulls colors, may make sunsets less vivid or skies gray |
+
+---
+
+✅ In short:  
+**The sky is blue because blue light scatters more in the atmosphere. At sunset, the path of sunlight is longer, so blue light is scattered away, leaving red and orange light visible. Dust and pollution alter this by scattering all wavelengths more evenly, reducing the vividness of colors.**
+
+This beautiful phenomenon is a direct result of the physics of light and the composition of our atmosphere. 🌍✨</mark></div></div><div class='o diff'><div class=oh><b>r6&ndash;7</b> &middot; differs from token 197 &middot; 913 tokens</div><div class=ot><span class=ctx>&hellip;frac{1}{\lambda^4}
+  \]
+  This means **shorter wavelengths (blue and violet)** are scattered about **10 times more** than longer wavelengths (red and orange).
+
+</span><mark>As a result:
+- Blue light is scattered in all directions by the atmosphere, making the sky appear blue to observers on the ground.
+- Violet light is scattered even more than blue, but our eyes are less sensitive to violet, and some of it is absorbed by the upper atmosphere, so blue dominates the perceived color.
+
+👉 **Conclusion**: The sky appears blue because blue light is scattered more efficiently by atmospheric molecules than other colors.
+
+---
+
+### 🌅 Why Sunsets Are Red or Orange
+
+At sunset (or sunrise), the Sun is near the horizon, so sunlight must pass through a much thicker layer of the atmosphere to reach the observer.
+
+- As light travels through more atmosphere, **shorter wavelengths (blue and green)** are scattered out of the direct beam by Rayleigh scattering.
+- The longer wavelengths (red, orange, yellow) are scattered much less and continue to travel through the atmosphere with less loss.
+- As a result, the direct sunlight reaching your eyes is dominated by red and orange hues.
+
+👉 **Conclusion**: At sunset, the blue light is scattered away, leaving the red and orange colors visible.
+
+---
+
+### 🌫️ How Dust, Pollution, and Atmospheric Conditions Change the Colors
+
+Atmospheric particles such as **dust, pollution, water droplets, or aerosols** can alter the colors we see:
+
+1. **Mie Scattering**:
+   - When particles are comparable in size to the wavelength of light (like dust or pollution), scattering becomes **Mie scattering**, which affects all wavelengths more equally.
+   - Unlike Rayleigh scattering, Mie scattering does not strongly favor blue or red.
+   - This can lead to **gray, hazy, or whitish skies** during pollution events.
+
+2. **Pollution or Dust Storms**:
+   - These increase the amount of particulate matter in the air.
+   - Mie scattering can **reduce the contrast** between colors, making sunsets appear duller or more yellowish.
+   - In some cases, pollution can enhance red or orange hues due to the way particles scatter and absorb light, especially if they are absorbing blue and green wavelengths.
+
+3. **Haze and Smog**:
+   - Hazy conditions often make the sky appear yellow or gray, and sunsets may appear muted or less vibrant.
+   - The scattering of blue light is enhanced, but the overall effect is a loss of color contrast.
+
+4. **Clean, Clear Air**:
+   - In clean air, Rayleigh scattering is dominant, leading to vivid blue skies and vibrant red/orange sunsets.
+
+👉 **Summary**: Clean air enhances blue skies and vivid red sunsets due to strong Rayleigh scattering. Polluted or dusty air reduces color contrast and can dull or shift the colors due to Mie scattering and light absorption.
+
+---
+
+### Final Summary
+
+| Condition | Sky Color | Sunset Color | Reason |
+|---------|----------|-------------|--------|
+| Clear day | Blue | Red/Orange | Rayleigh scattering favors blue; longer wavelengths pass through at sunset |
+| Polluted/dusty | Hazy, gray | Muted, dull red/yellow | Mie scattering and light absorption reduce contrast and color intensity |
+
+✅ The blue sky and red sunsets are a beautiful result of how light interacts with our atmosphere—specifically, the physics of scattering. Atmospheric conditions like pollution or dust can modify these effects, making the sky and sunsets appear different than in pristine conditions.
+
+🌞 Nature’s colors are not just beautiful—they’re a direct result of physics!</mark></div></div><div class='o diff'><div class=oh><b>r9</b> &middot; differs from token 197 &middot; 894 tokens</div><div class=ot><span class=ctx>&hellip;frac{1}{\lambda^4}
+  \]
+  This means **shorter wavelengths (blue and violet)** are scattered about **10 times more** than longer wavelengths (red and orange).
+
+</span><mark>As a result:
+- Blue light is scattered in all directions by the atmosphere, making the sky appear blue to observers on the ground.
+- Violet light is scattered even more than blue, but our eyes are less sensitive to violet, and some of it is absorbed by the upper atmosphere, so blue dominates the perceived color.
+
+👉 **Conclusion**: The sky appears blue because blue light is scattered more efficiently by atmospheric molecules than other colors.
+
+---
+
+### 🌅 Why Sunsets Are Red or Orange
+
+At sunset (or sunrise), the Sun is near the horizon, so sunlight must pass through a much thicker layer of the atmosphere to reach the observer.
+
+- As light travels through more atmosphere, **shorter wavelengths (blue and green)** are scattered out of the direct beam by Rayleigh scattering.
+- The longer wavelengths (red, orange, yellow) are scattered much less and continue to travel through the atmosphere with less loss.
+- As a result, the direct sunlight reaching your eyes is dominated by red and orange hues.
+
+👉 **Conclusion**: At sunset, the blue light is scattered away, leaving the red and orange colors visible.
+
+---
+
+### 🌫️ How Dust, Pollution, and Atmospheric Conditions Change the Colors
+
+Atmospheric particles such as **dust, pollution, water droplets, or aerosols** can alter the colors we see:
+
+1. **Mie Scattering**:
+   - When particles are comparable in size to the wavelength of light (like dust or pollution), scattering becomes **Mie scattering**, which affects all wavelengths more equally.
+   - Unlike Rayleigh scattering, Mie scattering does not strongly favor blue light.
+   - This can lead to **gray, hazy, or whitish skies** during pollution events.
+
+2. **Pollution or Dust Storms**:
+   - These increase the amount of particulate matter in the air.
+   - Mie scattering can reduce the contrast between colors, making sunsets appear **duller or more yellowish**.
+   - In some cases, pollution can enhance red or orange hues due to the way particles scatter and absorb light, but often the sky appears hazy and less vibrant.
+
+3. **Fog or Clouds**:
+   - Water droplets in fog or clouds scatter all wavelengths similarly, leading to **white or gray skies**.
+   - Sunsets may appear muted or washed out.
+
+4. **Clean, Clear Air**:
+   - In pristine conditions, Rayleigh scattering is dominant, resulting in vivid blue skies and vibrant red/orange sunsets.
+
+---
+
+### Summary
+
+| Condition | Effect on Sky Color |
+|---------|----------------------|
+| Daytime (clear sky) | Blue — due to Rayleigh scattering of short blue wavelengths |
+| Sunset/sunrise | Red/orange — longer wavelengths pass through more atmosphere with less scattering |
+| Pollution/dust | Hazy, muted colors; reduced blue scattering; may enhance reds due to Mie scattering |
+| Clouds/fog | White or gray; all wavelengths scattered equally |
+
+---
+
+✅ In short:  
+**The sky is blue because blue light is scattered more by air molecules. At sunset, the light travels through more atmosphere, scattering away the blue, leaving reds and oranges. Dust and pollution alter this by scattering all wavelengths more evenly, reducing color contrast.**
+
+This beautiful interplay of light and atmosphere is a classic example of how simple physics governs everyday natural phenomena. 🌍✨</mark></div></div></div></section><section class=pr id=story><p class=pq><b>story</b><span>Write a short story about a lighthouse keeper on a remote island who finds a message in a bottle that seems to be addressed to them personally.</span></p><div class=outs><div class=o><div class=oh>reference: E1 greedy, r0 &middot; 931 tokens &middot; <b>r1&ndash;2</b> identical</div><div class=ot>The wind howled across Blackthorn Point, a jagged tooth of rock rising from the churning North Sea. Elias Thorne, the lighthouse keeper, stood at the tall, weathered railing, his breath pluming in the cold air. For twenty-three years, he’d watched the same relentless storm, the same indifferent waves, the same endless expanse of grey. His world was the rhythmic *clack-clack* of the lamp, the groan of the iron tower, and the salt-stung silence of the island.
+
+He’d found the bottle half-buried in the damp sand near the base of the cliff, tucked behind a loose stone. It was small, chipped, the glass cloudy with sea spray. Inside, nestled in a scrap of faded blue cloth, was a single, folded piece of paper. No return address. Just a message, written in a hand that seemed both familiar and strangely distant:
+
+&gt; *To Elias Thorne, Keeper of Blackthorn Point, who sees the sea as a mirror and the sky as a wound:*
+&gt;
+&gt; *I am not who you think. I am the one who watches from the other side of the waves. I have been waiting for you to find this. The light you keep burning is not just for ships. It is a signal. A signal to the ones who are lost, not just at sea, but in the silence between heartbeats. You carry a memory I cannot forget. Find the stone beneath the old oak. It will speak. And when it does, you will know I am not gone. I am simply waiting to be seen.*
+&gt;
+&gt; *— M.*
+
+Elias froze. His hands, usually steady, trembled. *M.* The name was a ghost in his memory. His mother, Margaret. She’d died ten years ago, a year before he’d taken the post. A sudden illness, a quiet passing. He’d buried her on the island’s only hill, near the old oak tree. He’d never spoken of her after that. The sea had always felt like a cold, indifferent witness to her absence.
+
+He stared at the paper, the words burning into his mind. *The light you keep burning is not just for ships.* He’d always thought it was. A duty. A beacon. But now, it felt different. A message. A *call*.
+
+That night, he climbed the hill to the old oak. The wind whispered through its branches like a sigh. Beneath its roots, half-buried in moss and roots, was a smooth, dark stone, worn smooth by centuries of rain. He picked it up. It was warm. And when he pressed it to his palm, a faint vibration pulsed through his bones — not sound, but a sensation, like a memory surfacing.
+
+He closed his eyes. And suddenly, he wasn’t on the hill. He was standing on a shore, not of Blackthorn, but of a different coast — a place he’d never seen. The sky was bruised purple, and the sea was calm, still. A woman stood on the shore, her back to him, her hair like silver in the wind. She turned slowly. Her face was familiar — Margaret’s face, but older, wiser, with eyes that held the depth of the ocean.
+
+“You found it,” she said, her voice soft, like waves on stone.
+
+Elias opened his eyes. He was back on the hill. The stone was cold. The oak stood silent. The wind had died.
+
+He sat on the grass, heart pounding. The message wasn’t from a stranger. It was from *her*. From Margaret. She hadn’t died. She’d been waiting. Not in the grave, but in the silence, in the light, in the sea’s endless watch.
+
+He walked back to the lighthouse. The lamp was burning. He turned it to full beam, not just for ships, but for the sky, for the sea, for the memory of a woman who had loved him in a way he’d never known.
+
+And from that day on, Elias Thorne didn’t just keep the light. He *listened* to it. And sometimes, when the wind was right, he swore he could hear a whisper — not from the sea, but from the stone beneath the oak — a soft, familiar voice saying, *I am here. I am waiting. I am seen.*
+
+And for the first time in twenty-three years, he felt not alone. He felt *known*.</div></div><div class='o diff'><div class=oh><b>r0</b> &middot; differs from token 13 &middot; 720 tokens</div><div class=ot><span class=ctx>The wind howled across Blackthorn Point, a jagged</span><mark> island clawed from the sea, its cliffs slick with salt and spray. Elias Thorne, the lighthouse keeper, stood at the iron railing of the lantern room, his breath fogging the cold glass. For twenty-three years, he’d watched the endless grey expanse, the relentless rhythm of waves crashing against the rocks below. His world was predictable: oil lamps, foghorns, the slow drift of the tides, and the occasional, distant cry of gulls.
+
+He’d found the bottle on the third day of the new moon, half-buried in the damp sand near the base of the cliff where the sea met the rock. It was small, chipped, the glass cloudy with salt. Inside, nestled in a crumpled piece of yellowed paper, was a single, folded note.
+
+&gt; *To Elias Thorne, Keeper of Blackthorn Point,*
+&gt; 
+&gt; *I’ve been watching you for years. I know you don’t believe in ghosts, but I am real. I am the one who used to live here. I left when the storm came. I left because I thought I’d never see the light again. But I saw it. I saw you. You keep the light steady. You keep the world safe. I’m sorry I didn’t come back. I’m sorry I didn’t tell you. I’m sorry I didn’t know you’d be the one who would remember me.*
+&gt; 
+&gt; *— Someone who once lived here.*
+
+Elias froze. His hands, usually steady, trembled. The words were written in a hand he recognized—his own mother’s. She’d died when he was ten, a year before the storm that had claimed the old cottage on the island’s eastern shore. She’d been a quiet woman, a weaver, who’d once said, “The sea remembers everything, Elias. Even the things we forget.”
+
+He’d never believed that. He’d thought it was just wind and salt and memory playing tricks.
+
+But this note… it felt like a whisper from the past, a ghost of a life he’d never known.
+
+He sat on the stone steps, the note in his lap, the wind still screaming. He thought of the old cottage, the wooden door that had once stood open to the sea, the way the wind used to whistle through the eaves. He thought of his mother’s hands, the way she’d knit with a steady rhythm, like the turning of the lighthouse’s gears.
+
+And then he remembered—she’d once told him, “The light doesn’t just guide ships. It guides the ones who are lost.”
+
+He looked out to sea. The waves rolled in, slow and deep. And for the first time in decades, he didn’t just see the sea. He saw a woman standing on the shore, her face half-hidden by the wind, her hands outstretched, as if reaching for something.
+
+He didn’t know if she was real. But he knew, in his bones, that she had been here. That she had watched. That she had waited.
+
+And now, she had found her way back—not through the sea, but through the silence between the waves.
+
+Elias stood, the note still in his hand. He walked to the lantern room, lit the wick, and let the beam sweep across the dark water.
+
+For the first time in twenty-three years, the light didn’t just warn ships.
+
+It welcomed someone home.</mark></div></div><div class='o diff'><div class=oh><b>r3</b> &middot; differs from token 16 &middot; 841 tokens</div><div class=ot><span class=ctx>The wind howled across Blackthorn Point, a jagged tooth of rock</span><mark> jutting into the North Atlantic. Elias Thorne, the lighthouse keeper, stood at the tall, weathered railing of the lantern room, his breath fogging the cold glass. For twenty-three years, he’d watched the sea, its endless rhythm a familiar lullaby. His world was the tower, the oil lamps, the salt-crusted books, and the occasional, distant cry of gulls. He’d never seen a ship in distress, only the vast, indifferent blue.
+
+Then, one grey morning, a bottle washed ashore on the shingle below the tower’s base. Not a common driftwood piece, but a small, sturdy glass bottle, its surface pitted and green with sea spray. Elias picked it up, the cold metal of the cap biting into his palm. Inside, nestled in a crumpled piece of yellowed paper, was a single, handwritten note:
+
+&gt; *To the Keeper of Blackthorn Point,*
+&gt; *If you’re reading this, the storm is coming. The sea is rising. Find the stone beneath the old oak. It holds the key. Come before the tide swallows the path. – M. L.*  
+
+Elias froze. *M. L.*? No one had ever written to him. No one had ever mentioned the &quot;stone beneath the old oak.&quot; The old oak? He’d seen it once, long ago, when he’d first arrived. A gnarled, dying tree at the edge of the cliff, its roots exposed, its branches clawing at the sky. He’d thought it a relic, a forgotten thing. And the storm? The sea *was* rising. The tide had been higher than usual for weeks, a slow, ominous creep.
+
+He didn’t believe it. Not at first. He’d lived here long enough to know the sea’s moods. He checked the weather reports – nothing unusual. He walked to the old oak, the wind whipping his coat. Beneath its roots, half-buried in damp earth, was a smooth, dark stone, worn smooth by centuries of rain and wind. It was cold to the touch. He picked it up. It felt heavy, ancient. And as he held it, a strange warmth spread through his fingers, like sunlight through fog.
+
+He returned to the tower, the stone in his hand. That night, he lit the lantern. The beam swept across the dark water, a steady, unwavering light. But as he stood there, watching the waves, a thought struck him. *M. L.* – the initials. He’d seen them once, years ago, in a faded sketchbook in the tower’s attic. A young woman, drawn with a delicate hand, standing on a cliff, looking out to sea. The sketch had no name. But the date? It was the same day the storm had first begun to rise.
+
+He remembered now. A woman named Miriam Lorne. She’d come to Blackthorn Point as a student of marine biology, seeking solitude. She’d stayed for a year, then vanished without a trace. The island’s records listed her as &quot;disappeared.&quot; No one had seen her since the storm of ’98.
+
+Elias sat in silence, the stone in his lap. The sea outside was calm now, the wind still. But the note had changed him. He wasn’t just a keeper anymore. He was a witness. And the stone… it wasn’t just a key. It was a bridge.
+
+The next morning, he left the stone on the shore, where the tide would carry it back. He didn’t write a reply. He simply walked to the edge of the cliff, looked out at the sea, and whispered, “I found you.”
+
+And for the first time in decades, the wind didn’t howl. It sighed. And somewhere, deep in the waves, a single wave broke with a soft, almost human sound.  
+
+The lighthouse kept shining.  
+And the sea, for a moment, seemed to listen.</mark></div></div><div class='o diff'><div class=oh><b>r4</b> &middot; differs from token 272 &middot; 982 tokens</div><div class=ot><span class=ctx>&hellip;o watches from the other side of the waves. I have been waiting for you to find this. The light you keep burning is not just for ships. It is a signal. A signal</span><mark> that someone is still listening. Someone who remembers the shape of the sea when it was young. Find the cove where the tide pulls back like a sigh. There, beneath the old oak, you will find a stone. It is warm. It remembers. It speaks. You will understand then. You are not alone. You are not forgotten.*
+&gt;
+&gt; *—A Keeper of the Deep*
+
+Elias stared at the words, his heart hammering against his ribs. *A Keeper of the Deep?* He’d never heard of such a thing. The island had no known history of such a role. He’d read the old logs, the maps, the weather reports – nothing. The sea was vast, indifferent, and he’d always believed it was just a place of storms and solitude.
+
+But the message felt… true. Like a whisper from the deep that had been waiting for him.
+
+That night, he lit the lamp with extra care, the beam sweeping the dark water with a steady, unwavering rhythm. He didn’t sleep. He sat by the window, the paper in his hands, tracing the words. *The cove where the tide pulls back like a sigh.* He knew that cove – a narrow inlet hidden behind a curtain of rocks, only visible at low tide. He’d walked there once, as a boy, with his father. They’d found nothing but driftwood and a single, smooth stone.
+
+He went early the next morning, before the sun rose. The tide was receding, revealing the cove as a shallow, moonlit pool. The sea air was thick with salt and something else – a faint, ancient scent, like wet moss and old iron. He knelt by the edge, scanning the sand. Then, near the base of the ancient oak tree that grew crookedly over the water, he saw it.
+
+A stone. Not ordinary. It was dark, almost black, with a smooth, almost living surface. And it was warm. Not just warm – *warm like a heartbeat*.
+
+He picked it up. It felt heavy, yet light. As he held it, a soft hum vibrated through his palm, like the sound of a distant lullaby. And then, in his mind, not his ears, he heard it:
+
+*“You see the sea as a mirror,”* the voice said, not loud, but clear, like water over stone. *“You see the sky as a wound. That is how you know. That is how you are chosen.”*
+
+Elias dropped the stone, stunned. He looked around. The cove was empty. The wind had died. The sea was still. No one was there.
+
+But he knew. The message wasn’t from a stranger. It wasn’t a trick of the wind or the sea. It was from *within* the island. From the sea itself. From the deep, where the light had always been kept, not just for ships, but for those who listened.
+
+He returned to the lighthouse that evening, the stone tucked in his coat. He didn’t tell anyone. He didn’t need to. He lit the lamp, and as the beam swept across the water, he whispered, “I see you now. I remember.”
+
+And for the first time in twenty-three years, the sea didn’t feel like a wound. It felt like a memory. And Elias Thorne, the keeper of Blackthorn Point, finally felt like he belonged.</mark></div></div><div class='o diff'><div class=oh><b>r5</b> &middot; differs from token 272 &middot; 907 tokens</div><div class=ot><span class=ctx>&hellip;o watches from the other side of the waves. I have been waiting for you to find this. The light you keep burning is not just for ships. It is a signal. A signal</span><mark> that someone is still listening. Someone who remembers the shape of the sea when it was young. Find the cove where the tide pulls back like a sigh. There, beneath the old oak, you will find a stone. It is warm. It remembers. It speaks. You will understand then. You are not alone. You are not forgotten.*
+&gt;
+&gt; *—A Keeper of the Deep*
+
+Elias stared at the words, his heart hammering against his ribs. *A Keeper of the Deep?* He’d never heard of such a thing. The island had no known history of such a role. He’d read the old logs, the maps, the weather reports – nothing. The sea was vast, indifferent, and he’d always believed it was just a place of storms and solitude.
+
+But the message felt… true. Like a whisper from the deep that had been waiting for him.
+
+That night, he lit the lamp with extra care, the beam sweeping the dark water with a steady, unwavering rhythm. He didn’t sleep. He sat by the window, the paper in his hands, tracing the words. *The cove where the tide pulls back like a sigh.* He knew that cove – a narrow inlet hidden behind a curtain of rocks, only visible at low tide. He’d walked there once, as a boy, with his father. They’d found nothing but driftwood and a single, smooth stone.
+
+He went early the next morning, before the sun rose. The tide was receding, revealing the cove as a shallow, moonlit pool. The sea air was thick with salt and something else – a faint, briny sweetness, like old seaweed and rain.
+
+And there, half-buried in the sand, was a stone. Not smooth. Not ordinary. It was dark, almost black, with veins of silver running through it like frozen lightning. It was warm to the touch, pulsing slightly, as if breathing.
+
+Elias picked it up. It felt heavy, yet light. As he held it, the wind seemed to still. The sea fell silent. And then, in the quiet, he heard it – not a sound, but a *presence*. A deep, resonant hum, like the echo of a wave long gone, or the memory of a song sung by the ocean itself.
+
+He didn’t understand it. But he *felt* it. A connection. A recognition.
+
+He returned to the lighthouse that evening, the stone tucked in his coat. He didn’t show it to anyone. He didn’t write a report. He simply sat by the lamp, watching the sea, and for the first time in decades, he didn’t feel alone.
+
+The next morning, he found another bottle, half-buried in the sand near the same spot. Inside, a single line:
+
+&gt; *You are not the only keeper. You are the one who listens.*
+
+And in the silence of the lighthouse, Elias Thorne smiled. The sea had not just been a mirror. It had been a voice. And he, at last, had heard it.</mark></div></div><div class='o diff'><div class=oh><b>r6</b> &middot; differs from token 36 &middot; 918 tokens</div><div class=ot><span class=ctx>The wind howled across Blackthorn Point, a jagged tooth of rock rising from the churning North Sea. Elias Thorne, the lighthouse keeper, stood at the</span><mark> iron railing, his breath pluming in the cold air. For twenty-three years, he’d watched the same relentless storm, the same indifferent waves, the same endless expanse of grey. His world was the rhythmic *clack-clack* of the lamp, the groan of the tower’s iron bones, and the salt-stung silence of the island.
+
+He’d found the bottle half-buried in the damp sand near the old fishing cove, a place he’d only visited once in ten years. It was a simple, chipped blue glass, the kind from a long-dead seaside village. Inside, nestled in a crumpled piece of yellowed paper, was a single, handwritten note:
+
+&gt; *To Elias Thorne, Keeper of Blackthorn Point, who sees the sea like a mirror and hears its secrets. If you read this, the storm is not just wind and water. It remembers. It knows your name. It knows you are not alone. Find the stone beneath the old oak. It speaks in riddles. It will tell you what you’ve forgotten. – Someone who has watched the sea too long.*
+
+Elias froze. His hands, usually steady, trembled. *Someone who has watched the sea too long.* The words echoed in the hollow of the tower. He’d never heard anyone speak of the island’s old oak – a gnarled thing swallowed by brambles near the cliff’s edge. He’d dismissed it as a myth, a story from the fishermen’s tales of the 1800s. And *remembered*? The sea *remembered*? It was absurd. A trick of the wind, a prank by a careless child, perhaps.
+
+But the handwriting… it was precise, familiar. Not a child’s scrawl. It felt… *known*.
+
+That night, under the weight of the storm, Elias climbed the steep path to the old oak. The wind screamed through its branches like a chorus of ghosts. He found the stone – a smooth, dark basalt, half-buried in moss. It was cold, heavy, and carved with symbols: spirals, waves, and a single, repeated phrase in a language he didn’t recognize.
+
+He traced it with a trembling finger. Then, as the storm raged, a sound – not wind, not waves – a soft, resonant *hum*, like a tuning fork struck deep within the earth. It vibrated through the stone, up his arm, into his bones.
+
+He gasped. The hum wasn’t just sound. It was *memory*. Images flooded his mind: a child’s laughter on a sun-drenched shore, a woman’s hand reaching out from the water, a lighthouse beam cutting through fog… a face, blurred but unmistakable – his own, as a young man, standing on the very same cliff, looking out at the sea.
+
+*He had forgotten that moment.* He had forgotten the first time he’d seen the sea, the first time he’d felt its pull. He had forgotten the woman who’d once stood at the edge, whispering, “The sea remembers what we leave behind.”
+
+The storm lessened. The wind softened. The lighthouse beam, usually a steady white, flickered once, then steadied. Elias sat on the stone, tears cutting tracks through the salt on his cheeks. The bottle wasn’t a message from a stranger. It was a message from *himself* – from the part of him that had been buried beneath years of duty, solitude, and silence.
+
+The sea didn’t just remember. It *knew*. And it had been waiting.
+
+From that day on, Elias didn’t just keep the light. He listened. He walked the shore at dawn, not just to check the waves, but to hear the whispers in the wind. And sometimes, when the fog lifted just enough, he’d swear he saw a figure standing at the edge of the cliff – a woman with silver hair, smiling gently, as if she’d been waiting for him all along.
+
+The lighthouse still stands. The sea still roars. But now, Elias knows: the most powerful light isn’t the beam of glass and oil. It’s the quiet, steady glow of a heart that finally remembers it was never truly alone.</mark></div></div><div class='o diff'><div class=oh><b>r7</b> &middot; differs from token 36 &middot; 923 tokens</div><div class=ot><span class=ctx>The wind howled across Blackthorn Point, a jagged tooth of rock rising from the churning North Sea. Elias Thorne, the lighthouse keeper, stood at the</span><mark> iron railing, his breath pluming in the cold air. For twenty-three years, he’d watched the same relentless storm, the same indifferent waves, the same endless expanse of grey. His world was the rhythmic *clack-clack* of the lamp, the groan of the tower’s iron bones, and the salt-stung silence of the island.
+
+He’d found the bottle half-buried in the damp sand near the old fishing cove, a place he’d only visited once in ten years. It was a simple, chipped blue glass, the kind from a long-dead seaside village. Inside, nestled in a crumpled piece of yellowed paper, was a single, handwritten note:
+
+&gt; *To Elias Thorne, Keeper of Blackthorn Point, who sees the sea like a mirror and hears its secrets. If you read this, the storm is not just wind and water. It remembers. It knows your name. It knows you are not alone. Find the stone beneath the old oak. It speaks in riddles. It will tell you what you’ve forgotten. – Someone who has watched the sea too long.*
+
+Elias froze. His hands, usually steady, trembled. *Someone who has watched the sea too long.* The words echoed in the hollow of the tower. He’d never heard anyone speak of the island’s old oak – a gnarled thing swallowed by brambles near the cliff’s edge. He’d dismissed it as a myth, a story from the fishermen’s tales of the 1800s. And *remembered*? The sea *remembered*? It was absurd. A trick of the wind, a prank by a careless child, perhaps.
+
+But the handwriting… it was precise, elegant, and familiar in a way that made his pulse skip. It felt like a memory he couldn’t place, like a name whispered in a dream.
+
+That night, Elias lit the lamp with a quiet intensity. He didn’t sleep. He traced the words over and over, the salt and wind seeping into his bones. He thought of his mother, who’d died when he was ten, her voice soft and warm, saying, *“The sea doesn’t just move, Elias. It holds things. It holds the things we lose.”* He’d dismissed it as a child’s fantasy.
+
+The next morning, he climbed the steep path to the old oak. The roots were thick and twisted, half-buried in moss. Beneath the largest root, half-hidden by lichen, he found a smooth, dark stone, cold and heavy in his hands. It wasn’t ordinary. It was carved with symbols – spirals, waves, and a single, open eye.
+
+He brought it back to the tower. That evening, as the storm raged outside, he placed the stone on the table beside the lamp. He didn’t turn it over. He just stared at it.
+
+And then, as the wind screamed and the waves crashed against the cliffs, the stone *hummed*. A low, resonant vibration, like a tuning fork struck in silence. The light in the lamp flickered, not from the storm, but as if responding.
+
+Elias closed his eyes. The hum grew. And in the silence between the waves, he heard it – not words, but a memory. A woman’s voice, soft and clear, singing a lullaby he’d never heard before. The scent of salt and wild thyme. A child’s laughter. A hand reaching out from the dark.
+
+He opened his eyes. The storm had calmed. The sea was still, glassy and calm. The lamp burned steady.
+
+He looked at the stone. The symbols glowed faintly, like embers.
+
+And for the first time in twenty-three years, Elias Thorne didn’t feel alone.
+
+He picked up the bottle, the note still in his hand. He didn’t know who had written it. He didn’t know if it was a ghost, a memory, or a message from the sea itself.
+
+But he knew one thing: the sea had remembered. And so, perhaps, had he.
+
+He placed the stone back beneath the oak. And for the first time, he smiled.
+
+The lighthouse kept its light. And the sea, for a moment, seemed to listen.</mark></div></div><div class='o diff'><div class=oh><b>r8</b> &middot; differs from token 36 &middot; 796 tokens</div><div class=ot><span class=ctx>The wind howled across Blackthorn Point, a jagged tooth of rock rising from the churning North Sea. Elias Thorne, the lighthouse keeper, stood at the</span><mark> iron railing, his breath pluming in the cold air. For twenty-three years, he’d watched the same relentless storm, the same indifferent waves, the same endless expanse of grey. His world was the rhythmic *clack-clack* of the lamp, the groan of the tower’s iron bones, and the salt-stung silence of the island.
+
+He’d found the bottle half-buried in the damp sand near the old fishing cove, a place he’d only visited once in ten years. It was a simple, chipped blue glass, the kind from a long-dead seaside village. Inside, nestled in a crumpled piece of yellowed paper, was a single, handwritten note:
+
+&gt; *To Elias Thorne, Keeper of Blackthorn Point, who sees the sea like a mirror and hears its secrets. If you read this, the storm is not just wind and water. It remembers. It knows your name. It knows you are not alone. Find the stone beneath the old oak. It speaks in riddles. It will tell you what you’ve forgotten. – Someone who has watched the sea too long.*
+
+Elias froze. His hands, usually steady, trembled. *Someone who has watched the sea too long.* The words echoed in the hollow of the tower. He’d never heard anyone speak of the island’s old oak – a gnarled thing swallowed by brambles near the cove. He’d dismissed it as a myth, a story from the fishermen’s tales of the past. And *remembered*? The sea *remembered*? He’d always thought it was just a vast, indifferent force.
+
+He didn’t sleep that night. He sat by the lamp, the note burning in his mind. The next morning, he climbed the steep path to the cove, the wind biting his face. The old oak stood, half-rotted, its roots tangled in the mud. Beneath it, half-buried in the damp earth, was a smooth, dark stone, worn smooth by centuries of rain and tide.
+
+He picked it up. It was cold, heavy, and strangely warm at the center. As he held it, the wind shifted. Not just a gust – a deep, resonant *hum*, like a low note from a forgotten instrument, vibrated through the stone and into his bones. It wasn’t sound, exactly. It was a *feeling* – a memory of cold water, of a child’s laughter, of a woman’s voice singing a lullaby in a language he didn’t know.
+
+He dropped the stone. The hum faded.
+
+That night, he sat by the lamp again. The sea was calm. The storm had passed. And in the quiet, he heard it – not in his ears, but in the space between the waves. A whisper, soft and clear: *“You were not always alone, Elias. You were always part of the sea’s song.”*
+
+He looked out to the horizon. The moon hung low, silver and still. For the first time in decades, the sea didn’t feel like a threat. It felt like a companion. A keeper of secrets, a witness to time.
+
+He didn’t know who had written the note. He didn’t know if the stone was real or a trick of the wind. But he knew this: the sea had found him. And in finding him, it had finally remembered what it had always known.
+
+From that day on, Elias didn’t just watch the sea. He listened. And sometimes, when the wind was right, he’d hear the song – a soft, ancient hum beneath the waves – and smile, knowing he was no longer alone.</mark></div></div><div class='o diff'><div class=oh><b>r9</b> &middot; differs from token 36 &middot; 1024 tokens</div><div class=ot><span class=ctx>The wind howled across Blackthorn Point, a jagged tooth of rock rising from the churning North Sea. Elias Thorne, the lighthouse keeper, stood at the</span><mark> iron railing, his breath pluming in the cold air. For twenty-three years, he’d watched the same relentless storm, the same indifferent waves, the same endless expanse of grey. His world was the rhythmic *clack-clack* of the lamp, the groan of the tower’s iron bones, and the salt-stung silence of the island.
+
+He’d found the bottle half-buried in the damp sand near the old fishing cove, a place he’d only visited once in ten years. It was a simple, chipped blue glass, the kind from a long-dead seaside village. Inside, nestled in a crumpled piece of yellowed paper, was a single, handwritten note:
+
+&gt; *To Elias Thorne, Keeper of Blackthorn Point, who sees the sea like a mirror and hears its secrets. If you read this, the storm is not just wind and water. It remembers. It knows your name. It knows you are not alone. Find the stone beneath the old oak. It speaks in riddles. It will tell you what you’ve forgotten. – Someone who has watched the sea too long.*
+
+Elias froze. His hands, usually steady, trembled. *Someone who has watched the sea too long.* The words echoed in the hollow of the tower. He’d never heard anyone speak of the island’s old oak – a gnarled thing swallowed by brambles near the cliff’s edge. He’d dismissed it as a myth, a story from the fishermen’s tales of the 1800s. And *remembered*? The sea *remembered*? It was absurd. A trick of the wind, a prank by a careless child, perhaps.
+
+But the handwriting… it was precise, elegant, and familiar in a way that made his pulse skip. It felt like a memory he couldn’t place, like a name whispered in a dream.
+
+That night, Elias lit the lamp with a quiet intensity. He didn’t sleep. He traced the words over and over, the salt on his skin, the cold seeping through his coat. He thought of his mother, who’d died when he was ten, her voice soft and warm, saying, *“The sea doesn’t just move, Elias. It holds things. It holds the things we lose.”* He’d laughed then, thinking it foolish. Now, the words in the bottle felt like a key.
+
+The next morning, he climbed the steep path to the old oak. The brambles were thick, but he pushed through, his boots scraping stone. Beneath the roots, half-buried in moss and lichen, was a smooth, dark stone – worn smooth by centuries of rain and tide. He picked it up. It was cool, heavy, and when he held it, a faint vibration pulsed through his palm, like a heartbeat.
+
+He brought it back to the tower. That night, he sat by the lamp, the stone in his lap. He didn’t speak. He just stared at the sea, the waves crashing against the rocks like a thousand voices. And then, slowly, he began to *hear* it.
+
+Not with his ears. With his bones. A low, rhythmic hum, like the sound of a deep tide pulling back. And beneath it, a whisper — not words, but images: a child’s hand reaching for a boat, a woman’s face in the fog, a shipwreck long gone, its name lost to time. And then, a name: *Elias.*
+
+He gasped. It wasn’t just the sea remembering. It was *him*. The sea had known him since the day he first stood on the shore, twenty-three years ago. It had known his fear, his loneliness, his quiet grief. It had known his mother’s voice, the one he’d never told anyone about — the one that said, *“The sea holds what we lose.”*
+
+The message wasn’t a riddle. It was a truth. The sea didn’t just remember. It *knew* him. And in that knowing, it offered something: not answers, but presence. Not salvation, but companionship.
+
+Elias sat there, the stone warm in his hands, the lamp glowing steady. For the first time in decades, the wind didn’t feel like an enemy. It felt like a friend. And the sea, once a silent, indifferent force, now sang a quiet song — a song of memory, of loss, of belonging.
+
+He didn’t write back. He didn’t send it out. He simply placed the stone on the shelf beside the lamp, where the wind could carry it, where the sea could hear it.
+
+And from that day on, when the storm came, Elias didn’t just watch it. He listened. And sometimes, in</mark></div></div></div></section><section class=pr id=math><p class=pq><b>math</b><span>A train leaves Plzeň at 8:15 and travels toward Prague at an average speed of 72 km/h. A second train leaves Prague at 8:45 toward Plzeň at 90 km/h. The distance between the two cities along the track is 114 km. At what time do the trains meet, and how far from Plzeň? Solve it step by step and state the final answer clearly.</span></p><div class=outs><div class=o><div class=oh>reference: E1 greedy, r0 &middot; 1024 tokens &middot; <b>r0, r2&ndash;4, r6, r8&ndash;9</b> identical</div><div class=ot>Let&#x27;s solve this step by step.
+
+---
+
+### **Given:**
+
+- Distance between Plzeň and Prague: **114 km**
+- Train A (from Plzeň) leaves at **8:15** at **72 km/h**
+- Train B (from Prague) leaves at **8:45** at **90 km/h**
+- We need to find:
+  - The **time** when the two trains meet
+  - The **distance from Plzeň** to the meeting point
+
+---
+
+### **Step 1: Determine how long Train A travels before Train B starts**
+
+Train A starts at 8:15, Train B at 8:45.
+
+Time difference = 8:45 − 8:15 = **30 minutes** = **0.5 hours**
+
+In that time, Train A travels:
+
+$$
+\text{Distance} = \text{Speed} \times \text{Time} = 72 \, \text{km/h} \times 0.5 \, \text{h} = 36 \, \text{km}
+$$
+
+So, when Train B starts at 8:45, the two trains are **36 km apart** (since Train A has already covered 36 km from Plzeň).
+
+---
+
+### **Step 2: After 8:45, both trains are moving toward each other**
+
+Now, both trains are moving toward each other:
+
+- Train A speed: 72 km/h
+- Train B speed: 90 km/h
+- Combined speed:  
+  $$
+  72 + 90 = 162 \, \text{km/h}
+  $$
+
+Remaining distance between them:  
+$$
+114 \, \text{km} - 36 \, \text{km} = 78 \, \text{km}
+$$
+
+Time to meet after 8:45:
+
+$$
+\text{Time} = \frac{\text{Distance}}{\text{Speed}} = \frac{78}{162} \, \text{hours}
+$$
+
+Simplify the fraction:
+
+$$
+\frac{78}{162} = \frac{13}{27} \, \text{hours}
+$$
+
+Convert to minutes:
+
+$$
+\frac{13}{27} \times 60 = \frac{780}{27} \approx 28.888... \, \text{minutes}
+$$
+
+Break it down:
+
+- 28 minutes
+- 0.888... × 60 ≈ 53.33 seconds
+
+So approximately **28 minutes and 53 seconds**
+
+---
+
+### **Step 3: Add this time to 8:45 to get the meeting time**
+
+8:45 + 28 minutes = **9:13**
+
+Then + 53 seconds → **9:13:53**
+
+So, the trains meet at approximately **9:13 and 53 seconds**
+
+But let&#x27;s keep it precise.
+
+---
+
+### **Step 4: Find distance from Plzeň to meeting point**
+
+We can compute this in two ways:
+
+#### **Option 1: Distance traveled by Train A from 8:15 to meeting time**
+
+- Time from 8:15 to meeting time:
+  - From 8:15 to 8:45 = 30 minutes = 0.5 h
+  - From 8:45 to meeting = $ \frac{13}{27} $ h
+  - Total time = $ 0.5 + \frac{13}{27} = \frac{1}{2} + \frac{13}{27} $
+
+Convert to common denominator:
+
+$$
+\frac{1}{2} = \frac{27}{54}, \quad \frac{13}{27} = \frac{26}{54}
+$$
+
+Wait — better to use 54:
+
+$$
+\frac{1}{2} = \frac{27}{54}, \quad \frac{13}{27} = \frac{26}{54}
+$$
+
+So total = $ \frac{27 + 26}{54} = \frac{53}{54} $ hours? Wait — no:
+
+Wait: $ \frac{1}{2} = \frac{27}{54} $?  
+No: $ \frac{1}{2} = \frac{27}{54} $ is wrong.
+
+Actually:
+
+- $ \frac{1}{2} = \frac{27}{54} $? → 27/54 = 1/2 →</div></div><div class='o diff'><div class=oh><b>r1</b> &middot; differs from token 861 &middot; 1024 tokens</div><div class=ot><span class=ctx>&hellip;c{13}{27} = \frac{1}{2} + \frac{13}{27} $
+
+Convert to common denominator:
+
+$$
+\frac{1}{2} = \frac{27}{54}, \quad \frac{13}{27} = \frac{26}{54}
+$$
+
+Wait — better</span><mark> common denominator is 54:
+
+$$
+\frac{1}{2} = \frac{27}{54}, \quad \frac{13}{27} = \frac{26}{54}
+$$
+
+So total time = $ \frac{27 + 26}{54} = \frac{53}{54} $ hours
+
+Now, distance from Plzeň:
+
+$$
+\text{Distance} = 72 \, \text{km/h} \times \frac{53}{54} \, \text{h} = \frac{72 \times 53}{54}
+$$
+
+Simplify:
+
+$$
+\frac{72}{54} = \frac{4}{3</mark></div></div><div class='o diff'><div class=oh><b>r5, r7</b> &middot; differs from token 861 &middot; 1024 tokens</div><div class=ot><span class=ctx>&hellip;c{13}{27} = \frac{1}{2} + \frac{13}{27} $
+
+Convert to common denominator:
+
+$$
+\frac{1}{2} = \frac{27}{54}, \quad \frac{13}{27} = \frac{26}{54}
+$$
+
+Wait — better</span><mark> common denominator is 54:
+
+$$
+\frac{1}{2} = \frac{27}{54}, \quad \frac{13}{27} = \frac{26}{54}
+$$
+
+So total = $ \frac{27 + 26}{54} = \frac{53}{54} $ hours
+
+Now, distance from Plzeň:
+
+$$
+\text{Distance} = 72 \, \text{km/h} \times \frac{53}{54} \, \text{h} = \frac{72 \times 53}{54}
+$$
+
+Simplify:
+
+$$
+\frac{72}{54} = \frac{4}{3},</mark></div></div></div></section><section class=pr id=code><p class=pq><b>code</b><span>Write a Python function `parse_iso8601(s: str)` that parses an ISO 8601 timestamp such as `2026-10-12T14:03:07.250+02:00` into a tuple (year, month, day, hour, minute, second, microsecond, utc_offset_minutes) without using the datetime module. Validate the input and raise ValueError on malformed strings. Include a few pytest test cases.</span></p><div class=outs><div class=o><div class=oh>reference: E1 greedy, r0 &middot; 1024 tokens &middot; <b>r5&ndash;6, r9</b> identical</div><div class=ot>```python
+import re
+from typing import Tuple, ValueError
+
+def parse_iso8601(s: str) -&gt; Tuple[int, int, int, int, int, int, int, int]:
+    &quot;&quot;&quot;
+    Parse an ISO 8601 timestamp string into a tuple (year, month, day, hour, minute, 
+    second, microsecond, utc_offset_minutes).
+    
+    Args:
+        s: ISO 8601 formatted string (e.g., &quot;2026-10-12T14:03:07.250+02:00&quot;)
+    
+    Returns:
+        Tuple of (year, month, day, hour, minute, second, microsecond, utc_offset_minutes)
+    
+    Raises:
+        ValueError: If the input string is malformed or does not conform to ISO 8601 format
+    &quot;&quot;&quot;
+    
+    # Validate input
+    if not isinstance(s, str):
+        raise ValueError(&quot;Input must be a string&quot;)
+    
+    if not s or s.isspace():
+        raise ValueError(&quot;Input string cannot be empty or contain only whitespace&quot;)
+    
+    # Define the expected pattern for ISO 8601 with timezone offset
+    # Format: YYYY-MM-DDTHH:MM:SS.sss[+-]HH:MM
+    pattern = r&#x27;^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})\.(\d{3})([+-])(\d{2}):(\d{2})$&#x27;
+    
+    match = re.match(pattern, s)
+    
+    if not match:
+        # Try without microseconds (e.g., &quot;2026-10-12T14:03:07+02:00&quot;)
+        pattern_no_micro = r&#x27;^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})([+-])(\d{2}):(\d{2})$&#x27;
+        match_no_micro = re.match(pattern_no_micro, s)
+        if not match_no_micro:
+            raise ValueError(f&quot;Invalid ISO 8601 format: {s}&quot;)
+        
+        # Extract values from the no-microsecond version
+        year, month, day, hour, minute, second, tz_sign, tz_hour, tz_minute = match_no_micro.groups()
+        
+        # Microsecond is 0
+        microsecond = 0
+        
+        # Parse timezone offset
+        offset_minutes = int(tz_hour) * 60 + int(tz_minute) * (-1 if tz_sign == &#x27;-&#x27; else 1)
+        
+        # Validate date components
+        if not (1 &lt;= int(month) &lt;= 12):
+            raise ValueError(f&quot;Invalid month: {month}&quot;)
+        if not (1 &lt;= int(day) &lt;= 31):
+            raise ValueError(f&quot;Invalid day: {day}&quot;)
+        
+        # Validate time components
+        if not (0 &lt;= int(hour) &lt;= 23):
+            raise ValueError(f&quot;Invalid hour: {hour}&quot;)
+        if not (0 &lt;= int(minute) &lt;= 59):
+            raise ValueError(f&quot;Invalid minute: {minute}&quot;)
+        if not (0 &lt;= int(second) &lt;= 59):
+            raise ValueError(f&quot;Invalid second: {second}&quot;)
+        
+        return (
+            int(year), int(month), int(day),
+            int(hour), int(minute), int(second),
+            microsecond, offset_minutes
+        )
+    
+    # Extract values from the full pattern (with microseconds)
+    year, month, day, hour, minute, second, microsecond, tz_sign, tz_hour, tz_minute = match.groups()
+    
+    # Parse timezone offset
+    offset_minutes = int(tz_hour) * 60 + int(tz_minute) * (-1 if tz_sign == &#x27;-&#x27; else 1)
+    
+    # Validate date components
+    if not (1 &lt;= int(month) &lt;= 12):
+        raise ValueError(f&quot;Invalid month: {month}&quot;)
+    if not (1 &lt;= int(day) &lt;= 31):
+        raise ValueError(f&quot;Invalid day: {day}&quot;)
+    
+    # Validate time components
+    if not (0 &lt;= int(hour) &lt;= 23):
+        raise ValueError(f&quot;Invalid hour: {hour}&quot;)
+    if not (0 &lt;= int(minute) &lt;= 59):
+        raise ValueError(f&quot;Invalid minute: {minute}&quot;)
+    if not (0 &lt;= int(second) &lt;= 59):
+        raise ValueError(f&quot;Invalid second: {second}&quot;)
+    
+    # Validate microsecond (must be 3 digits)
+    if not (0 &lt;= int(microsecond) &lt;= 999):
+        raise ValueError(f&quot;Invalid microsecond: {microsecond}&quot;)
+    
+    return (
+        int(year), int(month), int(day),
+        int(hour), int</div></div><div class='o diff'><div class=oh><b>r0&ndash;4, r7&ndash;8</b> &middot; differs from token 185 &middot; 1024 tokens</div><div class=ot><span class=ctx>&hellip;, second, microsecond, utc_offset_minutes)
+    
+    Raises:
+        ValueError: If the input string is malformed or does not conform to ISO 8601 format
+    &quot;&quot;&quot;
+</span><mark>    # Validate input
+    if not isinstance(s, str):
+        raise ValueError(&quot;Input must be a string&quot;)
+    
+    if not s or s.isspace():
+        raise ValueError(&quot;Input string cannot be empty or contain only whitespace&quot;)
+    
+    # Define the expected pattern for ISO 8601 with timezone offset
+    # Format: YYYY-MM-DDTHH:MM:SS.sss[+-]HH:MM
+    pattern = r&#x27;^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})\.(\d{3})([+-])(\d{2}):(\d{2})$&#x27;
+    
+    match = re.match(pattern, s)
+    
+    if not match:
+        # Try without microseconds (e.g., &quot;2026-10-12T14:03:07+02:00&quot;)
+        pattern_no_micro = r&#x27;^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})([+-])(\d{2}):(\d{2})$&#x27;
+        match_no_micro = re.match(pattern_no_micro, s)
+        if not match_no_micro:
+            raise ValueError(f&quot;Invalid ISO 8601 format: {s}&quot;)
+        
+        # Extract values from the no-microsecond version
+        year, month, day, hour, minute, second, tz_sign, tz_hour, tz_minute = match_no_micro.groups()
+        
+        # Microsecond is 0 in this case
+        microsecond = 0
+        
+        # Parse timezone offset
+        offset_minutes = int(tz_hour) * 60 + int(tz_minute) * (-1 if tz_sign == &#x27;-&#x27; else 1)
+        
+        # Validate date components
+        if not (1 &lt;= int(month) &lt;= 12):
+            raise ValueError(f&quot;Invalid month: {month}&quot;)
+        if not (1 &lt;= int(day) &lt;= 31):
+            raise ValueError(f&quot;Invalid day: {day}&quot;)
+        
+        # Validate time components
+        if not (0 &lt;= int(hour) &lt;= 23):
+            raise ValueError(f&quot;Invalid hour: {hour}&quot;)
+        if not (0 &lt;= int(minute) &lt;= 59):
+            raise ValueError(f&quot;Invalid minute: {minute}&quot;)
+        if not (0 &lt;= int(second) &lt;= 59):
+            raise ValueError(f&quot;Invalid second: {second}&quot;)
+        
+        return (
+            int(year), int(month), int(day),
+            int(hour), int(minute), int(second),
+            microsecond, offset_minutes
+        )
+    
+    # Extract values from the full pattern (with microseconds)
+    year, month, day, hour, minute, second, microsecond, tz_sign, tz_hour, tz_minute = match.groups()
+    
+    # Parse timezone offset
+    offset_minutes = int(tz_hour) * 60 + int(tz_minute) * (-1 if tz_sign == &#x27;-&#x27; else 1)
+    
+    # Validate date components
+    if not (1 &lt;= int(month) &lt;= 12):
+        raise ValueError(f&quot;Invalid month: {month}&quot;)
+    if not (1 &lt;= int(day) &lt;= 31):
+        raise ValueError(f&quot;Invalid day: {day}&quot;)
+    
+    # Validate time components
+    if not (0 &lt;= int(hour) &lt;= 23):
+        raise ValueError(f&quot;Invalid hour: {hour}&quot;)
+    if not (0 &lt;= int(minute) &lt;= 59):
+        raise ValueError(f&quot;Invalid minute: {minute}&quot;)
+    if not (0 &lt;= int(second) &lt;= 59):
+        raise ValueError(f&quot;Invalid second: {second}&quot;)
+    
+    # Validate microsecond (must be 3 digits)
+    if not (0 &lt;= int(microsecond) &lt;= 999):
+        raise ValueError(f&quot;Invalid microsecond: {microsecond}&quot;)
+    
+    return (
+        int(year), int(month), int(day),
+        int(hour</mark></div></div></div></section><script>document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-theme-toggle]');if(!b)return;var d=document.documentElement,n=d.getAttribute('data-theme')==='dark'?'light':'dark';if(n==='dark')d.setAttribute('data-theme','dark');else d.removeAttribute('data-theme');try{localStorage.setItem('theme',n);}catch(err){}});</script></body></html>

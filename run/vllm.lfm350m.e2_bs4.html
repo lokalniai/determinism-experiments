@@ -1,0 +1,1123 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><title>LFM2.5-350M · vLLM · batch of 4 · A100 &middot; Determinism</title><link rel=icon href='../favicon.ico' sizes=any><script>try{var t=localStorage.getItem('theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}</script><link rel=preconnect href='https://fonts.googleapis.com'><link rel=preconnect href='https://fonts.gstatic.com' crossorigin><link rel=stylesheet href='https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;500&display=swap'><link rel=stylesheet href='../static/style.css'></head><body><header class=mast><a class=brand href='https://lokalni.ai' aria-label='lokalni.ai'><img class=logo-light src='../static/logo_dark.png' alt='lokalni.ai' width=102 height=32><img class=logo-dark src='../static/logo_light.png' alt='lokalni.ai' width=102 height=32></a><span class='mastsep p'>&frasl;</span><a class=proj href='https://lokalni.ai/blog/determinismus/'>Stejn&yacute; vstup, stejn&yacute; v&yacute;stup</a><span class=mastsep>&frasl;</span><a class=here href='../index.html'>LFM2.5-350M &middot; vLLM &middot; batch of 4 &middot; A100</a><span class=spacer></span><button class=tgl type=button data-theme-toggle aria-label='Switch theme' title='Switch theme'><svg class=sun viewBox='0 0 24 24' aria-hidden=true><circle cx=12 cy=12 r=4 /><path d='M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4' /></svg><svg class=moon viewBox='0 0 24 24' aria-hidden=true><path d='M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z' /></svg></button></header><section class=pr id=hello><p class=pq><b>hello</b><span>Hello! Who are you?</span></p><div class=outs><div class=o><div class=oh>reference: E1 greedy, r0 &middot; 62 tokens &middot; <b>r0, r2</b> identical</div><div class=ot>I’m an AI language model created by **Liquid AI**. I was developed by a research and engineering team at Liquid AI and belong to the **Liquid Foundation Models** family.  
+
+Other details about my architecture, training data, or additional specifications have not been specified.</div></div><div class='o diff'><div class=oh><b>r1, r3&ndash;9</b> &middot; differs from token 46 &middot; 62 tokens</div><div class=ot><span class=ctx>&hellip;reated by **Liquid AI**. I was developed by a research and engineering team at Liquid AI and belong to the **Liquid Foundation Models** family.  
+
+Other details</span><mark> such as specific training data, architecture, or release date are not specified.</mark></div></div></div></section><section class=pr id=fact><p class=pq><b>fact</b><span>Explain why the sky is blue during the day and why sunsets are often red or orange. Cover the physics involved and mention how atmospheric conditions such as dust or pollution change the colors.</span></p><div class=outs><div class=o><div class=oh>reference: E1 greedy, r0 &middot; 226 tokens &middot; <b>no run</b> identical</div><div class=ot>The sky appears blue during the day due to a phenomenon called Rayleigh scattering. This occurs when sunlight interacts with the Earth&#x27;s atmosphere, and shorter wavelengths of light (like blue and violet) are scattered more efficiently than longer wavelengths (like red and orange). The scattering is much stronger for blue light because it has a shorter wavelength, which is more easily scattered by atmospheric particles.
+
+Sunset times are often red or orange because the sun is lower in the sky, and the scattering of sunlight by the atmosphere is more pronounced during this time. As the sun sets, the sunlight travels through more of the atmosphere, scattering the shorter blue and violet light more than the longer wavelengths. This leaves the longer wavelengths, such as red and orange, to dominate the sky&#x27;s colors.
+
+Atmospheric conditions like dust or pollution can also affect the appearance of the sky. Dust particles can scatter sunlight in a way that makes the sky appear darker or more muted, while pollution can introduce additional colored particles that alter the sky&#x27;s appearance. However, these effects are generally less noticeable than the impact of Rayleigh scattering on the blue light.</div></div><div class='o diff'><div class=oh><b>r0, r6, r9</b> &middot; differs from token 72 &middot; 279 tokens</div><div class=ot><span class=ctx>&hellip; longer wavelengths (like red and orange). The scattering is much stronger for blue light because it has a shorter wavelength, which is more easily scattered by</span><mark> air molecules and aerosols.
+
+Sunset times are often red or orange because the sun is lower in the sky, and the scattering of sunlight by the atmosphere is more pronounced during this time. As the sun sets, the sunlight travels through more of the atmosphere, scattering the shorter blue and violet light more than the longer wavelengths. This leaves the longer wavelengths, such as red and orange, to dominate the sky&#x27;s colors.
+
+Atmospheric conditions like dust, pollution, or water vapor can also affect the sky&#x27;s appearance. Dust particles can scatter sunlight in a way that makes the sky appear darker or more muted, while pollution can introduce haze that scatters light in various directions, altering the overall color of the sky. Water vapor, on the other hand, can absorb certain wavelengths of light, particularly red and orange, making the sky appear more muted or pale. These changes in atmospheric composition can lead to a variety of sky colors depending on the time of day and the presence of particulates in the air.</mark></div></div><div class='o diff'><div class=oh><b>r1</b> &middot; differs from token 86 &middot; 291 tokens</div><div class=ot><span class=ctx>&hellip;r for blue light because it has a shorter wavelength, which is more easily scattered by atmospheric particles.
+
+Sunset times are often red or orange because the</span><mark> Sun is lower in the sky, and the Sun&#x27;s light has already been scattered by the atmosphere. As the Sun sets, the scattered sunlight reaches the Earth&#x27;s surface, where it is reflected back to our eyes. The longer wavelengths of light, such as red and orange, are less likely to be scattered back to the observer, making them appear more vivid and warm.
+
+Atmospheric conditions such as dust, pollution, or aerosols can significantly alter the colors of the sky. Dust particles, for example, can scatter sunlight in a way that makes the sky appear darker and more muted. Pollution can also affect the quality of the light reaching the Earth&#x27;s surface, potentially making the sky appear hazier or more muted. Additionally, aerosols can create a haze effect, which can make the sky appear more orange or yellowish. These changes in atmospheric conditions can lead to a variety of sky colors, from blue and white to pink and orange, depending on the intensity and composition of the pollutants present.</mark></div></div><div class='o diff'><div class=oh><b>r2&ndash;5</b> &middot; differs from token 72 &middot; 279 tokens</div><div class=ot><span class=ctx>&hellip; longer wavelengths (like red and orange). The scattering is much stronger for blue light because it has a shorter wavelength, which is more easily scattered by</span><mark> air molecules and aerosols.
+
+Sunset times are often red or orange because the sun is lower in the sky, and the scattering of sunlight by the atmosphere is more pronounced during this time. As the sun sets, the sunlight travels through more of the atmosphere, scattering the shorter blue and violet light more than the longer wavelengths. This leaves the longer wavelengths, such as red and orange, to dominate the sky&#x27;s colors.
+
+Atmospheric conditions like dust, pollution, or water vapor can also affect the sky&#x27;s appearance. Dust particles can scatter sunlight in a way that makes the sky appear darker or more muted, while pollution can introduce haze that scatters light in various directions, altering the overall color of the sky. Water vapor, on the other hand, can absorb certain wavelengths of light, particularly red and orange, making the sky appear more muted or pale. These changes in atmospheric composition can lead to a variety of sky colors, from blue and white to pink and orange, depending on the specific conditions.</mark></div></div><div class='o diff'><div class=oh><b>r7</b> &middot; differs from token 86 &middot; 274 tokens</div><div class=ot><span class=ctx>&hellip;r for blue light because it has a shorter wavelength, which is more easily scattered by atmospheric particles.
+
+Sunset times are often red or orange because the</span><mark> Sun is lower in the sky, and the Sun&#x27;s light has had more time to travel through the atmosphere. As the Sun sets, the light that reaches the Earth&#x27;s surface is shifted toward longer wavelengths, a process known as the reddening of sunlight. This is because the Sun&#x27;s light is scattered by the atmosphere, and the longer wavelengths are absorbed more readily.
+
+Atmospheric conditions such as dust, pollution, and water vapor can also affect the colors of the sky. Dust particles can scatter light in all directions, potentially making the sky appear hazier or more muted. Pollution can introduce aerosols that scatter light, altering the sky&#x27;s color and brightness. Water vapor, on the other hand, can absorb certain wavelengths of light, particularly red and orange, contributing to the reddish hues often seen during sunsets. These changes in atmospheric composition can make the sky appear more vibrant or muted depending on the specific conditions.</mark></div></div><div class='o diff'><div class=oh><b>r8</b> &middot; differs from token 72 &middot; 269 tokens</div><div class=ot><span class=ctx>&hellip; longer wavelengths (like red and orange). The scattering is much stronger for blue light because it has a shorter wavelength, which is more easily scattered by</span><mark> air molecules and aerosols.
+
+Sunset times are often red or orange because the sun is lower in the sky, and the scattering of sunlight by the atmosphere is more pronounced during this time. As the sun sets, the sunlight travels through more of the atmosphere, scattering the shorter blue and violet light more than the longer wavelengths. This leaves the longer wavelengths, such as red and orange, to dominate the sky&#x27;s colors.
+
+Atmospheric conditions like dust, pollution, or water vapor can also affect the sky&#x27;s appearance. Dust particles can scatter light in all directions, potentially making the sky appear hazier or more muted. Pollution can introduce additional particles that scatter light, altering the color of the sky. Water vapor, on the other hand, can absorb certain wavelengths of light, particularly red and orange, making the sky appear more muted or reddish. These changes in atmospheric composition can lead to a variety of sky colors depending on the time of day and local conditions.</mark></div></div></div></section><section class=pr id=story><p class=pq><b>story</b><span>Write a short story about a lighthouse keeper on a remote island who finds a message in a bottle that seems to be addressed to them personally.</span></p><div class=outs><div class=o><div class=oh>reference: E1 greedy, r0 &middot; 418 tokens &middot; <b>no run</b> identical</div><div class=ot>The wind howled through the narrow windows of the lighthouse, carrying the scent of salt and seaweed. Captain James sat at the small table, his hands wrapped around a mug of tea, his eyes fixed on the horizon. The lighthouse was a solitary sentinel, its beam cutting through the darkness like a promise.
+
+As the day wore on, the lighthouse keeper began to notice strange occurrences. Equipment malfunctioned, and the wind seemed to grow stronger. One evening, as the sun dipped below the horizon, he heard a faint whisper in his ear.
+
+The message was brief, but it was clear: *&quot;You are not alone.&quot;*
+
+James stared at the words, his heart pounding in his chest. He had never received such a message before. The lighthouse was his home, his refuge, and he had been warned to stay away from the coast. But now, he felt a strange sense of unease.
+
+He decided to investigate further, setting out to find the source of the message. As he walked along the shore, the wind carried the faint scent of the bottle, and he followed it, his heart racing with anticipation.
+
+Finally, he came across a small, weathered wooden box on the beach. Inside, he found a single, faded note. The handwriting was unfamiliar, but the words seemed to echo his own thoughts.
+
+*&quot;You are the only one who can see the truth.&quot;*
+
+James felt a shiver run down his spine. He had never been able to read the message before, but now he knew it was his. He knew he had to find the truth, no matter where it led.
+
+As he turned to leave, the wind picked up, and the lighthouse beam cast a warm glow on the shore. James knew he had to return to the lighthouse, to face whatever lay ahead and uncover the secrets hidden within the bottle. The journey was long and uncertain, but he was ready. The truth was out there, waiting for him to uncover it.</div></div><div class='o diff'><div class=oh><b>r0</b> &middot; differs from token 97 &middot; 421 tokens</div><div class=ot><span class=ctx>&hellip;s like a promise.
+
+As the day wore on, the lighthouse keeper began to notice strange occurrences. Equipment malfunctioned, and the wind seemed to grow stronger.</span><mark> He started to feel a growing sense of unease, as if the island itself was watching him.
+
+One evening, as the sun dipped below the horizon, James found the message in a bottle tucked away in the lighthouse&#x27;s storage room. The bottle was old, its lid cracked, and the contents were faded and worn. He picked it up, his heart racing.
+
+The message was simple: *&quot;You are not meant to leave.&quot;*
+
+James stared at it for a long time, his mind racing with the implications. He knew he had to act, to find a way to escape the island and the strange occurrences. He began to search the surrounding waters, hoping to find a way out.
+
+As he ventured further, the wind picked up, and he heard a faint sound, like a whisper. He followed it, his heart pounding in his chest. The sound grew louder, and he followed it into the dense jungle, the trees looming above him like sentinels.
+
+Finally, he reached the edge of the island, where the water was calm and the air was fresh. He stood at the lighthouse, the message still on his table, and felt a sense of relief wash over him. He knew he had to leave, but he also knew he couldn&#x27;t stay forever.
+
+As he stepped out into the night, the wind howled around him, carrying the scent of the sea and the promise of a new beginning. The lighthouse keeper knew that he had found his way, and that the island would never be the same again.</mark></div></div><div class='o diff'><div class=oh><b>r1</b> &middot; differs from token 97 &middot; 424 tokens</div><div class=ot><span class=ctx>&hellip;s like a promise.
+
+As the day wore on, the lighthouse keeper began to notice strange occurrences. Equipment malfunctioned, and the wind seemed to grow stronger.</span><mark> He started to feel a growing sense of unease, as if the island itself was watching him.
+
+One evening, as the sun dipped below the horizon, James found the message in a bottle tucked away in the lighthouse&#x27;s storage room. The bottle was old, its lid cracked, and the contents were faded and worn. He picked it up, his heart racing.
+
+The message was simple: *&quot;You are not meant to leave.&quot;*
+
+James stared at it for a long time, his mind racing with the implications. He knew he had to act, to find a way to escape the island and return to the mainland. But the thought of leaving felt like a betrayal, a rejection of the life he had built.
+
+As he sat in the lighthouse, the wind howling outside, James realized that the message was not just a warning, but a call to action. He had to find a way to reach the mainland, to escape the isolation and uncertainty that had been suffocating him.
+
+With a newfound determination, James began to search for a way out, his heart pounding in his chest. He knew he would have to be brave, to face his fears and doubts head-on. The lighthouse would be his refuge, his home, and his only hope for a better future.
+
+As the night wore on, James felt a sense of peace settle over him. He had found a way to escape, and the island was no longer his only home. The wind still howled through the windows, but he knew he was ready to face whatever lay ahead.</mark></div></div><div class='o diff'><div class=oh><b>r2</b> &middot; differs from token 97 &middot; 440 tokens</div><div class=ot><span class=ctx>&hellip;s like a promise.
+
+As the day wore on, the lighthouse keeper began to notice strange occurrences. Equipment malfunctioned, and the wind seemed to grow stronger.</span><mark> He started to feel a growing sense of unease, as if the island itself was watching him.
+
+One evening, as the sun dipped below the horizon, James found the message in a bottle tucked away in the lighthouse&#x27;s storage room. The bottle was old, its lid cracked, and the contents were faded and worn. He picked it up, his heart racing.
+
+The message was simple: *&quot;You are not meant to leave.&quot;*
+
+James stared at it for a long time, his mind racing with the implications. He knew he had to act, to find a way to escape the island and return to the mainland. But the thought of leaving felt like a betrayal, a rejection of the life he had built.
+
+As he sat in the lighthouse, the wind howling outside, James realized that the message was not just a warning, but a call to action. He had to find a way to reach the mainland, to escape the isolation and loneliness that had taken its toll on him.
+
+With a newfound determination, James began to search for a way out, his heart pounding in his chest. He knew he would have to be brave, to face his fears and doubts head-on. The lighthouse would be his only refuge, and he would have to rely on his wits and courage to survive.
+
+As the night wore on, James felt a sense of hope and determination. He knew that the message was not just a message, but a chance to start anew, to rebuild his life and find a new sense of purpose. The lighthouse would be his home, and he would face whatever challenges lay ahead with courage and resilience.</mark></div></div><div class='o diff'><div class=oh><b>r3</b> &middot; differs from token 27 &middot; 391 tokens</div><div class=ot><span class=ctx>The wind howled through the narrow windows of the lighthouse, carrying the scent of salt and seaweed. Captain James sat at the</span><mark> helm, his hands steady as he adjusted the beam. The island, a small cluster of palm trees and coconut palms, was quiet, save for the occasional crash of waves against the shore.
+
+As the sun dipped below the horizon, casting the sky in hues of orange and pink, James noticed a small, weathered bottle lying on the deck. It was a simple wooden box, its lid slightly ajar. He picked it up, feeling a strange pull, as if the bottle held secrets.
+
+The message inside was cryptic, but James couldn&#x27;t shake the feeling that it was meant for him. He read it twice, his heart racing with anticipation. The words were short, yet they seemed to whisper a message of longing and hope.
+
+As the night deepened, James sat by the fire, the bottle forgotten. He closed his eyes, letting the silence envelop him. The wind carried the faintest whisper of the message, a soft, melancholic tone. It was as if the bottle had been waiting for him, guiding him to a place of solace and reflection.
+
+When he finally opened his eyes, the lighthouse was dark, the only sound the creaking of the wooden beams. James stood at the helm, the message still in his hand, a silent promise of a future he couldn&#x27;t quite imagine. The wind carried him away, leaving him with a sense of peace and a newfound understanding of the world beyond the horizon.
+
+As the night wore on, James knew he would return to the lighthouse, to the bottle and the message, carrying with him a piece of his heart. The island, once a place of solitude, had become a sanctuary, a reminder of the beauty and mystery that lay just beyond the edge of the world.</mark></div></div><div class='o diff'><div class=oh><b>r4</b> &middot; differs from token 97 &middot; 470 tokens</div><div class=ot><span class=ctx>&hellip;s like a promise.
+
+As the day wore on, the lighthouse keeper began to notice strange occurrences. Equipment malfunctioned, and the wind seemed to grow stronger.</span><mark> He started to feel a growing sense of unease, as if the island itself was watching him.
+
+One evening, as the sun dipped below the horizon, James found the message in a bottle on the beach. It was a simple note, written in a hand he didn&#x27;t recognize. The words were cryptic, but James felt a shiver run down his spine.
+
+He read the message twice, his heart pounding in his chest. The words were personal, addressed to him directly. He knew he had to act quickly, for the lighthouse was in danger.
+
+James packed up his belongings and made his way back to the lighthouse, his heart racing with anticipation. As he approached the door, he saw a figure standing in the doorway, their eyes locked in a silent conversation.
+
+&quot;Captain James,&quot; the figure said, their voice low and urgent. &quot;We need your help.&quot;
+
+James hesitated, unsure of what to do. He knew he had to act, but the thought of confronting the figure was daunting.
+
+With a deep breath, James stepped forward, his heart pounding in his chest. The figure turned, their eyes glinting in the dim light. &quot;We&#x27;ve been waiting for you,&quot; they said, their voice filled with a sense of urgency.
+
+James followed their words, his heart racing with fear and hope. The lighthouse was safe, but the message had changed everything. He knew he had to return to the lighthouse, to face whatever lay ahead.
+
+As he stepped back into the darkness, the wind howled around him, carrying the echoes of the message and the figure&#x27;s words. James knew he had to keep moving, to face whatever challenges lay ahead, for the lighthouse was his home, and he was ready to face whatever came next.</mark></div></div><div class='o diff'><div class=oh><b>r5, r7</b> &middot; differs from token 97 &middot; 446 tokens</div><div class=ot><span class=ctx>&hellip;s like a promise.
+
+As the day wore on, the lighthouse keeper began to notice strange occurrences. Equipment malfunctioned, and the wind seemed to grow stronger.</span><mark> He started to feel a growing sense of unease, as if the island itself was watching him.
+
+One evening, as the sun dipped below the horizon, James found the message in a bottle tucked away in the lighthouse&#x27;s storage room. The bottle was old, its lid cracked, and the contents were faded and worn. He picked it up, his heart racing.
+
+The message was simple: *&quot;You are not meant to leave.&quot;*
+
+James stared at it for a long time, his mind racing with the implications. He knew he had to act, to find a way to escape the island and return to the mainland. But the thought of leaving felt like a betrayal, a rejection of the life he had built.
+
+As he sat in the lighthouse, the wind howling outside, James realized that the message was not just a warning, but a call to action. He had to find a way to reach the mainland, to escape the isolation and uncertainty that had been suffocating him.
+
+With a newfound determination, James began to search for a way out, his heart pounding in his chest. He knew he would have to be brave, to face his fears and doubts head-on. The lighthouse would be his only refuge, and he would have to rely on his wits and courage to survive.
+
+As the night wore on, James felt a sense of hope and determination growing within him. He knew that the message was not just a message, but a chance to start anew, to build a new life in the world beyond the island. And with that, he set out to find a way to escape, to leave the darkness behind and start anew.</mark></div></div><div class='o diff'><div class=oh><b>r6</b> &middot; differs from token 97 &middot; 467 tokens</div><div class=ot><span class=ctx>&hellip;s like a promise.
+
+As the day wore on, the lighthouse keeper began to notice strange occurrences. Equipment malfunctioned, and the wind seemed to grow stronger.</span><mark> He started to feel a growing sense of unease, as if the island itself was watching him.
+
+One evening, as the sun dipped below the horizon, James found the message in a bottle tucked away in the lighthouse&#x27;s storage room. The bottle was old, its lid cracked, and the contents were faded and worn. He picked it up, his heart racing.
+
+The message was simple: *&quot;You are not meant to leave.&quot;*
+
+James stared at it, his mind racing. He had never received such a message before. The words seemed to echo in his mind, a haunting reminder of his isolation. He knew he had to find a way to escape, but the thought of leaving the island felt like a betrayal.
+
+As he searched the island, James stumbled upon a hidden cove, its shores lined with palm trees and the sound of waves crashing against the rocks. He decided to take a walk, hoping to find shelter and a place to rest.
+
+The cove was quiet, the only sound the rustling of palm leaves in the breeze. James sat on a rock, his eyes scanning the horizon, his heart pounding in his chest. He knew he had to find a way to reach the lighthouse, but the thought of the unknown was daunting.
+
+As he stood there, the wind howled around him, and the message seemed to grow more urgent. James knew he had to act, to find a way to escape the island and the secrets it held. With a deep breath, he began to climb the rocky path, his heart pounding in his chest.
+
+The journey was long and arduous, but James pressed on, driven by the promise of freedom and the hope that one day, he would find a way to leave the island behind.</mark></div></div><div class='o diff'><div class=oh><b>r8</b> &middot; differs from token 97 &middot; 366 tokens</div><div class=ot><span class=ctx>&hellip;s like a promise.
+
+As the day wore on, the lighthouse keeper began to notice strange occurrences. Equipment malfunctioned, and the wind seemed to grow stronger.</span><mark> He started to feel a growing sense of unease, as if the island itself was watching him.
+
+One evening, as the sun dipped below the horizon, James found the message in a bottle tucked away in the lighthouse&#x27;s storage room. The bottle was old, its lid cracked, and the contents were faded and worn. He picked it up, his heart racing.
+
+The message was simple: *&quot;You are not meant to leave.&quot;*
+
+James stared at it for a long time, his mind racing with the implications. He knew he had to act, to leave the island and the lighthouse behind. But the thought of the sea, the wind, and the isolation was too much to bear.
+
+He packed up his belongings, his mind racing with the possibilities. He knew he had to find a way to escape, to leave the island and the lighthouse behind. But as he stepped out onto the beach, the wind howled around him, and he knew he had to be careful.
+
+The message was a warning, a reminder that the sea was not to be underestimated. James took a deep breath, his heart pounding in his chest, and stepped into the unknown. The lighthouse stood silent and watchful, its beam cutting through the darkness like a beacon of hope.</mark></div></div><div class='o diff'><div class=oh><b>r9</b> &middot; differs from token 97 &middot; 432 tokens</div><div class=ot><span class=ctx>&hellip;s like a promise.
+
+As the day wore on, the lighthouse keeper began to notice strange occurrences. Equipment malfunctioned, and the wind seemed to grow stronger.</span><mark> He started to feel a growing sense of unease, as if the island itself was watching him.
+
+One evening, as the sun dipped below the horizon, James found the message in a bottle on the beach. It was a simple note, written in a hand he didn&#x27;t recognize. The words were cryptic, but James felt a shiver run down his spine.
+
+He read the message twice, his heart pounding in his chest. The words were personal, addressed to him directly. He knew he had to act quickly, for the lighthouse was in danger.
+
+James packed up his belongings and made his way back to the lighthouse, his heart racing with anticipation. As he approached the door, he saw a figure standing in the doorway, their eyes locked in a silent conversation.
+
+&quot;Captain James,&quot; the figure said, their voice low and urgent. &quot;We need your help.&quot;
+
+James hesitated, unsure of what to do. He knew he had to act, but the thought of confronting the figure was daunting.
+
+With a deep breath, James stepped forward, his heart pounding in his chest. The figure turned, their eyes glinting in the dim light. &quot;We&#x27;ve been waiting for you,&quot; they said, their voice filled with a sense of urgency.
+
+James followed their words, his heart racing with fear and hope. The lighthouse was safe, but the message had changed everything. He knew he had to return to the lighthouse, to face whatever lay ahead.
+
+As he stepped back into the darkness, the wind howled around him, carrying the promise of a new beginning.</mark></div></div></div></section><section class=pr id=math><p class=pq><b>math</b><span>A train leaves Plzeň at 8:15 and travels toward Prague at an average speed of 72 km/h. A second train leaves Prague at 8:45 toward Plzeň at 90 km/h. The distance between the two cities along the track is 114 km. At what time do the trains meet, and how far from Plzeň? Solve it step by step and state the final answer clearly.</span></p><div class=outs><div class=o><div class=oh>reference: E1 greedy, r0 &middot; 324 tokens &middot; <b>r9</b> identical</div><div class=ot>Let \( t \) be the time in hours after 8:15 when the trains meet.
+
+**Step 1: Calculate the distance traveled by the first train.**  
+The first train travels for \( t \) hours at 72 km/h, so the distance is \( 72t \) km.
+
+**Step 2: Calculate the distance traveled by the second train.**  
+The second train travels for \( t - 0.5 \) hours at 90 km/h, so the distance is \( 90(t - 0.5) \) km.
+
+**Step 3: Set the distances equal.**  
+\[
+72t = 90(t - 0.5)
+\]
+
+**Step 4: Solve for \( t \).**  
+\[
+72t = 90t - 45 \implies 45 = 18t \implies t = \frac{45}{18} = 2.5
+\]
+
+**Step 5: Calculate the meeting time.**  
+The trains meet at \( 8:15 + 2.5 = 10:15 \) hours after 8:15.
+
+**Step 6: Calculate the distance from Plzeň.**  
+The distance from Plzeň is \( 114 - 72t \) km.
+
+**Final Answer:**  
+The trains meet at \(\boxed{10:15}\) hours from Plzeň, and the distance from Plzeň is \(\boxed{114 - 72t}\) km.</div></div><div class='o diff'><div class=oh><b>r0</b> &middot; differs from token 57 &middot; 431 tokens</div><div class=ot><span class=ctx>&hellip;hen the trains meet.
+
+**Step 1: Calculate the distance traveled by the first train.**  
+The first train travels for \( t \) hours at 72 km/h, so the distance is</span><mark>:  
+\[
+72t \text{ km}
+\]
+
+**Step 2: Calculate the distance traveled by the second train.**  
+The second train travels for \( t - 0.5 \) hours (since it departs at 8:45) at 90 km/h, so the distance is:  
+\[
+90(t - 0.5) \text{ km}
+\]
+
+**Step 3: Set the distances equal to find \( t \).**  
+\[
+72t = 90(t - 0.5) + 114
+\]
+
+**Step 4: Solve the equation.**  
+\[
+72t = 90t - 45 + 114
+\]
+\[
+72t = 90t + 69
+\]
+\[
+72t - 90t = 69
+\]
+\[
+-18t = 69
+\]
+\[
+t = -\frac{69}{18}} = -\frac{23}{6}} \approx -3.833 \text{ hours}
+\]
+
+**Step 5: Convert \( t \) to hours and minutes.**  
+\[
+-3.833 \text{ hours} \approx -3 \text{ hours and } 33 \text{ minutes}
+\]
+
+**Step 6: Calculate the meeting time and distance from Plzeň.**  
+The train leaves at 8:15, so the meeting time is:  
+\[
+8:15 + (-3) = 5:30 \text{ hours}
+\]  
+The distance from Plzeň is:  
+\[
+114 \text{ km}
+\]
+
+**Final Answer:**  
+The trains meet at \(\boxed{5:30}\) hours from Plzeň.  
+The distance from Plzeň is \(\boxed{114}\) km.</mark></div></div><div class='o diff'><div class=oh><b>r1&ndash;2, r4, r8</b> &middot; differs from token 57 &middot; 460 tokens</div><div class=ot><span class=ctx>&hellip;hen the trains meet.
+
+**Step 1: Calculate the distance traveled by the first train.**  
+The first train travels for \( t \) hours at 72 km/h, so the distance is</span><mark>:  
+\[
+72t \text{ km}
+\]
+
+**Step 2: Calculate the distance traveled by the second train.**  
+The second train travels for \( t - 0.5 \) hours (since it departs at 8:45) at 90 km/h, so the distance is:  
+\[
+90(t - 0.5) \text{ km}
+\]
+
+**Step 3: Set the distances equal to find \( t \).**  
+\[
+72t = 90(t - 0.5) + 114
+\]
+
+**Step 4: Solve the equation.**  
+\[
+72t = 90t - 45 + 114
+\]
+\[
+72t = 90t + 69
+\]
+\[
+72t - 90t = 69
+\]
+\[
+-18t = 69
+\]
+\[
+t = -\frac{69}{18}} = -\frac{23}{6}} \approx -3.833 \text{ hours}
+\]
+
+**Step 5: Convert \( t \) to hours and minutes.**  
+\[
+-3.833 \text{ hours} \approx -3 \text{ hours and } 33 \text{ minutes}
+\]
+
+**Step 6: Calculate the meeting time.**  
+The trains meet at \( 8:15 + 3 \text{ hours and } 33 \text{ minutes} = 11:33 \) after 8:15.
+
+**Step 7: Calculate the distance from Plzeň.**  
+\[
+\text{Distance} = 114 \text{ km} + (11 \times 60) = 114 + 660 = 774 \text{ km}
+\]
+
+**Final Answer:**  
+The trains meet at \(\boxed{11:33}\) after Plzeň, and the distance from Plzeň is \(\boxed{774}\) km.</mark></div></div><div class='o diff'><div class=oh><b>r3</b> &middot; differs from token 57 &middot; 337 tokens</div><div class=ot><span class=ctx>&hellip;hen the trains meet.
+
+**Step 1: Calculate the distance traveled by the first train.**  
+The first train travels for \( t \) hours at 72 km/h, so the distance is</span><mark>:  
+\[
+72t \text{ km}
+\]
+
+**Step 2: Calculate the distance traveled by the second train.**  
+The second train travels for \( t - 0.5 \) hours (since it departs at 8:45) at 90 km/h, so the distance is:  
+\[
+90(t - 0.5) \text{ km}
+\]
+
+**Step 3: Set the distances equal to find \( t \).**  
+\[
+72t = 90(t - 0.5) + 114
+\]
+
+**Step 4: Solve the equation.**  
+\[
+72t = 90t - 45 + 114
+\]
+\[
+72t = 90t + 69
+\]
+\[
+72t - 90t = 69
+\]
+\[
+-18t = 69
+\]
+\[
+t = -\frac{69}{18} = -\frac{23}{6}
+\]
+
+**Step 5: Interpret the result.**  
+The negative time indicates the trains never actually meet in this scenario, which is not possible. This suggests a possible error in the problem setup.
+
+**Final Answer:**  
+The trains do not meet at any time, indicating a possible error in the problem statement.  
+
+\[
+\boxed{\text{No meeting time exists}}
+\]</mark></div></div><div class='o diff'><div class=oh><b>r5</b> &middot; differs from token 57 &middot; 388 tokens</div><div class=ot><span class=ctx>&hellip;hen the trains meet.
+
+**Step 1: Calculate the distance traveled by the first train.**  
+The first train travels for \( t \) hours at 72 km/h, so the distance is</span><mark>:  
+\[
+72t \text{ km}
+\]
+
+**Step 2: Calculate the distance traveled by the second train.**  
+The second train travels for \( t - 0.5 \) hours (since it departs at 8:45) at 90 km/h, so the distance is:  
+\[
+90(t - 0.5) \text{ km}
+\]
+
+**Step 3: Set the distances equal to find \( t \).**  
+\[
+72t = 90(t - 0.5) + 114
+\]
+
+**Step 4: Solve the equation.**  
+\[
+72t = 90t - 45 + 114
+\]
+\[
+72t = 90t + 69
+\]
+\[
+72t - 90t = 69
+\]
+\[
+-18t = 69
+\]
+\[
+t = -\frac{69}{18} = -\frac{23}{6}
+\]
+
+**Step 5: Interpret the result.**  
+The negative time indicates a miscalculation. Rechecking the equation:  
+\[
+72t = 90t - 45 + 114 \implies 72t = 90t + 69
+\]
+\[
+-18t = 69 \implies t = -\frac{69}{18} = -\frac{23}{6}
+\]
+
+**Final Answer:**  
+The trains meet at \(\boxed{-\frac{23}{6}}\) hours after 8:15, and the distance from Plzeň is \(\boxed{114}\) km.</mark></div></div><div class='o diff'><div class=oh><b>r6</b> &middot; differs from token 57 &middot; 338 tokens</div><div class=ot><span class=ctx>&hellip;hen the trains meet.
+
+**Step 1: Calculate the distance traveled by the first train.**  
+The first train travels for \( t \) hours at 72 km/h, so the distance is</span><mark>:  
+\[
+72t \text{ km}
+\]
+
+**Step 2: Calculate the distance traveled by the second train.**  
+The second train travels for \( t - 0.5 \) hours (since it departs at 8:45) at 90 km/h, so the distance is:  
+\[
+90(t - 0.5) \text{ km}
+\]
+
+**Step 3: Set the distances equal to find \( t \).**  
+\[
+72t = 90(t - 0.5) + 114
+\]
+
+**Step 4: Solve the equation.**  
+\[
+72t = 90t - 45 + 114
+\]
+\[
+72t = 90t + 69
+\]
+\[
+72t - 90t = 69
+\]
+\[
+-18t = 69
+\]
+\[
+t = -\frac{69}{18} = -\frac{23}{6}
+\]
+
+**Step 5: Interpret the result.**  
+The negative time indicates the trains never actually meet in this scenario, which is not possible. This suggests a possible error in the problem setup.
+
+**Final Answer:**  
+The trains do not meet at any time, indicating a possible error in the problem&#x27;s parameters.  
+
+\[
+\boxed{\text{No meeting time exists}}
+\]</mark></div></div><div class='o diff'><div class=oh><b>r7</b> &middot; differs from token 57 &middot; 460 tokens</div><div class=ot><span class=ctx>&hellip;hen the trains meet.
+
+**Step 1: Calculate the distance traveled by the first train.**  
+The first train travels for \( t \) hours at 72 km/h, so the distance is</span><mark>:  
+\[
+72t \text{ km}
+\]
+
+**Step 2: Calculate the distance traveled by the second train.**  
+The second train travels for \( t - 0.5 \) hours (since it departs at 8:45) at 90 km/h, so the distance is:  
+\[
+90(t - 0.5) \text{ km}
+\]
+
+**Step 3: Set the distances equal to find \( t \).**  
+\[
+72t = 90(t - 0.5) + 114
+\]
+
+**Step 4: Solve the equation.**  
+\[
+72t = 90t - 45 + 114
+\]
+\[
+72t = 90t + 69
+\]
+\[
+72t - 90t = 69
+\]
+\[
+-18t = 69
+\]
+\[
+t = -\frac{69}{18}} = -\frac{23}{6}} \approx -3.833 \text{ hours}
+\]
+
+**Step 5: Convert \( t \) to hours and minutes.**  
+\[
+-3.833 \text{ hours} \approx 3 \text{ hours and } 33 \text{ minutes}
+\]
+
+**Step 6: Calculate the meeting time.**  
+The trains meet at \( 8:15 + 3 \text{ hours and } 33 \text{ minutes} = 11:33 \) after 8:15.
+
+**Step 7: Calculate the distance from Plzeň.**  
+\[
+\text{Distance} = 114 \text{ km} + (11 \times 60) = 114 + 660 = 774 \text{ km}
+\]
+
+**Final Answer:**  
+The trains meet at \(\boxed{11:33}\) after Plzeň, and the distance from Plzeň is \(\boxed{774}\) km.</mark></div></div></div></section><section class=pr id=code><p class=pq><b>code</b><span>Write a Python function `parse_iso8601(s: str)` that parses an ISO 8601 timestamp such as `2026-10-12T14:03:07.250+02:00` into a tuple (year, month, day, hour, minute, second, microsecond, utc_offset_minutes) without using the datetime module. Validate the input and raise ValueError on malformed strings. Include a few pytest test cases.</span></p><div class=outs><div class=o><div class=oh>reference: E1 greedy, r0 &middot; 898 tokens &middot; <b>no run</b> identical</div><div class=ot>Here&#x27;s a Python function `parse_iso8601(s: str)` that parses an ISO 8601 timestamp into a tuple without using the `datetime` module. It includes validation and a few pytest test cases.
+
+### ✅ Function Implementation
+
+```python
+def parse_iso8601(s: str) -&gt; tuple:
+    &quot;&quot;&quot;
+    Parses an ISO 8601 timestamp string into a tuple (year, month, day, hour, minute, second, microsecond, utc_offset_minutes).
+
+    Args:
+        s (str): The ISO 8601 timestamp string.
+
+    Returns:
+        tuple: A tuple of the parsed values.
+
+    Raises:
+        ValueError: If the input string is malformed.
+    &quot;&quot;&quot;
+    # Validate input
+    if not s.isdigit():
+        raise ValueError(&quot;Input must be a valid integer or string.&quot;)
+
+    # Split the string into components
+    year, month, day, hour, minute, second, microsecond, utc_offset_minutes = s.split(&#x27;T&#x27;)
+
+    # Validate each component
+    if not (isinstance(year, int) and year &gt; 0) or not (isinstance(month, str) and month not in [&#x27;january&#x27;, &#x27;february&#x27;, &#x27;march&#x27;, &#x27;apr&#x27;, &#x27;may&#x27;, &#x27;jun&#x27;, &#x27;jul&#x27;, &#x27;aug&#x27;, &#x27;sep&#x27;]) or not (isinstance(day, int) and day &gt; 0) or not (isinstance(hour, int) and hour &gt;= 0) or not (isinstance(minute, int) and minute &gt;= 0) or not (isinstance(second, int) and second &gt;= 0) or not (isinstance(microsecond, int) and microsecond &gt;= 0) or not (isinstance(utc_offset_minutes, int) and utc_offset_minutes &gt; 0)):
+        raise ValueError(&quot;Malformed ISO 8601 timestamp.&quot;)
+
+    # Return the parsed values
+    return (year, month, day, hour, minute, second, microsecond, utc_offset_minutes)
+```
+
+---
+
+### 🧪 Pytest Test Cases
+
+```python
+import pytest
+
+def test_parse_iso8601_valid():
+    assert parse_iso8601(&quot;2026-10-12T14:03:07.250+02:00&quot;) == (2026, 10, 12, 14, 3, 7, 250, 0, 00)
+
+def test_parse_iso8601_malformed():
+    with pytest.raises(ValueError):
+        parse_iso8601(&quot;2026-10-12T14:03:&quot;)
+
+def test_parse_iso8601_invalid_input():
+    with pytest.raises(ValueError):
+        parse_iso8601(&quot;invalid&quot;)
+
+def test_parse_iso8601_empty():
+    assert parse_iso8601(&quot;&quot;) == (None, None, None, None, None, None, 0)
+
+def test_parse_iso8601_day_missing():
+    assert parse_iso8601(&quot;2026-10-12&quot;) == (2026, 0, 12, 14, 3, 7, 250, 0)
+
+def test_parse_iso8601_month_missing():
+    assert parse_iso8601(&quot;2026-10-12T14:03&quot;) == (2026, 10, 12, 14, 3, 7, 250)
+
+def test_parse_iso8601_utc_offset_minutes():
+    assert parse_iso8601(&quot;2026-10-12T14:00:00+02:00&quot;) == (2026, 10, 12, 14, 0, 00, 0)
+```
+
+---
+
+### 📌 Notes
+
+- The function handles all valid ISO 8601 formats.
+- It raises a `ValueError` for malformed strings.
+- The test cases cover valid, invalid, empty, and edge cases.
+
+Let me know if you&#x27;d like to add more test scenarios or support for other formats!</div></div><div class='o diff'><div class=oh><b>r0, r9</b> &middot; differs from token 182 &middot; 807 tokens</div><div class=ot><span class=ctx>&hellip;    Raises:
+        ValueError: If the input string is malformed.
+    &quot;&quot;&quot;
+    # Validate input
+    if not s.isdigit():
+        raise ValueError(&quot;Input must be a</span><mark> string of digits.&quot;)
+    
+    # Split the string into year, month, day, hour, minute, second, microsecond, and utc_offset_minutes
+    parts = s.split(&#x27;+&#x27;)
+    if len(parts) != 4:
+        raise ValueError(&quot;Malformed input: expected 4 parts.&quot;)
+    
+    year = int(parts[0])
+    month = int(parts[1])
+    day = int(parts[2])
+    hour = int(parts[3])
+    minute = int(parts[4])
+    second = int(parts[5])
+    microsecond = int(parts[6])
+    utc_offset_minutes = int(parts[7])
+
+    return (year, month, day, hour, minute, second, microsecond, utc_offset_minutes)
+```
+
+---
+
+### 🧪 Pytest Test Cases
+
+```python
+import pytest
+
+def test_parse_iso8601_valid():
+    assert parse_iso8601(&quot;2026-10-12T14:03:07.250+02:00&quot;) == (2026, 10, 12, 14, 3, 7, 250, 0)
+
+def test_parse_iso8601_malformed():
+    with pytest.raises(ValueError):
+        parse_iso8601(&quot;2026-10-12T14:03:&quot;)
+
+def test_parse_iso8601_empty():
+    assert parse_iso8601(&quot;&quot;) == (None, None, None, None, None, None, 0)
+
+def test_parse_iso8601_with_leading_zero():
+    assert parse_iso8601(&quot;2026-10-12&quot;) == (2026, 10, 12, 0, 3, 7, 250)
+
+def test_parse_iso8601_with_space():
+    assert parse_iso8601(&quot;2026-10-12.&quot;) == (2026, 10, 12, 0.000, 3.000, 7.000, 250))
+
+def test_parse_iso8601_with_invalid_part():
+    with pytest.raises(ValueError):
+        parse_iso8601(&quot;2026-10-12-03:07.250&quot;)
+
+def test_parse_iso8601_with_negative_second():
+    assert parse_iso8601(&quot;2026-10-12-2:00&quot;) == (2026, 10, 12, 0, 2, 0, 250)
+```
+
+---
+
+### 📌 Notes
+
+- The function assumes the input string is a valid ISO 8601 timestamp.
+- The `pytest` framework is used for testing.
+- The test cases cover valid, malformed, empty, and edge cases.
+
+This implementation ensures robust validation and handles common edge cases while adhering to the constraints of the problem.</mark></div></div><div class='o diff'><div class=oh><b>r1</b> &middot; differs from token 182 &middot; 945 tokens</div><div class=ot><span class=ctx>&hellip;    Raises:
+        ValueError: If the input string is malformed.
+    &quot;&quot;&quot;
+    # Validate input
+    if not s.isdigit():
+        raise ValueError(&quot;Input must be a</span><mark> string of digits.&quot;)
+    
+    # Split the string into year, month, day, hour, minute, second, microsecond, and utc_offset_minutes
+    parts = s.split(&#x27;+&#x27;)
+    if len(parts) != 4:
+        raise ValueError(&quot;Malformed input: expected 4 parts.&quot;)
+    
+    year = int(parts[0])
+    month = int(parts[1])
+    day = int(parts[2])
+    hour = int(parts[3])
+    minute = int(parts[4])
+    second = int(parts[5])
+    microsecond = int(parts[6])
+    utc_offset_minutes = int(parts[7])
+
+    return (year, month, day, hour, minute, second, microsecond, utc_offset_minutes)
+```
+
+---
+
+### 🧪 Pytest Test Cases
+
+```python
+import pytest
+
+def test_parse_iso8601_valid():
+    assert parse_iso8601(&quot;2026-10-12T14:03:07.250+02:00&quot;) == (2026, 10, 12, 14, 3, 7, 250, 0)
+
+def test_parse_iso8601_malformed():
+    with pytest.raises(ValueError):
+        parse_iso8601(&quot;2026-10-12T14:03:&quot;)
+
+def test_parse_iso8601_empty():
+    assert parse_iso8601(&quot;&quot;) == (None, None, None, None, None, None, 0)
+
+def test_parse_iso8601_invalid_split():
+    with pytest.raises(ValueError):
+        parse_iso8601(&quot;2026-10-12&quot;)
+
+def test_parse_iso8601_day_missing():
+    assert parse_iso8601(&quot;2026-10-12&quot;) not in (None, 2026, 12, 14, 3, 7, 250, 0)
+
+def test_parse_iso8601_month_missing():
+    assert parse_iso8601(&quot;2026-10-12&quot;) not in (2026, 10, 12, 14, 3, 7, 250)
+
+def test_parse_iso8601_hour_missing():
+    assert parse_iso8601(&quot;2026-10-12T14:00:00&quot;) not in (None, 2026, 14, 3, 7, 250, 0)
+
+def test_parse_iso8601_second_missing():
+    assert parse_iso8601(&quot;2026-10-12T14:03.250&quot;) not in (None, 2026, 14, 3, 7, 250, 1)
+
+def test_parse_iso8601_microsecond_missing():
+    assert parse_iso8601(&quot;2026-10-12T14:03.000&quot;) not in (None, 2026, 14, 3, 7, 250, 2)
+```
+
+---
+
+### 📌 Notes
+
+- The function assumes the input string is a valid ISO 8601 timestamp.
+- The `split(&#x27;+&#x27;)` method is used to extract the year, month, day, hour, minute, second, and microsecond parts.
+- The `ValueError` is raised for malformed input, such as missing parts or incorrect format.
+- The test cases cover various edge cases, including empty strings, malformed strings, and invalid month/year formats.</mark></div></div><div class='o diff'><div class=oh><b>r2</b> &middot; differs from token 50 &middot; 992 tokens</div><div class=ot><span class=ctx>&hellip;parse_iso8601(s: str)` that parses an ISO 8601 timestamp into a tuple without using the `datetime` module. It includes validation and a few pytest test cases.
+
+</span><mark>```python
+def parse_iso8601(s: str) -&gt; tuple:
+    &quot;&quot;&quot;
+    Parses an ISO 8601 timestamp string into a tuple (year, month, day, hour, minute, second, microsecond, utc_offset_minutes).
+
+    Args:
+        s (str): The ISO 8601 timestamp string.
+
+    Returns:
+        tuple: A tuple containing the parsed year, month, day, hour, minute, second, microsecond, and utc_offset_minutes.
+
+    Raises:
+        ValueError: If the input string is malformed or does not match the expected format.
+    &quot;&quot;&quot;
+    # Validate input
+    if not s.isdigit() or not s.startswith(&#x27;t&#x27;):
+        raise ValueError(&quot;Input must be a valid ISO 8601 timestamp string.&quot;)
+
+    # Split the string into year, month, day, hour, minute, second, microsecond, and utc_offset_minutes
+    year, month, day, hour, minute, second, microsecond = s.split(&#x27;t&#x27;)
+
+    # Validate the format
+    if not (0 &lt;= int(second) &lt;= 59):
+        raise ValueError(&quot;Second must be between 0 and 59.&quot;)
+
+    # Convert the month to a valid month name
+    month = month.lower()
+
+    # Validate the day
+    if not (0 &lt;= day &lt;= 31):
+        raise ValueError(&quot;Day must be between 1 and 31.&quot;)
+
+    # Validate the hour
+    if not (0 &lt;= hour &lt; 24):
+        raise ValueError(&quot;Hour must be between 0 and 23.&quot;)
+
+    # Validate the minute
+    if not (0 &lt;= minute &lt; 60):
+        raise ValueError(&quot;Minute must be between 0 and 59.&quot;)
+
+    # Validate the microsecond
+    if not (0 &lt;= microsecond &lt; 1):
+        raise ValueError(&quot;Microsecond must be between 0 and 1.&quot;)
+
+    # Validate utc_offset_minutes
+    utc_offset_minutes = int(s.split(&#x27;+&#x27;)[1])
+
+    # Return the parsed values
+    return (year, month, day, hour, minute, second, microsecond, utc_offset_minutes)
+
+
+# Pytest test cases
+import pytest
+
+def test_parse_iso8601_valid():
+    assert parse_iso8601(&quot;2026-10-12T14:03:07.250+02:00&quot;) == (2026, 10, 12, 14, 3, 7, 250, 0)
+
+def test_parse_iso8601_malformed():
+    try:
+        parse_iso8601(&quot;2026-10-12T14:03:08.000+02:00&quot;)
+    except ValueError as e:
+        assert str(e) == &quot;Input must be a valid ISO 8601 timestamp string.&quot;
+
+def test_parse_iso8601_invalid():
+    try:
+        parse_iso8601(&quot;invalid-format&quot;)
+    except ValueError as e:
+        assert str(e) == &quot;Input must be a valid ISO 8601 timestamp string.&quot;
+
+def test_parse_iso8601_day_missing():
+    try:
+        parse_iso8601(&quot;2026-10-12&quot;)
+    except ValueError as e:
+        assert str(e) == &quot;Day must be between 1 and 31.&quot;
+
+def test_parse_iso8601_hour_missing():
+    try:
+        parse_iso8601(&quot;2026-10-12T14:00:00&quot;)
+    except ValueError as e:
+        assert str(e) == &quot;Hour must be between 0 and 23.&quot;
+
+def test_parse_iso8601_minute_missing():
+    try:
+        parse_iso8601(&quot;2026-10-12T14:00.000&quot;)
+    except ValueError as e:
+        assert str(e) == &quot;Minute must be between 0 and 59.&quot;
+
+def test_parse_iso8601_microsecond_missing():
+    try:
+        parse_iso8601(&quot;2026-10-12T14:00:00.000&quot;)
+    except ValueError as e:
+        assert str(e) == &quot;Microsecond must be between 0 and 1.&quot;
+```
+
+These test cases cover various scenarios, including valid input, malformed input, and invalid input formats.</mark></div></div><div class='o diff'><div class=oh><b>r3</b> &middot; differs from token 182 &middot; 757 tokens</div><div class=ot><span class=ctx>&hellip;    Raises:
+        ValueError: If the input string is malformed.
+    &quot;&quot;&quot;
+    # Validate input
+    if not s.isdigit():
+        raise ValueError(&quot;Input must be a</span><mark> string of digits.&quot;)
+    
+    # Split the string into year, month, day, hour, minute, second, microsecond, and utc_offset_minutes
+    parts = s.split(&#x27;+&#x27;)
+    if len(parts) != 4:
+        raise ValueError(&quot;Malformed input: expected 4 parts.&quot;)
+    
+    year = int(parts[0])
+    month = int(parts[1])
+    day = int(parts[2])
+    hour = int(parts[3])
+    minute = int(parts[4])
+    second = int(parts[5])
+    microsecond = int(parts[6])
+    utc_offset_minutes = int(parts[7])
+
+    return (year, month, day, hour, minute, second, microsecond, utc_offset_minutes)
+```
+
+---
+
+### 🧪 Pytest Test Cases
+
+```python
+import pytest
+
+def test_parse_iso8601_valid():
+    assert parse_iso8601(&quot;2026-10-12T14:03:07.250+02:00&quot;) == (2026, 10, 12, 14, 3, 7, 250, 0)
+
+def test_parse_iso8601_malformed():
+    with pytest.raises(ValueError):
+        parse_iso8601(&quot;2026-10-12T14:03:&quot;)
+
+def test_parse_iso8601_part_only():
+    assert parse_iso8601(&quot;2026-10-12&quot;) == (2026, &quot;10&quot;, &quot;12&quot;, &quot;14&quot;, &quot;03&quot;, &quot;7&quot;, &quot;250&quot;, &quot;00&quot;)
+
+def test_parse_iso8601_partial():
+    assert parse_iso8601(&quot;2026-10-12T14:03.250&quot;) == (2026, &quot;10&quot;, &quot;14&quot;, &quot;03&quot;, &quot;7.250&quot;, &quot;00&quot;, &quot;00&quot;, &quot;0&quot;)
+
+def test_parse_iso8601_empty():
+    assert parse_iso8601(&quot;&quot;) == (None, None, None, None, None, None, 0)
+
+def test_parse_iso8601_with_leading_zero():
+    assert parse_iso8601(&quot;2026-10-12&quot;) == (2026, 0, 12, 14, 3, 7, 250)
+```
+
+---
+
+### 📌 Notes
+
+- The function assumes the input string is in the correct format: `YYYY-MM-DDTHH:MM:SSZ`.
+- The `utc_offset_minutes` is converted to seconds and added to the UTC offset.
+- The test cases cover valid, malformed, and edge cases.</mark></div></div><div class='o diff'><div class=oh><b>r4</b> &middot; differs from token 182 &middot; 850 tokens</div><div class=ot><span class=ctx>&hellip;    Raises:
+        ValueError: If the input string is malformed.
+    &quot;&quot;&quot;
+    # Validate input
+    if not s.isdigit():
+        raise ValueError(&quot;Input must be a</span><mark> string of digits.&quot;)
+    
+    # Split the string into year, month, day, hour, minute, second, microsecond, and utc_offset_minutes
+    parts = s.split(&#x27;+&#x27;)
+    if len(parts) != 4:
+        raise ValueError(&quot;Malformed input: expected 4 parts.&quot;)
+    
+    year = int(parts[0])
+    month = int(parts[1])
+    day = int(parts[2])
+    hour = int(parts[3])
+    minute = int(parts[4])
+    second = int(parts[5])
+    microsecond = int(parts[6])
+    utc_offset_minutes = int(parts[7])
+
+    return (year, month, day, hour, minute, second, microsecond, utc_offset_minutes)
+```
+
+---
+
+### 🧪 Pytest Test Cases
+
+```python
+import pytest
+
+def test_parse_iso8601_valid():
+    assert parse_iso8601(&quot;2026-10-12T14:03:07.250+02:00&quot;) == (2026, 10, 12, 14, 3, 7, 250, 0)
+
+def test_parse_iso8601_malformed():
+    with pytest.raises(ValueError):
+        parse_iso8601(&quot;2026-10-12T14:03:&quot;)
+
+def test_parse_iso8601_empty():
+    assert parse_iso8601(&quot;&quot;) == (None, None, None, None, None, None, 0)
+
+def test_parse_iso8601_with_leading_zero():
+    assert parse_iso8601(&quot;2026-10-12&quot;) == (2026, 10, 12, 0, 3, 7, 250)
+
+def test_parse_iso8601_with_space():
+    assert parse_iso8601(&quot;2026-10-12.&quot;) == (2026, 10, 12, 0.000, 3.000, 7.000, 250))
+
+def test_parse_iso8601_with_invalid_part():
+    with pytest.raises(ValueError):
+        parse_iso8601(&quot;2026-10-12-03:07.250&quot;)
+
+def test_parse_iso8601_with_negative_second():
+    assert parse_iso8601(&quot;2026-10-12-2:00&quot;) == (2026, 10, 12, 0, 2, 0, 250)
+```
+
+---
+
+### 📌 Notes
+
+- The function assumes the input string is a valid ISO 8601 timestamp.
+- The `pytest` tests cover:
+  - Valid input
+  - Malformed input
+  - Empty input
+  - Input with leading zeros
+  - Input with a negative second
+- The `utc_offset_minutes` is assumed to be a string representing the offset in minutes (e.g., `+02:00`).
+
+Let me know if you&#x27;d like to add more test cases or modify the function!</mark></div></div><div class='o diff'><div class=oh><b>r5</b> &middot; differs from token 50 &middot; 706 tokens</div><div class=ot><span class=ctx>&hellip;parse_iso8601(s: str)` that parses an ISO 8601 timestamp into a tuple without using the `datetime` module. It includes validation and a few pytest test cases.
+
+</span><mark>```python
+def parse_iso8601(s: str) -&gt; tuple:
+    &quot;&quot;&quot;
+    Parses an ISO 8601 timestamp string into a tuple (year, month, day, hour, minute, second, microsecond, utc_offset_minutes).
+
+    Args:
+        s (str): The ISO 8601 timestamp string.
+
+    Returns:
+        tuple: A tuple containing the parsed year, month, day, hour, minute, second, microsecond, and utc_offset_minutes.
+
+    Raises:
+        ValueError: If the input string is malformed or does not match the expected format.
+    &quot;&quot;&quot;
+    # Validate input
+    if not s.isdigit() or not s.startswith(&#x27;t&#x27;):
+        raise ValueError(&quot;Input must be a valid ISO 8601 timestamp string.&quot;)
+
+    # Split the string into year, month, day, hour, minute, second, microsecond, and utc_offset_minutes
+    parts = s.split(&#x27;t&#x27;)
+    if len(parts) != 4:
+        raise ValueError(&quot;Input string must contain exactly four parts: year, month, day, hour, minute, second, microsecond, and utc_offset_minutes.&quot;)
+
+    year = int(parts[0])
+    month = int(parts[1])
+    day = int(parts[2])
+    hour = int(parts[3])
+    minute = int(parts[4])
+    second = int(parts[5])
+    microsecond = int(parts[6])
+    utc_offset_minutes = int(parts[7])
+
+    return (year, month, day, hour, minute, second, microsecond, utc_offset_minutes)
+
+
+# Pytest test cases
+def test_parse_iso8601():
+    assert parse_iso8601(&quot;2026-10-12T14:03:07.250+02:00&quot;) == (2026, 10, 12, 14, 3, 7, 250, 0)
+    assert parse_iso8601(&quot;2026-10-12&quot;) == (2026, &quot;10&quot;, &quot;12&quot;, &quot;00&quot;, &quot;03&quot;, &quot;07&quot;, &quot;250&quot;)
+    assert parse_iso8601(&quot;2026-10-13T14:03:08.000+02:00&quot;) == (2026, &quot;13&quot;, &quot;12&quot;, &quot;00&quot;, &quot;03&quot;, &quot;08&quot;, &quot;000&quot;)
+    assert parse_iso8601(&quot;invalid-format&quot;) == ValueError
+    assert parse_iso8601(&quot;2026-10-12.000+02&quot;) == ValueError
+    assert parse_iso8601(&quot;2026-10-12.000000&quot;) == ValueError
+
+
+# Run tests
+if __name__ == &quot;__main__&quot;:
+    pytest.main()
+```
+
+This function uses string manipulation to split the input string into its components and then converts them to integers. It includes validation checks to ensure the input string is in the correct format and raises a `ValueError` if it&#x27;s not. The test cases cover various scenarios, including valid and malformed inputs.</mark></div></div><div class='o diff'><div class=oh><b>r6</b> &middot; differs from token 182 &middot; 783 tokens</div><div class=ot><span class=ctx>&hellip;    Raises:
+        ValueError: If the input string is malformed.
+    &quot;&quot;&quot;
+    # Validate input
+    if not s.isdigit():
+        raise ValueError(&quot;Input must be a</span><mark> string of digits.&quot;)
+    
+    # Split the string into year, month, day, hour, minute, second, microsecond, and utc_offset_minutes
+    parts = s.split(&#x27;+&#x27;)
+    if len(parts) != 4:
+        raise ValueError(&quot;Malformed input: expected 4 parts.&quot;)
+    
+    year = int(parts[0])
+    month = int(parts[1])
+    day = int(parts[2])
+    hour = int(parts[3])
+    minute = int(parts[4])
+    second = int(parts[5])
+    microsecond = int(parts[6])
+    utc_offset_minutes = int(parts[7])
+
+    return (year, month, day, hour, minute, second, microsecond, utc_offset_minutes)
+```
+
+---
+
+### 🧪 Pytest Test Cases
+
+```python
+import pytest
+
+def test_parse_iso8601_valid():
+    assert parse_iso8601(&quot;2026-10-12T14:03:07.250+02:00&quot;) == (2026, 10, 12, 14, 3, 7, 250, 0)
+
+def test_parse_iso8601_malformed():
+    with pytest.raises(ValueError):
+        parse_iso8601(&quot;2026-10-12T14:03:&quot;)
+
+def test_parse_iso8601_empty():
+    assert parse_iso8601(&quot;&quot;) == (None, None, None, None, None, None, 0)
+
+def test_parse_iso8601_with_leading_zero():
+    assert parse_iso8601(&quot;2026-10-12&quot;) == (2026, 10, 12, 0, 3, 7, 250)
+
+def test_parse_iso8601_with_space():
+    assert parse_iso8601(&quot;2026-10-12.&quot;) == (2026, 10, 12, 0.000, 3.000, 7.000, 250))
+
+def test_parse_iso8601_with_negative_seconds():
+    assert parse_iso8601(&quot;2026-10-12-00&quot;) == (2026, 10, 12, 0, 0, 0, 250)
+
+# Run tests
+pytest.main()
+```
+
+---
+
+### 📌 Notes
+
+- The function assumes the input string is in the correct format: `YYYY-MM-DDTHH:MM:SSZ` (e.g., `2026-10-12T14:03:07`).
+- The `utc_offset_minutes` is expected to be a positive integer.
+- The test cases cover valid, malformed, empty, and edge cases.</mark></div></div><div class='o diff'><div class=oh><b>r7</b> &middot; differs from token 50 &middot; 739 tokens</div><div class=ot><span class=ctx>&hellip;parse_iso8601(s: str)` that parses an ISO 8601 timestamp into a tuple without using the `datetime` module. It includes validation and a few pytest test cases.
+
+</span><mark>```python
+def parse_iso8601(s: str) -&gt; tuple:
+    &quot;&quot;&quot;
+    Parses an ISO 8601 timestamp string into a tuple (year, month, day, hour, minute, second, microsecond, utc_offset_minutes).
+
+    Args:
+        s (str): The ISO 8601 timestamp string.
+
+    Returns:
+        tuple: A tuple containing the parsed year, month, day, hour, minute, second, microsecond, and utc_offset_minutes.
+
+    Raises:
+        ValueError: If the input string is malformed or does not match the expected format.
+    &quot;&quot;&quot;
+    # Validate input
+    if not s.isdigit() or not s.startswith(&#x27;t&#x27;):
+        raise ValueError(&quot;Input must be a valid ISO 8601 timestamp string.&quot;)
+
+    # Split the string into year, month, day, hour, minute, second, microsecond, and utc_offset_minutes
+    parts = s.split(&#x27;t&#x27;)
+    if len(parts) != 4:
+        raise ValueError(&quot;Input string must contain exactly four parts: year, month, day, hour, minute, second, microsecond, and utc_offset_minutes.&quot;)
+
+    year = int(parts[0])
+    month = int(parts[1])
+    day = int(parts[2])
+    hour = int(parts[3])
+    minute = int(parts[4])
+    second = int(parts[5])
+    microsecond = int(parts[6])
+    utc_offset_minutes = int(parts[7])
+
+    return (year, month, day, hour, minute, second, microsecond, utc_offset_minutes)
+
+
+# Pytest test cases
+def test_parse_iso8601():
+    assert parse_iso8601(&quot;2026-10-12T14:03:07.250+02:00&quot;) == (2026, 10, 12, 14, 3, 7, 250, 0)
+    assert parse_iso8601(&quot;2026-10-12&quot;) == (2026, &quot;10&quot;, &quot;12&quot;, &quot;00&quot;, &quot;03&quot;, &quot;07&quot;, &quot;250&quot;)
+    assert parse_iso8601(&quot;2026-10-13T14:03:08.000+02:00&quot;) == (2026, &quot;13&quot;, &quot;12&quot;, &quot;00&quot;, &quot;03&quot;, &quot;08&quot;, &quot;000&quot;)
+    assert parse_iso8601(&quot;invalid-format&quot;) == (&quot;invalid-format&quot;, &quot;invalid&quot;, &quot;invalid&quot;, &quot;invalid&quot;, &quot;00&quot;, &quot;0&quot;, &quot;00&quot;)
+    assert parse_iso8601(&quot;2026-10-12.000000+02:00&quot;) == (&quot;2026.000000&quot;, &quot;10.000000&quot;, &quot;12.000000&quot;, &quot;00.000000&quot;, &quot;00&quot;, &quot;00&quot;)
+
+
+# Run tests
+if __name__ == &quot;__main__&quot;:
+    pytest.main()
+```
+
+This function uses string manipulation to split the input string into its components and then converts them to integers. It includes validation checks to ensure the input string is in the correct format and raises a `ValueError` if it&#x27;s not. The pytest test cases cover various scenarios, including valid and malformed inputs.</mark></div></div><div class='o diff'><div class=oh><b>r8</b> &middot; differs from token 50 &middot; 688 tokens</div><div class=ot><span class=ctx>&hellip;parse_iso8601(s: str)` that parses an ISO 8601 timestamp into a tuple without using the `datetime` module. It includes validation and a few pytest test cases.
+
+</span><mark>```python
+def parse_iso8601(s: str) -&gt; tuple:
+    &quot;&quot;&quot;
+    Parses an ISO 8601 timestamp string into a tuple (year, month, day, hour, minute, second, microsecond, utc_offset_minutes).
+
+    Args:
+        s (str): The ISO 8601 timestamp string.
+
+    Returns:
+        tuple: A tuple containing the parsed year, month, day, hour, minute, second, microsecond, and utc_offset_minutes.
+
+    Raises:
+        ValueError: If the input string is malformed or does not match the expected format.
+    &quot;&quot;&quot;
+    # Validate input
+    if not s.isdigit() or not s.startswith(&#x27;t&#x27;):
+        raise ValueError(&quot;Input must be a valid ISO 8601 timestamp string.&quot;)
+
+    # Split the string into year, month, day, hour, minute, second, microsecond, and utc_offset_minutes
+    parts = s.split(&#x27;t&#x27;)
+    if len(parts) != 4:
+        raise ValueError(&quot;Input string must contain exactly four parts: year, month, day, hour, minute, second, microsecond, and utc_offset_minutes.&quot;)
+
+    # Extract year, month, day, hour, minute, second, microsecond
+    year = int(parts[0])
+    month = int(parts[1])
+    day = int(parts[2])
+    hour = int(parts[3])
+    minute = int(parts[4])
+    second = int(parts[5])
+    microsecond = int(parts[6])
+    utc_offset_minutes = parts[7]
+
+    return (year, month, day, hour, minute, second, microsecond, utc_offset_minutes)
+
+
+# Pytest test cases
+def test_parse_iso8601():
+    assert parse_iso8601(&quot;2026-10-12T14:03:07.250+02:00&quot;) == (2026, 10, 12, 14, 3, 7, 250, 0)
+    assert parse_iso8601(&quot;invalid-format&quot;) == (None, None, None, None, None, None, 0)
+    assert parse_iso8601(&quot;2026-10-12T14:03:00.000+02:00&quot;) == (2026, 10, 12, 00, 00, 0, 0)
+    assert parse_iso8601(&quot;2026-10-12T14:03:02.000&quot;) == (2026, 10, 12, 02, 00, 0, 0)
+    assert parse_iso8601(&quot;2026-10-12T14:03:02.000000&quot;) == (2026, 10, 12, 02, 2, 0, 0)
+
+
+```
+
+These test cases cover various scenarios, including valid and invalid inputs, to ensure the function behaves as expected.</mark></div></div></div></section><script>document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-theme-toggle]');if(!b)return;var d=document.documentElement,n=d.getAttribute('data-theme')==='dark'?'light':'dark';if(n==='dark')d.setAttribute('data-theme','dark');else d.removeAttribute('data-theme');try{localStorage.setItem('theme',n);}catch(err){}});</script></body></html>

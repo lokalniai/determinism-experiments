@@ -1,0 +1,307 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><title>Qwen3-4B · vLLM · batch of 1 · A100 &middot; Determinism</title><link rel=icon href='../favicon.ico' sizes=any><script>try{var t=localStorage.getItem('theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}</script><link rel=preconnect href='https://fonts.googleapis.com'><link rel=preconnect href='https://fonts.gstatic.com' crossorigin><link rel=stylesheet href='https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;500&display=swap'><link rel=stylesheet href='../static/style.css'></head><body><header class=mast><a class=brand href='https://lokalni.ai' aria-label='lokalni.ai'><img class=logo-light src='../static/logo_dark.png' alt='lokalni.ai' width=102 height=32><img class=logo-dark src='../static/logo_light.png' alt='lokalni.ai' width=102 height=32></a><span class='mastsep p'>&frasl;</span><a class=proj href='https://lokalni.ai/blog/determinismus/'>Stejn&yacute; vstup, stejn&yacute; v&yacute;stup</a><span class=mastsep>&frasl;</span><a class=here href='../index.html'>Qwen3-4B &middot; vLLM &middot; batch of 1 &middot; A100</a><span class=spacer></span><button class=tgl type=button data-theme-toggle aria-label='Switch theme' title='Switch theme'><svg class=sun viewBox='0 0 24 24' aria-hidden=true><circle cx=12 cy=12 r=4 /><path d='M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4' /></svg><svg class=moon viewBox='0 0 24 24' aria-hidden=true><path d='M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z' /></svg></button></header><section class=pr id=hello><p class=pq><b>hello</b><span>Hello! Who are you?</span></p><div class=outs><div class=o><div class=oh>reference = r0 &middot; 50 tokens &middot; <b>r0&ndash;9</b> identical</div><div class=ot>Hello! I&#x27;m Qwen, a large-scale language model developed by Alibaba Cloud&#x27;s Tongyi Lab. I can assist you with answering questions, writing stories, creating documents, coding, and more. How can I help you today? 😊</div></div></div></section><section class=pr id=fact><p class=pq><b>fact</b><span>Explain why the sky is blue during the day and why sunsets are often red or orange. Cover the physics involved and mention how atmospheric conditions such as dust or pollution change the colors.</span></p><div class=outs><div class=o><div class=oh>reference = r0 &middot; 924 tokens &middot; <b>r0&ndash;9</b> identical</div><div class=ot>The colors of the sky during the day and at sunset are due to a phenomenon in physics known as **Rayleigh scattering**. This process explains how sunlight interacts with the molecules and small particles in Earth&#x27;s atmosphere.
+
+---
+
+### 🌞 Why the Sky is Blue During the Day
+
+Sunlight, or white light, is made up of different colors, each with a different wavelength. The visible spectrum ranges from short-wavelength violet and blue to longer-wavelength red and orange.
+
+- **Rayleigh scattering** occurs when light interacts with particles much smaller than the wavelength of the light—such as nitrogen and oxygen molecules in the atmosphere.
+- The intensity of scattering is **inversely proportional to the fourth power of the wavelength**:
+  \[
+  I \propto \frac{1}{\lambda^4}
+  \]
+  This means **shorter wavelengths (blue and violet)** are scattered about **10 times more** than longer wavelengths (red and orange).
+
+- As sunlight enters the atmosphere, blue and violet light are scattered in all directions by air molecules. This scattered blue light reaches our eyes from all directions, making the sky appear blue.
+
+- Although violet light is scattered even more than blue, our eyes are less sensitive to violet, and some of it is absorbed by the upper atmosphere (by ozone), so we perceive the sky as **blue**, not violet.
+
+---
+
+### 🌅 Why Sunsets Are Red or Orange
+
+At sunset (or sunrise), the sun is near the horizon, so sunlight must pass through a much thicker layer of the atmosphere to reach our eyes.
+
+- As the light travels through more atmosphere, **more of the shorter wavelengths (blue and green)** are scattered out of the direct path.
+- The longer wavelengths (red, orange, and yellow) are scattered much less and continue traveling in a straight line.
+- As a result, the direct sunlight that reaches us is dominated by red and orange hues.
+
+This is why the sun appears red or orange at sunrise and sunset.
+
+---
+
+### 🌫️ How Dust, Pollution, and Atmospheric Conditions Change the Colors
+
+Atmospheric particles like **dust, pollution, water droplets, or aerosols** can alter the colors we see:
+
+1. **Increased Scattering by Larger Particles (Mie Scattering)**:
+   - Particles larger than the wavelength of light (like dust or pollution) cause **Mie scattering**, which scatters all wavelengths more equally.
+   - This can make the sky appear **gray or hazy**, and reduce the contrast between blue and red.
+   - In polluted or dusty conditions, sunsets may appear **duller or more yellowish**, and the sky may not appear as vividly blue.
+
+2. **Haze and Pollution**:
+   - Pollution can scatter light more broadly, reducing the blue component and making the sky appear **gray or yellow**.
+   - In such conditions, sunsets may appear **brighter reds or oranges** due to the longer wavelengths penetrating through the haze.
+
+3. **Water Droplets (e.g., fog, clouds)**:
+   - Clouds scatter all wavelengths, which can make the sky appear white or gray.
+   - When the sun is behind clouds, the light can be diffused, leading to **soft, warm colors** or even **pinkish hues**.
+
+4. **Clean vs. Polluted Atmospheres**:
+   - In clean, clear air, Rayleigh scattering dominates, leading to a vivid blue sky and vibrant red sunsets.
+   - In polluted or hazy air, the sky may appear dull, and sunsets may be less intense or more muted.
+
+---
+
+### Summary
+
+| Phenomenon | Cause |
+|----------|-------|
+| Blue sky | Rayleigh scattering of short-wavelength blue light by air molecules |
+| Red/orange sunsets | Long-wavelength red/orange light passes through more atmosphere, with blue/green scattered away |
+| Dust/pollution | Increases Mie scattering, reduces blue, dulls colors, can enhance reds in sunsets due to reduced scattering of longer wavelengths |
+
+✅ In essence: **The sky is blue because blue light scatters more in the atmosphere, and sunsets are red because only the longer, less-scattered red light reaches us at low angles.** Atmospheric conditions like pollution or dust modify these effects, altering the vividness and hue of the colors we see.
+
+This beautiful interplay of light and matter is a classic example of how simple physics governs everyday natural phenomena. 🌍✨</div></div></div></section><section class=pr id=story><p class=pq><b>story</b><span>Write a short story about a lighthouse keeper on a remote island who finds a message in a bottle that seems to be addressed to them personally.</span></p><div class=outs><div class=o><div class=oh>reference = r0 &middot; 844 tokens &middot; <b>r0&ndash;9</b> identical</div><div class=ot>The wind howled across Blackthorn Point, a jagged island clawed from the sea, its cliffs slick with salt and spray. Elias Thorne, the lighthouse keeper, stood at the iron railing of the lantern room, his breath fogging the cold glass. For twenty-three years, he’d watched the endless grey expanse, the relentless rhythm of waves crashing against the rocks. His world was predictable: oil lamps, foghorns, the slow drift of the tides, and the occasional, distant cry of gulls.
+
+He’d found the bottle on the third day of the new moon, half-buried in the damp sand near the base of the cliff where the sea met the rock. It was a small, chipped blue glass, the kind that once held lemonade. Inside, nestled in a crumpled piece of yellowed paper, was a single, folded note.
+
+&gt; *To Elias Thorne, Keeper of Blackthorn Point,*
+&gt; 
+&gt; *I know you see me. I know you watch. I am not lost. I am waiting. The light sees me. The light knows my name. Find the stone beneath the fern. It will speak. Come. It is not a warning. It is a home.*
+&gt; 
+&gt; *— M.*
+
+Elias froze. His hands, usually steady, trembled. *M.?* He’d never met a &quot;M.&quot; in all his years. No one had ever written to him. The island was a blank page. The sea was a silent witness. He’d dismissed it as a prank, a storm-washed piece of driftwood with a hopeful scribble. But the handwriting—neat, precise, with a slight tremor—felt like a memory. And the phrase *the light sees me*… it echoed in the hollow of his bones.
+
+That night, he lit the lamp, not just to signal ships, but to *see*. He stood at the base of the cliff, where the bottle had been found, and scanned the rocks. The wind carried the scent of brine and damp moss. He found a small, smooth stone half-buried under a curtain of ancient ferns. It was grey, cool to the touch, and carved with a single, looping symbol—a spiral.
+
+He took it home, placed it on the mantel beside the oil lamp. Every night, he’d sit by the window, watching the sea. The wind still howled, but now, sometimes, in the silence between waves, he heard a faint, soft chime—a sound like wind through glass, or a bell in a distant tower.
+
+One morning, as he was refilling the lamp oil, the spiral stone began to glow. A soft, pale blue light pulsed gently, like a heartbeat. He reached out, and the light didn’t burn. It *sang*—a low, resonant hum that vibrated in his chest, not in his ears. It wasn’t a sound he’d ever heard before. It felt like memory, like a long-forgotten lullaby.
+
+He sat down, the stone in his lap. And for the first time in decades, he didn’t feel alone.
+
+The next day, he wrote a note in the same hand, folded it, and placed it in a new bottle. He didn’t send it out. He left it on the cliff, where the wind would carry it to the sea.
+
+And when the next storm came, and the waves roared like thunder, Elias didn’t just watch the light. He *listened* to it. And in the silence between the crashes, he heard a whisper—soft, clear, and warm.
+
+*“Thank you,”* it said. *“I’ve been waiting.”*
+
+He smiled, a real, unguarded smile, and turned the lamp on. The beam cut through the fog, not just to warn ships, but to reach out—to someone who had been waiting, too. And for the first time, the lighthouse wasn’t just a beacon of safety. It was a bridge. A home. A message answered.</div></div></div></section><section class=pr id=math><p class=pq><b>math</b><span>A train leaves Plzeň at 8:15 and travels toward Prague at an average speed of 72 km/h. A second train leaves Prague at 8:45 toward Plzeň at 90 km/h. The distance between the two cities along the track is 114 km. At what time do the trains meet, and how far from Plzeň? Solve it step by step and state the final answer clearly.</span></p><div class=outs><div class=o><div class=oh>reference = r0 &middot; 1024 tokens &middot; <b>r0&ndash;9</b> identical</div><div class=ot>Let&#x27;s solve this step by step.
+
+---
+
+### **Given:**
+
+- Distance between Plzeň and Prague: **114 km**
+- Train A (from Plzeň) leaves at **8:15** at **72 km/h**
+- Train B (from Prague) leaves at **8:45** at **90 km/h**
+- We need to find:
+  - The **time** when the two trains meet
+  - The **distance from Plzeň** to the meeting point
+
+---
+
+### **Step 1: Determine how long Train A travels before Train B starts**
+
+Train A starts at 8:15, Train B at 8:45.
+
+Time difference = 8:45 − 8:15 = **30 minutes** = **0.5 hours**
+
+In that time, Train A travels:
+
+$$
+\text{Distance} = \text{Speed} \times \text{Time} = 72 \, \text{km/h} \times 0.5 \, \text{h} = 36 \, \text{km}
+$$
+
+So, when Train B starts at 8:45, the two trains are **36 km apart** (since Train A has already covered 36 km from Plzeň).
+
+---
+
+### **Step 2: After 8:45, both trains are moving toward each other**
+
+Now, both trains are moving toward each other:
+
+- Train A speed: 72 km/h
+- Train B speed: 90 km/h
+- Combined speed:  
+  $$
+  72 + 90 = 162 \, \text{km/h}
+  $$
+
+Remaining distance between them:  
+$$
+114 \, \text{km} - 36 \, \text{km} = 78 \, \text{km}
+$$
+
+Time to meet after 8:45:
+
+$$
+\text{Time} = \frac{\text{Distance}}{\text{Speed}} = \frac{78}{162} \, \text{hours}
+$$
+
+Simplify the fraction:
+
+$$
+\frac{78}{162} = \frac{13}{27} \, \text{hours}
+$$
+
+Convert to minutes:
+
+$$
+\frac{13}{27} \times 60 = \frac{780}{27} \approx 28.888... \, \text{minutes}
+$$
+
+Break it down:
+
+- 28 minutes
+- 0.888... × 60 ≈ 53.33 seconds
+
+So approximately **28 minutes and 53 seconds**
+
+---
+
+### **Step 3: Add this time to 8:45 to get the meeting time**
+
+8:45 + 28 minutes = **9:13**
+
+Then + 53 seconds → **9:13:53**
+
+So, the trains meet at approximately **9:13 and 53 seconds**
+
+But let&#x27;s keep it precise.
+
+---
+
+### **Step 4: Find distance from Plzeň to meeting point**
+
+We can compute this in two ways:
+
+#### **Option 1: Distance traveled by Train A from 8:15 to meeting time**
+
+- Time from 8:15 to meeting time:
+  - From 8:15 to 8:45 = 30 minutes = 0.5 h
+  - From 8:45 to meeting = 13/27 hours
+  - Total time = $ 0.5 + \frac{13}{27} = \frac{1}{2} + \frac{13}{27} $
+
+Convert to common denominator:
+
+$$
+\frac{1}{2} = \frac{27}{54}, \quad \frac{13}{27} = \frac{26}{54}
+$$
+
+Wait — better to use 54:
+
+$$
+\frac{1}{2} = \frac{27}{54}, \quad \frac{13}{27} = \frac{26}{54}
+\Rightarrow \text{Total} = \frac{53}{54} \, \text{hours}
+$$
+
+Now, distance from Plzeň:
+
+$$
+\text{Distance} = 72 \, \text{km/h} \times \frac{53}{54} \, \text{h}
+$$
+
+$$
+= 72 \times \frac{53}{54} = \left( \frac{72}{54} \right) \times 53 = \left( \frac{4}{3}</div></div></div></section><section class=pr id=code><p class=pq><b>code</b><span>Write a Python function `parse_iso8601(s: str)` that parses an ISO 8601 timestamp such as `2026-10-12T14:03:07.250+02:00` into a tuple (year, month, day, hour, minute, second, microsecond, utc_offset_minutes) without using the datetime module. Validate the input and raise ValueError on malformed strings. Include a few pytest test cases.</span></p><div class=outs><div class=o><div class=oh>reference = r0 &middot; 1024 tokens &middot; <b>r0&ndash;9</b> identical</div><div class=ot>```python
+import re
+from typing import Tuple, ValueError
+
+def parse_iso8601(s: str) -&gt; Tuple[int, int, int, int, int, int, int, int]:
+    &quot;&quot;&quot;
+    Parse an ISO 8601 timestamp string into a tuple (year, month, day, hour, minute, 
+    second, microsecond, utc_offset_minutes).
+    
+    Args:
+        s: ISO 8601 formatted string (e.g., &quot;2026-10-12T14:03:07.250+02:00&quot;)
+    
+    Returns:
+        Tuple of (year, month, day, hour, minute, second, microsecond, utc_offset_minutes)
+    
+    Raises:
+        ValueError: If the input string is malformed or does not conform to ISO 8601 format
+    &quot;&quot;&quot;
+    # Validate input
+    if not isinstance(s, str):
+        raise ValueError(&quot;Input must be a string&quot;)
+    
+    if not s or s.isspace():
+        raise ValueError(&quot;Input string cannot be empty or contain only whitespace&quot;)
+    
+    # Define the expected pattern
+    # Format: YYYY-MM-DDTHH:MM:SS.sss[+-]HH:MM or YYYY-MM-DDTHH:MM:SS.sss[+-]HH
+    # We need to match the full structure with optional fractional seconds and timezone
+    
+    # Pattern breakdown:
+    # YYYY-MM-DDT HH:MM:SS.sss[+-]HH:MM or YYYY-MM-DDT HH:MM:SS.sss[+-]HH
+    pattern = (
+        r&#x27;^(\d{4})-(\d{2})-(\d{2})T&#x27;
+        r&#x27;(\d{2}):(\d{2}):(\d{2})&#x27;
+        r&#x27;(\.\d{1,6})?&#x27;
+        r&#x27;([+-])?(\d{2}):(\d{2})?$&#x27;
+    )
+    
+    match = re.match(pattern, s)
+    
+    if not match:
+        raise ValueError(&quot;Invalid ISO 8601 format&quot;)
+    
+    # Extract groups
+    year, month, day, hour, minute, second, frac, tz_sign, tz_hour, tz_minute = match.groups()
+    
+    # Convert to integers
+    try:
+        year = int(year)
+        month = int(month)
+        day = int(day)
+        hour = int(hour)
+        minute = int(minute)
+        second = int(second)
+        
+        # Handle fractional seconds
+        microsecond = 0
+        if frac:
+            frac_part = frac.strip(&#x27;.&#x27;)
+            # Remove leading zeros and ensure at most 6 digits
+            frac_digits = frac_part.lstrip(&#x27;0&#x27;)
+            if len(frac_digits) &gt; 6:
+                frac_digits = frac_digits[:6]
+            microsecond = int(frac_digits.ljust(6, &#x27;0&#x27;)[:6])
+        
+        # Handle timezone offset
+        utc_offset_minutes = 0
+        if tz_sign:
+            tz_hour = int(tz_hour)
+            tz_minute = int(tz_minute) if tz_minute else 0
+            utc_offset_minutes = (tz_hour * 60) + (tz_minute if tz_sign == &#x27;+&#x27; else -tz_minute)
+        
+        # Validate date components
+        if not (1 &lt;= month &lt;= 12):
+            raise ValueError(&quot;Month must be between 1 and 12&quot;)
+        if not (1 &lt;= day &lt;= 31):
+            raise ValueError(&quot;Day must be between 1 and 31&quot;)
+        
+        # Validate time components
+        if not (0 &lt;= hour &lt;= 23):
+            raise ValueError(&quot;Hour must be between 0 and 23&quot;)
+        if not (0 &lt;= minute &lt;= 59):
+            raise ValueError(&quot;Minute must be between 0 and 59&quot;)
+        if not (0 &lt;= second &lt;= 59):
+            raise ValueError(&quot;Second must be between 0 and 59&quot;)
+        
+        # Validate microsecond (0 to 999999)
+        if microsecond &lt; 0 or microsecond &gt; 999999:
+            raise ValueError(&quot;Microsecond must be between 0 and 999999&quot;)
+        
+        # Validate timezone offset (in minutes)
+        if utc_offset_minutes &lt; -1440 or utc_offset_minutes &gt; 1440:
+            raise ValueError(&quot;UTC offset must be between -1440 and 1440 minutes&quot;)
+        
+        # Additional date validation: check for valid days in month
+        # We&#x27;ll do a basic check for month boundaries
+        days_in_month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+        if month</div></div></div></section><script>document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-theme-toggle]');if(!b)return;var d=document.documentElement,n=d.getAttribute('data-theme')==='dark'?'light':'dark';if(n==='dark')d.setAttribute('data-theme','dark');else d.removeAttribute('data-theme');try{localStorage.setItem('theme',n);}catch(err){}});</script></body></html>

@@ -1,0 +1,298 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><title>LFM2.5-350M · llama.cpp · --parallel 2 · A100 &middot; Determinism</title><link rel=icon href='../favicon.ico' sizes=any><script>try{var t=localStorage.getItem('theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}</script><link rel=preconnect href='https://fonts.googleapis.com'><link rel=preconnect href='https://fonts.gstatic.com' crossorigin><link rel=stylesheet href='https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;500&display=swap'><link rel=stylesheet href='../static/style.css'></head><body><header class=mast><a class=brand href='https://lokalni.ai' aria-label='lokalni.ai'><img class=logo-light src='../static/logo_dark.png' alt='lokalni.ai' width=102 height=32><img class=logo-dark src='../static/logo_light.png' alt='lokalni.ai' width=102 height=32></a><span class='mastsep p'>&frasl;</span><a class=proj href='https://lokalni.ai/blog/determinismus/'>Stejn&yacute; vstup, stejn&yacute; v&yacute;stup</a><span class=mastsep>&frasl;</span><a class=here href='../index.html'>LFM2.5-350M &middot; llama.cpp &middot; <code>--parallel 2</code> &middot; A100</a><span class=spacer></span><button class=tgl type=button data-theme-toggle aria-label='Switch theme' title='Switch theme'><svg class=sun viewBox='0 0 24 24' aria-hidden=true><circle cx=12 cy=12 r=4 /><path d='M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4' /></svg><svg class=moon viewBox='0 0 24 24' aria-hidden=true><path d='M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z' /></svg></button></header><section class=pr id=hello><p class=pq><b>hello</b><span>Hello! Who are you?</span></p><div class=outs><div class=o><div class=oh>reference: E1 greedy, r0 &middot; 62 tokens &middot; <b>r0&ndash;9</b> identical</div><div class=ot>I’m an AI language model created by **Liquid AI**. I was developed by a research and engineering team at Liquid AI and belong to the **Liquid Foundation Models** family.  
+
+Other details such as specific training data, architecture, or release date are not specified.</div></div></div></section><section class=pr id=fact><p class=pq><b>fact</b><span>Explain why the sky is blue during the day and why sunsets are often red or orange. Cover the physics involved and mention how atmospheric conditions such as dust or pollution change the colors.</span></p><div class=outs><div class=o><div class=oh>reference: E1 greedy, r0 &middot; 282 tokens &middot; <b>no run</b> identical</div><div class=ot>The sky appears blue during the day due to a phenomenon called Rayleigh scattering. This occurs when sunlight interacts with the Earth&#x27;s atmosphere, and shorter wavelengths (like blue and violet) are scattered more efficiently than longer wavelengths (like red and orange). The scattering is much stronger for blue light because it has a shorter wavelength, which is more easily scattered by air molecules and aerosols.
+
+Sunset times are often red or orange because the Sun is lower in the sky, and the scattering of sunlight by the atmosphere is most pronounced during this time. As the Sun sets, the sunlight that reaches the Earth&#x27;s surface is scattered in all directions, including back toward the ground. The longer wavelengths of light, such as red and orange, are scattered less and thus appear more vivid. This is why sunset colors are often described as warm and vibrant.
+
+Atmospheric conditions such as dust, pollution, or water vapor can significantly alter the colors of the sky. Dust particles can scatter light in all directions, potentially making the sky appear hazy or gray. Pollution can also affect the quality of the light reaching the Earth&#x27;s surface, often leading to a more muted or reddish appearance. Water vapor, on the other hand, can absorb certain wavelengths of light, particularly red and orange, making the sky appear more muted or dark. These changes in atmospheric composition can make sunset colors appear more intense and vivid.</div></div><div class='o diff'><div class=oh><b>r0, r3</b> &middot; differs from token 22 &middot; 297 tokens</div><div class=ot><span class=ctx>The sky appears blue during the day due to a phenomenon called Rayleigh scattering. This occurs when sunlight interacts with</span><mark> molecules in the Earth&#x27;s atmosphere, primarily nitrogen and oxygen. The shorter wavelengths of light, such as blue and violet, are scattered more efficiently by these molecules than the longer wavelengths, like red and orange. As a result, the sky appears blue to our eyes.
+
+Sunset times are often red or orange because the sun is lower in the sky, and the sunlight that reaches the Earth&#x27;s surface is scattered in all directions. This scattering process, known as diffuse reflection, causes the sunlight to be dispersed into a broader spectrum of colors. The blue light is scattered in all directions, while the longer wavelengths are more likely to be scattered away by the atmosphere. As a result, the sky transitions from blue to orange, with the colors becoming more vivid and intense.
+
+Atmospheric conditions such as dust or pollution can significantly alter the colors of the sky. Dust particles can absorb and scatter light, particularly in the blue and green wavelengths, leading to a more muted or washed-out appearance. Pollution can also introduce aerosols that scatter light in various directions, potentially creating a more complex and colorful sky. Additionally, the presence of water vapor or other gases in the atmosphere can affect the scattering process, resulting in different shades of blue, orange, or even purple hues. These changes in atmospheric conditions can make the sky appear more vibrant or even more dynamic during sunsets.</mark></div></div><div class='o diff'><div class=oh><b>r1, r5&ndash;6</b> &middot; differs from token 30 &middot; 271 tokens</div><div class=ot><span class=ctx>&hellip;ars blue during the day due to a phenomenon called Rayleigh scattering. This occurs when sunlight interacts with the Earth&#x27;s atmosphere, and shorter wavelengths</span><mark> of light (like blue and violet) are scattered more efficiently than longer wavelengths (like red and orange). The scattering is much stronger for blue light because it has a shorter wavelength, which is more easily scattered by atmospheric particles.
+
+Sunset colors often turn red or orange due to a combination of atmospheric conditions and the scattering of sunlight. As the sun sets, the sunlight travels through more of the Earth&#x27;s atmosphere, scattering the shorter blue and violet light more than the longer wavelengths. This leaves the longer wavelengths, such as red and orange, to dominate the sky&#x27;s colors. The scattering process is influenced by the size and composition of atmospheric particles, including dust, pollution, and water vapor. These particles can scatter sunlight in various directions, affecting the overall appearance of the sunset.
+
+Additionally, the angle of the sun at sunset can also play a role. When the sun is low in the sky, its light has to pass through a greater thickness of the atmosphere, which can enhance the scattering of shorter wavelengths and contribute to the reddish or orange hues. The combination of these factors—Rayleigh scattering, atmospheric conditions, and the sun&#x27;s position—results in the vibrant colors we see during sunsets.</mark></div></div><div class='o diff'><div class=oh><b>r2, r4, r8</b> &middot; differs from token 30 &middot; 273 tokens</div><div class=ot><span class=ctx>&hellip;ars blue during the day due to a phenomenon called Rayleigh scattering. This occurs when sunlight interacts with the Earth&#x27;s atmosphere, and shorter wavelengths</span><mark> of light (like blue and violet) are scattered more efficiently than longer wavelengths (like red and orange). The scattering is much stronger for blue light because it has a shorter wavelength, which is more easily scattered by atmospheric particles.
+
+Sunset colors often turn red or orange due to a combination of atmospheric conditions and the scattering of sunlight. As the sun sets, the sunlight travels through more of the Earth&#x27;s atmosphere, scattering the shorter blue and violet light more than the longer wavelengths. This leaves the longer wavelengths, such as red and orange, to dominate the sky&#x27;s colors. The scattering process is influenced by the size and composition of atmospheric particles, including dust, pollution, and water vapor. These particles can scatter sunlight in various directions, affecting the overall appearance of the sunset.
+
+Additionally, the angle of the sun at sunset can also play a role. When the sun is low in the sky, its light has to pass through a greater thickness of the atmosphere, which can enhance the scattering of shorter wavelengths and contribute to the reddish or orange hues. The interaction of sunlight with the atmosphere is a complex interplay of physical processes, including absorption, scattering, and the effects of aerosols and other atmospheric constituents.</mark></div></div><div class='o diff'><div class=oh><b>r7</b> &middot; differs from token 30 &middot; 327 tokens</div><div class=ot><span class=ctx>&hellip;ars blue during the day due to a phenomenon called Rayleigh scattering. This occurs when sunlight interacts with the Earth&#x27;s atmosphere, and shorter wavelengths</span><mark> of light (like blue and violet) are scattered more efficiently than longer wavelengths (like red and orange). The scattering is much stronger for blue light because it has a shorter wavelength, which is more easily scattered by atmospheric particles.
+
+Sunset times are often red or orange because the Sun is lower in the sky, and the scattering of sunlight by the atmosphere is most pronounced during this time. As the Sun sets, the sunlight that reaches the Earth&#x27;s surface is scattered in all directions, including back toward the ground. The longer wavelengths of light, such as red and orange, are scattered less and thus appear more vivid. This is why sunset colors are often described as warm and vibrant.
+
+Atmospheric conditions such as dust or pollution can significantly alter the colors of the sky. Dust particles can scatter sunlight in a way that may make the sky appear hazier or more muted, depending on the size and concentration of the particles. Pollution can also affect the clarity of the sky, potentially making it appear more hazy or cloudy. These changes can make sunset colors appear more intense or vivid, as the scattering of light is more pronounced.
+
+In summary, the blue sky during the day is due to Rayleigh scattering, while sunsets are often red or orange because the Sun is lower in the sky, and sunlight is scattered more in all directions. Atmospheric conditions like dust or pollution can further modify the appearance of the sky by altering the path and intensity of scattered light.</mark></div></div><div class='o diff'><div class=oh><b>r9</b> &middot; differs from token 22 &middot; 288 tokens</div><div class=ot><span class=ctx>The sky appears blue during the day due to a phenomenon called Rayleigh scattering. This occurs when sunlight interacts with</span><mark> molecules in the Earth&#x27;s atmosphere, primarily nitrogen and oxygen. The shorter wavelengths of light, such as blue and violet, are scattered more efficiently by these molecules than the longer wavelengths, like red and orange. As a result, the sky appears blue to our eyes.
+
+Sunset times are often red or orange because the sun is lower in the sky, and the sunlight that reaches the Earth&#x27;s surface is scattered in all directions. This scattering effect, combined with the scattering of shorter wavelengths by the atmosphere, makes the sky appear reddish or orange. The colors of the sunset are a result of the combined scattering of sunlight by the atmosphere, as well as the angle of the sun&#x27;s position.
+
+Atmospheric conditions such as dust or pollution can significantly alter the colors of the sky. Dust particles can scatter sunlight in a way that makes the sky appear darker or more muted, while pollution can introduce additional scattering particles that can change the color of the sky. For example, if there is a high concentration of dust in the atmosphere, it can make the sky appear more gray or brown. Similarly, pollution can introduce aerosols that scatter light in a way that can make the sky appear more orange or pink. These changes in atmospheric conditions can make sunset colors more vivid or even cause the sky to appear more intense or dramatic.</mark></div></div></div></section><section class=pr id=story><p class=pq><b>story</b><span>Write a short story about a lighthouse keeper on a remote island who finds a message in a bottle that seems to be addressed to them personally.</span></p><div class=outs><div class=o><div class=oh>reference: E1 greedy, r0 &middot; 426 tokens &middot; <b>no run</b> identical</div><div class=ot>The wind howled through the narrow windows of the lighthouse, carrying the scent of salt and seaweed. Captain James sat at the small table, his hands wrapped around a mug of tea, his eyes fixed on the horizon. The lighthouse was a solitary sentinel, its beam cutting through the darkness like a promise.
+
+As the day wore on, the lighthouse keeper began to notice strange occurrences. Equipment malfunctioned, and the wind seemed to grow stronger. One evening, as the sun dipped below the horizon, he heard a faint whisper in his ear.
+
+The message was brief, but it was clear: *&quot;You are not alone.&quot;*
+
+James stared at the words, his heart pounding in his chest. He had never received such a message before. The lighthouse was his home, his refuge, and now, he felt a strange sense of responsibility.
+
+He spent the night in the lighthouse, poring over the message and trying to decipher its meaning. The words seemed to echo in his mind, and he felt a growing sense of unease. Who could have sent such a message? And what did it mean?
+
+As the next day dawned, James returned to the lighthouse, determined to uncover the truth. He spent hours poring over the message, searching for clues and piecing together the story. The more he read, the more he realized that the lighthouse keeper was not alone on this remote island.
+
+The message was a warning, a plea for help. It was a message from a stranger, someone who had been watching over the lighthouse for years. The keeper had been warned to leave, but the stranger had been waiting for him, guiding him to safety.
+
+James knew he had to act quickly. He packed up his gear and set off for the mainland, determined to find the stranger and escape the lighthouse. As he walked, the wind howled around him, and the stars twinkled above, a reminder that the lighthouse keeper was not alone in this vast, mysterious world.</div></div><div class='o diff'><div class=oh><b>r0</b> &middot; differs from token 297 &middot; 426 tokens</div><div class=ot><span class=ctx>&hellip; poring over the message, searching for clues and piecing together the story. The more he read, the more he realized that the lighthouse keeper was not alone on</span><mark> the island.
+
+A figure emerged from the shadows, its silhouette indistinct against the moonlight. The lighthouse keeper felt a shiver run down his spine as he realized that he was not the only one searching for answers. The message had been sent by a group of strangers, each with their own motives and secrets.
+
+James knew he had to act quickly. He would need to find a way to communicate with the group, to uncover the truth behind the message and the lighthouse keeper&#x27;s own past. The journey ahead would be long and perilous, but he was ready to face whatever lay ahead.</mark></div></div><div class='o diff'><div class=oh><b>r1&ndash;3</b> &middot; differs from token 27 &middot; 428 tokens</div><div class=ot><span class=ctx>The wind howled through the narrow windows of the lighthouse, carrying the scent of salt and seaweed. Captain James sat at the</span><mark> helm, his hands steady as he adjusted the beam. The island, a rugged expanse of rocky cliffs and dense jungle, loomed in the distance, its silence oppressive.
+
+As the sun dipped below the horizon, casting the sky in hues of orange and purple, James noticed a small, weathered bottle on the deck. It was half-empty, its contents unreadable. He picked it up, his fingers brushing against the glass.
+
+The message was brief, yet it sent a shiver down his spine. It was addressed to him, written in a hand that seemed to tremble with age. The words were cryptic, but James felt a strange connection to them.
+
+He began to read, his eyes scanning the faded ink. The message was simple yet profound: *&quot;The sea is not always calm. It holds secrets, and some truths are best left unspoken.&quot;*
+
+James felt a pang of curiosity, as if he had stumbled upon a hidden passage in the island&#x27;s history. He knew that the sea was a mysterious force, full of secrets and surprises. The message had awakened something within him, a sense of responsibility to protect the island and its people.
+
+As the night deepened, James sat by the fire, the wind rustling the leaves outside. He closed his eyes, letting the words wash over him. The message had changed him, and he knew that he would never forget it. The lighthouse keeper had become a guardian of the island, a keeper of secrets and a protector of its people.
+
+In the silence of the night, James felt a deep sense of peace, knowing that he had been given a gift. The message had been a reminder that even in the darkest of times, there were always hidden truths waiting to be uncovered. And as the stars began to twinkle in the night sky, James smiled, knowing that he was ready to face whatever lay ahead.</mark></div></div><div class='o diff'><div class=oh><b>r4&ndash;5, r7</b> &middot; differs from token 27 &middot; 425 tokens</div><div class=ot><span class=ctx>The wind howled through the narrow windows of the lighthouse, carrying the scent of salt and seaweed. Captain James sat at the</span><mark> helm, his hands steady as he adjusted the beam. The island, a rugged expanse of rocky cliffs and dense jungle, loomed in the distance, its silence oppressive.
+
+As the sun dipped below the horizon, casting the sky in hues of orange and purple, James noticed a small, weathered bottle on the deck. It was half-empty, its contents unreadable. He picked it up, his fingers brushing against the glass.
+
+The message was brief, yet it sent a shiver down his spine. It was addressed to him, written in a hand that seemed to tremble with age. The words were cryptic, but James felt a strange connection to them.
+
+He began to read, his eyes scanning the faded ink. The message was simple yet profound: *&quot;The sea is not always calm. It holds secrets, and some truths are best left unspoken.&quot;*
+
+James felt a pang of curiosity, as if he had stumbled upon a hidden passage in the island&#x27;s history. He knew he had to return to the lighthouse, to uncover the secrets the message held. The wind howled closer, and the lighthouse&#x27;s beam swept across the water, casting a shadow over the island.
+
+As he climbed the stairs, the darkness seemed to close in around him. James closed his eyes, letting the words wash over him. The message was a reminder that the sea was a complex and mysterious place, full of hidden dangers and untold stories.
+
+When he finally emerged from the darkness, the lighthouse was silent, its beam still pointing toward the horizon. James stood at the helm, his heart pounding in his chest, as the wind carried the faint scent of salt and the distant call of a seagull. The message had changed nothing, but it had changed his perspective, reminding him that the sea was a world of its own, full of secrets waiting to be uncovered.</mark></div></div><div class='o diff'><div class=oh><b>r6</b> &middot; differs from token 27 &middot; 406 tokens</div><div class=ot><span class=ctx>The wind howled through the narrow windows of the lighthouse, carrying the scent of salt and seaweed. Captain James sat at the</span><mark> helm, his hands steady as he adjusted the beam. The island, a rugged expanse of rocky cliffs and dense jungle, loomed in the distance, its silence oppressive.
+
+As the sun dipped below the horizon, casting the sky in hues of orange and purple, James noticed a small, weathered bottle on the deck. It was half-empty, its contents unreadable. He picked it up, his fingers brushing against the glass.
+
+The message was brief, yet it sent a shiver down his spine. It was addressed to him, written in a hand that seemed to tremble with age. The words were cryptic, but James felt a strange connection to them.
+
+He began to read, his eyes scanning the faded ink. The message was simple yet profound: *&quot;The sea is not always calm. It holds secrets, and some truths are best left unspoken.&quot;*
+
+James felt a pang of curiosity, as if he had stumbled upon a hidden passage in the island&#x27;s history. He knew that the sea was a mysterious force, full of secrets and surprises. The message had awakened something within him, a sense of responsibility to protect the island and its people.
+
+As the night deepened, James sat in the lighthouse, the wind whispering through the windows. He closed his eyes, letting the silence envelop him. The message lingered in his mind, a reminder that even in the darkest of times, there were always secrets to uncover and truths to share.
+
+When dawn broke, James stood at the lighthouse, the sun rising over the island. He felt a sense of peace settle over him, as if the sea had finally revealed its secrets to him. The message had changed him, and he knew that he would carry it with him always, a guiding light in the darkness.</mark></div></div><div class='o diff'><div class=oh><b>r8</b> &middot; differs from token 27 &middot; 388 tokens</div><div class=ot><span class=ctx>The wind howled through the narrow windows of the lighthouse, carrying the scent of salt and seaweed. Captain James sat at the</span><mark> helm, his hands steady as he adjusted the beam. The island, a rugged expanse of rocky cliffs and dense jungle, loomed in the distance, its silence oppressive.
+
+As the sun dipped below the horizon, casting the sky in hues of orange and purple, James noticed a small, weathered bottle on the deck. It was half-empty, its contents unreadable. He picked it up, his fingers brushing against the glass.
+
+The message was brief, yet it sent a shiver down his spine. It was addressed to him, written in a hand that seemed to tremble with age. The words were cryptic, but James felt a strange connection to them.
+
+He began to read, his eyes scanning the faded ink. The message was simple yet profound: *&quot;The sea is not always calm. It holds secrets, and some truths are best left unspoken.&quot;*
+
+James felt a pang of curiosity, as if he had stumbled upon a hidden passage in the island&#x27;s history. He knew that the sea was a mysterious force, full of secrets and surprises. The message had awakened something within him, a sense of responsibility to protect the island and its people.
+
+As the night deepened, James sat by the fire, the wind rustling the leaves outside. He closed his eyes, letting the silence envelop him, and wondered if the message had changed anything. The lighthouse, once a symbol of safety, now felt like a threshold to a deeper understanding of the world beyond its shores.
+
+In the morning, James would return to the lighthouse, ready to face whatever challenges lay ahead. The message had changed him, and he knew that the sea would always be a force to be reckoned with.</mark></div></div><div class='o diff'><div class=oh><b>r9</b> &middot; differs from token 27 &middot; 441 tokens</div><div class=ot><span class=ctx>The wind howled through the narrow windows of the lighthouse, carrying the scent of salt and seaweed. Captain James sat at the</span><mark> helm, his hands steady as he adjusted the beam. The island, a rugged expanse of rocky cliffs and dense jungle, loomed in the distance, its silence oppressive.
+
+As the sun dipped below the horizon, casting the sky in hues of orange and purple, James noticed a small, weathered bottle on the deck. It was half-empty, its contents unreadable. He picked it up, his fingers brushing against the glass.
+
+The message was brief, yet it sent a shiver down his spine. It was addressed to him, written in a hand that seemed to tremble with age. The words were cryptic, but James felt a strange connection to them.
+
+He began to read, his eyes scanning the faded ink. The message was simple yet profound: *&quot;The sea is not always calm. It holds secrets, and some truths are best left unspoken.&quot;*
+
+James felt a pang of curiosity, as if he had stumbled upon a hidden passage in the island&#x27;s history. He knew that the sea was a mysterious force, full of secrets and surprises. The message had awakened something within him, a sense of responsibility to protect the island and its people.
+
+As the night deepened, James sat by the fire, the wind rustling the leaves outside. He closed his eyes, letting the words wash over him. The message had changed him, and he knew that he would never forget it. The lighthouse keeper had become a guardian of the island, a keeper of secrets and a protector of its people.
+
+In the silence of the night, James felt a deep sense of peace, knowing that he had been given a gift. The message had been a reminder that even in the darkest of times, there were always hidden truths waiting to be uncovered. And as he drifted off to sleep, the wind carried the echoes of the message, a gentle reminder that the sea was always watching, waiting for the next keeper to uncover its secrets.</mark></div></div></div></section><section class=pr id=math><p class=pq><b>math</b><span>A train leaves Plzeň at 8:15 and travels toward Prague at an average speed of 72 km/h. A second train leaves Prague at 8:45 toward Plzeň at 90 km/h. The distance between the two cities along the track is 114 km. At what time do the trains meet, and how far from Plzeň? Solve it step by step and state the final answer clearly.</span></p><div class=outs><div class=o><div class=oh>reference: E1 greedy, r0 &middot; 324 tokens &middot; <b>r0&ndash;9</b> identical</div><div class=ot>Let \( t \) be the time in hours after 8:15 when the trains meet.
+
+**Step 1: Calculate the distance traveled by the first train.**  
+The first train travels for \( t \) hours at 72 km/h, so the distance is \( 72t \) km.
+
+**Step 2: Calculate the distance traveled by the second train.**  
+The second train travels for \( t - 0.5 \) hours at 90 km/h, so the distance is \( 90(t - 0.5) \) km.
+
+**Step 3: Set the distances equal.**  
+\[
+72t = 90(t - 0.5)
+\]
+
+**Step 4: Solve for \( t \).**  
+\[
+72t = 90t - 45 \implies 45 = 18t \implies t = \frac{45}{18} = 2.5
+\]
+
+**Step 5: Calculate the meeting time.**  
+The trains meet at \( 8:15 + 2.5 = 10:15 \) hours after 8:15.
+
+**Step 6: Calculate the distance from Plzeň.**  
+The distance from Plzeň is \( 114 - 72t \) km.
+
+**Final Answer:**  
+The trains meet at \(\boxed{10:15}\) hours from Plzeň, and the distance from Plzeň is \(\boxed{114 - 72t}\) km.</div></div></div></section><section class=pr id=code><p class=pq><b>code</b><span>Write a Python function `parse_iso8601(s: str)` that parses an ISO 8601 timestamp such as `2026-10-12T14:03:07.250+02:00` into a tuple (year, month, day, hour, minute, second, microsecond, utc_offset_minutes) without using the datetime module. Validate the input and raise ValueError on malformed strings. Include a few pytest test cases.</span></p><div class=outs><div class=o><div class=oh>reference: E1 greedy, r0 &middot; 621 tokens &middot; <b>r0, r2, r4, r7</b> identical</div><div class=ot>Here&#x27;s a Python function `parse_iso8601(s: str)` that parses an ISO 8601 timestamp into a tuple without using the `datetime` module. It includes validation and a few pytest test cases.
+
+```python
+def parse_iso8601(s: str) -&gt; tuple:
+    &quot;&quot;&quot;
+    Parses an ISO 8601 timestamp string into a tuple (year, month, day, hour, minute, second, microsecond, utc_offset_minutes).
+
+    Args:
+        s (str): The ISO 8601 timestamp string.
+
+    Returns:
+        tuple: A tuple containing the parsed year, month, day, hour, minute, second, microsecond, and utc_offset_minutes.
+
+    Raises:
+        ValueError: If the input string does not match the expected format.
+    &quot;&quot;&quot;
+    # Validate input
+    if not s.isdigit() or not s.startswith(&#x27;t&#x27;):
+        raise ValueError(&quot;Input must be a valid ISO 8601 timestamp string.&quot;)
+
+    # Split the string into year, month, day, hour, minute, second, microsecond, and utc_offset_minutes
+    parts = s.split(&#x27;t&#x27;)
+    if len(parts) != 4:
+        raise ValueError(&quot;Invalid input format. Expected format: year-month-day-hour-minute-second&quot;)
+
+    year = int(parts[0])
+    month = int(parts[1])
+    day = int(parts[2])
+    hour = int(parts[3])
+    minute = int(parts[4])
+    second = int(parts[5])
+    microsecond = int(parts[6])
+    utc_offset_minutes = int(parts[7])
+
+    return (year, month, day, hour, minute, second, microsecond, utc_offset_minutes)
+
+
+# Pytest test cases
+def test_parse_iso8601():
+    assert parse_iso8601(&quot;2026-10-12T14:03:07.250+02:00&quot;) == (2026, 10, 12, 14, 3, 7, 250, 0)
+    assert parse_iso8601(&quot;invalid-format&quot;) == ValueError
+    assert parse_iso8601(&quot;2026-10-12T14:03:02.000&quot;) == ValueError
+    assert parse_iso8601(&quot;2026-10-12T14:03:02.000+02:00&quot;) == (2026, 10, 12, 2, 3, 7, 0, 2)
+    assert parse_iso8601(&quot;2026-10-12T14:03:00&quot;) == ValueError
+    assert parse_iso8601(&quot;2026-10-12.000&quot;) == ValueError
+
+
+```
+
+These test cases cover various scenarios, including valid and invalid inputs, to ensure the function behaves as expected.</div></div><div class='o diff'><div class=oh><b>r1</b> &middot; differs from token 546 &middot; 707 tokens</div><div class=ot><span class=ctx>&hellip;ueError
+    assert parse_iso8601(&quot;2026-10-12T14:03:02.000&quot;) == ValueError
+    assert parse_iso8601(&quot;2026-10-12T14:03:02.000+02:00&quot;) == (2026, 10, 12, 2, 3, 7, 0</span><mark>)
+
+    assert parse_iso8601(&quot;2026.10.12.14.03.00&quot;) == (2026, 10, 12, 14, 3, 00, 2)
+    assert parse_iso8601(&quot;2026-10-12.000&quot;) == ValueError
+    assert parse_iso8601(&quot;2026.000-02.00&quot;) == ValueError
+```
+
+This function first validates the input string to ensure it matches the expected format. It then splits the string into year, month, day, hour, minute, second, microsecond, and utc_offset_minutes. Finally, it returns the parsed values as a tuple. The pytest test cases cover various scenarios, including valid and invalid inputs.</mark></div></div><div class='o diff'><div class=oh><b>r3</b> &middot; differs from token 246 &middot; 743 tokens</div><div class=ot><span class=ctx>&hellip;&quot;Input must be a valid ISO 8601 timestamp string.&quot;)
+
+    # Split the string into year, month, day, hour, minute, second, microsecond, and utc_offset_minutes
+   </span><mark> year, month, day, hour, minute, second, microsecond = s.split(&#x27;t&#x27;)
+
+    # Validate each component
+    if not year.isdigit() or not month.isdigit() or not day.isdigit() or not hour.isdigit() or not minute.isdigit() or not second.isdigit() or not microsecond.isdigit():
+        raise ValueError(&quot;Each component of the ISO 8601 timestamp must be a valid number.&quot;)
+
+    # Convert the components to integers
+    year = int(year)
+    month = int(month)
+    day = int(day)
+    hour = int(hour)
+    minute = int(minute)
+    second = int(second)
+    microsecond = int(microsecond)
+    utc_offset_minutes = int(utc_offset_minutes)
+
+    # Return the parsed tuple
+    return (year, month, day, hour, minute, second, microsecond, utc_offset_minutes)
+
+
+# Test cases
+def test_parse_iso8601():
+    assert parse_iso8601(&quot;2026-10-12T14:03:07.250+02:00&quot;) == (2026, 10, 12, 14, 3, 7, 250, 0)
+    assert parse_iso8601(&quot;invalid-format&quot;) == (None, None, None, None, None, None, 0)
+    assert parse_iso8601(&quot;2026-10-12T14:03:00.000+02:00&quot;) == (2026, 10, 12, 00, 00, 0, 0)
+    assert parse_iso8601(&quot;2026.10.12.14.03.07.250&quot;) == (2026, 10, 12, 14, 3, 7, 250)
+    assert parse_iso8601(&quot;2026-10-12.000+02:00&quot;) == (None, None, None, None, 0, 0)
+
+
+# Run tests
+if __name__ == &quot;__main__&quot;:
+    pytest.main()
+```
+
+This function uses string manipulation to parse the ISO 8601 timestamp string and includes validation to ensure the input is valid. The test cases cover various scenarios, including valid and invalid inputs.</mark></div></div><div class='o diff'><div class=oh><b>r5&ndash;6</b> &middot; differs from token 596 &middot; 687 tokens</div><div class=ot><span class=ctx>&hellip;:00&quot;) == (2026, 10, 12, 2, 3, 7, 0, 2)
+    assert parse_iso8601(&quot;2026-10-12T14:03:00&quot;) == ValueError
+    assert parse_iso8601(&quot;2026-10-12.000&quot;) == ValueError
+
+
+</span><mark># Run tests
+if __name__ == &quot;__main__&quot;:
+    pytest.main()
+```
+
+This function first validates the input string to ensure it matches the expected format. It then splits the string into year, month, day, hour, minute, second, microsecond, and utc_offset_minutes. Finally, it returns the parsed values as a tuple. The test cases cover various scenarios, including valid and invalid inputs.</mark></div></div><div class='o diff'><div class=oh><b>r8</b> &middot; differs from token 246 &middot; 666 tokens</div><div class=ot><span class=ctx>&hellip;&quot;Input must be a valid ISO 8601 timestamp string.&quot;)
+
+    # Split the string into year, month, day, hour, minute, second, microsecond, and utc_offset_minutes
+   </span><mark> year, month, day, hour, minute, second, microsecond = s.split(&#x27;t&#x27;)
+    # Validate the split result
+    if not year or not month or not day or not hour or not minute or not second or not microsecond or not utc_offset_minutes:
+        raise ValueError(&quot;Invalid ISO 8601 timestamp format.&quot;)
+
+    # Convert the components to a tuple
+    return (int(year), int(month), int(day), int(hour), int(minute), int(second), int(microsecond), utc_offset_minutes)
+
+# Test cases
+def test_parse_iso8601():
+    assert parse_iso8601(&quot;2026-10-12T14:03:07.250+02:00&quot;) == (2026, 10, 12, 14, 3, 7, 250, 0)
+    assert parse_iso8601(&quot;invalid-format&quot;) == (invalid-format)
+    assert parse_iso8601(&quot;2026-10-12T14:03:02.000&quot;) == (2026, 10, 12, 14, 2, 0, 0)
+    assert parse_iso8601(&quot;2026.10.12.14.03.00&quot;) == (2026, 10, 12, 14, 3, 00, 00)
+    assert parse_iso8601(&quot;2026-10-12.000&quot;) == (2026, 10, 12)
+
+# Run tests
+if __name__ == &quot;__main__&quot;:
+    pytest.main()
+```
+
+This function first validates the input string to ensure it matches the expected format. It then splits the string into year, month, day, hour, minute, second, microsecond, and utc_offset_minutes. Finally, it converts the components to a tuple and returns the result. The test cases cover various scenarios to ensure the function behaves as expected.</mark></div></div><div class='o diff'><div class=oh><b>r9</b> &middot; differs from token 246 &middot; 749 tokens</div><div class=ot><span class=ctx>&hellip;&quot;Input must be a valid ISO 8601 timestamp string.&quot;)
+
+    # Split the string into year, month, day, hour, minute, second, microsecond, and utc_offset_minutes
+   </span><mark> year, month, day, hour, minute, second, microsecond = s.split(&#x27;t&#x27;)
+
+    # Validate each component
+    if not year.isdigit() or not month.isdigit() or not day.isdigit() or not hour.isdigit() or not minute.isdigit() or not second.isdigit() or not microsecond.isdigit():
+        raise ValueError(&quot;Each component of the ISO 8601 timestamp must be a valid number.&quot;)
+
+    # Convert the components to integers
+    year = int(year)
+    month = int(month)
+    day = int(day)
+    hour = int(hour)
+    minute = int(minute)
+    second = int(second)
+    microsecond = int(microsecond)
+    utc_offset_minutes = int(utc_offset_minutes)
+
+    # Return the parsed tuple
+    return (year, month, day, hour, minute, second, microsecond, utc_offset_minutes)
+
+
+# Test cases
+def test_parse_iso8601():
+    assert parse_iso8601(&quot;2026-10-12T14:03:07.250+02:00&quot;) == (2026, 10, 12, 14, 3, 7, 250, 0)
+    assert parse_iso8601(&quot;invalid-format&quot;) == (None, None, None, None, None, None, 0)
+    assert parse_iso8601(&quot;2026-10-12T14:03:02.000&quot;) == (2026, 10, 12, 14, 2, 0, 0)
+    assert parse_iso8601(&quot;2026.10.12.14.03.07&quot;) == (2026, 10, 12, 14, 3, 7, 250)
+    assert parse_iso8601(&quot;2026-10-12.000&quot;) == (None, None, None, None, 0, 0)
+
+
+# Run tests
+if __name__ == &quot;__main__&quot;:
+    pytest.main()
+```
+
+This function uses string manipulation to split the input string into its components and then validates each component to ensure they are valid numbers. The parsed components are then converted to integers and returned as a tuple. The test cases cover various scenarios, including valid and invalid inputs.</mark></div></div></div></section><script>document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-theme-toggle]');if(!b)return;var d=document.documentElement,n=d.getAttribute('data-theme')==='dark'?'light':'dark';if(n==='dark')d.setAttribute('data-theme','dark');else d.removeAttribute('data-theme');try{localStorage.setItem('theme',n);}catch(err){}});</script></body></html>

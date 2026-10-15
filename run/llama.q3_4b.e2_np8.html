@@ -1,0 +1,1230 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><title>Qwen3-4B · llama.cpp · --parallel 8 · A100 &middot; Determinism</title><link rel=icon href='../favicon.ico' sizes=any><script>try{var t=localStorage.getItem('theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}</script><link rel=preconnect href='https://fonts.googleapis.com'><link rel=preconnect href='https://fonts.gstatic.com' crossorigin><link rel=stylesheet href='https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;500&display=swap'><link rel=stylesheet href='../static/style.css'></head><body><header class=mast><a class=brand href='https://lokalni.ai' aria-label='lokalni.ai'><img class=logo-light src='../static/logo_dark.png' alt='lokalni.ai' width=102 height=32><img class=logo-dark src='../static/logo_light.png' alt='lokalni.ai' width=102 height=32></a><span class='mastsep p'>&frasl;</span><a class=proj href='https://lokalni.ai/blog/determinismus/'>Stejn&yacute; vstup, stejn&yacute; v&yacute;stup</a><span class=mastsep>&frasl;</span><a class=here href='../index.html'>Qwen3-4B &middot; llama.cpp &middot; <code>--parallel 8</code> &middot; A100</a><span class=spacer></span><button class=tgl type=button data-theme-toggle aria-label='Switch theme' title='Switch theme'><svg class=sun viewBox='0 0 24 24' aria-hidden=true><circle cx=12 cy=12 r=4 /><path d='M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4' /></svg><svg class=moon viewBox='0 0 24 24' aria-hidden=true><path d='M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z' /></svg></button></header><section class=pr id=hello><p class=pq><b>hello</b><span>Hello! Who are you?</span></p><div class=outs><div class=o><div class=oh>reference: E1 greedy, r0 &middot; 50 tokens &middot; <b>r0&ndash;9</b> identical</div><div class=ot>Hello! I&#x27;m Qwen, a large-scale language model developed by Alibaba Cloud&#x27;s Tongyi Lab. I can assist you with answering questions, writing stories, creating documents, coding, and more. How can I help you today? 😊</div></div></div></section><section class=pr id=fact><p class=pq><b>fact</b><span>Explain why the sky is blue during the day and why sunsets are often red or orange. Cover the physics involved and mention how atmospheric conditions such as dust or pollution change the colors.</span></p><div class=outs><div class=o><div class=oh>reference: E1 greedy, r0 &middot; 905 tokens &middot; <b>no run</b> identical</div><div class=ot>The colors of the sky during the day and at sunset are due to a phenomenon in physics known as **Rayleigh scattering**. This process explains how sunlight interacts with the molecules and small particles in Earth&#x27;s atmosphere.
+
+---
+
+### 🌞 Why the Sky is Blue During the Day
+
+Sunlight, or white light, is made up of different colors, each with a different wavelength. The visible spectrum ranges from short-wavelength violet and blue to longer-wavelength red and orange.
+
+- **Rayleigh scattering** occurs when light interacts with particles much smaller than the wavelength of the light—such as nitrogen and oxygen molecules in the atmosphere.
+- The intensity of scattering is **inversely proportional to the fourth power of the wavelength**:
+  \[
+  I \propto \frac{1}{\lambda^4}
+  \]
+  This means **shorter wavelengths (blue and violet)** are scattered about **10 times more** than longer wavelengths (red and orange).
+
+- As sunlight enters the atmosphere, blue and violet light are scattered in all directions by air molecules. This scattered blue light reaches our eyes from all directions, making the sky appear blue.
+
+- Although violet light is scattered even more than blue, our eyes are less sensitive to violet, and some of it is absorbed by the upper atmosphere (by ozone), so we perceive the sky as blue rather than violet.
+
+---
+
+### 🌅 Why Sunsets Are Red or Orange
+
+At sunset (or sunrise), the sun is near the horizon, so sunlight must pass through a much thicker layer of the atmosphere to reach our eyes.
+
+- As the light travels through more atmosphere, **shorter wavelengths (blue and green)** are scattered out of the direct beam by Rayleigh scattering.
+- The longer wavelengths (red, orange, and yellow) are scattered much less and continue traveling through the atmosphere with less obstruction.
+- As a result, the direct sunlight that reaches us at sunset is dominated by red and orange hues.
+
+This is why the sun appears red or orange during sunrise and sunset.
+
+---
+
+### 🌫️ How Dust, Pollution, and Atmospheric Conditions Change the Colors
+
+Atmospheric particles such as **dust, pollution, water droplets, or aerosols** can alter the colors we see:
+
+1. **Mie Scattering**:
+   - When particles are comparable in size to the wavelength of light (like dust or pollution), the scattering becomes **Mie scattering**, which affects all wavelengths more equally.
+   - Unlike Rayleigh scattering, Mie scattering does not strongly favor blue light.
+   - This can lead to **more uniform, grayish or hazy skies**, and **less vivid blue skies** during the day.
+
+2. **Pollution or Smoke**:
+   - In cities or areas with high pollution, the presence of fine particles can scatter all colors, leading to **duller, grayish skies**.
+   - However, during a sunset, pollution can enhance red or orange hues by scattering blue light away and allowing reds to dominate more clearly.
+
+3. **Haze or Dust Storms**:
+   - Dust storms or volcanic ash can create **intense reds and oranges** at sunset due to increased scattering and absorption of shorter wavelengths.
+   - In some cases, the sky may appear **pink or purple** due to the combination of scattered light and atmospheric particles.
+
+4. **Fog or Clouds**:
+   - Clouds scatter light more uniformly and can create white or gray skies, reducing the visibility of blue or red hues.
+   - However, when the sun is low and clouds are present, they can reflect and enhance red or orange colors.
+
+---
+
+### Summary
+
+| Phenomenon | Cause |
+|----------|-------|
+| Blue sky during the day | Rayleigh scattering of short blue wavelengths by air molecules |
+| Red/orange sunsets | Long-wavelength red/orange light travels through more atmosphere, with blue light scattered away |
+| Dust/pollution effects | Mie scattering reduces blue dominance, can enhance reds or create hazy skies |
+
+✅ In short:  
+**Blue sky = short wavelengths scattered widely during the day**  
+**Red sunsets = long wavelengths pass through more atmosphere with less scattering**  
+**Pollution/dust = alters scattering, can enhance or dull colors depending on particle size and concentration**
+
+This beautiful interplay of light and atmosphere is a classic example of how simple physics governs everyday natural phenomena. 🌍✨</div></div><div class='o diff'><div class=oh><b>r0</b> &middot; differs from token 197 &middot; 926 tokens</div><div class=ot><span class=ctx>&hellip;frac{1}{\lambda^4}
+  \]
+  This means **shorter wavelengths (blue and violet)** are scattered about **10 times more** than longer wavelengths (red and orange).
+
+</span><mark>As a result:
+- Blue light is scattered in all directions by the atmosphere, making the sky appear blue to observers on the ground.
+- Violet light is scattered even more than blue, but our eyes are less sensitive to violet, and some of it is absorbed by the upper atmosphere, so blue dominates the perceived color.
+
+👉 **Conclusion**: The sky appears blue because blue light is scattered more efficiently by atmospheric molecules than other colors.
+
+---
+
+### 🌅 Why Sunsets Are Red or Orange
+
+At sunset (or sunrise), the Sun is near the horizon, so sunlight must pass through a much thicker layer of the atmosphere to reach the observer.
+
+- As light travels through more atmosphere, **shorter wavelengths (blue and green)** are scattered out of the direct beam by Rayleigh scattering.
+- The longer wavelengths (red, orange, yellow) are scattered much less and continue to travel through the atmosphere with less loss.
+- As a result, the direct sunlight reaching your eyes is dominated by red and orange hues.
+
+👉 **Conclusion**: At sunset, the blue light is scattered away, leaving the red and orange colors visible.
+
+---
+
+### 🌫️ How Dust, Pollution, and Atmospheric Conditions Change the Colors
+
+Atmospheric particles such as **dust, pollution, water droplets, or aerosols** can alter the colors we see:
+
+1. **Mie Scattering**:
+   - When particles are comparable in size to the wavelength of light (like dust or pollution), scattering becomes **Mie scattering**, which affects all wavelengths more equally.
+   - Unlike Rayleigh scattering, Mie scattering does not strongly favor blue or red.
+   - This can lead to **gray, hazy, or whitish skies** during pollution events.
+
+2. **Pollution or Dust Storms**:
+   - These increase the amount of particulate matter in the air.
+   - Mie scattering can **reduce the contrast** between colors, making sunsets appear duller or more yellowish.
+   - In some cases, pollution can enhance red or orange hues due to the way particles scatter and absorb light, but often the sky appears hazy and less vibrant.
+
+3. **Haze and Smog**:
+   - Can suppress blue light and enhance reds, but often results in a **muted or washed-out sunset**.
+   - In clean air, sunsets are vivid and vibrant due to minimal scattering and clear paths for red light.
+
+4. **Water Droplets (e.g., fog, clouds)**:
+   - Can cause **diffuse reflection** and create white or gray skies.
+   - In the presence of clouds, the sky may appear white or gray, and sunsets may be soft and muted.
+
+---
+
+### Summary
+
+| Condition | Effect on Sky Color |
+|---------|----------------------|
+| Clear day | Blue sky (Rayleigh scattering of blue light) |
+| Sunset/sunrise | Red/orange (longer wavelengths pass through more atmosphere) |
+| Pollution/dust | Hazy, muted colors; reduced blue scattering; may enhance reds or yellows via Mie scattering |
+| Clean air | Vivid, vibrant sunsets |
+
+---
+
+✅ In short:  
+**The sky is blue because blue light is scattered more by air molecules. At sunset, sunlight travels through more atmosphere, scattering away the blue light, so we see reds and oranges. Dust and pollution alter this by scattering all wavelengths more evenly, leading to hazy or duller colors.**
+
+This beautiful phenomenon is a direct result of the physics of light and matter interaction in our atmosphere. 🌍✨</mark></div></div><div class='o diff'><div class=oh><b>r1</b> &middot; differs from token 24 &middot; 891 tokens</div><div class=ot><span class=ctx>The colors of the sky during the day and at sunset are due to a phenomenon in physics known as **Rayleigh scattering</span><mark>**, which describes how light interacts with molecules and small particles in the Earth&#x27;s atmosphere.
+
+---
+
+### 🌞 Why the Sky is Blue During the Day
+
+1. **Sunlight is made of all colors**  
+   Sunlight, or white light, is composed of a spectrum of colors—each with a different wavelength. The visible spectrum ranges from short-wavelength violet and blue to long-wavelength red and orange.
+
+2. **Rayleigh Scattering**  
+   When sunlight enters the atmosphere, it collides with gas molecules (like nitrogen and oxygen). These molecules are much smaller than the wavelengths of visible light.  
+   According to **Rayleigh&#x27;s law**, the amount of scattering is **inversely proportional to the fourth power of the wavelength**:
+   \[
+   I \propto \frac{1}{\lambda^4}
+   \]
+   This means **shorter wavelengths (blue and violet)** are scattered much more than longer wavelengths (red, orange, yellow).
+
+3. **Blue light is scattered more**  
+   Since blue light has a shorter wavelength (~450 nm) than red (~650 nm), it is scattered about **10 times more** than red light.  
+   This scattered blue light reaches our eyes from all directions, making the sky appear blue during the day.
+
+4. **Why not violet?**  
+   Violet light has an even shorter wavelength and is scattered even more than blue. However, the sun emits less violet light, and our eyes are less sensitive to violet. Also, some violet light is absorbed by the upper atmosphere. So, blue dominates our perception.
+
+---
+
+### 🌅 Why Sunsets Are Red or Orange
+
+At sunset, the sun is low on the horizon, so sunlight must pass through a much **thicker layer of the atmosphere** to reach our eyes.
+
+1. **Longer path = more scattering**  
+   As light travels through more atmosphere, shorter wavelengths (blue and green) are scattered out of the direct path.  
+   The blue and green light is scattered away from the line of sight, leaving mostly the **longer wavelengths**—red, orange, and yellow—traveling directly to our eyes.
+
+2. **Result: Red/orange sky**  
+   The remaining light that reaches us at sunset is dominated by red and orange hues, giving the sky a warm, vibrant color.
+
+---
+
+### 🌫️ How Dust, Pollution, and Atmospheric Conditions Change Colors
+
+- **Dust, pollution, and aerosols** (like smoke or haze) can alter the scattering behavior:
+  - These particles are **larger** than gas molecules and scatter light differently. They scatter **all wavelengths more equally**, a phenomenon called **Mie scattering**.
+  - Mie scattering is less dependent on wavelength, so it can **reduce the blue color** and make the sky appear **gray, hazy, or yellowish**.
+  - In polluted or dusty conditions, sunsets may appear **duller or more yellow/orange**, and the daytime sky may look **less blue** due to increased scattering of all colors.
+
+- **Haze or fog** can also reduce contrast and make the sky appear whitish or gray, especially during midday, because the scattering is more uniform.
+
+- **Clean, clear air** enhances Rayleigh scattering, leading to vivid blue skies and vibrant red sunsets.
+
+---
+
+### Summary
+
+| Condition | Effect on Sky Color |
+|---------|----------------------|
+| **Daytime (clear sky)** | Blue due to Rayleigh scattering of short blue wavelengths |
+| **Sunset/sunrise** | Red/orange because longer wavelengths pass through more atmosphere with less scattering |
+| **Pollution/dust** | Reduces blue scattering, dulls colors, may make sunsets less vivid or skies gray |
+
+---
+
+✅ In short:  
+**The sky is blue because blue light scatters more in the atmosphere. At sunset, the path of sunlight is longer, so blue light is scattered away, leaving red and orange light visible. Dust and pollution alter this by scattering all wavelengths more evenly, reducing the vividness of colors.**
+
+This beautiful phenomenon is a direct result of the physics of light and the composition of our atmosphere. 🌍✨</mark></div></div><div class='o diff'><div class=oh><b>r2</b> &middot; differs from token 24 &middot; 1016 tokens</div><div class=ot><span class=ctx>The colors of the sky during the day and at sunset are due to a phenomenon in physics known as **Rayleigh scattering</span><mark>**, which describes how light interacts with molecules and small particles in the Earth&#x27;s atmosphere.
+
+---
+
+### 🌞 Why the Sky is Blue During the Day
+
+1. **Sunlight is made of all colors**  
+   Sunlight, or white light, is composed of a spectrum of colors—each with a different wavelength. The visible spectrum ranges from short-wavelength violet and blue to long-wavelength red and orange.
+
+2. **Rayleigh Scattering**  
+   When sunlight enters the atmosphere, it collides with gas molecules (like nitrogen and oxygen). These molecules are much smaller than the wavelengths of visible light.  
+   According to **Rayleigh&#x27;s law**, the amount of scattering is **inversely proportional to the fourth power of the wavelength**:
+   \[
+   I \propto \frac{1}{\lambda^4}
+   \]
+   This means **shorter wavelengths (blue and violet)** are scattered much more than longer wavelengths (red, orange, yellow).
+
+3. **Blue light is scattered more**  
+   Since blue light has a shorter wavelength (~450 nm) than red (~650 nm), it is scattered about **10 times more** than red light.  
+   This scattered blue light reaches our eyes from all directions, making the sky appear blue during the day.
+
+4. **Why not violet?**  
+   Violet light has an even shorter wavelength and is scattered even more than blue. However, the sun emits less violet light, and our eyes are less sensitive to violet. Also, some violet light is absorbed by the upper atmosphere. So, blue dominates our perception.
+
+---
+
+### 🌅 Why Sunsets Are Red or Orange
+
+At sunset, the sun is near the horizon, so sunlight must pass through a much thicker layer of the atmosphere to reach our eyes.
+
+1. **Longer path through atmosphere**  
+   As light travels through more atmosphere, **more of the shorter wavelengths (blue and green)** are scattered out of the direct path.  
+   The blue and green light is scattered away, leaving mostly the **longer wavelengths**—red, orange, and yellow—traveling directly to our eyes.
+
+2. **Result: Red/orange sky**  
+   The remaining light that reaches us is dominated by red and orange hues, giving sunsets their characteristic warm colors.
+
+---
+
+### 🌫️ How Dust, Pollution, and Atmospheric Conditions Change Colors
+
+Atmospheric particles (dust, pollution, water droplets, smoke, or aerosols) can alter the colors we see:
+
+1. **Mie Scattering**  
+   When particles are larger than the wavelength of light (like dust or pollution), they scatter all wavelengths **more equally**—a process called **Mie scattering**.  
+   This leads to:
+   - A **more uniform, whitish or grayish sky** during the day.
+   - **Weaker blue sky** and **less vivid sunsets**.
+   - Sometimes, sunsets can appear **duller or more yellowish** due to the even scattering of all colors.
+
+2. **Pollution and haze**  
+   In cities or areas with high pollution, the sky may appear **gray or hazy** during the day because particles scatter all colors, reducing the blue dominance.  
+   Sunsets may appear **duller or more yellow/orange** due to the scattering of longer wavelengths.
+
+3. **Smoke or dust storms**  
+   These can create **reddish or pinkish sunsets** due to increased scattering and absorption of blue light.  
+   In some cases, the sky may appear **dark or deep red** during the day due to heavy particulate matter.
+
+4. **Water droplets (fog, clouds)**  
+   Clouds scatter all wavelengths equally, so they appear white or gray.  
+   However, when sunlight passes through thin clouds or fog at sunset, the red/orange light can be enhanced, creating dramatic red skies.
+
+---
+
+### Summary
+
+| Condition | Sky Color | Reason |
+|--------|----------|--------|
+| Daytime | Blue | Rayleigh scattering favors short blue wavelengths |
+| Sunset | Red/Orange | Long path through atmosphere scatters away blue/green, leaving red/orange |
+| Polluted/Dusty | Gray, hazy, dull reds | Mie scattering scatters all wavelengths equally |
+
+---
+
+✅ In short:  
+**The sky is blue because blue light is scattered more by air molecules.**  
+**Sunsets are red because the light travels through more atmosphere, scattering away the blue, leaving reds.**  
+**Pollution and dust reduce blue scattering and can dull or shift colors**, making sunsets less vibrant or skies appear hazy.
+
+This beautiful interplay of light and atmosphere is a classic example of how simple physics creates the natural world&#x27;s most familiar sights. 🌍✨</mark></div></div><div class='o diff'><div class=oh><b>r3</b> &middot; differs from token 24 &middot; 911 tokens</div><div class=ot><span class=ctx>The colors of the sky during the day and at sunset are due to a phenomenon in physics known as **Rayleigh scattering</span><mark>**, which describes how light interacts with molecules and small particles in the Earth&#x27;s atmosphere.
+
+---
+
+### 🌞 Why the Sky is Blue During the Day
+
+1. **Sunlight is made of all colors**  
+   Sunlight, or white light, is composed of a spectrum of colors—each with a different wavelength. The visible spectrum ranges from short-wavelength violet and blue to long-wavelength red and orange.
+
+2. **Rayleigh Scattering**  
+   When sunlight enters the atmosphere, it collides with gas molecules (like nitrogen and oxygen). These molecules are much smaller than the wavelengths of visible light.  
+   According to **Rayleigh&#x27;s law**, the amount of scattering is **inversely proportional to the fourth power of the wavelength**:
+   \[
+   I \propto \frac{1}{\lambda^4}
+   \]
+   This means **shorter wavelengths (blue and violet)** are scattered much more than longer wavelengths (red, orange, yellow).
+
+3. **Blue light is scattered more**  
+   Since blue light has a shorter wavelength (~450 nm) than red (~650 nm), it is scattered about **10 times more** than red light.  
+   This scattered blue light reaches our eyes from all directions, making the sky appear blue during the day.
+
+4. **Why not violet?**  
+   Violet light has an even shorter wavelength and is scattered even more than blue. However, the sun emits less violet light, and our eyes are less sensitive to violet. Also, some violet light is absorbed by the upper atmosphere. So, blue dominates our perception.
+
+---
+
+### 🌅 Why Sunsets Are Red or Orange
+
+At sunset, the sun is low on the horizon, so sunlight must pass through a much **thicker layer of the atmosphere** to reach our eyes.
+
+1. **Longer path = more scattering**  
+   As light travels through more atmosphere, shorter wavelengths (blue and green) are scattered out of the direct path.  
+   The blue and green light is scattered away from the line of sight, leaving mostly the **longer wavelengths**—red, orange, and yellow—traveling directly to our eyes.
+
+2. **Result: Red/orange sky**  
+   The remaining light that reaches us at sunset is dominated by red and orange hues, giving the sky a warm, vibrant color.
+
+---
+
+### 🌫️ How Dust, Pollution, and Atmospheric Conditions Change Colors
+
+- **Dust, pollution, and aerosols** (like smoke or haze) can alter the scattering process.  
+  These particles are larger than gas molecules and scatter light differently. They can cause **Mie scattering**, which affects all wavelengths more equally.
+
+- **Mie scattering** is less dependent on wavelength, so it can:
+  - Make the sky appear **gray or hazy** instead of blue.
+  - Enhance reds and oranges during sunsets by scattering blue light and allowing reds to dominate.
+  - Create **more vivid or intense sunset colors** in polluted or dusty conditions (e.g., after a wildfire or in urban areas with smog).
+
+- **Clean, clear skies** allow Rayleigh scattering to dominate, producing a crisp blue sky and a subtle red sunset.
+- **Hazy or polluted skies** may result in a duller blue and a less vibrant sunset, or even a pinkish or grayish hue due to the even scattering of all colors.
+
+---
+
+### Summary
+
+| Phenomenon | Cause |
+|----------|-------|
+| Blue sky | Rayleigh scattering of short blue wavelengths by atmospheric gases |
+| Red/orange sunsets | Long path through atmosphere scatters blue/green away, leaving red/orange light |
+| Dust/pollution | Causes Mie scattering, which can dull blue and enhance reds or create hazy skies |
+
+✅ In short:  
+**Blue during the day** because blue light is scattered more by air molecules.  
+**Red/orange at sunset** because the light travels through more atmosphere, scattering away the blue, leaving reds.  
+**Pollution or dust** changes the colors by scattering all wavelengths more evenly, often making sunsets more intense or skies more hazy.
+
+This beautiful interplay of light and atmosphere is a classic example of how simple physics creates the everyday wonders we see in nature. 🌍✨</mark></div></div><div class='o diff'><div class=oh><b>r4</b> &middot; differs from token 24 &middot; 903 tokens</div><div class=ot><span class=ctx>The colors of the sky during the day and at sunset are due to a phenomenon in physics known as **Rayleigh scattering</span><mark>**, which describes how light interacts with molecules and small particles in the Earth&#x27;s atmosphere.
+
+---
+
+### 🌞 Why the Sky is Blue During the Day
+
+1. **Sunlight is made of all colors**  
+   Sunlight, or white light, is composed of a spectrum of colors—each with a different wavelength. The visible spectrum ranges from short-wavelength violet and blue to long-wavelength red and orange.
+
+2. **Rayleigh Scattering**  
+   When sunlight enters the atmosphere, it collides with gas molecules (like nitrogen and oxygen). These molecules are much smaller than the wavelengths of visible light.  
+   According to **Rayleigh&#x27;s law**, the amount of scattering is **inversely proportional to the fourth power of the wavelength**:
+   \[
+   I \propto \frac{1}{\lambda^4}
+   \]
+   This means **shorter wavelengths (blue and violet)** are scattered much more than longer wavelengths (red, orange, yellow).
+
+3. **Blue light is scattered more**  
+   Since blue light has a shorter wavelength (~450 nm) than red (~650 nm), it is scattered about **10 times more** than red light.  
+   This scattered blue light reaches our eyes from all directions, making the sky appear blue during the day.
+
+4. **Why not violet?**  
+   Violet light has an even shorter wavelength and is scattered even more than blue. However, the sun emits less violet light, and our eyes are less sensitive to violet. Also, some violet light is absorbed by the upper atmosphere. So, blue dominates our perception.
+
+---
+
+### 🌅 Why Sunsets Are Red or Orange
+
+At sunset, the sun is low on the horizon, so sunlight must pass through a much **thicker layer of the atmosphere** to reach our eyes.
+
+1. **Longer path = more scattering**  
+   As light travels through more atmosphere, shorter wavelengths (blue and green) are scattered out of the direct path.  
+   The blue and green light is scattered away from the line of sight, leaving mostly the **longer wavelengths**—red, orange, and yellow—traveling directly to our eyes.
+
+2. **Result: Red/orange sky**  
+   The remaining light that reaches us at sunset is dominated by red and orange hues, giving the sky a warm, vibrant color.
+
+---
+
+### 🌫️ How Dust, Pollution, and Atmospheric Conditions Change Colors
+
+- **Dust, pollution, and aerosols** (like smoke or haze) can alter the scattering behavior:
+  - These particles are **larger** than gas molecules and scatter light differently. They scatter **all wavelengths more equally**, a phenomenon called **Mie scattering**.
+  - Mie scattering is less dependent on wavelength, so it can **reduce the blue color** and make the sky appear **gray or hazy**.
+  - In polluted or dusty conditions, sunsets may appear **duller or more yellowish**, or even **pinkish**, because the scattering removes the blue and green components more uniformly.
+  - In some cases, pollution can enhance red hues by increasing the amount of long-wavelength light that reaches the observer.
+
+- **Fog or haze** can make the sky appear white or gray during the day because of widespread scattering of all wavelengths.
+- **Clean, clear skies** allow for the most vivid blue and red/orange sunsets due to efficient Rayleigh scattering.
+
+---
+
+### Summary
+
+| Phenomenon | Cause |
+|----------|-------|
+| Blue sky (daytime) | Rayleigh scattering of short blue wavelengths by atmospheric gases |
+| Red/orange sunsets | Long path through atmosphere scatters blue/green away, leaving red/orange light |
+| Hazy or polluted skies | Mie scattering by larger particles reduces blue and makes skies gray or dull; can alter sunset colors |
+
+✅ In essence:  
+**Blue during the day** because blue light is scattered more by air molecules.  
+**Red/orange at sunset** because the path through the atmosphere removes the blue light.  
+**Pollution/dust** changes these colors by scattering all wavelengths more evenly.
+
+This beautiful interplay of light and atmosphere is a classic example of how simple physics creates the everyday wonders we see in nature. 🌍✨</mark></div></div><div class='o diff'><div class=oh><b>r5</b> &middot; differs from token 24 &middot; 897 tokens</div><div class=ot><span class=ctx>The colors of the sky during the day and at sunset are due to a phenomenon in physics known as **Rayleigh scattering</span><mark>**, which describes how light interacts with molecules and small particles in the Earth&#x27;s atmosphere.
+
+---
+
+### 🌞 Why the Sky is Blue During the Day
+
+1. **Sunlight is made of all colors**  
+   Sunlight, or white light, is composed of a spectrum of colors—each with a different wavelength. The visible spectrum ranges from short-wavelength violet and blue to long-wavelength red and orange.
+
+2. **Rayleigh Scattering**  
+   When sunlight enters the atmosphere, it collides with gas molecules (like nitrogen and oxygen). These molecules are much smaller than the wavelengths of visible light.  
+   According to **Rayleigh&#x27;s law**, the amount of scattering is **inversely proportional to the fourth power of the wavelength**:
+   \[
+   I \propto \frac{1}{\lambda^4}
+   \]
+   This means **shorter wavelengths (blue and violet)** are scattered much more than longer wavelengths (red, orange, yellow).
+
+3. **Blue light is scattered more**  
+   Since blue light has a shorter wavelength (~450 nm) than red (~650 nm), it is scattered about **10 times more** than red light.  
+   This scattered blue light reaches our eyes from all directions, making the sky appear blue during the day.
+
+4. **Why not violet?**  
+   Violet light has an even shorter wavelength and is scattered even more than blue. However, the sun emits less violet light, and our eyes are less sensitive to violet. Also, some violet light is absorbed by the upper atmosphere. So, blue dominates our perception.
+
+---
+
+### 🌅 Why Sunsets Are Red or Orange
+
+At sunset, the sun is low on the horizon, so sunlight must pass through a much **thicker layer of the atmosphere** to reach our eyes.
+
+1. **Longer path = more scattering**  
+   As light travels through more atmosphere, shorter wavelengths (blue and green) are scattered out of the direct path.  
+   The blue and green light is scattered away from the line of sight, leaving mostly the **longer wavelengths**—red, orange, and yellow—traveling directly to our eyes.
+
+2. **Result: Red/orange sky**  
+   The remaining light that reaches us at sunset is dominated by red and orange hues, giving the sky a warm, vibrant color.
+
+---
+
+### 🌫️ How Dust, Pollution, and Atmospheric Conditions Change Colors
+
+- **Dust, pollution, and aerosols** (like smoke or haze) can alter the scattering behavior:
+  - These particles are **larger** than gas molecules and scatter light differently. They scatter **all wavelengths more equally**, a phenomenon called **Mie scattering**.
+  - Mie scattering is less dependent on wavelength, so it can **reduce the blue color** and make the sky appear **gray or hazy**.
+  - In polluted or dusty conditions, sunsets may appear **duller or more yellowish**, or even **pinkish**, depending on the composition of the particles.
+  - In some cases, pollution can enhance reds and oranges by scattering blue light more effectively and allowing reds to dominate.
+
+- **Fog or haze** can make the sky appear white or gray during the day because of widespread scattering of all wavelengths.
+- **Clean, clear skies** allow for the most vivid blue and red/orange sunsets due to minimal scattering interference.
+
+---
+
+### Summary
+
+| Phenomenon | Cause |
+|----------|-------|
+| Blue sky (daytime) | Rayleigh scattering of short blue wavelengths by atmospheric gases |
+| Red/orange sunsets | Long path through atmosphere scatters blue/green away, leaving red/orange light |
+| Dust/pollution effects | Mie scattering by larger particles reduces blue, enhances reds, and can dull or distort colors |
+
+✅ In essence:  
+**Blue during the day** because blue light is scattered more by air molecules.  
+**Red/orange at sunset** because the path through the atmosphere removes the blue light.  
+**Pollution or dust** changes these colors by scattering light differently and reducing contrast.
+
+This beautiful interplay of light and atmosphere is a classic example of how simple physics governs everyday natural phenomena. 🌍✨</mark></div></div><div class='o diff'><div class=oh><b>r6</b> &middot; differs from token 24 &middot; 908 tokens</div><div class=ot><span class=ctx>The colors of the sky during the day and at sunset are due to a phenomenon in physics known as **Rayleigh scattering</span><mark>**, which describes how light interacts with molecules and small particles in the Earth&#x27;s atmosphere.
+
+---
+
+### 🌞 Why the Sky is Blue During the Day
+
+1. **Sunlight is made of all colors**  
+   Sunlight, or white light, is composed of a spectrum of colors—each with a different wavelength. The visible spectrum ranges from short-wavelength violet and blue to long-wavelength red and orange.
+
+2. **Rayleigh Scattering**  
+   When sunlight enters the atmosphere, it collides with gas molecules (like nitrogen and oxygen). These molecules are much smaller than the wavelengths of visible light.  
+   According to **Rayleigh&#x27;s law**, the amount of scattering is **inversely proportional to the fourth power of the wavelength**:
+   \[
+   I \propto \frac{1}{\lambda^4}
+   \]
+   This means **shorter wavelengths (blue and violet)** are scattered much more than longer wavelengths (red, orange, yellow).
+
+3. **Blue light is scattered more**  
+   Since blue light has a shorter wavelength (~450 nm) than red (~650 nm), it is scattered about **10 times more** than red light.  
+   This scattered blue light reaches our eyes from all directions, making the sky appear blue during the day.
+
+4. **Why not violet?**  
+   Violet light has an even shorter wavelength and is scattered even more than blue. However, the sun emits less violet light, and our eyes are less sensitive to violet. Also, some violet light is absorbed by the upper atmosphere. So, blue dominates our perception.
+
+---
+
+### 🌅 Why Sunsets Are Red or Orange
+
+At sunset, the sun is low on the horizon, so sunlight must pass through a much **thicker layer of the atmosphere** to reach our eyes.
+
+1. **Longer path = more scattering**  
+   As light travels through more atmosphere, shorter wavelengths (blue and green) are scattered out of the direct path.  
+   The blue and green light is scattered away from the line of sight, leaving mostly the **longer wavelengths**—red, orange, and yellow—traveling directly to our eyes.
+
+2. **Result: Red/orange sky**  
+   The remaining light that reaches us at sunset is dominated by red and orange hues, giving the sky a warm, vibrant color.
+
+---
+
+### 🌫️ How Dust, Pollution, and Atmospheric Conditions Change Colors
+
+- **Dust, pollution, and aerosols** (like smoke or haze) can alter the scattering process.  
+  These particles are larger than gas molecules and scatter light differently. They can cause **Mie scattering**, which affects all wavelengths more equally.
+
+- **Mie scattering** is less dependent on wavelength, so it can:
+  - Make the sky appear **gray or hazy** instead of blue.
+  - Enhance reds and oranges during sunsets by scattering blue light and allowing reds to dominate.
+  - Create **more vivid or intense sunset colors** in polluted or dusty conditions (e.g., after a wildfire or in urban areas with smog).
+
+- **Clean, clear skies** allow Rayleigh scattering to dominate, producing a crisp blue sky and a subtle red sunset.
+- **Hazy or polluted skies** may result in a duller blue and a less vibrant sunset, or even a pinkish or grayish hue due to the scattering of all wavelengths.
+
+---
+
+### Summary
+
+| Phenomenon | Cause |
+|----------|-------|
+| Blue sky | Rayleigh scattering of short blue wavelengths by atmospheric gases |
+| Red/orange sunsets | Long path through atmosphere scatters blue/green away, leaving red/orange light |
+| Dust/pollution | Causes Mie scattering, which can dull blue and enhance reds or create hazy skies |
+
+✅ In short:  
+**Blue during the day** because blue light is scattered more by air molecules.  
+**Red/orange at sunset** because the light travels through more atmosphere, scattering away the blue, leaving reds.  
+**Pollution or dust** changes the colors by altering the scattering process, often making skies hazy or intensifying sunset hues.
+
+This beautiful interplay of light and atmosphere is a classic example of how simple physics creates the everyday wonders we see in nature. 🌍✨</mark></div></div><div class='o diff'><div class=oh><b>r7&ndash;8</b> &middot; differs from token 24 &middot; 1024 tokens</div><div class=ot><span class=ctx>The colors of the sky during the day and at sunset are due to a phenomenon in physics known as **Rayleigh scattering</span><mark>**, which describes how light interacts with molecules and small particles in the Earth&#x27;s atmosphere.
+
+---
+
+### 🌞 Why the Sky is Blue During the Day
+
+1. **Sunlight is made of all colors**  
+   Sunlight, or white light, is composed of a spectrum of colors—each with a different wavelength. The visible spectrum ranges from short-wavelength violet and blue to long-wavelength red and orange.
+
+2. **Rayleigh Scattering**  
+   When sunlight enters the atmosphere, it collides with gas molecules (like nitrogen and oxygen). These molecules are much smaller than the wavelengths of visible light.  
+   According to **Rayleigh&#x27;s law**, the amount of scattering is **inversely proportional to the fourth power of the wavelength**:
+   \[
+   I \propto \frac{1}{\lambda^4}
+   \]
+   This means **shorter wavelengths (blue and violet)** are scattered much more than longer wavelengths (red, orange, yellow).
+
+3. **Blue light is scattered more**  
+   Since blue light has a shorter wavelength (~450 nm) than red (~650 nm), it is scattered about **10 times more** than red light.  
+   This scattered blue light reaches our eyes from all directions, making the sky appear blue during the day.
+
+4. **Why not violet?**  
+   Violet light has an even shorter wavelength and is scattered even more than blue. However, the sun emits less violet light, and our eyes are less sensitive to violet. Also, some violet light is absorbed by the upper atmosphere. So, blue dominates our perception.
+
+---
+
+### 🌅 Why Sunsets Are Red or Orange
+
+At sunset, the sun is near the horizon, so sunlight must pass through a much thicker layer of the atmosphere to reach our eyes.
+
+1. **Longer path through atmosphere**  
+   As light travels through more atmosphere, **more of the shorter wavelengths (blue and green)** are scattered out of the direct path.  
+   The blue and green light is scattered away, leaving mostly the **longer wavelengths**—red, orange, and yellow—traveling directly to our eyes.
+
+2. **Result: Red/orange sky**  
+   The remaining light that reaches us is dominated by red and orange hues, giving sunsets their characteristic warm colors.
+
+---
+
+### 🌫️ How Dust, Pollution, and Atmospheric Conditions Change Colors
+
+Atmospheric particles (dust, pollution, water droplets, smoke, or aerosols) can alter the colors we see:
+
+1. **Mie Scattering**  
+   When particles are larger than the wavelength of light (like dust or pollution), they scatter all wavelengths **more equally**—a process called **Mie scattering**.  
+   This leads to:
+   - A **more uniform, whitish or grayish sky** during the day.
+   - **Weaker blue sky** and **less vivid sunsets**.
+   - Sometimes, sunsets can appear **duller or more yellowish** due to the even scattering of all colors.
+
+2. **Pollution and haze**  
+   In cities or areas with high pollution, the sky may appear **gray or hazy** during the day because particles scatter all colors, reducing the blue dominance.  
+   Sunsets may appear **duller or more yellow/orange** due to the scattering of reds and oranges, but not as vivid as in clean air.
+
+3. **Dust storms or volcanic ash**  
+   These introduce large particles that scatter light broadly.  
+   - The sky may appear **yellow or hazy** during the day.  
+   - Sunsets can become **intense reds or deep oranges** due to the long path through particulate-laden air, enhancing red light transmission.
+
+4. **Water droplets (fog, clouds)**  
+   Clouds scatter all wavelengths equally, so they appear white.  
+   However, when the sun is low, the reds and oranges can still dominate in the sky due to the long path through the atmosphere, especially if the air is clear but the horizon is hazy.
+
+---
+
+### Summary
+
+| Condition | Sky Color | Reason |
+|--------|----------|--------|
+| Daytime (clear air) | Blue | Rayleigh scattering favors short blue wavelengths |
+| Sunset | Red/Orange | Long path through atmosphere scatters blue away, leaving reds |
+| Polluted/dusty air | Gray, hazy | Mie scattering scatters all wavelengths equally |
+| Dust storms/volcanic ash | Yellowish, red sunsets | Particles enhance red light transmission |
+
+---
+
+✅ In short:  
+**The sky is blue because blue light is scattered more by air molecules.**  
+**Sunsets are red because the long path through the atmosphere removes blue and green light, leaving reds.**  
+**Pollution and dust reduce blue</mark></div></div><div class='o diff'><div class=oh><b>r9</b> &middot; differs from token 24 &middot; 897 tokens</div><div class=ot><span class=ctx>The colors of the sky during the day and at sunset are due to a phenomenon in physics known as **Rayleigh scattering</span><mark>**, which describes how light interacts with molecules and small particles in the Earth&#x27;s atmosphere.
+
+---
+
+### 🌞 Why the Sky is Blue During the Day
+
+1. **Sunlight is made of all colors**  
+   Sunlight, or white light, is composed of a spectrum of colors—each with a different wavelength. The visible spectrum ranges from short-wavelength violet and blue to long-wavelength red and orange.
+
+2. **Rayleigh Scattering**  
+   When sunlight enters the atmosphere, it collides with gas molecules (like nitrogen and oxygen). These molecules are much smaller than the wavelengths of visible light.  
+   According to **Rayleigh&#x27;s law**, the amount of scattering is **inversely proportional to the fourth power of the wavelength**:
+   \[
+   I \propto \frac{1}{\lambda^4}
+   \]
+   This means **shorter wavelengths (blue and violet)** are scattered much more than longer wavelengths (red, orange, yellow).
+
+3. **Blue light is scattered more**  
+   Since blue light has a shorter wavelength (~450 nm) than red (~650 nm), it is scattered about **10 times more** than red light.  
+   This scattered blue light reaches our eyes from all directions, making the sky appear blue during the day.
+
+4. **Why not violet?**  
+   Violet light has an even shorter wavelength and is scattered even more than blue. However, the sun emits less violet light, and our eyes are less sensitive to violet. Also, some violet light is absorbed by the upper atmosphere. So, blue dominates our perception.
+
+---
+
+### 🌅 Why Sunsets Are Red or Orange
+
+At sunset, the sun is low on the horizon, so sunlight must pass through a much **thicker layer of the atmosphere** before reaching our eyes.
+
+1. **Longer path = more scattering**  
+   As light travels through more atmosphere, shorter wavelengths (blue and green) are scattered out of the direct path.  
+   The blue and green light is scattered away from the line of sight, leaving mostly the **longer wavelengths**—red, orange, and yellow—traveling directly to our eyes.
+
+2. **Result: Red/orange sky**  
+   The remaining light that reaches us at sunset is dominated by red and orange hues, giving the sky a warm, vibrant color.
+
+---
+
+### 🌫️ How Dust, Pollution, and Atmospheric Conditions Change Colors
+
+- **Dust, pollution, and aerosols** (like smoke or haze) can alter the scattering behavior:
+  - These particles are **larger** than gas molecules and scatter light differently. They scatter **all wavelengths more equally**, a phenomenon called **Mie scattering**.
+  - Mie scattering is less dependent on wavelength, so it can **reduce the blue color** and make the sky appear **gray or hazy**.
+  - In polluted or dusty conditions, sunsets may appear **duller or more yellowish**, or even **pinkish**, depending on the composition of the particles.
+  - In some cases, pollution can enhance reds and oranges by scattering blue light more effectively and allowing reds to dominate.
+
+- **Fog or haze** can make the sky appear white or gray during the day because of widespread scattering of all wavelengths.
+- **Clean, clear skies** allow for the most vivid blue and red/orange sunsets due to minimal scattering interference.
+
+---
+
+### Summary
+
+| Phenomenon | Cause |
+|----------|-------|
+| Blue sky (daytime) | Rayleigh scattering of short blue wavelengths by atmospheric gases |
+| Red/orange sunsets | Long path through atmosphere scatters blue/green away, leaving red/orange light |
+| Dust/pollution effects | Mie scattering by larger particles reduces blue, enhances reds, and can dull or distort colors |
+
+✅ In essence:  
+**Blue during the day** because blue light is scattered more by air molecules.  
+**Red/orange at sunset** because the path through the atmosphere removes the blue light.  
+**Pollution or dust** changes these colors by scattering light differently and reducing contrast.
+
+This beautiful interplay of light and atmosphere is a classic example of how simple physics governs everyday natural phenomena. 🌍✨</mark></div></div></div></section><section class=pr id=story><p class=pq><b>story</b><span>Write a short story about a lighthouse keeper on a remote island who finds a message in a bottle that seems to be addressed to them personally.</span></p><div class=outs><div class=o><div class=oh>reference: E1 greedy, r0 &middot; 931 tokens &middot; <b>r4</b> identical</div><div class=ot>The wind howled across Blackthorn Point, a jagged tooth of rock rising from the churning North Sea. Elias Thorne, the lighthouse keeper, stood at the tall, weathered railing, his breath pluming in the cold air. For twenty-three years, he’d watched the same relentless storm, the same indifferent waves, the same endless expanse of grey. His world was the rhythmic *clack-clack* of the lamp, the groan of the iron tower, and the salt-stung silence of the island.
+
+He’d found the bottle half-buried in the damp sand near the base of the cliff, tucked behind a loose stone. It was small, chipped, the glass cloudy with sea spray. Inside, nestled in a scrap of faded blue cloth, was a single, folded piece of paper. No return address. Just a message, written in a hand that seemed both familiar and strangely distant:
+
+&gt; *To Elias Thorne, Keeper of Blackthorn Point, who sees the sea as a mirror and the sky as a wound:*
+&gt;
+&gt; *I am not who you think. I am the one who watches from the other side of the waves. I have been waiting for you to find this. The light you keep burning is not just for ships. It is a signal. A signal to the ones who are lost, not just at sea, but in the silence between heartbeats. You carry a memory I cannot forget. Find the stone beneath the old oak. It will speak. And when it does, you will know I am not gone. I am simply waiting to be seen.*
+&gt;
+&gt; *— M.*
+
+Elias froze. His hands, usually steady, trembled. *M.* The name was a ghost in his memory. His mother, Margaret. She’d died ten years ago, a year before he’d taken the post. A sudden illness, a quiet passing. He’d buried her on the island’s only hill, near the old oak tree. He’d never spoken of her after that. The sea had always felt like a cold, indifferent witness to her absence.
+
+He stared at the paper, the words burning into his mind. *The light you keep burning is not just for ships.* He’d always thought it was. A duty. A beacon. But now, it felt different. A message. A *call*.
+
+That night, he climbed the hill to the old oak. The wind whispered through its branches like a sigh. Beneath its roots, half-buried in moss and roots, was a smooth, dark stone, worn smooth by centuries of rain. He picked it up. It was warm. And when he pressed it to his palm, a faint vibration pulsed through his bones — not sound, but a sensation, like a memory surfacing.
+
+He closed his eyes. And suddenly, he wasn’t on the hill. He was standing on a shore, not of Blackthorn, but of a different coast — a place he’d never seen. The sky was bruised purple, and the sea was calm, still. A woman stood on the shore, her back to him, her hair like silver in the wind. She turned slowly. Her face was familiar — Margaret’s face, but older, wiser, with eyes that held the depth of the ocean.
+
+“You found it,” she said, her voice soft, like waves on stone.
+
+Elias opened his eyes. He was back on the hill. The stone was cold. The oak stood silent. The wind had died.
+
+He sat on the grass, heart pounding. The message wasn’t from a stranger. It was from *her*. From Margaret. She hadn’t died. She’d been waiting. Not in the grave, but in the silence, in the light, in the sea’s endless watch.
+
+He walked back to the lighthouse. The lamp was burning. He turned it to full beam, not just for ships, but for the sky, for the sea, for the memory of a woman who had loved him in a way he’d never known.
+
+And from that day on, Elias Thorne didn’t just keep the light. He *listened* to it. And sometimes, when the wind was right, he swore he could hear a whisper — not from the sea, but from the stone beneath the oak — a soft, familiar voice saying, *I am here. I am waiting. I am seen.*
+
+And for the first time in twenty-three years, he felt not alone. He felt *known*.</div></div><div class='o diff'><div class=oh><b>r0</b> &middot; differs from token 330 &middot; 790 tokens</div><div class=ot><span class=ctx>&hellip;beats. You carry a memory I cannot forget. Find the stone beneath the old oak. It will speak. And when it does, you will know I am not gone. I am simply waiting</span><mark> for the right light to shine on the right place.*
+&gt;
+&gt; *— M.*
+
+Elias froze. His hands, usually steady, trembled. *M.* The name. It was a name he’d never heard, yet it felt like a key turning in a lock he didn’t know existed. He’d never spoken to anyone on the island. The only other human presence was the occasional fisherman, and even they were distant, fleeting. He’d lived alone, yes, but never felt truly *seen*.
+
+He returned to the cottage, the paper clutched like a secret. That night, he lit the lamp, its beam cutting through the fog like a silver blade. He walked to the old oak tree, its gnarled roots exposed by the storm. Beneath it, half-buried in moss and sand, was a smooth, dark stone, shaped like a teardrop. He picked it up. It was cold, heavy. As he held it, a faint vibration pulsed through his palm, like a heartbeat.
+
+He sat on the porch, the stone in his lap. The wind still howled, but it no longer felt like a threat. It felt like a song. And in that silence, he remembered something he’d buried deep—his mother, long gone, who used to say, “The sea doesn’t forget. It just waits for the right light to show it what it’s holding.” He hadn’t believed her then. Now, he did.
+
+The next morning, he found a second bottle, half-submerged in the tide pool. Inside, a single line: *“The light is not just for ships. It is for those who remember.”*
+
+Elias smiled, a real one, for the first time in years. He didn’t know who M. was. He didn’t know if they were real or a memory born of loneliness. But for the first time, the lighthouse didn’t feel like a duty. It felt like a conversation. A signal. A bridge.
+
+And as the sun rose over Blackthorn Point, casting long shadows across the cliffs, Elias Thorne stood at the railing, not just watching the sea—but listening. And in that listening, he felt, finally, seen.</mark></div></div><div class='o diff'><div class=oh><b>r1, r9</b> &middot; differs from token 272 &middot; 861 tokens</div><div class=ot><span class=ctx>&hellip;o watches from the other side of the waves. I have been waiting for you to find this. The light you keep burning is not just for ships. It is a signal. A signal</span><mark> that someone is still listening. Someone who remembers the shape of the sea when it was young. Find the cove where the tide pulls back like a sigh. There, beneath the old oak, you will find a stone. It is warm. It remembers. It speaks. You will understand then. You are not alone. You are not forgotten.*
+&gt;
+&gt; *—A Keeper of the Deep*
+
+Elias stared at the words. His hands trembled. *A Keeper of the Deep?* He’d never heard of such a thing. The island had no known history of such a role. The sea was vast, ancient, and terrifyingly indifferent. He’d spent his life guarding the light, not listening to whispers from the deep.
+
+That night, he lit the lamp with a quiet, solemnity. He didn’t sleep. He sat by the window, the message open on his lap, the wind outside like a low, persistent hum. He thought of the old oak near the cove—the one with the gnarled roots that seemed to twist like fingers into the rock. He remembered the stories his grandfather used to tell: of fishermen who vanished, of storms that didn’t end, of a place where the sea *breathed*.
+
+The next morning, he walked to the cove. The tide had pulled back, revealing a patch of wet sand. In the shadow of the old oak, half-buried in the damp earth, was a smooth, dark stone. It was warm to the touch, even in the early morning chill. It felt… alive.
+
+He picked it up. It was heavy, smooth, and when he pressed his palm to its surface, a faint vibration pulsed through his hand, like a slow, deep heartbeat. He closed his eyes and listened. Not to the wind, not to the waves—but to the silence between them. And in that silence, he heard it: a soft, rhythmic sound, like a lullaby sung underwater, a melody that had been buried for centuries.
+
+He opened his eyes. The sea was still. The light from the tower flickered gently, casting long shadows across the rocks.
+
+For the first time in decades, Elias didn’t feel alone.
+
+He returned to the lighthouse that evening, the stone tucked in his coat. He didn’t write a log. He simply sat by the lamp and whispered, “I hear you now.”
+
+And from that day on, the light at Blackthorn Point burned not just for ships—but for the deep, for the quiet ones who watched from the edge of the world. And sometimes, when the wind was still and the sea was calm, Elias would swear he could hear a soft, ancient song rising from the waves—like a reply, like a promise.
+
+He wasn’t just a keeper anymore.
+
+He was a listener. And the sea, at last, had remembered his name.</mark></div></div><div class='o diff'><div class=oh><b>r2</b> &middot; differs from token 272 &middot; 993 tokens</div><div class=ot><span class=ctx>&hellip;o watches from the other side of the waves. I have been waiting for you to find this. The light you keep burning is not just for ships. It is a signal. A signal</span><mark> that someone is still listening. Someone who remembers the shape of the sea when it was young. Find the cove where the tide pulls back like a sigh. There, beneath the old oak, you will find a stone. It is warm. It remembers. It speaks. You will understand then. You are not alone. You are not forgotten.*
+&gt;
+&gt; *—A Keeper of the Deep*
+
+Elias stared at the words, his heart hammering against his ribs. *A Keeper of the Deep?* He’d never heard of such a thing. The island had no known history of such a role. He’d read the old logs, the maps, the weather reports – nothing. The sea was vast, indifferent, and he’d always believed it was just a place of storms and solitude.
+
+But the message felt… true. Like a whisper from the deep that had been waiting for him.
+
+That night, he lit the lamp with extra care, the beam sweeping the dark water with a steady, unwavering rhythm. He didn’t sleep. He sat by the window, the paper in his hands, tracing the words. *The cove where the tide pulls back like a sigh.* He knew that cove – a narrow inlet hidden behind a curtain of rocks, only visible at low tide. He’d walked there once, as a boy, with his father. They’d found nothing but driftwood and a single, smooth stone.
+
+He went early the next morning, before the sun rose. The tide was receding, revealing the cove as a shallow, moonlit pool. The sea air was thick with salt and something else – a faint, briny sweetness, like old seaweed and rain.
+
+And there, half-buried in the sand, was a stone. Not smooth. Not ordinary. It was dark, almost black, with veins of silver running through it like frozen lightning. It was warm to the touch, pulsing slightly, as if breathing.
+
+Elias picked it up. It felt heavy, yet light. As he held it, the words from the note seemed to echo in his mind, not just as a message, but as a memory.
+
+He remembered the night his father died. A storm. The sea had roared like a beast. The lighthouse beam had flickered, then died. For hours, Elias had stood in the tower, watching the waves crash against the rocks, feeling the silence of the island grow heavier. He’d thought he was alone. But in that moment, he’d *felt* something. A presence. A pulse beneath the waves. A voice in the wind.
+
+He’d never told anyone.
+
+Now, with the stone in his hand, the memory returned. Not as a memory, but as a truth. The sea wasn’t just water. It was alive. It remembered. It watched. And it had a keeper too — not of ships, but of the deep, of the silence, of the forgotten moments.
+
+He sat on the shore, the stone resting in his palm, the light from the lighthouse casting long shadows across the water. The wind still howled, but it no longer felt like a threat. It felt like a song.
+
+And for the first time in twenty-three years, Elias Thorne smiled.
+
+He wasn’t alone. He wasn’t forgotten.
+
+He was part of something older than the island, older than the sea. And the light he kept burning — it wasn’t just for ships.
+
+It was for the deep.
+
+And for the one who had been waiting.</mark></div></div><div class='o diff'><div class=oh><b>r3</b> &middot; differs from token 272 &middot; 838 tokens</div><div class=ot><span class=ctx>&hellip;o watches from the other side of the waves. I have been waiting for you to find this. The light you keep burning is not just for ships. It is a signal. A signal</span><mark> that someone is still listening. Someone who remembers the shape of the sea when it was young. Find the cove where the tide pulls back like a sigh. There, beneath the old oak, you will find a stone. It is warm. It remembers. It speaks. You will understand then. You are not alone. You are not forgotten.*
+&gt;
+&gt; *—A Keeper of the Deep*
+
+Elias stared at the words. His hands trembled. *A Keeper of the Deep?* He’d never heard of such a thing. The island had no known history of such a role. The sea was vast, ancient, and terrifyingly indifferent. He’d spent his life guarding the light, not listening to whispers from the deep.
+
+That night, he lit the lamp with a quiet, solemnity. He didn’t sleep. He sat by the window, the message open on his lap, the wind outside like a low, persistent hum. He thought of the old oak near the cove—the one with the gnarled roots that seemed to twist like fingers into the earth. He remembered the stories his grandfather used to tell: of fishermen who vanished, of storms that didn’t end, of a time when the sea *spoke* in riddles.
+
+The next morning, he walked to the cove. The tide had pulled back, revealing a patch of wet sand. In the shadow of the old oak, half-buried in the damp earth, he found a smooth, dark stone. It was warm to the touch, even in the early morning. It felt… alive.
+
+He picked it up. It wasn’t heavy. It hummed faintly, like a tuning fork struck in silence. As he held it, the wind seemed to still. The sea, far below, fell into a deep, rhythmic breath.
+
+And then, in the quiet, a sound—not a word, not a voice, but a *feeling*—like the memory of a lullaby sung long ago. It wasn’t in his ears. It was in his bones. It was the sound of waves folding back, of tides remembering their names.
+
+Elias closed his eyes. He didn’t know if the message was real. He didn’t know if the stone was magic or memory. But for the first time in twenty-three years, he didn’t feel alone.
+
+He returned to the lighthouse, the stone tucked in his coat. That night, as the lamp burned steady, he whispered into the wind, not to the sea, but to the stone:
+
+“Thank you.”
+
+And for the first time, the light didn’t just guide ships. It seemed to *answer*.
+
+The sea, he realized, had always been watching. And sometimes, it remembered who was listening.</mark></div></div><div class='o diff'><div class=oh><b>r5</b> &middot; differs from token 272 &middot; 1024 tokens</div><div class=ot><span class=ctx>&hellip;o watches from the other side of the waves. I have been waiting for you to find this. The light you keep burning is not just for ships. It is a signal. A signal</span><mark> that someone is still listening. Someone who remembers the shape of the sea when it was young. Find the cove where the tide pulls back like a sigh. There, beneath the old oak, you will find a stone. It is warm. It remembers. It speaks. You will understand then. You are not alone. You are not forgotten.*
+&gt;
+&gt; *—A Keeper of the Deep*
+
+Elias stared at the words, his heart hammering against his ribs. *A Keeper of the Deep?* He’d never heard of such a thing. The island had no known history of such a role. He’d read the old logs, the maps, the weather reports – nothing. The sea was vast, indifferent, and he’d always believed it was just a place of storms and solitude.
+
+But the message felt… true. Like a whisper from the deep that had been waiting for him.
+
+That night, he lit the lamp with extra care, the beam sweeping the dark water with a steady, unwavering rhythm. He didn’t sleep. He sat by the window, the paper in his hands, tracing the words. *The cove where the tide pulls back like a sigh.* He knew that cove – a narrow inlet hidden behind a curtain of rocks, only visible at low tide. He’d walked there once, as a boy, with his father. They’d found nothing but driftwood and a single, smooth stone.
+
+He went early the next morning, before the sun rose. The tide was receding, revealing the cove as a shallow, moonlit pool. The sea air was thick with salt and something else – a faint, briny sweetness, like old seaweed and rain.
+
+And there, half-buried in the sand, was a stone. Not smooth. Not ordinary. It was dark, almost black, with veins of silver running through it like frozen lightning. It was warm to the touch, pulsing with a faint, internal heat. As he touched it, a low hum vibrated through his bones, not loud, but deep, like the sound of the sea itself breathing.
+
+He sat on the sand, the stone in his palm. The wind picked up, and for a moment, the sea didn’t roar. It *sang*. A soft, melodic hum, like a lullaby sung from the bottom of the ocean. And in that silence, he saw it – not with his eyes, but in the space between thoughts.
+
+He saw a figure, tall and shadowed, standing on the edge of the deep, watching the lighthouse beam. Not a man. Not a woman. A shape made of light and water, like the sea itself given form. And it smiled.
+
+*You are not alone,* the hum seemed to say. *You are not forgotten. You are a keeper too. Of memory. Of silence. Of the sea’s quiet truth.*
+
+Elias closed his eyes. The message wasn’t just a letter. It was a key. A bridge between the known and the unseen. The lighthouse wasn’t just a warning to ships. It was a beacon to those who listened – to those who remembered the sea’s ancient language.
+
+He returned to the tower that night, the stone tucked in his coat. He didn’t tell anyone. He didn’t need to. The light still burned. The sea still roared. But now, when the wind howled, Elias would sometimes hear a soft hum beneath it – a whisper from the deep, a message from a keeper who had waited, and who had finally found him.
+
+And in that moment, on the edge of the world, he felt not loneliness, but belonging.
+
+The sea,</mark></div></div><div class='o diff'><div class=oh><b>r6</b> &middot; differs from token 330 &middot; 812 tokens</div><div class=ot><span class=ctx>&hellip;beats. You carry a memory I cannot forget. Find the stone beneath the old oak. It will speak. And when it does, you will know I am not gone. I am simply waiting</span><mark> for the right light to shine on the right place.*
+&gt;
+&gt; *— M.*
+
+Elias froze. His hands, usually steady, trembled. *M.* The name. It was a name he’d never heard, yet it felt like a key turning in a lock he didn’t know existed. He’d never spoken to anyone on the island. No visitors. No letters. Just the wind and the sea.
+
+He returned to the cottage, the paper trembling in his hands. He found the old oak tree near the shore, its roots gnarled and deep. Beneath it, half-buried in moss and sand, was a smooth, dark stone, shaped like a teardrop. He picked it up. It was cold, heavy. As he held it, a strange warmth spread through his chest. A memory surfaced—not his own, but *hers*. A woman, young, laughing, standing on the same cliff, holding a bottle of sea-salt water. Her name was Mira. She’d been his sister, long thought dead in a storm years ago.
+
+He’d buried her in the island’s hidden cove, a secret he’d kept for decades. He’d never told anyone. He’d thought the sea had taken her, and he’d carried the silence like a stone.
+
+But this message… it wasn’t just a letter. It was a *recognition*. A ghost of a sister, returned not in flesh, but in memory, in the language of the sea.
+
+That night, as the fog rolled in, Elias lit the lamp not just for the ships, but with a quiet, solemn purpose. He placed the stone on the sill of the cottage, where the wind could carry it to the sea. And as the beam swept across the dark water, he whispered, “I see you, Mira. I see you. And I am not alone.”
+
+The next morning, the bottle was gone. The sea had taken it, or perhaps it had simply found its way back to the deep. But Elias no longer felt the silence. He felt a pulse. A light. A message answered.
+
+And from that day on, the lighthouse at Blackthorn Point burned not just for ships—but for the ones who had been lost, and for the ones who had waited, in the quiet between heartbeats, to be found.</mark></div></div><div class='o diff'><div class=oh><b>r7</b> &middot; differs from token 272 &middot; 925 tokens</div><div class=ot><span class=ctx>&hellip;o watches from the other side of the waves. I have been waiting for you to find this. The light you keep burning is not just for ships. It is a signal. A signal</span><mark> that someone is still listening. Someone who remembers the shape of the sea when it was young. Find the cove where the tide pulls back like a sigh. There, beneath the old oak, you will find a stone. It is warm. It remembers. It speaks. You will understand then. You are not alone. You are not forgotten.*
+&gt;
+&gt; *—A Keeper of the Deep*
+
+Elias stared at the words, his heart hammering against his ribs. *A Keeper of the Deep?* He’d never heard of such a thing. The island had no known history of such a role. He’d read the old logs, the maps, the weather reports – nothing. The sea was vast, indifferent, and he’d always believed it was just a place of storms and solitude.
+
+But the message felt… true. Like a whisper from the deep that had been waiting for him.
+
+That night, he lit the lamp with extra care, the beam sweeping the dark water with a steady, unwavering rhythm. He didn’t sleep. He sat by the window, the paper in his hands, tracing the words. *The cove where the tide pulls back like a sigh.* He knew that cove – a narrow inlet hidden behind a curtain of rocks, only visible at low tide. He’d walked there once, as a boy, with his father. They’d found nothing but driftwood and a single, smooth stone.
+
+He went early the next morning, before the sun rose. The tide was receding, revealing the cove as a shallow, moonlit pool. The sea air was thick with salt and something else – a faint, briny sweetness, like old seaweed and rain.
+
+And there, half-buried in the sand, was a stone. Not smooth. Not ordinary. It was dark, almost black, with veins of silver running through it like frozen lightning. It was warm to the touch, pulsing slightly, as if breathing.
+
+Elias knelt, his hands trembling. He placed the stone in his pocket. As he did, a memory surfaced – not his own. A woman’s voice, soft and clear, singing a lullaby he’d never heard before. A child’s laughter. A wave breaking not with fury, but with gentle rhythm.
+
+He didn’t know where the memory came from. But the stone felt like a key.
+
+Later that day, as the sun dipped below the horizon, Elias stood at the lighthouse again. The light burned steady. But now, as he looked out across the sea, he didn’t see only waves and storm. He saw shapes – faint, shimmering silhouettes in the distance, like figures moving with the tide. Not ships. Not ghosts. *Keepers.*
+
+And for the first time in decades, he didn’t feel alone.
+
+He didn’t know if the message was real. He didn’t know if the stone was magic or memory. But he knew this: the sea had a voice. And it had been speaking to him all along.
+
+And now, he would listen. Not just to the wind, or the waves, or the lamp.
+
+But to the deep.
+
+And to the keeper who had waited.</mark></div></div><div class='o diff'><div class=oh><b>r8</b> &middot; differs from token 272 &middot; 810 tokens</div><div class=ot><span class=ctx>&hellip;o watches from the other side of the waves. I have been waiting for you to find this. The light you keep burning is not just for ships. It is a signal. A signal</span><mark> that someone is still listening. Someone who remembers the song of the tides when the world was still soft. Find the stone beneath the old oak. It hums when the wind changes. It will tell you where to go. And when you go, you will understand that the sea does not forget. It only waits.*
+&gt;
+&gt; *—A Friend Who Was Never Lost*
+
+Elias froze. His hands, usually steady, trembled. *A Friend Who Was Never Lost?* He’d never known anyone who’d lived on Blackthorn Point. The island had been abandoned decades ago, its population wiped out by a storm. The records were silent. The only people who’d come were the occasional fisherman or the lighthouse keeper’s family, long gone.
+
+He stared at the paper, the words echoing in the hollow of the tower. *The song of the tides when the world was still soft.* He remembered, as a boy, sitting on the shore with his grandmother, listening to the waves like a lullaby. She’d said the sea had a memory. That it remembered every voice, every sorrow, every hope.
+
+He went to the old oak tree, its roots gnarled and deep in the soil. Beneath it, half-buried in moss and sand, was a smooth, dark stone. As he touched it, a low, resonant hum vibrated through his bones. It wasn’t sound, not exactly. It was a feeling—a warmth, a pull, like a memory surfacing from deep within.
+
+He sat on the stone, the wind howling around him, and closed his eyes. The hum grew stronger. And then, in the silence, he heard it—a sound like waves, but softer, older. A melody. A lullaby. The same one his grandmother had sung.
+
+Tears welled in his eyes. Not from sadness, but from recognition. The sea hadn’t forgotten. It had been waiting. And someone—someone who had once lived here, who had loved this place, who had known the song—had sent a message. Not to warn, not to guide, but to say: *You are not alone. You are part of something older than the rocks. You are part of the sea’s memory.*
+
+He opened his eyes and looked out to the horizon. The light of the lighthouse burned steady, a beacon not just for ships, but for the soul of the island.
+
+And for the first time in twenty-three years, Elias Thorne smiled.
+
+The sea, he realized, had always been listening. And now, he had finally learned how to listen back.</mark></div></div></div></section><section class=pr id=math><p class=pq><b>math</b><span>A train leaves Plzeň at 8:15 and travels toward Prague at an average speed of 72 km/h. A second train leaves Prague at 8:45 toward Plzeň at 90 km/h. The distance between the two cities along the track is 114 km. At what time do the trains meet, and how far from Plzeň? Solve it step by step and state the final answer clearly.</span></p><div class=outs><div class=o><div class=oh>reference: E1 greedy, r0 &middot; 1024 tokens &middot; <b>r0&ndash;1, r3&ndash;4, r6&ndash;9</b> identical</div><div class=ot>Let&#x27;s solve this step by step.
+
+---
+
+### **Given:**
+
+- Distance between Plzeň and Prague: **114 km**
+- Train A (from Plzeň) leaves at **8:15** at **72 km/h**
+- Train B (from Prague) leaves at **8:45** at **90 km/h**
+- We need to find:
+  - The **time** when the two trains meet
+  - The **distance from Plzeň** to the meeting point
+
+---
+
+### **Step 1: Determine how long Train A travels before Train B starts**
+
+Train A starts at 8:15, Train B at 8:45.
+
+Time difference = 8:45 − 8:15 = **30 minutes** = **0.5 hours**
+
+In that time, Train A travels:
+
+$$
+\text{Distance} = \text{Speed} \times \text{Time} = 72 \, \text{km/h} \times 0.5 \, \text{h} = 36 \, \text{km}
+$$
+
+So, when Train B starts at 8:45, the two trains are **36 km apart** (since Train A has already covered 36 km from Plzeň).
+
+---
+
+### **Step 2: After 8:45, both trains are moving toward each other**
+
+Now, both trains are moving toward each other:
+
+- Train A speed: 72 km/h
+- Train B speed: 90 km/h
+- Combined speed:  
+  $$
+  72 + 90 = 162 \, \text{km/h}
+  $$
+
+Remaining distance between them:  
+$$
+114 \, \text{km} - 36 \, \text{km} = 78 \, \text{km}
+$$
+
+Time to meet after 8:45:
+
+$$
+\text{Time} = \frac{\text{Distance}}{\text{Speed}} = \frac{78}{162} \, \text{hours}
+$$
+
+Simplify the fraction:
+
+$$
+\frac{78}{162} = \frac{13}{27} \, \text{hours}
+$$
+
+Convert to minutes:
+
+$$
+\frac{13}{27} \times 60 = \frac{780}{27} \approx 28.888... \, \text{minutes}
+$$
+
+Break it down:
+
+- 28 minutes
+- 0.888... × 60 ≈ 53.33 seconds
+
+So approximately **28 minutes and 53 seconds**
+
+---
+
+### **Step 3: Add this time to 8:45 to get the meeting time**
+
+8:45 + 28 minutes = **9:13**
+
+Then + 53 seconds → **9:13:53**
+
+So, the trains meet at approximately **9:13 and 53 seconds**
+
+But let&#x27;s keep it precise.
+
+---
+
+### **Step 4: Find distance from Plzeň to meeting point**
+
+We can compute this in two ways:
+
+#### **Option 1: Distance traveled by Train A from 8:15 to meeting time**
+
+- Time from 8:15 to meeting time:
+  - From 8:15 to 8:45 = 30 minutes = 0.5 h
+  - From 8:45 to meeting = $ \frac{13}{27} $ h
+  - Total time = $ 0.5 + \frac{13}{27} = \frac{1}{2} + \frac{13}{27} $
+
+Convert to common denominator:
+
+$$
+\frac{1}{2} = \frac{27}{54}, \quad \frac{13}{27} = \frac{26}{54}
+$$
+
+Wait — better to use 54:
+
+$$
+\frac{1}{2} = \frac{27}{54}, \quad \frac{13}{27} = \frac{26}{54}
+$$
+
+So total = $ \frac{27 + 26}{54} = \frac{53}{54} $ hours? Wait — no:
+
+Wait: $ \frac{1}{2} = \frac{27}{54} $?  
+No: $ \frac{1}{2} = \frac{27}{54} $ is wrong.
+
+Actually:
+
+- $ \frac{1}{2} = \frac{27}{54} $? → 27/54 = 1/2 →</div></div><div class='o diff'><div class=oh><b>r2</b> &middot; differs from token 861 &middot; 1024 tokens</div><div class=ot><span class=ctx>&hellip;c{13}{27} = \frac{1}{2} + \frac{13}{27} $
+
+Convert to common denominator:
+
+$$
+\frac{1}{2} = \frac{27}{54}, \quad \frac{13}{27} = \frac{26}{54}
+$$
+
+Wait — better</span><mark> common denominator is 54:
+
+$$
+\frac{1}{2} = \frac{27}{54}, \quad \frac{13}{27} = \frac{26}{54}
+$$
+
+So total time = $ \frac{27 + 26}{54} = \frac{53}{54} $ hours
+
+Now, distance from Plzeň:
+
+$$
+\text{Distance} = 72 \, \text{km/h} \times \frac{53}{54} \, \text{h} = \frac{72 \times 53}{54}
+$$
+
+Simplify:
+
+$$
+\frac{72}{54} = \frac{4}{3</mark></div></div><div class='o diff'><div class=oh><b>r5</b> &middot; differs from token 861 &middot; 1024 tokens</div><div class=ot><span class=ctx>&hellip;c{13}{27} = \frac{1}{2} + \frac{13}{27} $
+
+Convert to common denominator:
+
+$$
+\frac{1}{2} = \frac{27}{54}, \quad \frac{13}{27} = \frac{26}{54}
+$$
+
+Wait — better</span><mark> common denominator is 54:
+
+$$
+\frac{1}{2} = \frac{27}{54}, \quad \frac{13}{27} = \frac{26}{54}
+$$
+
+So total = $ \frac{27 + 26}{54} = \frac{53}{54} $ hours
+
+Now, distance from Plzeň:
+
+$$
+\text{Distance} = 72 \, \text{km/h} \times \frac{53}{54} \, \text{h} = \frac{72 \times 53}{54}
+$$
+
+Simplify:
+
+$$
+\frac{72}{54} = \frac{4}{3},</mark></div></div></div></section><section class=pr id=code><p class=pq><b>code</b><span>Write a Python function `parse_iso8601(s: str)` that parses an ISO 8601 timestamp such as `2026-10-12T14:03:07.250+02:00` into a tuple (year, month, day, hour, minute, second, microsecond, utc_offset_minutes) without using the datetime module. Validate the input and raise ValueError on malformed strings. Include a few pytest test cases.</span></p><div class=outs><div class=o><div class=oh>reference: E1 greedy, r0 &middot; 1024 tokens &middot; <b>r2&ndash;3, r6</b> identical</div><div class=ot>```python
+import re
+from typing import Tuple, ValueError
+
+def parse_iso8601(s: str) -&gt; Tuple[int, int, int, int, int, int, int, int]:
+    &quot;&quot;&quot;
+    Parse an ISO 8601 timestamp string into a tuple (year, month, day, hour, minute, 
+    second, microsecond, utc_offset_minutes).
+    
+    Args:
+        s: ISO 8601 formatted string (e.g., &quot;2026-10-12T14:03:07.250+02:00&quot;)
+    
+    Returns:
+        Tuple of (year, month, day, hour, minute, second, microsecond, utc_offset_minutes)
+    
+    Raises:
+        ValueError: If the input string is malformed or does not conform to ISO 8601 format
+    &quot;&quot;&quot;
+    
+    # Validate input
+    if not isinstance(s, str):
+        raise ValueError(&quot;Input must be a string&quot;)
+    
+    if not s or s.isspace():
+        raise ValueError(&quot;Input string cannot be empty or contain only whitespace&quot;)
+    
+    # Define the expected pattern for ISO 8601 with timezone offset
+    # Format: YYYY-MM-DDTHH:MM:SS.sss[+-]HH:MM
+    pattern = r&#x27;^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})\.(\d{3})([+-])(\d{2}):(\d{2})$&#x27;
+    
+    match = re.match(pattern, s)
+    
+    if not match:
+        # Try without microseconds (e.g., &quot;2026-10-12T14:03:07+02:00&quot;)
+        pattern_no_micro = r&#x27;^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})([+-])(\d{2}):(\d{2})$&#x27;
+        match_no_micro = re.match(pattern_no_micro, s)
+        if not match_no_micro:
+            raise ValueError(f&quot;Invalid ISO 8601 format: {s}&quot;)
+        
+        # Extract values from the no-microsecond version
+        year, month, day, hour, minute, second, tz_sign, tz_hour, tz_minute = match_no_micro.groups()
+        
+        # Microsecond is 0
+        microsecond = 0
+        
+        # Parse timezone offset
+        offset_minutes = int(tz_hour) * 60 + int(tz_minute) * (-1 if tz_sign == &#x27;-&#x27; else 1)
+        
+        # Validate date components
+        if not (1 &lt;= int(month) &lt;= 12):
+            raise ValueError(f&quot;Invalid month: {month}&quot;)
+        if not (1 &lt;= int(day) &lt;= 31):
+            raise ValueError(f&quot;Invalid day: {day}&quot;)
+        
+        # Validate time components
+        if not (0 &lt;= int(hour) &lt;= 23):
+            raise ValueError(f&quot;Invalid hour: {hour}&quot;)
+        if not (0 &lt;= int(minute) &lt;= 59):
+            raise ValueError(f&quot;Invalid minute: {minute}&quot;)
+        if not (0 &lt;= int(second) &lt;= 59):
+            raise ValueError(f&quot;Invalid second: {second}&quot;)
+        
+        return (
+            int(year), int(month), int(day),
+            int(hour), int(minute), int(second),
+            microsecond, offset_minutes
+        )
+    
+    # Extract values from the full pattern (with microseconds)
+    year, month, day, hour, minute, second, microsecond, tz_sign, tz_hour, tz_minute = match.groups()
+    
+    # Parse timezone offset
+    offset_minutes = int(tz_hour) * 60 + int(tz_minute) * (-1 if tz_sign == &#x27;-&#x27; else 1)
+    
+    # Validate date components
+    if not (1 &lt;= int(month) &lt;= 12):
+        raise ValueError(f&quot;Invalid month: {month}&quot;)
+    if not (1 &lt;= int(day) &lt;= 31):
+        raise ValueError(f&quot;Invalid day: {day}&quot;)
+    
+    # Validate time components
+    if not (0 &lt;= int(hour) &lt;= 23):
+        raise ValueError(f&quot;Invalid hour: {hour}&quot;)
+    if not (0 &lt;= int(minute) &lt;= 59):
+        raise ValueError(f&quot;Invalid minute: {minute}&quot;)
+    if not (0 &lt;= int(second) &lt;= 59):
+        raise ValueError(f&quot;Invalid second: {second}&quot;)
+    
+    # Validate microsecond (must be 3 digits)
+    if not (0 &lt;= int(microsecond) &lt;= 999):
+        raise ValueError(f&quot;Invalid microsecond: {microsecond}&quot;)
+    
+    return (
+        int(year), int(month), int(day),
+        int(hour), int</div></div><div class='o diff'><div class=oh><b>r0&ndash;1, r4&ndash;5, r7&ndash;9</b> &middot; differs from token 185 &middot; 1024 tokens</div><div class=ot><span class=ctx>&hellip;, second, microsecond, utc_offset_minutes)
+    
+    Raises:
+        ValueError: If the input string is malformed or does not conform to ISO 8601 format
+    &quot;&quot;&quot;
+</span><mark>    # Validate input
+    if not isinstance(s, str):
+        raise ValueError(&quot;Input must be a string&quot;)
+    
+    if not s or s.isspace():
+        raise ValueError(&quot;Input string cannot be empty or contain only whitespace&quot;)
+    
+    # Define the expected pattern for ISO 8601 with timezone offset
+    # Format: YYYY-MM-DDTHH:MM:SS.sss[+-]HH:MM
+    pattern = r&#x27;^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})\.(\d{3})([+-])(\d{2}):(\d{2})$&#x27;
+    
+    match = re.match(pattern, s)
+    
+    if not match:
+        # Try without microseconds (e.g., &quot;2026-10-12T14:03:07+02:00&quot;)
+        pattern_no_micro = r&#x27;^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})([+-])(\d{2}):(\d{2})$&#x27;
+        match_no_micro = re.match(pattern_no_micro, s)
+        if not match_no_micro:
+            raise ValueError(f&quot;Invalid ISO 8601 format: {s}&quot;)
+        
+        # Extract values from the no-microsecond version
+        year, month, day, hour, minute, second, tz_sign, tz_hour, tz_minute = match_no_micro.groups()
+        
+        # Microsecond is 0 in this case
+        microsecond = 0
+        
+        # Parse timezone offset
+        offset_minutes = int(tz_hour) * 60 + int(tz_minute) * (-1 if tz_sign == &#x27;-&#x27; else 1)
+        
+        # Validate date components
+        if not (1 &lt;= int(month) &lt;= 12):
+            raise ValueError(f&quot;Invalid month: {month}&quot;)
+        if not (1 &lt;= int(day) &lt;= 31):
+            raise ValueError(f&quot;Invalid day: {day}&quot;)
+        
+        # Validate time components
+        if not (0 &lt;= int(hour) &lt;= 23):
+            raise ValueError(f&quot;Invalid hour: {hour}&quot;)
+        if not (0 &lt;= int(minute) &lt;= 59):
+            raise ValueError(f&quot;Invalid minute: {minute}&quot;)
+        if not (0 &lt;= int(second) &lt;= 59):
+            raise ValueError(f&quot;Invalid second: {second}&quot;)
+        
+        return (
+            int(year), int(month), int(day),
+            int(hour), int(minute), int(second),
+            microsecond, offset_minutes
+        )
+    
+    # Extract values from the full pattern (with microseconds)
+    year, month, day, hour, minute, second, microsecond, tz_sign, tz_hour, tz_minute = match.groups()
+    
+    # Parse timezone offset
+    offset_minutes = int(tz_hour) * 60 + int(tz_minute) * (-1 if tz_sign == &#x27;-&#x27; else 1)
+    
+    # Validate date components
+    if not (1 &lt;= int(month) &lt;= 12):
+        raise ValueError(f&quot;Invalid month: {month}&quot;)
+    if not (1 &lt;= int(day) &lt;= 31):
+        raise ValueError(f&quot;Invalid day: {day}&quot;)
+    
+    # Validate time components
+    if not (0 &lt;= int(hour) &lt;= 23):
+        raise ValueError(f&quot;Invalid hour: {hour}&quot;)
+    if not (0 &lt;= int(minute) &lt;= 59):
+        raise ValueError(f&quot;Invalid minute: {minute}&quot;)
+    if not (0 &lt;= int(second) &lt;= 59):
+        raise ValueError(f&quot;Invalid second: {second}&quot;)
+    
+    # Validate microsecond (must be 3 digits)
+    if not (0 &lt;= int(microsecond) &lt;= 999):
+        raise ValueError(f&quot;Invalid microsecond: {microsecond}&quot;)
+    
+    return (
+        int(year), int(month), int(day),
+        int(hour</mark></div></div></div></section><script>document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-theme-toggle]');if(!b)return;var d=document.documentElement,n=d.getAttribute('data-theme')==='dark'?'light':'dark';if(n==='dark')d.setAttribute('data-theme','dark');else d.removeAttribute('data-theme');try{localStorage.setItem('theme',n);}catch(err){}});</script></body></html>

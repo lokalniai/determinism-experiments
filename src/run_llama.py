@@ -2,15 +2,12 @@
 to /completion as token arrays. One JSON record per (prompt, repeat).
 
 Experiments (see EXPERIMENTS.md):
-  e0        smoke test: 1 repeat, 128 tokens
-  e1a       batch size 1, 10 repeats in one server process (reference)
-  e1b       10 server restarts, 1 pass each
-  e1c       same as e1a, on another node of the reference cluster
-  e2_np1    -np 1, 3 concurrent filler clients (target queues behind fillers)
-  e2_np4    -np 4, 3 concurrent filler clients (target batched with fillers)
-  e3_fa_off flash attention off
-  e5_t07    seeded sampling, T=0.7, top-p 0.95
-  e5_t10    seeded sampling, T=1.0, top-p 0.95
+  e0              smoke test: 1 repeat, 128 tokens
+  e1              greedy, 10 repeats in one server process, requests one at a time (the reference)
+  e1_t07/e1_t10   seeded sampling the same way, T=0.7 / 1.0, top-p 0.95
+  e2_np{2,4,8}    --parallel N with N-1 concurrent filler clients, so the target shares each
+                  forward pass with up to N-1 other sequences
+Raw results from before 2026-10-15 use older names (e1a, e5_t07, ...); src/analyze.py maps them.
 """
 import argparse
 import json
@@ -29,19 +26,15 @@ LLAMA = os.environ.get("LLAMA_BIN", str(Path(__file__).resolve().parent.parent /
 PORT = int(os.environ.get("LLAMA_PORT", "18080"))
 URL = f"http://127.0.0.1:{PORT}"
 
-# exp -> server options, request options, repeats, restarts, filler clients
+# exp -> server options, request options, repeats, filler clients
 DEFAULT_SERVER = dict(np=1, fa="on")
 GREEDY = dict(temperature=-1.0)  # <0: greedy, logprobs from a plain softmax of the logits
 EXPS = {
     "e0": dict(reps=1, req=dict(GREEDY, n_predict=128)),
-    "e1a": dict(reps=10, req=GREEDY),
-    "e1b": dict(reps=1, restarts=10, req=GREEDY),
-    "e1c": dict(reps=10, req=GREEDY),  # = e1a, run on another node of the reference cluster
-    "e2_np1": dict(reps=10, req=GREEDY, fillers=3),
-    "e2_np4": dict(reps=10, req=GREEDY, fillers=3, server=dict(np=4)),
-    "e3_fa_off": dict(reps=10, req=GREEDY, server=dict(fa="off")),
-    "e5_t07": dict(reps=10, req=dict(temperature=0.7, top_p=0.95, top_k=0, min_p=0.0, seed=SEED)),
-    "e5_t10": dict(reps=10, req=dict(temperature=1.0, top_p=0.95, top_k=0, min_p=0.0, seed=SEED)),
+    "e1": dict(reps=10, req=GREEDY),
+    "e1_t07": dict(reps=10, req=dict(temperature=0.7, top_p=0.95, top_k=0, min_p=0.0, seed=SEED)),
+    "e1_t10": dict(reps=10, req=dict(temperature=1.0, top_p=0.95, top_k=0, min_p=0.0, seed=SEED)),
+    **{f"e2_np{n}": dict(reps=10, req=GREEDY, fillers=n - 1, server=dict(np=n)) for n in (2, 4, 8)},
 }
 
 
@@ -140,29 +133,27 @@ def run_exp(model, exp, outdir, env):
     targets = rendered_prompts(model)
     fillers = rendered_prompts(model, "fillers")
     w = Writer(outdir, exp, "llama", model, env)
-    for restart in range(spec.get("restarts", 1)):
-        with Server(model, srv["np"], srv["fa"], outdir, f"{model}.{exp}") as s:
-            stop = threading.Event()
-            threads = [threading.Thread(target=filler_loop, args=(fillers, stop, i), daemon=True)
-                       for i in range(spec.get("fillers", 0))]
+    with Server(model, srv["np"], srv["fa"], outdir, f"{model}.{exp}") as s:
+        stop = threading.Event()
+        threads = [threading.Thread(target=filler_loop, args=(fillers, stop, i), daemon=True)
+                   for i in range(spec.get("fillers", 0))]
+        for t in threads:
+            t.start()
+        if threads:
+            time.sleep(3)  # let the fillers occupy the slots first
+        try:
+            for rep in range(spec["reps"]):
+                for p in targets:
+                    out = complete(p["token_ids"], req)
+                    w.write(config=dict(server=srv, req=req, fillers=len(threads)), prompt_id=p["id"],
+                            rep=rep, **out)
+                    print(f"{exp} {model} rep{rep} {p['id']}: {len(out['token_ids'])} tok "
+                          f"{out['t_wall']:.1f}s", flush=True)
+        finally:
+            stop.set()
             for t in threads:
-                t.start()
-            if threads:
-                time.sleep(3)  # let the fillers occupy the slots first
-            try:
-                for rep in range(spec["reps"]):
-                    for p in targets:
-                        out = complete(p["token_ids"], req)
-                        w.write(config=dict(server=srv, req=req, fillers=len(threads)), prompt_id=p["id"],
-                                rep=rep, restart=restart, **out)
-                        print(f"{exp} {model} r{restart} rep{rep} {p['id']}: {len(out['token_ids'])} tok "
-                              f"{out['t_wall']:.1f}s", flush=True)
-            finally:
-                stop.set()
-                for t in threads:
-                    t.join(timeout=120)
-            if restart == 0:
-                (Path(outdir) / f"props.llama.{model}.{exp}.json").write_text(json.dumps(s.props, indent=1))
+                t.join(timeout=120)
+        (Path(outdir) / f"props.llama.{model}.{exp}.json").write_text(json.dumps(s.props, indent=1))
     w.close()
 
 

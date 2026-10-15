@@ -1,32 +1,28 @@
 # Determinism in LLM inference: vLLM vs llama.cpp on MetaCentrum GPUs
 
-Report, 2026-10-12. Plan: [EXPERIMENTS.md](EXPERIMENTS.md). Raw per-run tables:
-[results/summary.md](results/summary.md) (regenerate with `python src/analyze.py`).
+Report, v2, 2026-10-15 (v1 2026-10-12, with more settings; see the plan's status line). Plan:
+[EXPERIMENTS.md](EXPERIMENTS.md). Per-setting metrics: [results/summary.md](results/summary.md)
+(regenerate with `python src/analyze.py`). Viewer: https://lokalniai.github.io/determinism-experiments/
 
 ## TL;DR
 
-1. **At batch size 1, both engines are bit-exact for the dense models.** Every greedy and seeded run
-   (10 repeats × 5 prompts) was identical within a process, across restarts and across nodes of the
-   same GPU type. The one exception is the MoE in vLLM (see 3).
-2. **Batching with other requests is what breaks determinism.** With fillers in the same batch, vLLM
-   produced up to 10 different completions from 10 repeats; llama.cpp with `--parallel 4` and
-   concurrent clients, 5–10. With one slot (`--parallel 1`) llama.cpp stays exact even under load,
-   because requests are processed one at a time.
-3. **The NVFP4 MoE (Qwen3.6-35B-A3B) is nondeterministic in vLLM even at batch size 1**: 10 distinct
-   completions out of 10, already within the same process, while **llama.cpp runs the same weights
-   on the same Blackwell GPU deterministically**. This is specific to vLLM's kernels for this model.
-4. **vLLM's batch-invariant mode works, but costs ~3× throughput and supports few architectures.**
-   On Qwen3-4B it made every batch size (1–8) and batch position give the same output, at
-   173 vs 512 tok/s (batch 8) and 39 vs 118 tok/s (batch 1). It refuses the hybrid LFM2.5
-   (short-conv layers) and Qwen3.6 (Gated DeltaNet layers, and W4A16 NVFP4).
-5. **Changing the GPU changes vLLM's output; llama.cpp's output did not change.** vLLM on L40S vs
-   A100 diverged on 3 of 5 prompts (LFM2.5) and 4 of 5 (Qwen3-4B). llama.cpp was bit-identical on both GPUs for both
-   dense models.
-6. **Engine settings shift the output but keep it stable.** CUDA graphs vs eager, attention backend,
-   flash attention on/off and prefix caching give a *different but reproducible* text (1 distinct
-   output over 10 repeats in all but one case).
-7. Divergence starts where the top-2 tokens are (nearly) tied: the median top-2 logprob gap at the
-   first differing token is 0–0.375 in vLLM (multiples of the BF16 step) and 0.002–0.06 in llama.cpp.
+1. **At batch size 1, both engines are bit-exact for the dense models (E1).** Greedy and seeded
+   sampling alike: 10 repeats × 5 prompts gave one output per prompt. The exception is the NVFP4
+   MoE in vLLM: 10 distinct completions out of 10, greedy or sampled, while **llama.cpp runs the
+   same weights on the same Blackwell GPU deterministically**.
+2. **Sharing the forward pass with other requests breaks determinism (E2).** vLLM batches of 2–8
+   matched the batch-1 output in only 2–38 % of runs, with up to 10 distinct completions from 10
+   repeats. llama.cpp with 2, 4 or 8 parallel slots shared with concurrent clients: 18–54 %, with 4–10
+   distinct completions, and hardly any dependence on the number of slots.
+3. **vLLM's batch-invariant mode removes the batching effect, at ~3× the cost (E3).** On Qwen3-4B,
+   batches of 1, 2, 4 and 8 all gave the same output, at 49/86/173 tok/s instead of 156/264/512
+   (batch 2/4/8). It refuses the other two models (LFM2.5's short-conv layers; the MoE's W4A16 NVFP4
+   kernels).
+4. **Changing the GPU changes vLLM's output; llama.cpp's did not change (E4).** On L40S instead of
+   A100, vLLM diverged on 3 of 5 prompts (LFM2.5) and 4 of 5 (Qwen3-4B), but stayed deterministic
+   on the L40S itself. llama.cpp was bit-identical on both GPUs for both dense models.
+5. Outputs split where the top-2 tokens are (nearly) tied: the median top-2 logprob gap at the
+   first differing token is 0–0.375 in vLLM (multiples of the BF16 step) and 0.006–0.062 in llama.cpp.
 
 ## Setup
 
@@ -34,111 +30,97 @@ Report, 2026-10-12. Plan: [EXPERIMENTS.md](EXPERIMENTS.md). Raw per-run tables:
 |---|---|
 | Engines | vLLM 0.31.0 (torch 2.13, CUDA 13.0, FlashInfer sampler off); llama.cpp b11429 (`d812350`), own CUDA 13.1 build for sm_80/86/89/120a |
 | Models | `LiquidAI/LFM2.5-350M` (BF16), `Qwen/Qwen3-4B-Instruct-2507` (BF16), `nvidia/Qwen3.6-35B-A3B-NVFP4` (MoE; NVFP4 W4A16 experts, FP8 attention projections). GGUFs converted from the same checkpoints. |
-| GPUs | A100-SXM4-40GB (zia, reference), L40S (alfrid6), RTX PRO 6000 Blackwell (grogu; MoE only). A40 (galdor) was skipped: not scheduled within the 2 h queue limit. |
-| Prompts | 5 targets (`hello` "Hello! Who are you?", `fact`, `story`, `math`, `code`), chat template rendered once to token IDs and fed to both engines; reasoning off; `max_tokens=1024`. 30 filler prompts for batching/load. |
-| Repeats | 10 per (model, experiment, config). |
-| Metrics | **match** = share of runs whose token sequence equals the reference run; **uniq** = distinct completions per prompt (max over prompts; 1 = deterministic); **div@** = median first differing token; **gap** = median top-2 logprob gap of the reference at that token. |
-| Cost | 10.3 GPU-h + 2.1 CPU-job-h (incl. smoke tests, build, conversion). |
+| GPUs | A100-SXM4-40GB (zia; reference for the dense models), RTX PRO 6000 Blackwell (grogu; the MoE), L40S (alfrid6; E4). |
+| Prompts | 5 targets (`hello` "Hello! Who are you?", `fact`, `story`, `math`, `code`), chat template rendered once to token IDs and fed to both engines; reasoning off; `max_tokens=1024`. 30 filler prompts for E2/E3. |
+| Repeats | 10 per (setting, model, prompt). |
+| Metrics | **match** = share of runs whose token sequence equals the reference; **outputs** = distinct completions per prompt (max over prompts; 1 = deterministic); **div@** = median first differing token; **gap** = median top-2 logprob gap of the reference at that token. |
 
-Reference for each (GPU, engine, model) is repeat 0 of E1a (batch size 1, one process). For E5 it is
-repeat 0 of the same sampling setting, and for batch-invariant runs repeat 0 at batch size 1.
+Reference: repeat 0 of E1 greedy on the reference GPU, same engine and model. Exceptions: E1
+sampling compares with repeat 0 of the same sampling setting, and E3 with repeat 0 of
+batch-invariant batch 1.
 
 ## Results
 
-### RQ1: repeatability at batch size 1 (E1)
+Cells are **match / outputs**.
 
-| GPU | Engine | Model | within process (E1a) | 10 restarts (E1b) | other node (E1c) |
-|---|---|---|---|---|---|
-| A100 | vLLM | LFM2.5-350M | 1.00 / 1 | 1.00 / 1 | 1.00 / 1 (zia2 vs zia4) |
-| A100 | vLLM | Qwen3-4B | 1.00 / 1 | 1.00 / 1 | 1.00 / 1 (same node) |
-| A100 | llama.cpp | LFM2.5-350M | 1.00 / 1 | 1.00 / 1 | 1.00 / 1 (same node) |
-| A100 | llama.cpp | Qwen3-4B | 1.00 / 1 | 1.00 / 1 | 1.00 / 1 (same node) |
-| L40S | both | both dense | 1.00 / 1 | | |
-| Blackwell | llama.cpp | Qwen3.6 MoE | 1.00 / 1 | 1.00 / 1 | |
-| Blackwell | **vLLM** | **Qwen3.6 MoE** | **0.26 / 10** (div@43) | **0.18 / 10** | |
+### E1: batch size 1, one process
 
-Cells: match / uniq. E1c landed on the reference node zia2 for three of the four combinations;
-a run pinned to zia3 did not start within the 2 h queue limit (see Limitations).
+| Engine | Setting | LFM2.5-350M | Qwen3-4B | Qwen3.6 MoE |
+|---|---|---|---|---|
+| vLLM | greedy | 1.00 / 1 | 1.00 / 1 | **0.26 / 10** (div@43) |
+| vLLM | T = 0.7 | 1.00 / 1 | 1.00 / 1 | **0.22 / 10** |
+| vLLM | T = 1.0 | 1.00 / 1 | 1.00 / 1 | **0.10 / 10** |
+| llama.cpp | greedy | 1.00 / 1 | 1.00 / 1 | 1.00 / 1 |
+| llama.cpp | T = 0.7 | 1.00 / 1 | 1.00 / 1 | 1.00 / 1 |
+| llama.cpp | T = 1.0 | 1.00 / 1 | 1.00 / 1 | 1.00 / 1 |
 
-### RQ2: batching and concurrency (E2)
+Sampling: top-p 0.95, the same seed in every repeat (vLLM per-request `seed`, llama.cpp `seed`).
 
-**vLLM, offline batches** (target + random fillers; match / uniq):
+### E2: batching
 
-| Batch size | LFM2.5 (target first / last) | Qwen3-4B (first / last) | Qwen3.6 MoE (first / last) |
-|---|---|---|---|
-| 2 | 0.02 / 10 · 0.24 / 8 | 0.20 / 8 · 0.20 / 7 | 0.10 / 10 · 0.08 / 10 |
-| 4 | 0.06 / 9 · 0.40 / 10 | 0.20 / 8 · 0.20 / 9 | 0.04 / 10 · 0.00 / 10 |
-| 8 | 0.38 / 7 · 0.32 / 8 | 0.20 / 9 · 0.20 / 10 | 0.10 / 10 · 0.08 / 10 |
+| Engine | Setting | LFM2.5-350M | Qwen3-4B | Qwen3.6 MoE |
+|---|---|---|---|---|
+| vLLM | batch of 2 | 0.02 / 10 | 0.20 / 8 | 0.10 / 10 |
+| vLLM | batch of 4 | 0.06 / 9 | 0.20 / 8 | 0.04 / 10 |
+| vLLM | batch of 8 | 0.38 / 7 | 0.20 / 9 | 0.10 / 10 |
+| llama.cpp | `--parallel 2` | 0.48 / 6 | 0.42 / 9 | 0.20 / 10 |
+| llama.cpp | `--parallel 4` | 0.54 / 5 | 0.46 / 9 | 0.18 / 10 |
+| llama.cpp | `--parallel 8` | 0.52 / 4 | 0.44 / 9 | 0.18 / 10 |
 
-**Server load** (`vllm serve`, `llama-server`; match / uniq):
+vLLM: the target first in an offline batch, the other N−1 prompts drawn at random from the
+fillers (a new draw per repeat). llama.cpp: `llama-server --parallel N` with N−1 clients sending
+fillers (256 tokens each) concurrently, so the target shares each forward pass with up to N−1
+sequences. The `hello` prompt of Qwen3-4B survived every vLLM batch; most other prompts split
+within the first 3–90 tokens. In llama.cpp the match rate barely moves between 2, 4 and 8 slots:
+what matters is that the target shares a forward pass at all, not with how many sequences.
+The `--parallel 2` and `8` runs (2026-10-15) ran on zia1, the reference on zia2; llama.cpp gave
+bit-identical output even across A100 and L40S (E4), so the node is not a factor.
 
-| | LFM2.5 | Qwen3-4B | Qwen3.6 MoE |
-|---|---|---|---|
-| vLLM, no concurrent clients | 1.00 / 1 | 1.00 / 1 | 0.20 / 10 |
-| vLLM, 4 filler clients | 0.38 / 10 | 0.20 / 10 | 0.06 / 10 |
-| llama.cpp `--parallel 1`, 3 filler clients | 1.00 / 1 | 1.00 / 1 | 1.00 / 1 |
-| llama.cpp `--parallel 4`, 3 filler clients | 0.54 / 5 | 0.46 / 9 | 0.18 / 10 |
+### E3: vLLM batch-invariant mode (Qwen3-4B, A100)
 
-**Prefix caching** (vLLM, cache on; repeat 0 cold, 1–9 warm): LFM2.5 0.40 / 1 (cache on changes the
-output, but consistently); Qwen3-4B 0.28 / 2 (cold and warm differ from each other).
-
-**Batch-invariant mode** (`VLLM_BATCH_INVARIANT=1`, Qwen3-4B, A100):
-
-| Batch size | default: match / uniq | batch-invariant: match / uniq | default tok/s | batch-invariant tok/s |
+| Batch size | default (E1/E2): match / outputs | batch-invariant: match / outputs | default tok/s | batch-invariant tok/s |
 |---|---|---|---|---|
 | 1 | 1.00 / 1 | 1.00 / 1 | 118 | 39 |
 | 2 | 0.20 / 8 | **1.00 / 1** | 156 | 49 |
-| 4 | 0.20 / 9 | **1.00 / 1** | 264 | 86 |
-| 8 | 0.20 / 10 | **1.00 / 1** | 512 | 173 |
+| 4 | 0.20 / 8 | **1.00 / 1** | 264 | 86 |
+| 8 | 0.20 / 9 | **1.00 / 1** | 512 | 173 |
 
-(Throughput at batch size > 1 is the whole batch; at batch size 1 a single request.) The
-batch-invariant output differs from the default output on 4 of 5 prompts (only `hello` is equal):
-it is a different, but fixed, computation. Unsupported models:
+Throughput is the whole batch (at batch size 1, the single request). The batch-invariant output is
+fixed but differs from the default batch-1 output on 4 of 5 prompts (only `hello` is equal): it is
+a different computation, which is why E3 is compared with its own batch-1 run. Unsupported:
 - LFM2.5: `VLLM batch_invariant mode is not supported for SHORT_CONV_ATTN`.
 - Qwen3.6 MoE: `CutlassNvFp4LinearKernel does not support W4A16`. Its Gated DeltaNet layers would
   also be rejected: in vLLM 0.31 only the FLASH_ATTN, TRITON_ATTN, FLEX_ATTENTION and MLA backends
   declare batch-invariance support.
 
-### RQ3: engine settings (E3, batch size 1, A100)
+### E4: L40S instead of A100 (greedy, batch size 1)
 
-| Setting | LFM2.5 | Qwen3-4B |
+| Engine | LFM2.5-350M | Qwen3-4B |
 |---|---|---|
-| vLLM `enforce_eager` (no CUDA graphs / torch.compile) | 0.00 / 1 | 0.20 / 1 |
-| vLLM `TRITON_ATTN` instead of `FLASH_ATTN` | 0.20 / 1 | 0.20 / 1 |
-| llama.cpp `-fa off` | 0.80 / 1 | 0.80 / 1 |
+| vLLM | 0.40 / 1 | 0.20 / 1 |
+| llama.cpp | 1.00 / 1 | 1.00 / 1 |
 
-Each setting gives a different output from the reference, but the same output in all 10 repeats.
-
-### RQ4: hardware and engine (E4; first differing token, E1a repeat 0)
+First differing token, L40S vs A100 (`=` identical over the whole completion):
 
 | | `hello` | `fact` | `story` | `math` | `code` |
 |---|---|---|---|---|---|
-| vLLM LFM2.5, L40S vs A100 | = | 72 | 27 | = | 182 |
-| vLLM Qwen3-4B, L40S vs A100 | = | 12 | 13 | 263 | 185 |
-| llama.cpp LFM2.5, L40S vs A100 | = | = | = | = | = |
-| llama.cpp Qwen3-4B, L40S vs A100 | = | = | = | = | = |
-| A100: llama.cpp vs vLLM, LFM2.5 | 46 | 30 | 172 | = | 50 |
-| A100: llama.cpp vs vLLM, Qwen3-4B | = | 89 | 13 | 3 | 240 |
-| Blackwell: llama.cpp vs vLLM, MoE | = | 43 | 37 | 239 | 38 |
+| vLLM LFM2.5 | = | 72 | 27 | = | 182 |
+| vLLM Qwen3-4B | = | 12 | 13 | 263 | 185 |
+| llama.cpp, both models | = | = | = | = | = |
 
-(`=` identical over the whole completion.) The MoE engine comparison is not like-for-like: vLLM
-runs the attention projections in FP8, llama.cpp in BF16 (the converter dequantized them).
-
-### RQ5: seeded sampling (E5, batch size 1; T = 0.7 / 1.0, top-p 0.95, fixed seed)
-
-Reproducible (1.00 / 1) for every dense model in both engines and for the MoE in llama.cpp.
-vLLM MoE: 0.22 / 10 and 0.10 / 10, consistent with its greedy nondeterminism.
+Each L40S setting is itself deterministic (1 output per prompt over 10 repeats): the GPU changes
+which output you get, not whether it repeats.
 
 ## Interpretation
 
-- **Batch-size dependence is the dominant source of nondeterminism in serving.** Once other requests
-  share the forward pass, the GEMM/attention reduction order changes with batch shape, and outputs
-  split at the first near-tie. With BF16 logits (vLLM) these are often exact ties (gap 0.000) or
-  one BF16 step (0.125).
-- **Where the split happens is prompt-dependent, not random.** The short `hello` answer survived almost
-  every perturbation; `story`, `fact` and `math` split within the first 3–90 tokens in many cases.
+- **Batch-shape dependence is the dominant source of nondeterminism in serving.** Once other
+  requests share the forward pass, the reduction order of the GEMM and attention kernels changes
+  with the batch shape, and outputs split at the first near-tie. With BF16 logits (vLLM) these are
+  often exact ties (gap 0.000) or one BF16 step (0.125).
+- **Where the split happens is prompt-dependent, not random.** The short `hello` answer survived
+  most perturbations; `story`, `fact` and `math` often split within the first 3–90 tokens.
 - **llama.cpp is more stable across hardware** in this setup: its CUDA kernels for sm_80 and sm_89
-  produced bit-identical results, while vLLM selects different kernels (and torch.compile/Triton
+  gave bit-identical results, while vLLM selects different kernels (and torch.compile/Triton
   autotuning) per GPU.
 - **vLLM MoE at batch size 1:** candidate causes, not yet isolated: the FlashInfer GDN prefill
   kernel, the Marlin W4A16 MoE kernel, or expert routing on near-tied router scores. llama.cpp's
@@ -146,15 +128,16 @@ vLLM MoE: 0.22 / 10 and 0.10 / 10, consistent with its greedy nondeterminism.
 
 ## Limitations
 
-- Small scale: 3 models, 5 prompts, 10 repeats, 2–3 GPU types; the match rates are coarse
-  (steps of 0.02–0.2).
-- A40 (sm_86) and H100 (sm_90) are missing (queue limit / availability).
-- E1c covers a different node only for vLLM LFM2.5 (zia4 vs zia2); the other three ran on the same
-  node as their reference. A run pinned to zia3 (job 24608340) was cancelled after 2 h in the queue.
-- MoE: the vLLM and llama.cpp runs use the same NVFP4 expert weights but different precision for
-  attention projections, and vLLM ignored the checkpoint's FP8 KV-cache hint (BF16 KV cache).
-- Batch-invariant results exist only for Qwen3-4B, on A100 (vLLM has no tuned batch-invariant matmul
-  configs for sm_80; on sm_89/90/120 the throughput cost may differ).
+- Small scale: 3 models, 5 prompts, 10 repeats; the match rates are coarse (steps of 0.02–0.2).
+- E4 covers one GPU pair (L40S vs A100). A40 and H100 were not scheduled within the 2 h queue
+  limit.
+- MoE: vLLM and llama.cpp use the same NVFP4 expert weights but different precision for the
+  attention projections (vLLM FP8, llama.cpp BF16), and vLLM ignored the checkpoint's FP8
+  KV-cache hint (BF16 KV cache).
+- E3 exists only for Qwen3-4B, on A100 (vLLM has no tuned batch-invariant matmul configs for sm_80;
+  on sm_89/90/120 the throughput cost may differ).
+- E2 differs between the engines by design: vLLM batches are offline and fixed per repeat; in
+  llama.cpp the fillers arrive concurrently, so the batch composition also varies over time.
 - The mid-size model was changed from Qwen3.5-4B to Qwen3-4B-Instruct-2507 to make batch-invariant
   mode possible; Qwen3.5-4B appears only in smoke tests.
 
@@ -163,7 +146,7 @@ vLLM MoE: 0.22 / 10 and 0.10 / 10, consistent with its greedy nondeterminism.
 1. Ablate the vLLM MoE batch-size-1 nondeterminism (~30 GPU-min on grogu): `enforce_eager`, Triton
    GDN prefill, another NVFP4 MoE backend.
 2. Batch-invariant mode on L40S/Blackwell, where vLLM has tuned configs, to measure its cost there.
-3. Add A40/H100 when the queues allow, and a longer prompt set for tighter estimates.
+3. More GPU types for E4, and a longer prompt set for tighter estimates.
 
 ## Reproducing
 
@@ -173,8 +156,14 @@ qsub jobs/build_llama.sh        # llama.cpp b11429 for sm_80/86/89/120a
 qsub jobs/pack_venv.sh          # vLLM venv tarball for fast job start
 python src/render_prompts.py    # prompts -> token IDs (prompts/rendered/)
 qsub -l select=1:ncpus=4:ngpus=1:mem=32gb:scratch_local=40gb:cluster=zia \
-     -v ENGINE=llama+vllm,MODELS=lfm350m+q3_4b,EXPS=e1a+e1b jobs/run.sh
-python src/analyze.py           # results/*.tar.gz -> results/summary.md
+     -v ENGINE=llama+vllm,MODELS=lfm350m+q3_4b,EXPS=e1+e1_t07+e1_t10 jobs/run.sh
+qsub jobs/analyze.sh            # results/*.tar.gz -> results/summary.md, results/site_data.json.gz
+python src/build_site.py --out site
 ```
 
-Experiment names and settings are in the docstrings of `src/run_vllm.py` and `src/run_llama.py`.
+Setting names are in the docstrings of `src/run_vllm.py` and `src/run_llama.py`: `e1*` exist in
+both, `e2_bs*` and `e3_*` only in vLLM (`ENGINE=vllm`), `e2_np*` only in llama.cpp (`ENGINE=llama`).
+E4 is `e1` submitted with `cluster=alfrid`.
+
+Computational resources were provided by the e-INFRA CZ project (ID:90254), supported by the
+Ministry of Education, Youth and Sports of the Czech Republic.

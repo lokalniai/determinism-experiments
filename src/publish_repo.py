@@ -30,8 +30,8 @@ COPY = ["README.md", "REPORT.md", "EXPERIMENTS.md", "results/summary.md",
         "results/site_data.json.gz", "models/manifest.tsv", "bin/llama",
         "install_llama.sh", "install_vllm.sh"]
 COPY_DIRS = ["jobs", "prompts", "src/assets"]
-RECORD_KEYS = ("exp", "engine", "model", "gpu", "run", "host", "prompt_id", "rep", "restart",
-               "position", "config", "n_prompt", "stop_type", "t_wall", "batch_tok_per_s",
+RECORD_KEYS = ("exp", "engine", "model", "gpu", "run", "host", "prompt_id", "rep", "config",
+               "n_prompt", "stop_type", "t_wall", "batch_tok_per_s",
                "token_ids", "text")
 
 GITIGNORE = """\
@@ -43,12 +43,12 @@ __pycache__/
 
 
 def records(out: Path) -> None:
-    """Every completion without its logprobs, one JSON line each."""
-    import site_data
+    """Every completion of the current plan without its logprobs, one JSON line each."""
+    import analyze
     dest = out / "results" / "records.jsonl.gz"
     n = 0
     with gzip.open(dest, "wt", encoding="utf-8") as f:
-        for r in site_data.stream():
+        for r in analyze.iter_records():
             f.write(json.dumps({k: r[k] for k in RECORD_KEYS if k in r}, ensure_ascii=False) + "\n")
             n += 1
     print(f"  {n} records -> {dest.relative_to(out)} ({dest.stat().st_size / 1e6:.1f} MB)")

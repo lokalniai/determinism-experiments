@@ -1,0 +1,1174 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><title>LFM2.5-350M · vLLM · batch of 2 · A100 &middot; Determinism</title><link rel=icon href='../favicon.ico' sizes=any><script>try{var t=localStorage.getItem('theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}</script><link rel=preconnect href='https://fonts.googleapis.com'><link rel=preconnect href='https://fonts.gstatic.com' crossorigin><link rel=stylesheet href='https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;500&display=swap'><link rel=stylesheet href='../static/style.css'></head><body><header class=mast><a class=brand href='https://lokalni.ai' aria-label='lokalni.ai'><img class=logo-light src='../static/logo_dark.png' alt='lokalni.ai' width=102 height=32><img class=logo-dark src='../static/logo_light.png' alt='lokalni.ai' width=102 height=32></a><span class='mastsep p'>&frasl;</span><a class=proj href='https://lokalni.ai/blog/determinismus/'>Stejn&yacute; vstup, stejn&yacute; v&yacute;stup</a><span class=mastsep>&frasl;</span><a class=here href='../index.html'>LFM2.5-350M &middot; vLLM &middot; batch of 2 &middot; A100</a><span class=spacer></span><button class=tgl type=button data-theme-toggle aria-label='Switch theme' title='Switch theme'><svg class=sun viewBox='0 0 24 24' aria-hidden=true><circle cx=12 cy=12 r=4 /><path d='M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4' /></svg><svg class=moon viewBox='0 0 24 24' aria-hidden=true><path d='M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z' /></svg></button></header><section class=pr id=hello><p class=pq><b>hello</b><span>Hello! Who are you?</span></p><div class=outs><div class=o><div class=oh>reference: E1 greedy, r0 &middot; 62 tokens &middot; <b>r9</b> identical</div><div class=ot>I’m an AI language model created by **Liquid AI**. I was developed by a research and engineering team at Liquid AI and belong to the **Liquid Foundation Models** family.  
+
+Other details about my architecture, training data, or additional specifications have not been specified.</div></div><div class='o diff'><div class=oh><b>r0&ndash;8</b> &middot; differs from token 46 &middot; 62 tokens</div><div class=ot><span class=ctx>&hellip;reated by **Liquid AI**. I was developed by a research and engineering team at Liquid AI and belong to the **Liquid Foundation Models** family.  
+
+Other details</span><mark> such as specific training data, architecture, or release date are not specified.</mark></div></div></div></section><section class=pr id=fact><p class=pq><b>fact</b><span>Explain why the sky is blue during the day and why sunsets are often red or orange. Cover the physics involved and mention how atmospheric conditions such as dust or pollution change the colors.</span></p><div class=outs><div class=o><div class=oh>reference: E1 greedy, r0 &middot; 226 tokens &middot; <b>no run</b> identical</div><div class=ot>The sky appears blue during the day due to a phenomenon called Rayleigh scattering. This occurs when sunlight interacts with the Earth&#x27;s atmosphere, and shorter wavelengths of light (like blue and violet) are scattered more efficiently than longer wavelengths (like red and orange). The scattering is much stronger for blue light because it has a shorter wavelength, which is more easily scattered by atmospheric particles.
+
+Sunset times are often red or orange because the sun is lower in the sky, and the scattering of sunlight by the atmosphere is more pronounced during this time. As the sun sets, the sunlight travels through more of the atmosphere, scattering the shorter blue and violet light more than the longer wavelengths. This leaves the longer wavelengths, such as red and orange, to dominate the sky&#x27;s colors.
+
+Atmospheric conditions like dust or pollution can also affect the appearance of the sky. Dust particles can scatter sunlight in a way that makes the sky appear darker or more muted, while pollution can introduce additional colored particles that alter the sky&#x27;s appearance. However, these effects are generally less noticeable than the impact of Rayleigh scattering on the blue light.</div></div><div class='o diff'><div class=oh><b>r0</b> &middot; differs from token 102 &middot; 226 tokens</div><div class=ot><span class=ctx>&hellip;attered by atmospheric particles.
+
+Sunset times are often red or orange because the sun is lower in the sky, and the scattering of sunlight by the atmosphere is</span><mark> most pronounced during this time. As the sun sets, the sunlight travels through more of the atmosphere, scattering the shorter blue and violet light more than the longer wavelengths. This leaves the longer wavelengths, such as red and orange, to dominate the sky&#x27;s colors.
+
+Atmospheric conditions like dust or pollution can also affect the appearance of the sky. Dust particles can scatter sunlight in a way that makes the sky appear darker or more muted, while pollution can introduce additional colored particles that alter the sky&#x27;s appearance. However, these effects are generally less noticeable than the impact of Rayleigh scattering on the blue light.</mark></div></div><div class='o diff'><div class=oh><b>r1, r3, r6</b> &middot; differs from token 30 &middot; 274 tokens</div><div class=ot><span class=ctx>&hellip;ars blue during the day due to a phenomenon called Rayleigh scattering. This occurs when sunlight interacts with the Earth&#x27;s atmosphere, and shorter wavelengths</span><mark> (like blue and violet) are scattered more efficiently than longer wavelengths (like red and orange). The scattering is much stronger for blue light because it has a shorter wavelength, which is more easily scattered by air molecules and aerosols.
+
+Sunset times are often red or orange because the Sun is lower in the sky, and the Sun&#x27;s light has had more time to travel through the atmosphere. As the Sun sets, the light that reaches the Earth&#x27;s surface is shifted toward longer wavelengths, a process known as the reddening of sunlight. This is because the Sun&#x27;s light is scattered by the atmosphere, and the longer wavelengths are less affected by the scattering process.
+
+Atmospheric conditions such as dust, pollution, and water vapor can also change the colors of the sky. Dust particles can scatter sunlight in a way that makes the sky appear darker and more muted, while pollution can introduce additional colored particles that tint the sky. Water vapor, on the other hand, can absorb certain wavelengths of light, particularly red and orange, making the sky appear more muted or even brownish. These changes in atmospheric composition can significantly alter the colors of the sky, especially during sunsets and sunrises.</mark></div></div><div class='o diff'><div class=oh><b>r2, r4, r7</b> &middot; differs from token 30 &middot; 243 tokens</div><div class=ot><span class=ctx>&hellip;ars blue during the day due to a phenomenon called Rayleigh scattering. This occurs when sunlight interacts with the Earth&#x27;s atmosphere, and shorter wavelengths</span><mark> (like blue and violet) are scattered more efficiently than longer wavelengths (like red and orange). The scattering is much stronger for blue light because it has a shorter wavelength, which is more easily scattered by air molecules and aerosols.
+
+Sunset times are often red or orange because the Sun is lower in the sky, and the Sun&#x27;s light has already been scattered by the atmosphere. As the Sun sets, the scattered sunlight reaches the Earth&#x27;s surface, where it is reflected and dispersed in all directions. The longer wavelengths of light, such as red and orange, are less likely to be scattered back to the observer, making them appear more vivid and warm.
+
+Atmospheric conditions like dust or pollution can significantly alter the colors of the sky. Dust particles can scatter sunlight in a way that makes the sky appear darker and more muted, while pollution can introduce additional scattering effects, often resulting in a more muted or hazy appearance. These changes can also affect the overall brightness and contrast of the sky, making it appear more vibrant or less saturated.</mark></div></div><div class='o diff'><div class=oh><b>r5</b> &middot; differs from token 30 &middot; 251 tokens</div><div class=ot><span class=ctx>&hellip;ars blue during the day due to a phenomenon called Rayleigh scattering. This occurs when sunlight interacts with the Earth&#x27;s atmosphere, and shorter wavelengths</span><mark> (like blue and violet) are scattered more efficiently than longer wavelengths (like red and orange). The scattering is much stronger for blue light because it has a shorter wavelength, which is more easily scattered by air molecules and aerosols.
+
+Sunset times are often red or orange because the Sun is lower in the sky, and the Sun&#x27;s light has already been scattered by the atmosphere. As the Sun sets, the scattered sunlight reaches the Earth&#x27;s surface, where it is reflected and dispersed in all directions. The longer wavelengths of light, such as red and orange, are less likely to be scattered back to the observer, making them appear more vivid and warm.
+
+Atmospheric conditions like dust or pollution can significantly alter the colors of the sky. Dust particles can scatter sunlight in a way that makes the sky appear darker or more muted, while pollution can introduce additional scattering effects, often resulting in a more muted or hazy appearance. These changes can also affect the overall brightness and contrast of the sky, making it appear more or less vivid depending on the presence and concentration of these particles.</mark></div></div><div class='o diff'><div class=oh><b>r8</b> &middot; differs from token 33 &middot; 228 tokens</div><div class=ot><span class=ctx>&hellip;ring the day due to a phenomenon called Rayleigh scattering. This occurs when sunlight interacts with the Earth&#x27;s atmosphere, and shorter wavelengths of light (</span><mark>such as blue and violet) are scattered more efficiently than longer wavelengths (such as red and orange). The scattering is much stronger for blue light because it has a shorter wavelength, which is more easily scattered by atmospheric particles.
+
+Sunset times are often red or orange because the sun is lower in the sky, and the scattering of sunlight by the atmosphere is more pronounced during this time. As the sun sets, the sunlight travels through more of the atmosphere, scattering the shorter blue and violet light more than the longer wavelengths. This leaves the longer wavelengths, such as red and orange, to dominate the sky&#x27;s colors.
+
+Atmospheric conditions like dust or pollution can also affect the appearance of the sky. Dust particles can scatter sunlight in a way that makes the sky appear darker or more muted, while pollution can introduce additional colored particles that alter the sky&#x27;s appearance. However, these effects are generally less noticeable than the impact of Rayleigh scattering on the blue light.</mark></div></div><div class='o diff'><div class=oh><b>r9</b> &middot; differs from token 30 &middot; 261 tokens</div><div class=ot><span class=ctx>&hellip;ars blue during the day due to a phenomenon called Rayleigh scattering. This occurs when sunlight interacts with the Earth&#x27;s atmosphere, and shorter wavelengths</span><mark> (like blue and violet) are scattered more efficiently than longer wavelengths (like red and orange). The scattering is much stronger for blue light because it has a shorter wavelength, which is more easily scattered by air molecules and aerosols.
+
+Sunset times are often red or orange because the Sun is lower in the sky, and the Sun&#x27;s light has already been scattered by the atmosphere. As the Sun sets, the scattered sunlight reaches the Earth&#x27;s surface, where it is reflected and dispersed in all directions. The longer wavelengths of light, such as red and orange, are less likely to be scattered back to the observer, making them appear more vivid and warm.
+
+Atmospheric conditions like dust or pollution can significantly alter the colors of the sky. Dust particles can scatter sunlight in a way that makes the sky appear darker or more muted, while pollution can introduce additional colored particles that tint the sky. These particles can also affect the clarity of the sky, making it appear hazier or more cloudy. Additionally, the presence of water vapor or other gases in the atmosphere can influence the scattering process, leading to more complex and varied sky colors.</mark></div></div></div></section><section class=pr id=story><p class=pq><b>story</b><span>Write a short story about a lighthouse keeper on a remote island who finds a message in a bottle that seems to be addressed to them personally.</span></p><div class=outs><div class=o><div class=oh>reference: E1 greedy, r0 &middot; 418 tokens &middot; <b>no run</b> identical</div><div class=ot>The wind howled through the narrow windows of the lighthouse, carrying the scent of salt and seaweed. Captain James sat at the small table, his hands wrapped around a mug of tea, his eyes fixed on the horizon. The lighthouse was a solitary sentinel, its beam cutting through the darkness like a promise.
+
+As the day wore on, the lighthouse keeper began to notice strange occurrences. Equipment malfunctioned, and the wind seemed to grow stronger. One evening, as the sun dipped below the horizon, he heard a faint whisper in his ear.
+
+The message was brief, but it was clear: *&quot;You are not alone.&quot;*
+
+James stared at the words, his heart pounding in his chest. He had never received such a message before. The lighthouse was his home, his refuge, and he had been warned to stay away from the coast. But now, he felt a strange sense of unease.
+
+He decided to investigate further, setting out to find the source of the message. As he walked along the shore, the wind carried the faint scent of the bottle, and he followed it, his heart racing with anticipation.
+
+Finally, he came across a small, weathered wooden box on the beach. Inside, he found a single, faded note. The handwriting was unfamiliar, but the words seemed to echo his own thoughts.
+
+*&quot;You are the only one who can see the truth.&quot;*
+
+James felt a shiver run down his spine. He had never been able to read the message before, but now he knew it was his. He knew he had to find the truth, no matter where it led.
+
+As he turned to leave, the wind picked up, and the lighthouse beam cast a warm glow on the shore. James knew he had to return to the lighthouse, to face whatever lay ahead and uncover the secrets hidden within the bottle. The journey was long and uncertain, but he was ready. The truth was out there, waiting for him to uncover it.</div></div><div class='o diff'><div class=oh><b>r0</b> &middot; differs from token 27 &middot; 380 tokens</div><div class=ot><span class=ctx>The wind howled through the narrow windows of the lighthouse, carrying the scent of salt and seaweed. Captain James sat at the</span><mark> helm, his hands steady as he adjusted the beam. The island, a rugged expanse of rocky cliffs and dense jungle, loomed in the distance, its silence oppressive.
+
+As the sun dipped below the horizon, casting the sky in hues of orange and purple, James noticed a small, weathered bottle on the deck. It was half-empty, its contents unreadable. He picked it up, his fingers brushing against the glass.
+
+The message was brief, yet it sent a shiver down his spine. It was addressed to him, written in a hand that seemed to tremble with age. The words were cryptic, but James felt a strange connection to them.
+
+He began to read, his eyes scanning the faded ink. The message was simple yet profound: *&quot;The sea is not always calm. It holds secrets, and some truths are best left unspoken.&quot;*
+
+James felt a pang of curiosity, as if he had stumbled upon a hidden passage in the island&#x27;s history. He decided to investigate further, his heart racing with anticipation.
+
+As the night deepened, the wind howled again, and the lighthouse beam swept across the water, casting a shadow on the horizon. James closed his eyes, listening to the waves, and felt a strange sense of peace wash over him. The message had changed nothing, but it had changed his perspective on the island and its secrets.
+
+When dawn broke, James stood at the lighthouse, the message still on his desk. He knew it was only a dream, but the thought of the mysterious message lingered in his mind, a reminder that even in the most isolated places, the sea holds secrets waiting to be uncovered.</mark></div></div><div class='o diff'><div class=oh><b>r1, r4&ndash;6</b> &middot; differs from token 27 &middot; 372 tokens</div><div class=ot><span class=ctx>The wind howled through the narrow windows of the lighthouse, carrying the scent of salt and seaweed. Captain James sat at the</span><mark> helm, his hands steady as he adjusted the beam. The island, a rugged expanse of rocky cliffs and dense jungle, loomed in the distance, its silence oppressive.
+
+As the sun dipped below the horizon, casting the sky in hues of orange and purple, James noticed a small, weathered bottle on the deck. It was half-empty, its contents unreadable. He picked it up, his fingers brushing against the glass.
+
+The message was brief, yet it sent a shiver down his spine. It was addressed to him, written in a hand that seemed to tremble with age. The words were cryptic, but James felt a strange connection to them.
+
+He began to read, his eyes scanning the faded ink. The message was simple yet profound: *&quot;The sea is not always calm. It holds secrets, and some truths are best left unspoken.&quot;*
+
+James felt a pang of curiosity, as if he had stumbled upon a hidden passage in the island&#x27;s history. He decided to investigate further, his heart racing with anticipation.
+
+As the night deepened, the wind howled again, and James felt a strange energy emanating from the lighthouse. He knew he had to return to the island, to uncover the secrets hidden within the bottle and the mysterious message.
+
+With a deep breath, he climbed the stairs to the lighthouse, his heart pounding in his chest. The wind whispered secrets in his ear, and the moonlight cast eerie shadows on the walls. James knew that this was only the beginning of his journey, one that would lead him to the depths of the sea and the mysteries it held.</mark></div></div><div class='o diff'><div class=oh><b>r2</b> &middot; differs from token 27 &middot; 435 tokens</div><div class=ot><span class=ctx>The wind howled through the narrow windows of the lighthouse, carrying the scent of salt and seaweed. Captain James sat at the</span><mark> helm, his hands steady as he adjusted the beam. The island, a rugged expanse of rocky cliffs and dense jungle, loomed in the distance, its silence oppressive.
+
+As the sun dipped below the horizon, casting the sky in hues of orange and purple, James noticed a small, weathered bottle on the deck. It was half-empty, its contents unreadable. He picked it up, his fingers brushing against the glass.
+
+The message was brief, yet it sent a shiver down his spine. It was addressed to him, written in a hand that seemed to be both familiar and foreign. James opened the bottle, revealing a single, faded photograph.
+
+The image showed a young woman, her face obscured by a veil of seaweed, standing on a beach at sunset. The caption read: &quot;Lost in the waves, seeking solace.&quot; James&#x27;s heart skipped a beat as he realized the message was personal.
+
+He spent the next few days poring over the photograph, searching for any clues. The woman&#x27;s name was unknown, but the image seemed to whisper secrets of a past he couldn&#x27;t recall. James began to feel a growing sense of unease, as if the message was a key to a hidden truth.
+
+One evening, as the stars twinkled above, James decided to take a walk along the beach. The wind was stronger, and the sea was calm, but he felt a strange connection to the woman he had seen. He reached out a hand, touched the glass, and the message began to glow, illuminating the path ahead.
+
+The lighthouse keeper&#x27;s heart swelled with a mix of fear and wonder. He knew he had to uncover the truth behind the message, but the journey ahead was uncertain. As he stood at the helm, the wind howling around him, he realized that the lighthouse was more than just a beacon of guidance—it was a door to a world he had never imagined.</mark></div></div><div class='o diff'><div class=oh><b>r3</b> &middot; differs from token 27 &middot; 510 tokens</div><div class=ot><span class=ctx>The wind howled through the narrow windows of the lighthouse, carrying the scent of salt and seaweed. Captain James sat at the</span><mark> helm, his hands steady as he adjusted the beam, casting a warm glow across the dark water below. The island, a rugged outcropping of limestone, was quiet, save for the occasional crash of waves and the distant call of a seagull.
+
+As the sun dipped below the horizon, casting the sky in hues of orange and pink, James noticed a small, weathered bottle lying on the deck. It was half-empty, its contents a mix of sea salt and a faint, sweet aroma. He picked it up, his fingers brushing against the cool glass.
+
+The message was brief, yet it sent a shiver down James&#x27;s spine. It was addressed to him, written in a hand that seemed to be older than him. The words were cryptic, but James felt a strange connection to them. He read them twice, his heart racing with anticipation.
+
+As the night deepened, James began to notice strange occurrences on the island. Equipment malfunctioned, and strange noises echoed through the night. He started to feel a growing sense of unease, as if the island itself was watching him.
+
+One night, as the moon rose high in the sky, James climbed the stairs to the lighthouse, his heart pounding in his chest. He opened the bottle, revealing a single, faded photograph. The image showed a young woman, her face obscured by a veil, standing on a beach at sunset. The caption read: &quot;To the keeper, from the island of the lost.&quot;
+
+James felt a surge of emotion, a mix of fear and wonder. He knew he had to find her, to uncover the truth behind the message. He began to search the island, following clues and piecing together the story. The more he learned, the more he realized that the island was not just a place of solitude, but a place of secrets and mysteries waiting to be uncovered.
+
+As the night wore on, James returned to the lighthouse, his heart filled with a sense of purpose. He knew that the message was not just a clue, but a call to action, a reminder that the island held many secrets, and that he was the only one who could uncover them. With a newfound determination, he set out to find the lost woman, to uncover the truth behind the mysterious message and the island&#x27;s hidden stories.</mark></div></div><div class='o diff'><div class=oh><b>r7&ndash;8</b> &middot; differs from token 27 &middot; 420 tokens</div><div class=ot><span class=ctx>The wind howled through the narrow windows of the lighthouse, carrying the scent of salt and seaweed. Captain James sat at the</span><mark> helm, his hands steady as he adjusted the beam. The island, a rugged outcropping of limestone, loomed in the distance, its rocky shores glistening under the pale sun.
+
+As the day wore on, the lighthouse keeper began to notice strange occurrences. Equipment malfunctioned, and the ship that had docked nearby seemed to drift away. The crew reported strange noises in the night, and the stars seemed to shift and change, as if the sea itself was watching them.
+
+One evening, as the ship approached, James noticed a small, weathered bottle lying on the deck. It was empty, but the label was faded, bearing the words: &quot;To Captain James, on the island of Aethelgard.&quot;
+
+Curious, James opened the bottle and took a sip. The liquid inside was clear and viscous, but as he drank, he felt a strange tingling sensation in his fingers. He remembered a conversation he had had with a local fisherman, a man named Elijah, who had warned him about the dangers of the island&#x27;s currents.
+
+The message was cryptic, but James felt a growing sense of unease. He began to wonder if Elijah had been right. The island was a place of mystery and danger, and he had no idea what lay ahead.
+
+As the night wore on, James realized that the message was not just a simple warning, but a call to action. He knew he had to return to the lighthouse, investigate the strange occurrences, and uncover the secrets of the island. The wind howled, and the lighthouse beam swept across the horizon, guiding him toward the unknown.
+
+With a newfound sense of purpose, James set off into the unknown, ready to face whatever lay ahead on Aethelgard. The sea, once a source of fear, had become a guide, and he was ready to explore its depths.</mark></div></div><div class='o diff'><div class=oh><b>r9</b> &middot; differs from token 27 &middot; 502 tokens</div><div class=ot><span class=ctx>The wind howled through the narrow windows of the lighthouse, carrying the scent of salt and seaweed. Captain James sat at the</span><mark> helm, his hands steady as he adjusted the beam, casting a warm glow across the dark water below. The island, a rugged outcropping of limestone, was quiet, save for the occasional crash of waves and the distant call of a seagull.
+
+As the sun dipped below the horizon, casting the sky in hues of orange and pink, James noticed a small, weathered bottle lying on the deck. It was half-empty, its contents a mix of sea salt and a faint, sweet aroma. He picked it up, his fingers brushing against the cool glass.
+
+The message was brief, yet it sent a shiver down James&#x27;s spine. It was addressed to him, written in a hand that seemed to be older than him. The words were cryptic, but James felt a strange connection to them. He read them twice, his heart racing with anticipation.
+
+As the night deepened, James began to notice strange occurrences on the island. Equipment malfunctioned, and strange noises echoed through the night. He started to feel a growing sense of unease, as if the island itself was watching him.
+
+One night, as the moon rose high in the sky, James climbed the stairs to the lighthouse, his heart pounding in his chest. He opened the bottle, revealing a single, faded photograph. The image showed a young woman, her face obscured by a veil, standing on a beach at sunset. The caption read: &quot;To the keeper, from the island of the lost.&quot;
+
+James felt a surge of emotion, a mix of fear and wonder. He knew he had to find her, to uncover the truth behind the message. He began to search the island, following clues and piecing together the story. The more he learned, the more he realized that the island was not just a place of solitude, but a place of secrets and mysteries.
+
+As the night wore on, James returned to the lighthouse, his heart filled with a sense of purpose. He knew that the message was not just a clue, but a call to action, a reminder that the island held many secrets and stories waiting to be uncovered. With a newfound determination, he set out to find the lost woman, to unravel the tangled threads of her past and the mysteries of the island.</mark></div></div></div></section><section class=pr id=math><p class=pq><b>math</b><span>A train leaves Plzeň at 8:15 and travels toward Prague at an average speed of 72 km/h. A second train leaves Prague at 8:45 toward Plzeň at 90 km/h. The distance between the two cities along the track is 114 km. At what time do the trains meet, and how far from Plzeň? Solve it step by step and state the final answer clearly.</span></p><div class=outs><div class=o><div class=oh>reference: E1 greedy, r0 &middot; 324 tokens &middot; <b>no run</b> identical</div><div class=ot>Let \( t \) be the time in hours after 8:15 when the trains meet.
+
+**Step 1: Calculate the distance traveled by the first train.**  
+The first train travels for \( t \) hours at 72 km/h, so the distance is \( 72t \) km.
+
+**Step 2: Calculate the distance traveled by the second train.**  
+The second train travels for \( t - 0.5 \) hours at 90 km/h, so the distance is \( 90(t - 0.5) \) km.
+
+**Step 3: Set the distances equal.**  
+\[
+72t = 90(t - 0.5)
+\]
+
+**Step 4: Solve for \( t \).**  
+\[
+72t = 90t - 45 \implies 45 = 18t \implies t = \frac{45}{18} = 2.5
+\]
+
+**Step 5: Calculate the meeting time.**  
+The trains meet at \( 8:15 + 2.5 = 10:15 \) hours after 8:15.
+
+**Step 6: Calculate the distance from Plzeň.**  
+The distance from Plzeň is \( 114 - 72t \) km.
+
+**Final Answer:**  
+The trains meet at \(\boxed{10:15}\) hours from Plzeň, and the distance from Plzeň is \(\boxed{114 - 72t}\) km.</div></div><div class='o diff'><div class=oh><b>r0</b> &middot; differs from token 57 &middot; 431 tokens</div><div class=ot><span class=ctx>&hellip;hen the trains meet.
+
+**Step 1: Calculate the distance traveled by the first train.**  
+The first train travels for \( t \) hours at 72 km/h, so the distance is</span><mark>:  
+\[
+72t \text{ km}
+\]
+
+**Step 2: Calculate the distance traveled by the second train.**  
+The second train travels for \( t - 0.5 \) hours (since it departs at 8:45) at 90 km/h, so the distance is:  
+\[
+90(t - 0.5) \text{ km}
+\]
+
+**Step 3: Set the distances equal to find \( t \).**  
+\[
+72t = 90(t - 0.5) + 114
+\]
+
+**Step 4: Solve the equation.**  
+\[
+72t = 90t - 45 + 114
+\]
+\[
+72t = 90t + 69
+\]
+\[
+72t - 90t = 69
+\]
+\[
+-18t = 69
+\]
+\[
+t = -\frac{69}{18}} = -\frac{23}{6}} \approx -3.833 \text{ hours}
+\]
+
+**Step 5: Convert \( t \) to hours and minutes.**  
+\[
+-3.833 \text{ hours} \approx -3 \text{ hours and } 33 \text{ minutes}
+\]
+
+**Step 6: Calculate the meeting time and distance from Plzeň.**  
+The train leaves at 8:15, so the meeting time is:  
+\[
+8:15 + (-3) = 5:30 \text{ hours}
+\]  
+The distance from Plzeň is:  
+\[
+114 \text{ km}
+\]
+
+**Final Answer:**  
+The trains meet at \(\boxed{5:30}\) hours from Plzeň.  
+The distance from Plzeň is \(\boxed{114}\) km.</mark></div></div><div class='o diff'><div class=oh><b>r1</b> &middot; differs from token 57 &middot; 460 tokens</div><div class=ot><span class=ctx>&hellip;hen the trains meet.
+
+**Step 1: Calculate the distance traveled by the first train.**  
+The first train travels for \( t \) hours at 72 km/h, so the distance is</span><mark>:  
+\[
+72t \text{ km}
+\]
+
+**Step 2: Calculate the distance traveled by the second train.**  
+The second train travels for \( t - 0.5 \) hours (since it departs at 8:45) at 90 km/h, so the distance is:  
+\[
+90(t - 0.5) \text{ km}
+\]
+
+**Step 3: Set the distances equal to find \( t \).**  
+\[
+72t = 90(t - 0.5) + 114
+\]
+
+**Step 4: Solve the equation.**  
+\[
+72t = 90t - 45 + 114
+\]
+\[
+72t = 90t + 69
+\]
+\[
+72t - 90t = 69
+\]
+\[
+-18t = 69
+\]
+\[
+t = -\frac{69}{18}} = -\frac{23}{6}} \approx -3.833 \text{ hours}
+\]
+
+**Step 5: Convert \( t \) to hours and minutes.**  
+\[
+-3.833 \text{ hours} \approx 3 \text{ hours and } 33 \text{ minutes}
+\]
+
+**Step 6: Calculate the meeting time.**  
+The trains meet at \( 8:15 + 3 \text{ hours and } 33 \text{ minutes} = 11:33 \) after 8:15.
+
+**Step 7: Calculate the distance from Plzeň.**  
+\[
+\text{Distance} = 114 \text{ km} + (11 \times 60) = 114 + 660 = 774 \text{ km}
+\]
+
+**Final Answer:**  
+The trains meet at \(\boxed{11:33}\) after Plzeň, and the distance from Plzeň is \(\boxed{774}\) km.</mark></div></div><div class='o diff'><div class=oh><b>r2, r6, r9</b> &middot; differs from token 57 &middot; 337 tokens</div><div class=ot><span class=ctx>&hellip;hen the trains meet.
+
+**Step 1: Calculate the distance traveled by the first train.**  
+The first train travels for \( t \) hours at 72 km/h, so the distance is</span><mark>:  
+\[
+72t \text{ km}
+\]
+
+**Step 2: Calculate the distance traveled by the second train.**  
+The second train travels for \( t - 0.5 \) hours (since it departs at 8:45) at 90 km/h, so the distance is:  
+\[
+90(t - 0.5) \text{ km}
+\]
+
+**Step 3: Set the distances equal to find \( t \).**  
+\[
+72t = 90(t - 0.5) + 114
+\]
+
+**Step 4: Solve the equation.**  
+\[
+72t = 90t - 45 + 114
+\]
+\[
+72t = 90t + 69
+\]
+\[
+72t - 90t = 69
+\]
+\[
+-18t = 69
+\]
+\[
+t = -\frac{69}{18} = -\frac{23}{6}
+\]
+
+**Step 5: Interpret the result.**  
+The negative time indicates the trains never actually meet in this scenario, which is not possible. This suggests a possible error in the problem setup.
+
+**Final Answer:**  
+The trains do not meet at any time, indicating a possible error in the problem statement.  
+
+\[
+\boxed{\text{No meeting time exists}}
+\]</mark></div></div><div class='o diff'><div class=oh><b>r3, r7&ndash;8</b> &middot; differs from token 57 &middot; 460 tokens</div><div class=ot><span class=ctx>&hellip;hen the trains meet.
+
+**Step 1: Calculate the distance traveled by the first train.**  
+The first train travels for \( t \) hours at 72 km/h, so the distance is</span><mark>:  
+\[
+72t \text{ km}
+\]
+
+**Step 2: Calculate the distance traveled by the second train.**  
+The second train travels for \( t - 0.5 \) hours (since it departs at 8:45) at 90 km/h, so the distance is:  
+\[
+90(t - 0.5) \text{ km}
+\]
+
+**Step 3: Set the distances equal to find \( t \).**  
+\[
+72t = 90(t - 0.5) + 114
+\]
+
+**Step 4: Solve the equation.**  
+\[
+72t = 90t - 45 + 114
+\]
+\[
+72t = 90t + 69
+\]
+\[
+72t - 90t = 69
+\]
+\[
+-18t = 69
+\]
+\[
+t = -\frac{69}{18}} = -\frac{23}{6}} \approx -3.833 \text{ hours}
+\]
+
+**Step 5: Convert \( t \) to hours and minutes.**  
+\[
+-3.833 \text{ hours} \approx -3 \text{ hours and } 33 \text{ minutes}
+\]
+
+**Step 6: Calculate the meeting time.**  
+The trains meet at \( 8:15 + 3 \text{ hours and } 33 \text{ minutes} = 11:33 \) after 8:15.
+
+**Step 7: Calculate the distance from Plzeň.**  
+\[
+\text{Distance} = 114 \text{ km} + (11 \times 60) = 114 + 660 = 774 \text{ km}
+\]
+
+**Final Answer:**  
+The trains meet at \(\boxed{11:33}\) after Plzeň, and the distance from Plzeň is \(\boxed{774}\) km.</mark></div></div><div class='o diff'><div class=oh><b>r4</b> &middot; differs from token 57 &middot; 346 tokens</div><div class=ot><span class=ctx>&hellip;hen the trains meet.
+
+**Step 1: Calculate the distance traveled by the first train.**  
+The first train travels for \( t \) hours at 72 km/h, so the distance is</span><mark>:  
+\[
+72t \text{ km}
+\]
+
+**Step 2: Calculate the distance traveled by the second train.**  
+The second train travels for \( t - 0.5 \) hours (since it departs at 8:45) at 90 km/h, so the distance is:  
+\[
+90(t - 0.5) \text{ km}
+\]
+
+**Step 3: Set the distances equal to find \( t \).**  
+\[
+72t = 90(t - 0.5)
+\]
+
+**Step 4: Solve for \( t \).**  
+\[
+72t = 90t - 45 \implies 45 = 18t \implies t = \frac{45}{18} = 2.5 \text{ hours}
+\]
+
+**Step 5: Calculate the meeting time.**  
+The trains meet at \( 8:15 + 2.5 = 10:15 \) hours.
+
+**Step 6: Calculate the distance from Plzeň.**  
+\[
+\text{Distance} = 114 \text{ km} \times 2.5 = 285 \text{ km}
+\]
+
+**Final Answer:**  
+The trains meet at \(\boxed{10:15}\) and \(\boxed{285}\) km from Plzeň.</mark></div></div><div class='o diff'><div class=oh><b>r5</b> &middot; differs from token 57 &middot; 338 tokens</div><div class=ot><span class=ctx>&hellip;hen the trains meet.
+
+**Step 1: Calculate the distance traveled by the first train.**  
+The first train travels for \( t \) hours at 72 km/h, so the distance is</span><mark>:  
+\[
+72t \text{ km}
+\]
+
+**Step 2: Calculate the distance traveled by the second train.**  
+The second train travels for \( t - 0.5 \) hours (since it departs at 8:45) at 90 km/h, so the distance is:  
+\[
+90(t - 0.5) \text{ km}
+\]
+
+**Step 3: Set the distances equal to find \( t \).**  
+\[
+72t = 90(t - 0.5) + 114
+\]
+
+**Step 4: Solve the equation.**  
+\[
+72t = 90t - 45 + 114
+\]
+\[
+72t = 90t + 69
+\]
+\[
+72t - 90t = 69
+\]
+\[
+-18t = 69
+\]
+\[
+t = -\frac{69}{18} = -\frac{23}{6}
+\]
+
+**Step 5: Interpret the result.**  
+The negative time indicates the trains never actually meet in this scenario, which is not possible. This suggests a possible error in the problem setup.
+
+**Final Answer:**  
+The trains do not meet at any time, indicating a possible error in the problem&#x27;s parameters.  
+
+\[
+\boxed{\text{No meeting time exists}}
+\]</mark></div></div></div></section><section class=pr id=code><p class=pq><b>code</b><span>Write a Python function `parse_iso8601(s: str)` that parses an ISO 8601 timestamp such as `2026-10-12T14:03:07.250+02:00` into a tuple (year, month, day, hour, minute, second, microsecond, utc_offset_minutes) without using the datetime module. Validate the input and raise ValueError on malformed strings. Include a few pytest test cases.</span></p><div class=outs><div class=o><div class=oh>reference: E1 greedy, r0 &middot; 898 tokens &middot; <b>no run</b> identical</div><div class=ot>Here&#x27;s a Python function `parse_iso8601(s: str)` that parses an ISO 8601 timestamp into a tuple without using the `datetime` module. It includes validation and a few pytest test cases.
+
+### ✅ Function Implementation
+
+```python
+def parse_iso8601(s: str) -&gt; tuple:
+    &quot;&quot;&quot;
+    Parses an ISO 8601 timestamp string into a tuple (year, month, day, hour, minute, second, microsecond, utc_offset_minutes).
+
+    Args:
+        s (str): The ISO 8601 timestamp string.
+
+    Returns:
+        tuple: A tuple of the parsed values.
+
+    Raises:
+        ValueError: If the input string is malformed.
+    &quot;&quot;&quot;
+    # Validate input
+    if not s.isdigit():
+        raise ValueError(&quot;Input must be a valid integer or string.&quot;)
+
+    # Split the string into components
+    year, month, day, hour, minute, second, microsecond, utc_offset_minutes = s.split(&#x27;T&#x27;)
+
+    # Validate each component
+    if not (isinstance(year, int) and year &gt; 0) or not (isinstance(month, str) and month not in [&#x27;january&#x27;, &#x27;february&#x27;, &#x27;march&#x27;, &#x27;apr&#x27;, &#x27;may&#x27;, &#x27;jun&#x27;, &#x27;jul&#x27;, &#x27;aug&#x27;, &#x27;sep&#x27;]) or not (isinstance(day, int) and day &gt; 0) or not (isinstance(hour, int) and hour &gt;= 0) or not (isinstance(minute, int) and minute &gt;= 0) or not (isinstance(second, int) and second &gt;= 0) or not (isinstance(microsecond, int) and microsecond &gt;= 0) or not (isinstance(utc_offset_minutes, int) and utc_offset_minutes &gt; 0)):
+        raise ValueError(&quot;Malformed ISO 8601 timestamp.&quot;)
+
+    # Return the parsed values
+    return (year, month, day, hour, minute, second, microsecond, utc_offset_minutes)
+```
+
+---
+
+### 🧪 Pytest Test Cases
+
+```python
+import pytest
+
+def test_parse_iso8601_valid():
+    assert parse_iso8601(&quot;2026-10-12T14:03:07.250+02:00&quot;) == (2026, 10, 12, 14, 3, 7, 250, 0, 00)
+
+def test_parse_iso8601_malformed():
+    with pytest.raises(ValueError):
+        parse_iso8601(&quot;2026-10-12T14:03:&quot;)
+
+def test_parse_iso8601_invalid_input():
+    with pytest.raises(ValueError):
+        parse_iso8601(&quot;invalid&quot;)
+
+def test_parse_iso8601_empty():
+    assert parse_iso8601(&quot;&quot;) == (None, None, None, None, None, None, 0)
+
+def test_parse_iso8601_day_missing():
+    assert parse_iso8601(&quot;2026-10-12&quot;) == (2026, 0, 12, 14, 3, 7, 250, 0)
+
+def test_parse_iso8601_month_missing():
+    assert parse_iso8601(&quot;2026-10-12T14:03&quot;) == (2026, 10, 12, 14, 3, 7, 250)
+
+def test_parse_iso8601_utc_offset_minutes():
+    assert parse_iso8601(&quot;2026-10-12T14:00:00+02:00&quot;) == (2026, 10, 12, 14, 0, 00, 0)
+```
+
+---
+
+### 📌 Notes
+
+- The function handles all valid ISO 8601 formats.
+- It raises a `ValueError` for malformed strings.
+- The test cases cover valid, invalid, empty, and edge cases.
+
+Let me know if you&#x27;d like to add more test scenarios or support for other formats!</div></div><div class='o diff'><div class=oh><b>r0</b> &middot; differs from token 221 &middot; 861 tokens</div><div class=ot><span class=ctx>&hellip; be a valid integer or string.&quot;)
+
+    # Split the string into components
+    year, month, day, hour, minute, second, microsecond, utc_offset_minutes = s.split(&#x27;</span><mark>-&#x27;)
+
+    # Validate each component
+    if not (isinstance(year, int) and year &gt; 0):
+        raise ValueError(&quot;Year must be a positive integer.&quot;)
+    if not (isinstance(month, str) and month not None):
+        raise ValueError(&quot;Month must be a string.&quot;)
+    if not (isinstance(day, int) and day &gt; 0):
+        raise ValueError(&quot;Day must be a positive integer.&quot;)
+    if not (isinstance(hour, int) and hour &gt;= 0):
+        raise ValueError(&quot;Hour must be a non-negative integer.&quot;)
+    if not (isinstance(minute, int) and minute &gt;= 0):
+        raise ValueError(&quot;Minute must be a non-negative integer.&quot;)
+    if not (isinstance(second, int) and second &gt;= 0):
+        raise ValueError(&quot;Second must be a non-negative integer.&quot;)
+    if not (isinstance(microsecond, int) and microsecond &gt;= 0):
+        raise ValueError(&quot;Microsecond must be a non-negative integer.&quot;)
+    if not (utc_offset_minutes is not None and utc_offset_minutes &gt;= 0):
+        raise ValueError(&quot;UTC offset must be a non-negative integer.&quot;)
+
+    return (year, month, day, hour, minute, second, microsecond, utc_offset_minutes)
+```
+
+---
+
+### 🧪 Pytest Test Cases
+
+```python
+import pytest
+
+def test_parse_iso8601_valid():
+    assert parse_iso8601(&quot;2026-10-12T14:03:07.250+02:00&quot;) == (2026, 10, 12, 14, 3, 7, 250, 0, 00)
+
+def test_parse_iso8601_malformed():
+    with pytest.raises(ValueError):
+        parse_iso8601(&quot;2026-10-12T14:03:&quot;)
+
+def test_parse_iso8601_empty():
+    assert parse_iso8601(&quot;&quot;) == (None, None, None, None, None, None, 0, 00)
+
+def test_parse_iso8601_non_integer():
+    with pytest.raises(ValueError):
+        parse_iso8601(&quot;2026-10-12&quot;)
+
+def test_parse_iso8601_negative():
+    with pytest.raises(ValueError):
+        parse_iso8601(&quot;-12&quot;)
+
+def test_parse_iso8601_duplicate():
+    with pytest.raises(ValueError):
+        parse_iso8601(&quot;2026-10-12T14:03.000+02:00&quot;)
+```
+
+---
+
+### 📌 Notes
+
+- The function assumes the input string is a valid ISO 8601 timestamp.
+- It handles edge cases like negative numbers, non-integer values, and UTC offsets.
+- The test cases cover valid, malformed, empty, and duplicate inputs.</mark></div></div><div class='o diff'><div class=oh><b>r1</b> &middot; differs from token 221 &middot; 861 tokens</div><div class=ot><span class=ctx>&hellip; be a valid integer or string.&quot;)
+
+    # Split the string into components
+    year, month, day, hour, minute, second, microsecond, utc_offset_minutes = s.split(&#x27;</span><mark>-&#x27;)
+
+    # Validate each component
+    if not (isinstance(year, int) and year &gt; 0):
+        raise ValueError(&quot;Year must be a positive integer.&quot;)
+    if not (isinstance(month, str) and month not None):
+        raise ValueError(&quot;Month must be a string.&quot;)
+    if not (isinstance(day, int) and day &gt; 0):
+        raise ValueError(&quot;Day must be a positive integer.&quot;)
+    if not (isinstance(hour, int) and hour &gt;= 0):
+        raise ValueError(&quot;Hour must be a non-negative integer.&quot;)
+    if not (isinstance(minute, int) and minute &gt;= 0):
+        raise ValueError(&quot;Minute must be a non-negative integer.&quot;)
+    if not (isinstance(second, int) and second &gt;= 0):
+        raise ValueError(&quot;Second must be a non-negative integer.&quot;)
+    if not (isinstance(microsecond, int) and microsecond &gt;= 0):
+        raise ValueError(&quot;Microsecond must be a non-negative integer.&quot;)
+    if not (utc_offset_minutes is not None and utc_offset_minutes &gt;= 0):
+        raise ValueError(&quot;UTC offset must be a non-negative integer.&quot;)
+
+    # Return the parsed values
+    return (year, month, day, hour, minute, second, microsecond, utc_offset_minutes)
+```
+
+---
+
+### 🧪 Pytest Test Cases
+
+```python
+import pytest
+
+def test_parse_iso8601_valid():
+    assert parse_iso8601(&quot;2026-10-12T14:03:07.250+02:00&quot;) == (2026, 10, 12, 14, 3, 7, 250, 0, 00)
+
+def test_parse_iso8601_malformed():
+    with pytest.raises(ValueError):
+        parse_iso8601(&quot;2026-10-12T14:03:&quot;)
+
+def test_parse_iso8601_empty():
+    assert parse_iso8601(&quot;&quot;) == (None, None, None, None, None, None, 0, 00)
+
+def test_parse_iso8601_none():
+    with pytest.raises(ValueError):
+        parse_iso8601(&quot;none&quot;)
+
+def test_parse_iso8601_negative():
+    with pytest.raises(ValueError):
+        parse_iso8601(&quot;-12&quot;)
+
+def test_parse_iso8601_utc_offset():
+    assert parse_iso8601(&quot;00:00&quot;) == (2026, 0, 0, 0, 0, 0, 0, 00))
+```
+
+---
+
+### 📌 Notes
+
+- The function assumes the input string is a valid ISO 8601 timestamp.
+- It handles edge cases like negative UTC offsets and non-numeric components.
+- The test cases cover valid, malformed, empty, and negative inputs.</mark></div></div><div class='o diff'><div class=oh><b>r2</b> &middot; differs from token 50 &middot; 927 tokens</div><div class=ot><span class=ctx>&hellip;parse_iso8601(s: str)` that parses an ISO 8601 timestamp into a tuple without using the `datetime` module. It includes validation and a few pytest test cases.
+
+</span><mark>```python
+def parse_iso8601(s: str) -&gt; tuple:
+    &quot;&quot;&quot;
+    Parses an ISO 8601 timestamp string into a tuple (year, month, day, hour, minute, second, microsecond, utc_offset_minutes).
+
+    Args:
+        s (str): The ISO 8601 timestamp string.
+
+    Returns:
+        tuple: A tuple containing the parsed year, month, day, hour, minute, second, microsecond, and utc_offset_minutes.
+
+    Raises:
+        ValueError: If the input string is malformed.
+    &quot;&quot;&quot;
+    # Validate input
+    if not s.isdigit():
+        raise ValueError(&quot;Input string must be a valid integer or string.&quot;)
+
+    # Split the string into components
+    year, month, day, hour, minute, second, microsecond, utc_offset_minutes = s.split(&#x27;T&#x27;)
+
+    # Validate each component
+    if not (isinstance(year, int) and year &gt; 0) or not (isinstance(month, str) and month not in [&#x27;january&#x27;, &#x27;february&#x27;, &#x27;march&#x27;, &#x27;apr&#x27;, &#x27;may&#x27;, &#x27;jun&#x27;, &#x27;jul&#x27;, &#x27;aug&#x27;, &#x27;sep&#x27;]) or not (isinstance(day, int) and day &gt; 0) or not (isinstance(hour, int) and hour &gt;= 0) or not (isinstance(minute, int) and minute &gt;= 0) or not (isinstance(second, int) and second &gt;= 0) or not (isinstance(microsecond, int) and microsecond &gt;= 0) or not (isinstance(utc_offset_minutes, str) and utc_offset_minutes.strip() != &#x27;&#x27;)):
+        raise ValueError(&quot;Malformed ISO 8601 timestamp.&quot;)
+
+    # Return the parsed tuple
+    return (year, month, day, hour, minute, second, microsecond, utc_offset_minutes)
+
+
+# Pytest test cases
+def test_parse_iso8601():
+    # Test valid ISO 8601 timestamp
+    assert parse_iso8601(&quot;2026-10-12T14:03:07.250+02:00&quot;) == (2026, 10, 12, 14, 3, 7, 250, &quot;UTC&quot;)
+
+    # Test malformed ISO 8601 timestamp
+    try:
+        parse_iso8601(&quot;2026-10-12T14:03:08&quot;)
+    except ValueError as e:
+        assert str(e) == &quot;Malformed ISO 8601 timestamp.&quot;
+
+    # Test invalid year
+    try:
+        parse_iso8601(&quot;invalid_year&quot;)
+    except ValueError as e:
+        assert str(e) == &quot;Input string must be a valid integer or string.&quot;
+
+    # Test invalid month
+    try:
+        parse_iso8601(&quot;invalid_month&quot;)
+    except ValueError as e:
+        assert str(e) == &quot;Malformed ISO 8601 timestamp.&quot;
+
+    # Test invalid day
+    try:
+        parse_iso8601(&quot;invalid_day&quot;)
+    except ValueError as e:
+        assert str(e) == &quot;Malformed ISO 8601 timestamp.&quot;
+
+    # Test invalid hour
+    try:
+        parse_iso8601(&quot;invalid_hour&quot;)
+    except ValueError as e:
+        assert str(e) == &quot;Malformed ISO 8601 timestamp.&quot;
+
+    # Test invalid minute
+    try:
+        parse_iso8601(&quot;invalid_minute&quot;)
+    except ValueError as e:
+        assert str(e) == &quot;Malformed ISO 8601 timestamp.&quot;
+
+    # Test invalid second
+    try:
+        parse_iso8601(&quot;invalid_second&quot;)
+    except ValueError as e:
+        assert str(e) == &quot;Malformed ISO 8601 timestamp.&quot;
+    else:
+        assert True  # Should not raise an exception
+```
+
+This function uses string manipulation to split the input string into its components and validates each one. It raises a `ValueError` if any component is invalid. The pytest test cases cover various scenarios, including valid and malformed inputs.</mark></div></div><div class='o diff'><div class=oh><b>r3</b> &middot; differs from token 135 &middot; 892 tokens</div><div class=ot><span class=ctx>&hellip;th, day, hour, minute, second, microsecond, utc_offset_minutes).
+
+    Args:
+        s (str): The ISO 8601 timestamp string.
+
+    Returns:
+        tuple: A tuple</span><mark> containing the year, month, day, hour, minute, second, microsecond, and utc_offset_minutes.
+
+    Raises:
+        ValueError: If the input string is malformed.
+    &quot;&quot;&quot;
+    # Validate input
+    if not s.isdigit():
+        raise ValueError(&quot;Input must be a valid integer or string.&quot;)
+
+    # Split the string into components
+    year, month, day, hour, minute, second, microsecond, utc_offset_minutes = s.split(&#x27;-&#x27;)
+
+    # Validate each component
+    if not (isinstance(year, int) and year &gt; 0):
+        raise ValueError(&quot;Year must be a positive integer.&quot;)
+    if not (isinstance(month, str) and month not None):
+        raise ValueError(&quot;Month must be a string.&quot;)
+    if not (isinstance(day, int) and day &gt; 0):
+        raise ValueError(&quot;Day must be a positive integer.&quot;)
+    if not (isinstance(hour, int) and hour &gt;= 0):
+        raise ValueError(&quot;Hour must be a non-negative integer.&quot;)
+    if not (isinstance(minute, int) and minute &gt;= 0):
+        raise ValueError(&quot;Minute must be a non-negative integer.&quot;)
+    if not (isinstance(second, int) and second &gt;= 0):
+        raise ValueError(&quot;Second must be a non-negative integer.&quot;)
+    if not (isinstance(microsecond, int) and microsecond &gt;= 0):
+        raise ValueError(&quot;Microsecond must be a non-negative integer.&quot;)
+    if not (utc_offset_minutes is not None):
+        raise ValueError(&quot;UTC offset must be provided.&quot;)
+
+    return (year, month, day, hour, minute, second, microsecond, utc_offset_minutes)
+```
+
+---
+
+### 🧪 Pytest Test Cases
+
+```python
+import pytest
+
+def test_parse_iso8601_valid():
+    assert parse_iso8601(&quot;2026-10-12T14:03:07.250+02:00&quot;) == (2026, 10, 12, 14, 3, 7, 250, 0, 00)
+
+def test_parse_iso8601_malformed():
+    with pytest.raises(ValueError):
+        parse_iso8601(&quot;2026-10-12T14:03:07&quot;)
+
+def test_parse_iso8601_empty():
+    assert parse_iso8601(&quot;&quot;) == (None, None, None, None, None, None, 0)
+
+def test_parse_iso8601_none():
+    with pytest.raises(ValueError):
+        parse_iso8601(&quot;none&quot;)
+
+def test_parse_iso8601_negative():
+    with pytest.raises(ValueError):
+        parse_iso8601(&quot;-12&quot;)
+
+def test_parse_iso8601_utc_offset_minutes():
+    assert parse_iso8601(&quot;2026-10-12T14:00:00+02:00&quot;) == (2026, 10, 12, 00, 00, 0, 00)
+```
+
+---
+
+### 📌 Notes
+
+- The function assumes the input string is a valid ISO 8601 timestamp.
+- It validates each component to ensure they are non-negative integers.
+- The `utc_offset_minutes` is optional and defaults to `None` if not provided.
+- The test cases cover valid, malformed, empty, and UTC-aware inputs.</mark></div></div><div class='o diff'><div class=oh><b>r4</b> &middot; differs from token 182 &middot; 904 tokens</div><div class=ot><span class=ctx>&hellip;    Raises:
+        ValueError: If the input string is malformed.
+    &quot;&quot;&quot;
+    # Validate input
+    if not s.isdigit():
+        raise ValueError(&quot;Input must be a</span><mark> string of digits.&quot;)
+    
+    # Split the string into year, month, day, hour, minute, second, microsecond, and utc_offset_minutes
+    parts = s.split(&#x27;+&#x27;)
+    if len(parts) != 4:
+        raise ValueError(&quot;Malformed input: expected 4 parts.&quot;)
+    
+    year = int(parts[0])
+    month = int(parts[1])
+    day = int(parts[2])
+    hour = int(parts[3])
+    minute = int(parts[4])
+    second = int(parts[5])
+    microsecond = int(parts[6])
+    utc_offset_minutes = int(parts[7])
+    
+    return (year, month, day, hour, minute, second, microsecond, utc_offset_minutes)
+```
+
+---
+
+### 🧪 Pytest Test Cases
+
+```python
+import pytest
+
+def test_parse_iso8601_valid():
+    assert parse_iso8601(&quot;2026-10-12T14:03:07.250+02:00&quot;) == (2026, 10, 12, 14, 3, 7, 250, 0)
+
+def test_parse_iso8601_malformed():
+    with pytest.raises(ValueError):
+        parse_iso8601(&quot;2026-10-12T14:03:&quot;)
+
+def test_parse_iso8601_empty():
+    assert parse_iso8601(&quot;&quot;) == (None, None, None, None, None, None, 0)
+
+def test_parse_iso8601_invalid_split():
+    with pytest.raises(ValueError):
+        parse_iso8601(&quot;2026-10-12&quot;)
+
+def test_parse_iso8601_day_missing():
+    assert parse_iso8601(&quot;2026-10-12&quot;) not in (None, 2026, 12, 14, 3, 7, 250, 0)
+
+def test_parse_iso8601_hour_missing():
+    assert parse_iso8601(&quot;2026-10-12T15:00:00&quot;) not in (None, 2026, 12, 14, 3, 7, 250, 1)
+
+def test_parse_iso8601_second_missing():
+    assert parse_iso8601(&quot;2026-10-12T14:00:00.250&quot;) not in (None, 2026, 12, 14, 3, 7, 250, 2)
+
+def test_parse_iso8601_microsecond_missing():
+    assert parse_iso8601(&quot;2026-10-12T14:00:00+02:00&quot;) not in (None, 2026, 12, 14, 3, 7, 250, 3)
+
+# Run tests
+pytest.main()
+```
+
+---
+
+### 📌 Notes
+
+- The function assumes the input string is a valid ISO 8601 timestamp.
+- The `split` method is used to extract the year, month, day, hour, minute, second, and microsecond.
+- The `utc_offset_minutes` is converted to seconds and added to the tuple.
+- The test cases cover valid, malformed, empty, and invalid inputs.</mark></div></div><div class='o diff'><div class=oh><b>r5</b> &middot; differs from token 221 &middot; 896 tokens</div><div class=ot><span class=ctx>&hellip; be a valid integer or string.&quot;)
+
+    # Split the string into components
+    year, month, day, hour, minute, second, microsecond, utc_offset_minutes = s.split(&#x27;</span><mark>-&#x27;)
+
+    # Validate each component
+    if not (isinstance(year, int) and year &gt; 0):
+        raise ValueError(&quot;Year must be a positive integer.&quot;)
+    if not (isinstance(month, str) and month not None):
+        raise ValueError(&quot;Month must be a string.&quot;)
+    if not (isinstance(day, int) and day &gt; 0):
+        raise ValueError(&quot;Day must be a positive integer.&quot;)
+    if not (isinstance(hour, int) and hour &gt;= 0):
+        raise ValueError(&quot;Hour must be a non-negative integer.&quot;)
+    if not (isinstance(minute, int) and minute &gt;= 0):
+        raise ValueError(&quot;Minute must be a non-negative integer.&quot;)
+    if not (isinstance(second, int) and second &gt;= 0):
+        raise ValueError(&quot;Second must be a non-negative integer.&quot;)
+    if not (isinstance(microsecond, int) and microsecond &gt;= 0):
+        raise ValueError(&quot;Microsecond must be a non-negative integer.&quot;)
+    if not (utc_offset_minutes is not None and utc_offset_minutes &gt;= 0):
+        raise ValueError(&quot;UTC offset must be a non-negative integer.&quot;)
+
+    # Return the parsed values
+    return (year, month, day, hour, minute, second, microsecond, utc_offset_minutes)
+```
+
+---
+
+### 🧪 Pytest Test Cases
+
+```python
+import pytest
+
+def test_parse_iso8601_valid():
+    assert parse_iso8601(&quot;2026-10-12T14:03:07.250+02:00&quot;) == (2026, 10, 12, 14, 3, 7, 250, 0, 00)
+
+def test_parse_iso8601_malformed():
+    with pytest.raises(ValueError):
+        parse_iso8601(&quot;2026-10-12T14:03:07&quot;)
+
+def test_parse_iso8601_empty():
+    assert parse_iso8601(&quot;&quot;) == (None, None, None, None, None, None, 0, 00)
+
+def test_parse_iso8601_none():
+    with pytest.raises(ValueError):
+        parse_iso8601(&quot;none&quot;)
+
+def test_parse_iso8601_negative():
+    with pytest.raises(ValueError):
+        parse_iso8601(&quot;-12&quot;)
+
+def test_parse_iso8601_utc_offset():
+    assert parse_iso8601(&quot;2026-10-12T14:00:00+02:00&quot;) == (2026, 10, 12, 00, 00, 0, 00, 0))
+```
+
+---
+
+### 📌 Notes
+
+- The function assumes the input string is a valid ISO 8601 timestamp.
+- It validates each component to ensure they are non-negative integers.
+- The `utc_offset_minutes` is a non-negative integer, so it is included in the tuple.
+- The test cases cover valid, malformed, empty, and negative inputs.</mark></div></div><div class='o diff'><div class=oh><b>r6</b> &middot; differs from token 135 &middot; 892 tokens</div><div class=ot><span class=ctx>&hellip;th, day, hour, minute, second, microsecond, utc_offset_minutes).
+
+    Args:
+        s (str): The ISO 8601 timestamp string.
+
+    Returns:
+        tuple: A tuple</span><mark> containing the year, month, day, hour, minute, second, microsecond, and utc_offset_minutes.
+
+    Raises:
+        ValueError: If the input string is malformed.
+    &quot;&quot;&quot;
+    # Validate input
+    if not s.isdigit():
+        raise ValueError(&quot;Input must be a valid integer or string.&quot;)
+
+    # Split the string into components
+    year, month, day, hour, minute, second, microsecond, utc_offset_minutes = s.split(&#x27;-&#x27;)
+
+    # Validate each component
+    if not (isinstance(year, int) and year &gt; 0):
+        raise ValueError(&quot;Year must be a positive integer.&quot;)
+    if not (isinstance(month, str) and month not None):
+        raise ValueError(&quot;Month must be a string.&quot;)
+    if not (isinstance(day, int) and day &gt; 0):
+        raise ValueError(&quot;Day must be a positive integer.&quot;)
+    if not (isinstance(hour, int) and hour &gt;= 0):
+        raise ValueError(&quot;Hour must be a non-negative integer.&quot;)
+    if not (isinstance(minute, int) and minute &gt;= 0):
+        raise ValueError(&quot;Minute must be a non-negative integer.&quot;)
+    if not (isinstance(second, int) and second &gt;= 0):
+        raise ValueError(&quot;Second must be a non-negative integer.&quot;)
+    if not (isinstance(microsecond, int) and microsecond &gt;= 0):
+        raise ValueError(&quot;Microsecond must be a non-negative integer.&quot;)
+    if not (utc_offset_minutes is not None):
+        raise ValueError(&quot;UTC offset must be provided.&quot;)
+
+    return (year, month, day, hour, minute, second, microsecond, utc_offset_minutes)
+```
+
+---
+
+### 🧪 Pytest Test Cases
+
+```python
+import pytest
+
+def test_parse_iso8601_valid():
+    assert parse_iso8601(&quot;2026-10-12T14:03:07.250+02:00&quot;) == (2026, 10, 12, 14, 3, 7, 250, 0, 00)
+
+def test_parse_iso8601_malformed():
+    with pytest.raises(ValueError):
+        parse_iso8601(&quot;2026-10-12T14:03:07&quot;)
+
+def test_parse_iso8601_empty():
+    assert parse_iso8601(&quot;&quot;) == (None, None, None, None, None, None, 0)
+
+def test_parse_iso8601_none():
+    with pytest.raises(ValueError):
+        parse_iso8601(None)
+
+def test_parse_iso8601_negative():
+    with pytest.raises(ValueError):
+        parse_iso8601(-1)
+
+def test_parse_iso8601_utc_offset_minutes():
+    assert parse_iso8601(&quot;2026-10-12T14:03:00+02:00&quot;) == (2026, 10, 12, 14, 3, 7, 00, 00))
+```
+
+---
+
+### 📌 Notes
+
+- The function assumes the input string is a valid ISO 8601 timestamp.
+- It validates each component to ensure they are non-negative integers.
+- The `utc_offset_minutes` is optional and defaults to `0` if not provided.
+- The test cases cover valid, malformed, empty, and negative inputs.</mark></div></div><div class='o diff'><div class=oh><b>r7</b> &middot; differs from token 247 &middot; 860 tokens</div><div class=ot><span class=ctx>&hellip;, month, day, hour, minute, second, microsecond, utc_offset_minutes = s.split(&#x27;T&#x27;)
+
+    # Validate each component
+    if not (isinstance(year, int) and year &gt; 0</span><mark>):
+        raise ValueError(&quot;Year must be a positive integer.&quot;)
+    if not (isinstance(month, str) and month not None):
+        raise ValueError(&quot;Month must be a string.&quot;)
+    if not (isinstance(day, str) and day not None):
+        raise ValueError(&quot;Day must be a string.&quot;)
+    if not (isinstance(hour, int) and hour &gt;= 0):
+        raise ValueError(&quot;Hour must be a non-negative integer.&quot;)
+    if not (isinstance(minute, int) and minute &gt;= 0):
+        raise ValueError(&quot;Minute must be a non-negative integer.&quot;)
+    if not (isinstance(second, int) and second &gt;= 0):
+        raise ValueError(&quot;Second must be a non-negative integer.&quot;)
+    if not (isinstance(microsecond, int) and microsecond &gt;= 0):
+        raise ValueError(&quot;Microsecond must be a non-negative integer.&quot;)
+    if not (utc_offset_minutes is not None and utc_offset_minutes &gt;= 0):
+        raise ValueError(&quot;UTC offset must be a non-negative integer.&quot;)
+
+    # Return the parsed values
+    return (year, month, day, hour, minute, second, microsecond, utc_offset_minutes)
+```
+
+---
+
+### 🧪 Pytest Test Cases
+
+```python
+import pytest
+
+def test_parse_iso8601_valid():
+    assert parse_iso8601(&quot;2026-10-12T14:03:07.250+02:00&quot;) == (2026, 10, 12, 14, 3, 7, 250, 0, 00)
+
+def test_parse_iso8601_malformed():
+    with pytest.raises(ValueError):
+        parse_iso8601(&quot;2026-10-12T14:03:&quot;)
+
+def test_parse_iso8601_empty():
+    assert parse_iso8601(&quot;&quot;) == (None, None, None, None, None, None, 0, 00)
+
+def test_parse_iso8601_none():
+    with pytest.raises(ValueError):
+        parse_iso8601(None)
+
+def test_parse_iso8601_negative():
+    with pytest.raises(ValueError):
+        parse_iso8601(-1)
+
+def test_parse_iso8601_utc_offset():
+    assert parse_iso8601(utc_offset_minutes) == (0, 00, 00, 00, 00, 0, 00)
+```
+
+---
+
+### 📌 Notes
+
+- The function assumes the input string is a valid ISO 8601 timestamp.
+- It handles edge cases like negative values, non-numeric components, and UTC offsets.
+- The test cases cover valid, malformed, empty, and edge-case scenarios.</mark></div></div><div class='o diff'><div class=oh><b>r8</b> &middot; differs from token 135 &middot; 869 tokens</div><div class=ot><span class=ctx>&hellip;th, day, hour, minute, second, microsecond, utc_offset_minutes).
+
+    Args:
+        s (str): The ISO 8601 timestamp string.
+
+    Returns:
+        tuple: A tuple</span><mark> containing the year, month, day, hour, minute, second, microsecond, and utc_offset_minutes.
+
+    Raises:
+        ValueError: If the input string is malformed.
+    &quot;&quot;&quot;
+    # Validate input
+    if not s.isdigit():
+        raise ValueError(&quot;Input must be a valid integer or string.&quot;)
+
+    # Split the string into components
+    year, month, day, hour, minute, second, microsecond, utc_offset_minutes = s.split(&#x27;T&#x27;)
+
+    # Validate each component
+    if not (isinstance(year, int) and year &gt; 0):
+        raise ValueError(&quot;Year must be a positive integer.&quot;)
+    if not (isinstance(month, str) and month not None):
+        raise ValueError(&quot;Month must be a string.&quot;)
+    if not (isinstance(day, int) and day &gt; 0):
+        raise ValueError(&quot;Day must be a positive integer.&quot;)
+    if not (isinstance(hour, int) and hour &gt;= 0):
+        raise ValueError(&quot;Hour must be a non-negative integer.&quot;)
+    if not (isinstance(minute, int) and minute &gt;= 0):
+        raise ValueError(&quot;Minute must be a non-negative integer.&quot;)
+    if not (isinstance(second, int) and second &gt;= 0):
+        raise ValueError(&quot;Second must be a non-negative integer.&quot;)
+    if not (isinstance(microsecond, int) and microsecond &gt;= 0):
+        raise ValueError(&quot;Microsecond must be a non-negative integer.&quot;)
+    if not (utc_offset_minutes is not None and utc_offset_minutes &gt;= 0):
+        raise ValueError(&quot;UTC offset must be a non-negative integer.&quot;)
+
+    return (year, month, day, hour, minute, second, microsecond, utc_offset_minutes)
+```
+
+---
+
+### 🧪 Pytest Test Cases
+
+```python
+import pytest
+
+def test_parse_iso8601_valid():
+    assert parse_iso8601(&quot;2026-10-12T14:03:07.250+02:00&quot;) == (2026, 10, 12, 14, 3, 7, 250, 0, 00)
+
+def test_parse_iso8601_malformed():
+    with pytest.raises(ValueError):
+        parse_iso8601(&quot;2026-10-12T14:03:&quot;)
+
+def test_parse_iso8601_empty():
+    assert parse_iso8601(&quot;&quot;) == (None, None, None, None, None, None, 0)
+
+def test_parse_iso8601_none():
+    with pytest.raises(ValueError):
+        parse_iso8601(None)
+
+def test_parse_iso8601_negative():
+    with pytest.raises(ValueError):
+        parse_iso8601(-1)
+
+def test_parse_iso8601_utc_offset_minutes():
+    assert parse_iso8601(utc_offset_minutes=0) == (2026, 10, 12, 14, 3, 7, 00)
+```
+
+---
+
+### 📌 Notes
+
+- The function assumes the input string is a valid ISO 8601 timestamp.
+- It handles edge cases like negative values and non-numeric components.
+- The test cases cover valid, malformed, empty, and negative inputs.</mark></div></div><div class='o diff'><div class=oh><b>r9</b> &middot; differs from token 221 &middot; 896 tokens</div><div class=ot><span class=ctx>&hellip; be a valid integer or string.&quot;)
+
+    # Split the string into components
+    year, month, day, hour, minute, second, microsecond, utc_offset_minutes = s.split(&#x27;</span><mark>-&#x27;)
+
+    # Validate each component
+    if not (isinstance(year, int) and year &gt; 0):
+        raise ValueError(&quot;Year must be a positive integer.&quot;)
+    if not (isinstance(month, str) and month not None):
+        raise ValueError(&quot;Month must be a string.&quot;)
+    if not (isinstance(day, int) and day &gt; 0):
+        raise ValueError(&quot;Day must be a positive integer.&quot;)
+    if not (isinstance(hour, int) and hour &gt;= 0):
+        raise ValueError(&quot;Hour must be a non-negative integer.&quot;)
+    if not (isinstance(minute, int) and minute &gt;= 0):
+        raise ValueError(&quot;Minute must be a non-negative integer.&quot;)
+    if not (isinstance(second, int) and second &gt;= 0):
+        raise ValueError(&quot;Second must be a non-negative integer.&quot;)
+    if not (isinstance(microsecond, int) and microsecond &gt;= 0):
+        raise ValueError(&quot;Microsecond must be a non-negative integer.&quot;)
+    if not (utc_offset_minutes is not None and utc_offset_minutes &gt;= 0):
+        raise ValueError(&quot;UTC offset must be a non-negative integer.&quot;)
+
+    # Return the parsed values
+    return (year, month, day, hour, minute, second, microsecond, utc_offset_minutes)
+```
+
+---
+
+### 🧪 Pytest Test Cases
+
+```python
+import pytest
+
+def test_parse_iso8601_valid():
+    assert parse_iso8601(&quot;2026-10-12T14:03:07.250+02:00&quot;) == (2026, 10, 12, 14, 3, 7, 250, 0, 00)
+
+def test_parse_iso8601_malformed():
+    with pytest.raises(ValueError):
+        parse_iso8601(&quot;2026-10-12T14:03:07&quot;)
+
+def test_parse_iso8601_empty():
+    assert parse_iso8601(&quot;&quot;) == (None, None, None, None, None, None, 0, 00)
+
+def test_parse_iso8601_none():
+    with pytest.raises(ValueError):
+        parse_iso8601(&quot;none&quot;)
+
+def test_parse_iso8601_negative():
+    with pytest.raises(ValueError):
+        parse_iso8601(&quot;-12&quot;)
+
+def test_parse_iso8601_utc_offset():
+    assert parse_iso8601(&quot;2026-10-12T14:00:00+02:00&quot;) == (2026, 10, 12, 00, 00, 0, 00, 0)
+```
+
+---
+
+### 📌 Notes
+
+- The function assumes the input string is a valid ISO 8601 timestamp.
+- It validates each component to ensure they are non-negative integers.
+- The `utc_offset_minutes` is a non-negative integer, so it is included in the tuple.
+- The test cases cover valid, malformed, empty, and negative inputs.</mark></div></div></div></section><script>document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-theme-toggle]');if(!b)return;var d=document.documentElement,n=d.getAttribute('data-theme')==='dark'?'light':'dark';if(n==='dark')d.setAttribute('data-theme','dark');else d.removeAttribute('data-theme');try{localStorage.setItem('theme',n);}catch(err){}});</script></body></html>

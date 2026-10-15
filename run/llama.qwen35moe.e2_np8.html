@@ -1,0 +1,1711 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><title>Qwen3.6-35B-A3B · llama.cpp · --parallel 8 · Blackwell &middot; Determinism</title><link rel=icon href='../favicon.ico' sizes=any><script>try{var t=localStorage.getItem('theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}</script><link rel=preconnect href='https://fonts.googleapis.com'><link rel=preconnect href='https://fonts.gstatic.com' crossorigin><link rel=stylesheet href='https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;500&display=swap'><link rel=stylesheet href='../static/style.css'></head><body><header class=mast><a class=brand href='https://lokalni.ai' aria-label='lokalni.ai'><img class=logo-light src='../static/logo_dark.png' alt='lokalni.ai' width=102 height=32><img class=logo-dark src='../static/logo_light.png' alt='lokalni.ai' width=102 height=32></a><span class='mastsep p'>&frasl;</span><a class=proj href='https://lokalni.ai/blog/determinismus/'>Stejn&yacute; vstup, stejn&yacute; v&yacute;stup</a><span class=mastsep>&frasl;</span><a class=here href='../index.html'>Qwen3.6-35B-A3B &middot; llama.cpp &middot; <code>--parallel 8</code> &middot; Blackwell</a><span class=spacer></span><button class=tgl type=button data-theme-toggle aria-label='Switch theme' title='Switch theme'><svg class=sun viewBox='0 0 24 24' aria-hidden=true><circle cx=12 cy=12 r=4 /><path d='M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4' /></svg><svg class=moon viewBox='0 0 24 24' aria-hidden=true><path d='M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z' /></svg></button></header><section class=pr id=hello><p class=pq><b>hello</b><span>Hello! Who are you?</span></p><div class=outs><div class=o><div class=oh>reference: E1 greedy, r0 &middot; 30 tokens &middot; <b>r0, r2&ndash;9</b> identical</div><div class=ot>Hello! I am Qwen, a large language model independently developed by Alibaba Group&#x27;s Tongyi Lab. 
+
+How can I help you today?</div></div><div class='o diff'><div class=oh><b>r1</b> &middot; differs from token 22 &middot; 65 tokens</div><div class=ot><span class=ctx>Hello! I am Qwen, a large language model independently developed by Alibaba Group&#x27;s Tongyi Lab. 
+
+</span><mark>I&#x27;m here to be your helpful thinking partner. Whether you need help with complex reasoning, creative writing, coding, or just want to chat, I&#x27;m ready to assist. How can I help you today?</mark></div></div></div></section><section class=pr id=fact><p class=pq><b>fact</b><span>Explain why the sky is blue during the day and why sunsets are often red or orange. Cover the physics involved and mention how atmospheric conditions such as dust or pollution change the colors.</span></p><div class=outs><div class=o><div class=oh>reference: E1 greedy, r0 &middot; 1024 tokens &middot; <b>no run</b> identical</div><div class=ot>The colors of the sky and sunsets are primarily governed by a physical phenomenon known as **Rayleigh scattering**. This process describes how light interacts with particles in the Earth&#x27;s atmosphere.
+
+Here is a step-by-step deduction of the physics involved, followed an analysis of how atmospheric conditions alter these colors.
+
+### 1. The Physics of Rayleigh Scattering
+
+#### The Nature of Sunlight
+Sunlight appears white, but it is actually a mixture of all colors in the visible spectrum. Each color corresponds to a specific wavelength of light:
+*   **Violet/Blue:** Short wavelengths ($\approx 400\text{--}450$ nm).
+*   **Red/Orange:** Long wavelengths ($\approx 600\text{--}700$ nm).
+
+#### Interaction with the Atmosphere
+The Earth&#x27;s atmosphere is composed mostly of nitrogen ($N_2$) and oxygen ($O_2$) molecules. These molecules are much smaller than the wavelengths of visible light.
+
+When sunlight enters the atmosphere, it collides with these gas molecules. According to the physics of **Rayleigh scattering**, the intensity of scattered light ($I$) is inversely proportional to the fourth power of the wavelength ($\lambda$):
+
+$$ I \propto \frac{1}{\lambda^4} $$
+
+This equation implies that shorter wavelengths (blue/violet) are scattered much more strongly than longer wavelengths (red/orange). Specifically, blue light is scattered roughly 10 times more effectively than red light.
+
+### 2. Why the Sky is Blue (Daytime)
+
+During the middle of the day, the sun is high in the sky, and sunlight travels through a relatively thin layer of the atmosphere to reach your eyes.
+
+1.  **Scattering:** As sunlight hits the nitrogen and oxygen molecules, the short-wavelength blue light is scattered in all directions (up, down, sideways).
+2.  **Perception:** Because this blue light is scattered everywhere, when you look up at any part of the sky (away from the sun), your eyes detect this scattered blue light.
+3.  **Why not Violet?** Although violet light has an even shorter wavelength than blue and is scattered even more, the sky does not appear violet for two reasons:
+    *   The sun emits less violet light than blue light.
+    *   The human eye is much more sensitive to blue light than violet light.
+
+**Conclusion:** The sky appears blue because blue light is scattered by atmospheric molecules in all directions, filling the sky with this color.
+
+### 3. Why Sunsets are Red or Orange
+
+Sunsets occur when the sun is near the horizon. In this position, sunlight must travel through a much thicker layer of the atmosphere to reach the observer&#x27;s eyes compared to when the sun is overhead.
+
+1.  **Increased Path Length:** The path length through the atmosphere can be up to 30–40 times longer at sunset than at noon.
+2.  **Cumulative Scattering:** As light travels this long distance, the short-wavelength blue and green light are scattered out of the direct beam almost entirely. By the time the light reaches your eyes, very little blue remains in the direct line of sight.
+3.  **Transmission of Long Wavelengths:** The longer wavelengths (red, orange, and yellow) are scattered much less. Therefore, they pass through the thick atmosphere more easily and reach the observer directly.
+
+**Conclusion:** Sunsets appear red or orange because the atmosphere has filtered out the blue light via scattering, leaving only the longer red and orange wavelengths to reach the observer.
+
+### 4. The Impact of Atmospheric Conditions (Dust, Pollution, Volcanoes)
+
+The presence of larger particles in the atmosphere—such as dust, smoke, pollution, or volcanic ash—significantly alters the scattering process. This introduces a different type of scattering called **Mie scattering**.
+
+#### Mie Scattering
+*   **Particle Size:** Mie scattering occurs when particles are roughly the same size as or larger than the wavelength of light (e.g., water droplets, dust, soot).
+*   **Wavelength Dependence:** Unlike Rayleigh scattering, Mie scattering is not strongly dependent on wavelength. It scatters all wavelengths of visible light relatively equally.
+
+#### How Conditions Change Colors:
+1.  **Enhanced Red/Orange (High Pollution/Dust):**
+    *   If the atmosphere contains a high concentration of fine dust or pollution, these particles absorb and scatter even more of the shorter wavelengths (blue/green) before they can reach the observer.
+    *   This leaves an even higher proportion of red and orange light, resulting in intensely vibrant, deep red sunsets.
+    *   *Example:* Wildfires produce smoke that creates spectacular red sunsets globally.
+
+2.  **White/Grey Skies (Heavy Haze or Clouds):**
+    *  </div></div><div class='o diff'><div class=oh><b>r0</b> &middot; differs from token 93 &middot; 1024 tokens</div><div class=ot><span class=ctx>&hellip;nditions alter these colors.
+
+### 1. The Physics of Rayleigh Scattering
+
+#### The Nature of Sunlight
+Sunlight appears white, but it is actually a mixture of all</span><mark> visible colors (the spectrum). Each color corresponds to a specific wavelength of light:
+*   **Blue/Violet:** Short wavelengths ($\approx 380–450$ nm).
+*   **Red/Orange:** Long wavelengths ($\approx 620–750$ nm).
+
+#### Interaction with the Atmosphere
+The Earth&#x27;s atmosphere is composed mostly of nitrogen ($N_2$) and oxygen ($O_2$) molecules. These molecules are much smaller than the wavelengths of visible light.
+
+When sunlight enters the atmosphere, it collides with these gas molecules. According to **Rayleigh&#x27;s Law**, the intensity of scattered light ($I$) is inversely proportional to the fourth power of the wavelength ($\lambda$):
+
+$$ I \propto \frac{1}{\lambda^4} $$
+
+**The Consequence:**
+Because blue light has a much shorter wavelength than red light, it is scattered much more strongly.
+*   Blue light is scattered roughly $(700/450)^4 \approx 9$ times more than red light.
+*   This scattered blue light is sent in all directions, filling the sky. When you look up (away from the sun), your eyes detect this scattered blue light.
+
+*Note: Although violet light has an even shorter wavelength than blue, the sky appears blue rather than violet because:*
+1.  *The sun emits more energy in the blue part of the spectrum than in the violet.*
+2.  *The human eye is more sensitive to blue light.*
+
+### 2. Why Sunsets are Red or Orange
+
+The color of the sunset is determined by the **path length** of sunlight through the atmosphere.
+
+#### The Geometry of the Sun&#x27;s Position
+*   **At Noon:** The sun is directly overhead. Sunlight travels through the thinnest possible layer of the atmosphere to reach your eyes. The path is short, so only a small amount of blue light is scattered away, leaving the sun looking white or slightly yellow.
+*   **At Sunset/Sunrise:** The sun is near the horizon. Sunlight must travel through a much thicker slice of the atmosphere to reach an observer on the ground. The path length can be up to 30–40 times longer than at noon.
+
+#### The Filtering Effect
+As the light travels this long distance:
+1.  Almost all the short-wavelength blue and green light is scattered out of the beam entirely (which is why the sky away from the sun looks dark blue or purple at twilight).
+2.  The long-wavelength red, orange, and yellow light is scattered much less.
+3.  Consequently, the direct light that reaches your eyes from the sun is depleted of blue and dominated by red and orange hues.
+
+### 3. The Impact of Atmospheric Conditions (Dust and Pollution)
+
+While Rayleigh scattering explains the baseline colors, the presence of larger particles modifies the scattering process. This is often described by **Mie scattering** or general aerosol scattering.
+
+#### Larger Particles (Aerosols, Dust, Smoke, Pollution)
+Rayleigh scattering applies to particles *smaller* than the wavelength of light (gas molecules). However, the atmosphere also contains particles *larger* than the wavelength of light, such as:
+*   Dust
+*   Smoke (from wildfires or volcanoes)
+*   Pollution (sulfates, nitrates)
+*   Water droplets (clouds/haze)
+
+These larger particles scatter light differently. They tend to scatter all wavelengths of visible light more equally (non-selective scattering), but they also absorb and block light.
+
+#### How Conditions Change Colors:
+1.  **Enhanced Red/Orange (Volcanic Eruptions/Wildfires):**
+    If the atmosphere is filled with fine ash or smoke particles, they act as additional filters. They scatter even more of the remaining blue and green light out of the direct beam. This allows only the deepest reds and oranges to penetrate.
+    *   *Example:* After major volcanic eruptions (e.g., Mount Pinatubo in 1991), sunsets around the world were famously vivid red and purple due to stratospheric aerosols.
+
+2.  **Whitish/Grey Sky (Heavy Pollution/Haze):**
+    If the air is thick with large particulate matter (like heavy smog or fog), the scattering becomes non-selective. The particles scatter all</mark></div></div><div class='o diff'><div class=oh><b>r1</b> &middot; differs from token 93 &middot; 1024 tokens</div><div class=ot><span class=ctx>&hellip;nditions alter these colors.
+
+### 1. The Physics of Rayleigh Scattering
+
+#### The Nature of Sunlight
+Sunlight appears white, but it is actually a mixture of all</span><mark> visible colors (the spectrum). Each color corresponds to a specific wavelength of light:
+*   **Blue/Violet:** Short wavelengths ($\approx 400\text{--}450$ nm).
+*   **Red/Orange:** Long wavelengths ($\approx 620\text{--}750$ nm).
+
+#### Interaction with the Atmosphere
+The Earth&#x27;s atmosphere is composed mostly of nitrogen ($N_2$) and oxygen ($O_2$) molecules. These molecules are much smaller than the wavelengths of visible light.
+
+When sunlight enters the atmosphere, it collides with these gas molecules. According to **Rayleigh&#x27;s Law**, the intensity of scattered light ($I$) is inversely proportional to the fourth power of the wavelength ($\lambda$):
+
+$$ I \propto \frac{1}{\lambda^4} $$
+
+This mathematical relationship means that shorter wavelengths (blue and violet) are scattered much more strongly than longer wavelengths (red and orange). Specifically, blue light is scattered roughly 10 times more effectively than red light.
+
+### 2. Why the Sky is Blue (Daytime)
+
+During the middle of the day, the sun is high in the sky, and sunlight travels through a relatively thin layer of the atmosphere to reach your eyes.
+
+1.  **Scattering:** As sunlight hits the nitrogen and oxygen molecules, the short-wavelength blue light is scattered in all directions (up, down, sideways).
+2.  **Perception:** Because this blue light is scattered everywhere, when you look up at any part of the sky (away from the sun), your eyes detect this scattered blue light.
+3.  **Why not Violet?** Although violet light has an even shorter wavelength than blue and is scattered even more, the sky does not appear violet for two reasons:
+    *   **Solar Spectrum:** The sun emits much more blue light than violet light.
+    *   **Human Vision:** The human eye is more sensitive to blue light than violet light, and our atmosphere absorbs some violet light.
+
+**Conclusion:** The sky appears blue because blue light is scattered by atmospheric molecules in all directions, filling the sky with this color.
+
+### 3. Why Sunsets are Red or Orange
+
+Sunsets occur when the sun is near the horizon. In this position, sunlight must travel through a much thicker layer of the atmosphere to reach your eyes compared to when the sun is overhead.
+
+1.  **Increased Path Length:** The path length through the atmosphere can be up to 30–40 times longer at sunset than at noon.
+2.  **Cumulative Scattering:** As light travels this long distance, almost all the short-wavelength blue and green light is scattered out of the direct beam.
+3.  **Transmission of Long Wavelengths:** The longer wavelengths (red, orange, and yellow) are scattered much less. Therefore, they pass through the atmosphere more directly.
+4.  **Result:** By the time the light reaches your eyes, the blue components have been largely removed, leaving the dominant red and orange hues.
+
+**Conclusion:** Sunsets are red/orange because the long path through the atmosphere scatters away the blue light, allowing only the longer red and orange wavelengths to reach the observer directly.
+
+### 4. The Impact of Atmospheric Conditions (Dust, Pollution, Volcanoes)
+
+The presence of larger particles in the atmosphere—such as dust, smoke, pollution, or volcanic ash—significantly alters the scattering process. This introduces a different type of scattering called **Mie Scattering**.
+
+#### Mie Scattering vs. Rayleigh Scattering
+*   **Rayleigh Scattering:** Occurs when particles are **smaller** than the wavelength of light (e.g., gas molecules). It is highly wavelength-dependent ($1/\lambda^4$).
+*   **Mie Scattering:** Occurs when particles are **comparable to or larger** than the wavelength of light (e.g., water droplets, dust, soot). It is less wavelength-dependent and scatters all colors more equally.
+
+#### How Conditions Change Colors
+
+1.  **Enhanced Red/Orange Sunsets (Clean Air + Particles):**
+    *   If the air is clean but contains some aerosols (like dust or pollution), these particles enhance the scattering of blue light even further.
+    *   This results in deeper, more intense reds and oranges at sunset because more blue light is removed</mark></div></div><div class='o diff'><div class=oh><b>r2</b> &middot; differs from token 93 &middot; 1024 tokens</div><div class=ot><span class=ctx>&hellip;nditions alter these colors.
+
+### 1. The Physics of Rayleigh Scattering
+
+#### The Nature of Sunlight
+Sunlight appears white, but it is actually a mixture of all</span><mark> visible colors (the spectrum). Each color corresponds to a specific wavelength of light:
+*   **Blue/Violet:** Short wavelengths ($\approx 400\text{--}450$ nm).
+*   **Red/Orange:** Long wavelengths ($\approx 620\text{--}750$ nm).
+
+#### Interaction with the Atmosphere
+The Earth&#x27;s atmosphere is composed mostly of nitrogen ($N_2$) and oxygen ($O_2$) molecules. These molecules are much smaller than the wavelengths of visible light.
+
+When sunlight enters the atmosphere, it collides with these gas molecules. According to **Rayleigh&#x27;s Law**, the intensity of scattered light ($I$) is inversely proportional to the fourth power of the wavelength ($\lambda$):
+
+$$ I \propto \frac{1}{\lambda^4} $$
+
+This mathematical relationship means that shorter wavelengths (blue and violet) are scattered much more strongly than longer wavelengths (red and orange). Specifically, blue light is scattered roughly 10 times more effectively than red light.
+
+### 2. Why the Sky is Blue (Daytime)
+
+During the middle of the day, the sun is high in the sky, and sunlight travels through a relatively thin layer of the atmosphere to reach your eyes.
+
+1.  **Scattering:** As sunlight hits the nitrogen and oxygen molecules, the short-wavelength blue light is scattered in all directions (up, down, sideways).
+2.  **Perception:** Because this blue light is scattered everywhere, when you look up at any part of the sky (away from the sun), your eyes detect this scattered blue light.
+3.  **Why not Violet?** Although violet light has an even shorter wavelength than blue and is scattered even more, the sky does not appear violet for two reasons:
+    *   **Solar Spectrum:** The sun emits much more blue light than violet light.
+    *   **Human Vision:** The human eye is more sensitive to blue light than violet light, and our atmosphere absorbs some violet light.
+
+**Conclusion:** The sky appears blue because blue light is scattered by atmospheric molecules in all directions, filling the sky with this color.
+
+### 3. Why Sunsets are Red or Orange
+
+At sunset (or sunrise), the sun is near the horizon. This changes the geometry of the light&#x27;s path through the atmosphere.
+
+1.  **Increased Path Length:** Sunlight must travel through a much thicker layer of the atmosphere to reach your eyes compared to when the sun is overhead. The path length can be 30 to 40 times longer.
+2.  **Selective Removal:** As the light travels this long distance, the short-wavelength blue and green light is scattered out of the beam almost entirely before it reaches you.
+3.  **Direct Transmission:** The longer-wavelength red, orange, and yellow light is scattered much less. Therefore, it can penetrate the thick atmosphere and reach your eyes directly.
+
+**Conclusion:** The sun appears red or orange at sunset because the blue light has been scattered away, leaving only the longer wavelengths to pass through the atmosphere to the observer.
+
+### 4. The Impact of Atmospheric Conditions (Dust, Pollution, Volcanoes)
+
+The presence of larger particles in the atmosphere—such as dust, smoke, pollution, or volcanic ash—significantly alters the scattering process. This introduces a different type of scattering called **Mie Scattering**.
+
+#### Mie Scattering
+*   **Particle Size:** Mie scattering occurs when particles are roughly the same size as or larger than the wavelength of light (e.g., water droplets, dust, soot).
+*   **Wavelength Dependence:** Unlike Rayleigh scattering, Mie scattering is not strongly dependent on wavelength. It scatters all wavelengths of visible light relatively equally.
+
+#### How Conditions Change Colors:
+1.  **Enhanced Red/Orange Sunsets:**
+    *   If the atmosphere contains a moderate amount of dust or pollution, these larger particles scatter even more of the blue and green light out of the direct beam.
+    *   This leaves an even higher concentration of red and orange light to reach the observer, resulting in **more vivid, intense reds and oranges** during sunset.
+    *   *Historical Example:* After major volcanic eruptions (e.g., Mount Pinatubo in 1991), sunsets around the world were famously brilliant red and purple due to sulfate aerosols in the stratos</mark></div></div><div class='o diff'><div class=oh><b>r3</b> &middot; differs from token 93 &middot; 1024 tokens</div><div class=ot><span class=ctx>&hellip;nditions alter these colors.
+
+### 1. The Physics of Rayleigh Scattering
+
+#### The Nature of Sunlight
+Sunlight appears white, but it is actually a mixture of all</span><mark> visible colors (the spectrum). Each color corresponds to a specific wavelength of light:
+*   **Blue/Violet:** Short wavelengths ($\approx 400\text{--}450$ nm).
+*   **Red/Orange:** Long wavelengths ($\approx 620\text{--}750$ nm).
+
+#### Interaction with the Atmosphere
+The Earth&#x27;s atmosphere is composed mostly of nitrogen ($N_2$) and oxygen ($O_2$) molecules. These molecules are much smaller than the wavelengths of visible light.
+
+When sunlight enters the atmosphere, it collides with these gas molecules. According to **Rayleigh&#x27;s Law**, the intensity of scattered light ($I$) is inversely proportional to the fourth power of the wavelength ($\lambda$):
+
+$$ I \propto \frac{1}{\lambda^4} $$
+
+This mathematical relationship means that shorter wavelengths (blue and violet) are scattered much more strongly than longer wavelengths (red and orange).
+*   Blue light is scattered approximately **10 times more** than red light.
+
+### 2. Why the Sky is Blue (Daytime)
+
+During the middle of the day, the sun is high in the sky, and sunlight travels through a relatively thin layer of the atmosphere to reach your eyes.
+
+1.  **Scattering:** As sunlight hits the nitrogen and oxygen molecules, the short-wavelength blue light is scattered in all directions (up, down, sideways).
+2.  **Perception:** When you look up at any part of the sky (away from the sun), you are seeing this scattered blue light entering your eyes.
+3.  **Why not Violet?** Although violet light has an even shorter wavelength than blue and is scattered even more, the sky does not appear violet for two reasons:
+    *   **Solar Spectrum:** The sun emits much more blue light than violet light.
+    *   **Human Vision:** The human eye is more sensitive to blue light than violet light, and the upper atmosphere absorbs some of the violet light.
+
+**Conclusion:** The sky appears blue because blue light is scattered widely by atmospheric gases, filling the sky with this color.
+
+### 3. Why Sunsets are Red or Orange
+
+At sunset (or sunrise), the sun is near the horizon. This changes the geometry of the light&#x27;s path through the atmosphere.
+
+1.  **Increased Path Length:** Sunlight must travel through a much thicker slice of the atmosphere to reach your eyes compared to midday. The path length can be up to 40 times longer.
+2.  **Cumulative Scattering:** Because the path is so long, almost all the short-wavelength blue and green light is scattered out of the direct beam before it reaches you.
+3.  **Transmission of Long Wavelengths:** The longer wavelengths (red, orange, and yellow) are scattered much less effectively. They pass through the thick atmosphere with less deviation.
+4.  **Result:** The light that finally reaches your eyes directly from the sun is depleted of blue and green, leaving predominantly red and orange hues.
+
+**Conclusion:** Sunsets are red/orange because the long atmospheric path removes the blue light via scattering, allowing only the longer red wavelengths to penetrate to the observer.
+
+### 4. The Impact of Atmospheric Conditions (Dust, Pollution, Volcanoes)
+
+The purity of the atmosphere significantly alters the intensity and hue of these colors. This is explained by **Mie Scattering**, which occurs when light interacts with particles that are roughly the same size as or larger than the wavelength of light (e.g., dust, water droplets, smoke, pollution).
+
+#### A. Enhanced Red/Orange Sunsets
+*   **Mechanism:** Particles like dust, smoke, or pollution increase the amount of scattering. While Rayleigh scattering removes blue light, larger particles can scatter remaining light and absorb certain wavelengths.
+*   **Effect:** If the atmosphere is clean, sunsets are pale yellow or orange. If the atmosphere contains significant particulate matter (e.g., after a forest fire or volcanic eruption), the scattering is more intense. This can lead to **deep, vibrant reds and purples** because even more of the blue/green spectrum is removed, and the remaining light is concentrated in the red end of the spectrum.
+*   **Historical Example:** The eruption of Mount Tambora in 1815 caused spectacular red sunsets across the world for years due to stratos</mark></div></div><div class='o diff'><div class=oh><b>r4</b> &middot; differs from token 93 &middot; 1024 tokens</div><div class=ot><span class=ctx>&hellip;nditions alter these colors.
+
+### 1. The Physics of Rayleigh Scattering
+
+#### The Nature of Sunlight
+Sunlight appears white, but it is actually a mixture of all</span><mark> visible colors (the spectrum). Each color corresponds to a specific wavelength of light:
+*   **Blue/Violet:** Short wavelengths ($\approx 400\text{--}450$ nm).
+*   **Red/Orange:** Long wavelengths ($\approx 620\text{--}750$ nm).
+
+#### Interaction with the Atmosphere
+The Earth&#x27;s atmosphere is composed mostly of nitrogen ($N_2$) and oxygen ($O_2$) molecules. These molecules are much smaller than the wavelengths of visible light.
+
+When sunlight enters the atmosphere, it collides with these gas molecules. According to **Rayleigh&#x27;s Law**, the intensity of scattered light ($I$) is inversely proportional to the fourth power of the wavelength ($\lambda$):
+
+$$ I \propto \frac{1}{\lambda^4} $$
+
+This mathematical relationship means that shorter wavelengths (blue and violet) are scattered much more strongly than longer wavelengths (red and orange). Specifically, blue light is scattered roughly 10 times more effectively than red light.
+
+### 2. Why the Sky is Blue (Daytime)
+
+During the middle of the day, the sun is high in the sky, and sunlight travels through a relatively thin layer of the atmosphere to reach your eyes.
+
+1.  **Scattering:** As sunlight hits the nitrogen and oxygen molecules, the short-wavelength blue light is scattered in all directions (up, down, sideways).
+2.  **Perception:** Because this blue light is scattered everywhere, when you look up at any part of the sky (away from the sun), your eyes detect this scattered blue light.
+3.  **Why not Violet?** Although violet light has an even shorter wavelength than blue and is scattered even more, the sky does not appear violet for two reasons:
+    *   **Solar Spectrum:** The sun emits much more blue light than violet light.
+    *   **Human Vision:** The human eye is more sensitive to blue light than violet light, and our atmosphere absorbs some violet light.
+
+**Conclusion:** The sky appears blue because blue light is scattered by atmospheric molecules in all directions, filling the sky with this color.
+
+### 3. Why Sunsets are Red or Orange
+
+At sunset (or sunrise), the sun is near the horizon. This changes the geometry of the light&#x27;s path through the atmosphere.
+
+1.  **Increased Path Length:** Sunlight must travel through a much thicker layer of the atmosphere to reach your eyes compared to when the sun is overhead. The path length can be 30 to 40 times longer.
+2.  **Selective Removal:** As the light travels this long distance, the short-wavelength blue and green light is scattered out of the beam almost entirely before it reaches you.
+3.  **Direct Transmission:** The longer-wavelength red, orange, and yellow light is scattered much less. Therefore, it can penetrate the thick atmosphere and reach your eyes directly.
+
+**Conclusion:** The sun appears red or orange at sunset because the blue light has been scattered away, leaving only the longer wavelengths to pass through the thick atmospheric layer.
+
+### 4. The Impact of Atmospheric Conditions (Dust, Pollution, Volcanoes)
+
+The presence of larger particles in the atmosphere—such as dust, smoke, pollution, or volcanic ash—significantly alters the scattering process. This introduces a different type of scattering called **Mie Scattering**.
+
+#### Mie Scattering
+*   **Particle Size:** Mie scattering occurs when particles are roughly the same size as or larger than the wavelength of light (e.g., water droplets, dust, soot).
+*   **Wavelength Dependence:** Unlike Rayleigh scattering, Mie scattering is not strongly dependent on wavelength. It scatters all wavelengths of visible light relatively equally.
+
+#### How Conditions Change Colors:
+1.  **Enhanced Red/Orange Sunsets:**
+    *   If the atmosphere contains a moderate amount of dust or pollution, these larger particles scatter the remaining blue and green light even more effectively than gas molecules do.
+    *   This &quot;cleans&quot; the direct sunlight of all colors except red and orange, leading to **more intense and vibrant sunsets**.
+    *   *Example:* After a volcanic eruption (like Mount Pinatubo in 1991), sunsets around the world were famously vivid red due to sulfate aerosols in the stratosphere.
+
+2.  **White or Gray Skies:**</mark></div></div><div class='o diff'><div class=oh><b>r5</b> &middot; differs from token 93 &middot; 1024 tokens</div><div class=ot><span class=ctx>&hellip;nditions alter these colors.
+
+### 1. The Physics of Rayleigh Scattering
+
+#### The Nature of Sunlight
+Sunlight appears white, but it is actually a mixture of all</span><mark> visible colors (the spectrum). Each color corresponds to a specific wavelength of light:
+*   **Blue/Violet:** Short wavelengths ($\approx 400\text{--}450$ nm).
+*   **Red/Orange:** Long wavelengths ($\approx 620\text{--}750$ nm).
+
+#### Interaction with the Atmosphere
+The Earth&#x27;s atmosphere is composed mostly of nitrogen ($N_2$) and oxygen ($O_2$) molecules. These molecules are much smaller than the wavelengths of visible light.
+
+When sunlight enters the atmosphere, it collides with these gas molecules. According to **Rayleigh&#x27;s Law**, the intensity of scattered light ($I$) is inversely proportional to the fourth power of the wavelength ($\lambda$):
+
+$$ I \propto \frac{1}{\lambda^4} $$
+
+This mathematical relationship means that shorter wavelengths (blue and violet) are scattered much more strongly than longer wavelengths (red and orange). Specifically, blue light is scattered roughly 10 times more effectively than red light.
+
+### 2. Why the Sky is Blue (Daytime)
+
+During the middle of the day, the sun is high in the sky, and sunlight travels through a relatively thin layer of the atmosphere to reach your eyes.
+
+1.  **Scattering:** As sunlight hits the nitrogen and oxygen molecules, the short-wavelength blue light is scattered in all directions (up, down, sideways).
+2.  **Perception:** Because this blue light is scattered everywhere, when you look up at any part of the sky (away from the sun), your eyes detect this scattered blue light.
+3.  **Why not Violet?** Although violet light has an even shorter wavelength than blue and is scattered even more, the sky does not appear violet for two reasons:
+    *   **Solar Spectrum:** The sun emits much more blue light than violet light.
+    *   **Human Vision:** The human eye is more sensitive to blue light than violet light, and our atmosphere absorbs some violet light.
+
+**Conclusion:** The sky appears blue because blue light is scattered by atmospheric molecules in all directions, filling the sky with this color.
+
+### 3. Why Sunsets are Red or Orange
+
+At sunset (or sunrise), the sun is near the horizon. This changes the geometry of the light&#x27;s path through the atmosphere.
+
+1.  **Increased Path Length:** Sunlight must travel through a much thicker layer of the atmosphere to reach your eyes compared to when the sun is overhead. The path length can be 30 to 40 times longer.
+2.  **Selective Removal:** As the light travels this long distance, the short-wavelength blue and green light is scattered out of the beam almost entirely before it reaches you.
+3.  **Direct Transmission:** The longer-wavelength red, orange, and yellow light is scattered much less. Therefore, it can penetrate the thick atmosphere and reach your eyes directly.
+
+**Conclusion:** The sun appears red or orange at sunset because the blue light has been scattered away, leaving only the longer wavelengths to pass through the thick atmospheric layer.
+
+### 4. The Impact of Atmospheric Conditions (Dust, Pollution, Volcanoes)
+
+The presence of larger particles in the atmosphere—such as dust, smoke, pollution, or volcanic ash—significantly alters the scattering process. This introduces a different type of scattering called **Mie Scattering**.
+
+#### Mie Scattering
+*   **Particle Size:** Mie scattering occurs when particles are roughly the same size as or larger than the wavelength of light (e.g., water droplets, dust, soot).
+*   **Wavelength Dependence:** Unlike Rayleigh scattering, Mie scattering is not strongly dependent on wavelength. It scatters all wavelengths of visible light relatively equally.
+
+#### How Conditions Change Colors:
+1.  **Enhanced Red/Orange Sunsets:**
+    *   If the atmosphere contains a moderate amount of dust or pollution, these larger particles scatter even more of the blue and green light out of the direct beam.
+    *   This leaves an even higher concentration of red and orange light to reach the observer, resulting in **more vivid, intense reds and oranges** during sunset.
+    *   *Historical Example:* After major volcanic eruptions (e.g., Mount Pinatubo in 1991), sunsets around the world were famously brilliant red and purple due to sulfate aerosols in the stratosphere</mark></div></div><div class='o diff'><div class=oh><b>r6</b> &middot; differs from token 50 &middot; 1024 tokens</div><div class=ot><span class=ctx>&hellip;ring**. This process describes how light interacts with particles in the Earth&#x27;s atmosphere.
+
+Here is a step-by-step deduction of the physics involved, followed</span><mark> by an analysis of how atmospheric conditions alter these colors.
+
+### 1. The Physics of Rayleigh Scattering
+
+#### The Nature of Sunlight
+Sunlight appears white, but it is actually a mixture of all visible colors (the spectrum). Each color corresponds to a specific wavelength of light:
+*   **Blue and Violet:** Short wavelengths ($\approx 380–450$ nm).
+*   **Red and Orange:** Long wavelengths ($\approx 620–750$ nm).
+
+#### Interaction with the Atmosphere
+The Earth&#x27;s atmosphere is composed mostly of nitrogen ($N_2$) and oxygen ($O_2$) molecules. These molecules are much smaller than the wavelengths of visible light.
+
+When sunlight enters the atmosphere, it collides with these gas molecules. According to **Rayleigh&#x27;s Law**, the intensity of scattered light ($I$) is inversely proportional to the fourth power of its wavelength ($\lambda$):
+
+$$ I \propto \frac{1}{\lambda^4} $$
+
+This mathematical relationship has two critical implications:
+1.  **Shorter wavelengths scatter much more strongly than longer wavelengths.**
+2.  Blue light (short wavelength) is scattered roughly $(700/400)^4 \approx 9$ times more strongly than red light (long wavelength).
+
+### 2. Why the Sky is Blue (Daytime)
+
+During the middle of the day, the sun is high in the sky, and sunlight travels through a relatively thin layer of the atmosphere to reach your eyes.
+
+1.  **Scattering:** As sunlight hits the nitrogen and oxygen molecules, the blue and violet components are scattered in all directions across the sky.
+2.  **Human Vision:** Although violet light is scattered even more than blue light (due to its shorter wavelength), the sky does not appear violet for two reasons:
+    *   The sun emits significantly more energy in the blue part of the spectrum than in the violet.
+    *   The human eye is much more sensitive to blue light than to violet light.
+3.  **Result:** When you look up at any part of the sky (away from the sun), you see this scattered blue light. Therefore, the sky appears blue.
+
+### 3. Why Sunsets are Red or Orange
+
+Sunsets occur when the sun is near the horizon. In this position, sunlight must travel through a much thicker layer of the atmosphere to reach an observer compared to when the sun is overhead.
+
+1.  **Increased Path Length:** The path length through the atmosphere at sunset can be up to 30–40 times longer than at noon.
+2.  **Cumulative Scattering:** Because the path is so long, almost all the short-wavelength light (blue and violet) is scattered out of the direct beam of sunlight before it reaches your eyes.
+3.  **Transmission of Long Wavelengths:** The longer wavelengths (red, orange, and yellow) are scattered much less effectively. Consequently, they pass through the atmosphere with less attenuation.
+4.  **Result:** The direct light from the sun that reaches your eyes is depleted of blue and enriched with red and orange. Thus, the sun and the surrounding sky appear red or orange.
+
+### 4. The Impact of Atmospheric Conditions (Dust and Pollution)
+
+While Rayleigh scattering explains the baseline colors, the presence of larger particles in the atmosphere modifies the scattering process. This is governed by **Mie scattering**, which affects particles comparable in size to or larger than the wavelength of light (such as dust, pollen, smoke, and water droplets).
+
+#### How Dust and Pollution Change Colors:
+
+1.  **Enhanced Scattering of All Wavelengths:**
+    *   Mie scattering is less dependent on wavelength than Rayleigh scattering. It scatters all wavelengths of visible light more equally.
+    *   **Effect:** This can make the sky appear hazy, white, or pale blue rather than deep blue, as the larger particles scatter white light in all directions.
+
+2.  **Intensification of Red/Orange Sunsets:**
+    *   Particles like volcanic ash, smoke from wildfires, or industrial pollution act as additional scattering centers.
+    *   These particles efficiently scatter the remaining blue light that might have survived the long atmospheric path, further clearing the blue component from the direct sunlight.
+    *   Simultaneously, they can scatter red light toward the observer.
+    *   **Result:** Sunsets following volcanic eruptions or during periods of heavy pollution are often dramatically more vivid, appearing deep crimson, purple, or blood-red.
+
+3.  **Atmospheric Cl</mark></div></div><div class='o diff'><div class=oh><b>r7</b> &middot; differs from token 93 &middot; 1024 tokens</div><div class=ot><span class=ctx>&hellip;nditions alter these colors.
+
+### 1. The Physics of Rayleigh Scattering
+
+#### The Nature of Sunlight
+Sunlight appears white, but it is actually a mixture of all</span><mark> visible colors (the spectrum). Each color corresponds to a specific wavelength of light:
+*   **Blue and Violet:** Short wavelengths ($\approx 380–450$ nm).
+*   **Red and Orange:** Long wavelengths ($\approx 620–750$ nm).
+
+#### Interaction with the Atmosphere
+The Earth&#x27;s atmosphere is composed mostly of nitrogen ($N_2$) and oxygen ($O_2$) molecules. These molecules are much smaller than the wavelengths of visible light.
+
+When sunlight enters the atmosphere, it collides with these gas molecules. According to **Rayleigh&#x27;s Law**, the intensity of scattered light ($I$) is inversely proportional to the fourth power of the wavelength ($\lambda$):
+
+$$ I \propto \frac{1}{\lambda^4} $$
+
+**Deduction:**
+1.  Because blue light has a much shorter wavelength than red light, it is scattered much more strongly.
+2.  Specifically, blue light is scattered roughly **10 times more** than red light.
+3.  This scattered blue light is sent in all directions, including toward your eyes, regardless of where you look in the sky (except directly at the sun).
+
+#### Why is the sky blue and not violet?
+Violet light has an even shorter wavelength than blue light and is scattered even more intensely. However, the sky appears blue for two reasons:
+1.  **Solar Spectrum:** The sun emits more energy in the blue part of the spectrum than in the violet.
+2.  **Human Vision:** The human eye is more sensitive to blue light than violet light.
+
+### 2. Why Sunsets are Red and Orange
+
+The color of the sky changes at sunset due to the **path length** of sunlight through the atmosphere.
+
+#### The Geometry of Light Path
+*   **At Noon:** The sun is overhead. Sunlight travels through a relatively thin layer of the atmosphere to reach your eyes.
+*   **At Sunset:** The sun is near the horizon. Sunlight must travel through a much thicker layer of the atmosphere (up to 30–40 times thicker than at noon) to reach your eyes.
+
+#### The Filtering Effect
+As sunlight travels this long distance:
+1.  The short-wavelength blue and violet light is scattered out of the line of sight completely (which is why the sky away from the sun still looks blue, but the sun itself does not).
+2.  The long-wavelength red, orange, and yellow light is scattered much less.
+3.  Consequently, the light that survives the journey directly from the sun to your eyes is dominated by these longer wavelengths.
+
+**Conclusion:** The sky appears red or orange because the blue light has been &quot;filtered out&quot; by scattering, leaving only the reds and oranges to pass through the thick atmospheric layer.
+
+### 3. The Impact of Atmospheric Conditions (Dust and Pollution)
+
+While Rayleigh scattering explains the baseline colors, the presence of larger particles modifies the scattering process. This is often described by **Mie scattering**, which affects particles comparable in size to or larger than the wavelength of light (such as dust, pollen, smoke, and pollution).
+
+#### How Particles Change Colors
+1.  **Enhanced Scattering:** Larger particles scatter light differently than gas molecules. They tend to scatter all wavelengths more equally, but they can significantly increase the total amount of scattering.
+2.  **Deep Reds and Purples:** If the atmosphere contains a high concentration of aerosols (volcanic ash, dust storms, or industrial pollution), the scattering of blue and green light becomes even more efficient. This removes even more of the shorter wavelengths from the direct beam of the sun.
+3.  **Result:**
+    *   **Clear Air:** Sunsets are typically yellow, orange, and pink.
+    *   **Polluted/Dusty Air:** Sunsets can become deep crimson, blood-red, or even purple. The extra particles strip away the yellow and green light, leaving only the deepest reds.
+
+#### Historical Examples
+*   **Volcanic Eruptions:** After major eruptions (e.g., Mount Pinatubo in 1991), the stratosphere is filled with sulfate aerosols. This often leads to spectacular, intensely red sunsets for months or years following the event.
+*   **Wildfires:** Smoke particles from wildfires can create eerie, deep red sunsets even hundreds</mark></div></div><div class='o diff'><div class=oh><b>r8</b> &middot; differs from token 50 &middot; 1024 tokens</div><div class=ot><span class=ctx>&hellip;ring**. This process describes how light interacts with particles in the Earth&#x27;s atmosphere.
+
+Here is a step-by-step deduction of the physics involved, followed</span><mark> by an analysis of how atmospheric conditions alter these colors.
+
+### 1. The Physics of Rayleigh Scattering
+
+#### The Nature of Sunlight
+Sunlight appears white, but it is actually a mixture of all visible colors (the spectrum). Each color corresponds to a specific wavelength of light:
+*   **Blue and Violet:** Short wavelengths ($\approx 380–450$ nm).
+*   **Red and Orange:** Long wavelengths ($\approx 620–750$ nm).
+
+#### Interaction with the Atmosphere
+The Earth&#x27;s atmosphere is composed mostly of nitrogen ($N_2$) and oxygen ($O_2$) molecules. These molecules are much smaller than the wavelengths of visible light.
+
+When sunlight enters the atmosphere, it collides with these gas molecules. According to **Rayleigh&#x27;s Law**, the intensity of scattered light ($I$) is inversely proportional to the fourth power of the wavelength ($\lambda$):
+
+$$ I \propto \frac{1}{\lambda^4} $$
+
+This mathematical relationship means that shorter wavelengths are scattered much more strongly than longer wavelengths.
+*   Blue light (short wavelength) is scattered roughly **10 times more** than red light (long wavelength).
+
+### 2. Why the Sky is Blue During the Day
+
+During the day, the sun is high in the sky, meaning sunlight travels through a relatively thin layer of the atmosphere to reach your eyes.
+
+1.  **Scattering:** As sunlight hits the nitrogen and oxygen molecules, the blue and violet components are scattered in all directions across the sky.
+2.  **Human Vision:** Although violet light has an even shorter wavelength than blue light and is scattered even more, the sky does not look violet for two reasons:
+    *   The sun emits less violet light than blue light.
+    *   The human eye is significantly more sensitive to blue light than violet light.
+3.  **Result:** The scattered blue light reaches our eyes from all directions, making the sky appear blue.
+
+### 3. Why Sunsets are Red or Orange
+
+Sunsets occur when the sun is near the horizon. In this position, sunlight must travel through a much thicker layer of the atmosphere to reach an observer compared to when the sun is overhead.
+
+1.  **Increased Path Length:** The path length through the atmosphere can be up to 30–40 times longer at sunset than at noon.
+2.  **Cumulative Scattering:** Because the path is so long, almost all the short-wavelength light (blue and violet) is scattered out of the direct beam before it reaches your eyes.
+3.  **Transmission of Long Wavelengths:** The longer wavelengths (red, orange, and yellow) are scattered much less effectively. They pass through the thick atmosphere with less deviation.
+4.  **Result:** The direct light that reaches your eyes from the sun is depleted of blue and enriched with red and orange, creating the characteristic sunset colors.
+
+### 4. The Impact of Atmospheric Conditions (Dust and Pollution)
+
+While Rayleigh scattering explains the baseline colors, the presence of larger particles in the atmosphere modifies the scattering process. This is often described by **Mie scattering**, which affects particles comparable in size to or larger than the wavelength of light (such as dust, smoke, water droplets, and pollution).
+
+#### How Larger Particles Change Colors:
+1.  **Non-Selective Scattering:** Unlike Rayleigh scattering, Mie scattering does not depend heavily on wavelength. It scatters all colors of light relatively equally.
+2.  **Enhanced Red/Orange:** When the atmosphere contains high levels of dust, smoke, or pollution (e.g., after a volcanic eruption or forest fire), these larger particles scatter even more of the remaining blue and green light out of the line of sight. This allows the red and orange light to dominate even more intensely.
+3.  **Whitish Haze:** If the particles are very large (like thick fog or heavy smog), they scatter all wavelengths equally, resulting in a white or grayish appearance rather than a vibrant sunset.
+
+#### Specific Examples:
+*   **Volcanic Ash:** Can create spectacular, deep red sunsets because the ash particles are perfectly sized to scatter blue light efficiently while allowing red to pass.
+*   **Pollution/Smog:** Often leads to duller, brownish, or grayish sunsets because the particulate matter absorbs some light and scatters it diffusely, reducing contrast.
+*   **Clean Air:** Results in the classic, vibrant blue sky and crisp orange/red sunsets because the scattering is dominated purely by gas molecules (Rayleigh</mark></div></div><div class='o diff'><div class=oh><b>r9</b> &middot; differs from token 93 &middot; 1024 tokens</div><div class=ot><span class=ctx>&hellip;nditions alter these colors.
+
+### 1. The Physics of Rayleigh Scattering
+
+#### The Nature of Sunlight
+Sunlight appears white, but it is actually a mixture of all</span><mark> visible colors (the spectrum). Each color corresponds to a specific wavelength of light:
+*   **Blue/Violet:** Short wavelengths ($\approx 400\text{--}450$ nm).
+*   **Red/Orange:** Long wavelengths ($\approx 620\text{--}750$ nm).
+
+#### Interaction with the Atmosphere
+The Earth&#x27;s atmosphere is composed mostly of nitrogen ($N_2$) and oxygen ($O_2$) molecules. These molecules are much smaller than the wavelengths of visible light.
+
+When sunlight enters the atmosphere, it collides with these gas molecules. The intensity of scattering ($I$) is inversely proportional to the fourth power of the wavelength ($\lambda$):
+
+$$ I \propto \frac{1}{\lambda^4} $$
+
+**Deduction:**
+Because blue light has a much shorter wavelength than red light, it is scattered much more strongly. Specifically, blue light is scattered roughly $(700/450)^4 \approx 9$ times more than red light.
+
+### 2. Why the Sky is Blue (Mid-day)
+
+When the sun is high in the sky, sunlight travels through a relatively thin layer of the atmosphere to reach your eyes.
+
+1.  **Scattering:** As sunlight hits the nitrogen and oxygen molecules, the short-wavelength blue light is scattered in all directions (up, down, sideways).
+2.  **Perception:** When you look up at any part of the sky (away from the sun), you see this scattered blue light entering your eyes.
+3.  **Why not Violet?** Although violet light has an even shorter wavelength than blue and is scattered even more, the sky does not look violet for two reasons:
+    *   The sun emits less violet light than blue light.
+    *   The human eye is much more sensitive to blue light than violet light.
+
+**Conclusion:** The sky appears blue because short-wavelength blue light is scattered by atmospheric molecules in all directions, dominating our visual field.
+
+### 3. Why Sunsets are Red or Orange
+
+Sunsets occur when the sun is near the horizon. In this position, sunlight must travel through a much thicker layer of the atmosphere to reach the observer&#x27;s eyes compared to when the sun is overhead.
+
+1.  **Increased Path Length:** The path length through the atmosphere can be up to 30–40 times longer at sunset than at noon.
+2.  **Cumulative Scattering:** As light travels this long distance, almost all the short-wavelength blue and green light is scattered out of the direct beam.
+3.  **Transmission of Long Wavelengths:** The longer wavelengths (red, orange, and yellow) are scattered much less effectively. Therefore, they pass through the atmosphere more directly.
+4.  **Result:** By the time the light reaches your eyes, the blue component has been largely removed, leaving the dominant red and orange hues.
+
+**Conclusion:** Sunsets are red/orange because the long path through the atmosphere scatters away the blue light, allowing only the longer-wavelength red and orange light to reach the observer directly.
+
+### 4. The Impact of Atmospheric Conditions (Dust, Pollution, Volcanoes)
+
+The previous explanation assumes a &quot;clean&quot; atmosphere with only gas molecules. However, the presence of larger particles significantly alters the scattering process. This involves a transition from **Rayleigh scattering** (molecules) to **Mie scattering** (larger particles).
+
+#### Mie Scattering
+When particles are comparable in size to or larger than the wavelength of light (e.g., dust, pollen, smoke, water droplets, pollution), they scatter light differently.
+*   **Wavelength Dependence:** Mie scattering is less dependent on wavelength. It scatters all colors of visible light roughly equally.
+*   **Effect on Color:** This tends to whiten or gray the sky rather than produce vibrant colors.
+
+#### How Conditions Change Sunset Colors
+
+1.  **Increased Particulates (Dust/Smoke/Pollution):**
+    *   **Enhanced Reds:** Paradoxically, moderate amounts of dust or smoke can make sunsets *more* vividly red. These larger particles scatter away even more of the blue and green light, leaving only the deepest reds and oranges to pass through.
+    *   **Example:** Wildfires or volcanic eruptions often produce spectacular, deep red sunsets because the</mark></div></div></div></section><section class=pr id=story><p class=pq><b>story</b><span>Write a short story about a lighthouse keeper on a remote island who finds a message in a bottle that seems to be addressed to them personally.</span></p><div class=outs><div class=o><div class=oh>reference: E1 greedy, r0 &middot; 760 tokens &middot; <b>no run</b> identical</div><div class=ot>The wind on Blackrock Island didn’t just blow; it screamed. It was a constant, ragged companion to Elias Thorne, who had spent the last twenty years as the solitary keeper of the lighthouse that stood like a jagged tooth against the gray horizon.
+
+Elias knew the rhythm of the sea better than he knew his own heartbeat. He knew the smell of the coming storm, the taste of the salt on the morning air, and the specific groan of the iron stairs when the humidity rose. But he did not know the bottle.
+
+It was a Tuesday, or perhaps a Thursday—the days blurred into a monochrome loop of polishing brass and trimming wicks—when the tide receded unusually far, exposing the slick, black rocks that usually remained submerged. Elias, checking the perimeter for erosion, spotted a glint of green glass half-buried in the kelp.
+
+He picked it up. It was heavy, thick glass, sealed with wax that had cracked with age. There was no cork, just a tight seal of resin. Curiosity, a sensation he hadn’t felt in years, prickled at his skin. He took it inside the lantern room, the warm glow of the Fresnel lens reflecting off the curved surface.
+
+With a pair of pliers, he carefully broke the seal. The paper inside was brittle, yellowed by decades of salt and sun, but the ink remained dark and legible.
+
+Elias unfolded it with trembling hands. He expected a pirate’s treasure map, or perhaps a sailor’s last will. Instead, he read:
+
+*“To Elias Thorne,*
+*If you are reading this, the storm has passed. The light is still on. Do not let it go out. The sea remembers what the land forgets. — A Friend.”*
+
+Elias stared at the paper. The handwriting was elegant, looping, and familiar. Too familiar. It was the same hand that had signed his commission papers twenty years ago. The same hand that had written the letter telling him his wife, Clara, had died in the fire at their home in Portsmouth, a fire that had consumed everything but his guilt.
+
+He had never told anyone he came to Blackrock. He had never signed his name on any public document that could have been intercepted. He had chosen this isolation specifically to escape the past, to vanish into the fog.
+
+His heart hammered against his ribs. He looked out the window. The sea was calm, a sheet of hammered silver under the moon. No ships. No boats. Just the endless, indifferent horizon.
+
+Who was the friend? Had Clara survived? No, that was impossible. He had seen the ashes. Had someone followed him? The island was accessible only by a monthly supply boat, and the captain knew nothing of his past.
+
+Elias folded the note and placed it in his pocket. He climbed the stairs to the lantern room and checked the mechanism. The gears turned smoothly. The light swept across the water, a steady, rhythmic pulse. *On. Off. On. Off.*
+
+He realized then that the message wasn’t a threat. It was a reminder. The sea had kept his secret, but it had also kept his connection. He was not as alone as he thought. Someone, somewhere, knew his name. Someone knew his pain.
+
+For the first time in twenty years, Elias Thorne did not feel the crushing weight of isolation. He felt a strange, terrifying warmth. He lit a fresh wick, adjusted the lens, and watched the beam cut through the dark. The storm might have passed, but the mystery had just begun. And for the first time in decades, Elias looked forward to tomorrow.</div></div><div class='o diff'><div class=oh><b>r0</b> &middot; differs from token 37 &middot; 883 tokens</div><div class=ot><span class=ctx>&hellip;wind on Blackrock Island didn’t just blow; it screamed. It was a constant, ragged companion to Elias Thorne, who had spent the last twenty years as the solitary</span><mark> guardian of the lighthouse that pierced the gray sky like a jagged finger.
+
+Elias knew the rhythm of the sea better than he knew his own heartbeat. He knew which waves crashed hardest against the northern cliffs and which currents whispered secrets near the southern cove. But he did not know the bottle.
+
+It was a Tuesday, the kind of day where the fog was so thick it felt like walking through wet wool. Elias was descending the spiral stairs to check the supply hatch when he saw it. Wedged between two slick, black rocks at the base of the cliff, half-buried in kelp and driftwood, was a cylinder of green glass.
+
+He picked it up. It was heavy, sealed with wax that had held firm against decades of salt and storm. There was no label, no name, no postmark. Just a single word etched into the glass near the neck: *Elias.*
+
+His breath hitched. He turned the bottle over in his calloused hands. The etching was faint, worn by time, but unmistakable. He had never told anyone his name. Not the supply boat captain, who only spoke in grunts and gestures. Not the radio operator in the mainland city, who checked in once a month with sterile, bureaucratic updates.
+
+&quot;Coincidence,&quot; Elias muttered, his voice raspy from disuse. &quot;Someone named Elias lives nearby. The current brought it here.&quot;
+
+But the probability was a needle in a haystack. He took the bottle inside, to the warm, oil-scented warmth of the lantern room. He sat at his small wooden desk, the one that overlooked the churning Atlantic, and examined the wax seal. It was red, cracked with age.
+
+With trembling fingers, he broke the seal. Inside was a single sheet of parchment, yellowed and brittle. The handwriting was elegant, looping, and familiar. Too familiar.
+
+*Dear Elias,*
+
+*If you are reading this, then the cycle is complete. You have kept the light. You have watched the horizon. You have waited.*
+
+*The message is not from the past, Elias. It is from the future. Or perhaps, from a version of you that chose differently. I am you, thirty years from now. I am writing this to tell you that the isolation is not a punishment. It is a preparation.*
+
+*Do not fear the silence. Do not fear the loneliness. The world below is loud, chaotic, and fleeting. Here, in the stillness, you are building something eternal. The light you keep does not just warn ships away from the rocks; it guides them home. And one day, you will understand that you are guiding yourself, too.*
+
+*When the storm comes next winter, do not let the glass break. Hold the flame. It is the only thing that matters.*
+
+*Yours,*
+*Elias*
+
+Elias stared at the paper. The date scrawled at the bottom was dated for next year.
+
+A cold draft slipped through the window latch, making the flame of his desk lamp flicker. Outside, the wind began to howl, louder than before, a prelude to the storm the weatherman had warned about on the morning radio.
+
+He looked out at the churning black water. For twenty years, he had felt like a prisoner. Now, reading the words of a man who shared his name, his face, his soul, he felt a strange, terrifying clarity.
+
+He stood up and walked to the great lens of the lighthouse. The mechanism was humming, the gears turning with precise, mechanical grace. He placed his hand on the cold iron railing.
+
+&quot;Okay,&quot; he whispered to the empty room. &quot;I’m listening.&quot;
+
+The storm hit an hour later, shaking the tower to its foundations. But Elias did not flinch. He watched the beam cut through the darkness, steady and unyielding, and for the first time in two decades, he did not feel alone. He felt like a man who had finally received the answer to a question he hadn’t known how to ask.</mark></div></div><div class='o diff'><div class=oh><b>r1</b> &middot; differs from token 36 &middot; 980 tokens</div><div class=ot><span class=ctx>The wind on Blackrock Island didn’t just blow; it screamed. It was a constant, ragged companion to Elias Thorne, who had spent the last twenty years as the</span><mark> sole guardian of the lighthouse that pierced the gray sky like a jagged finger.
+
+Elias knew the rhythm of the sea better than he knew his own heartbeat. He knew which waves crashed hardest against the northern cliffs and which tides retreated silently from the southern cove. But he did not know the bottle.
+
+It was a Tuesday, the kind of day where the fog was so thick it felt like walking through wet wool. Elias was descending the spiral stairs to check the supply hatch when he saw it. Resting on the wet cobblestones of the landing, untouched by the spray, was a bottle. It was old, the glass clouded with age, corked with wax that had long since hardened.
+
+He picked it up. It was heavy, filled with sand and water. He shook it gently, expecting the rattle of empty space, but heard a soft *shush*. Paper.
+
+Elias frowned. He hadn’t seen a boat in three weeks. The nearest mainland was forty miles away, across treacherous currents that usually swallowed small vessels whole. He took the bottle to his desk, the only warm place in the tower, and placed it under the heat lamp.
+
+With a pair of tweezers, he carefully worked the cork loose. It gave way with a reluctant pop. He tipped the bottle, and a single sheet of cream-colored paper slid out, dry and crisp, as if it had never touched the ocean.
+
+His hands trembled slightly as he unfolded it. The handwriting was elegant, looping, and unmistakably familiar. It was the same slant, the same sharp loop on the &#x27;y&#x27;, the same slight tremor at the end of the sentences.
+
+It was his own handwriting.
+
+*&quot;Elias,&quot;* it began. *&quot;If you are reading this, the storm of &#x27;94 has passed. You remember the night the generator failed. You remember the fear. But you also remember the light. Keep it burning. The next one is coming. Don’t let them take the view.&quot;*
+
+Elias dropped the paper. His breath hitched in his throat. The storm of &#x27;94. That was twenty years ago. The night his wife, Clara, had died in the hospital on the mainland while he was trapped here by the gale, unable to reach her. The night he had nearly extinguished the light in his grief, convinced the world didn’t need him.
+
+He looked at the date scrawled at the bottom of the page. It wasn’t a date from the past. It was today’s date.
+
+A cold chill, unrelated to the damp air, crawled up his spine. He looked out the window. The fog had lifted slightly, revealing the horizon. And there, barely visible through the mist, was a small fishing boat, its engine sputtering, drifting dangerously close to the jagged rocks below the lighthouse.
+
+Elias didn’t think. He moved. He ran up the stairs, two at a time, his heart hammering against his ribs. He reached the lantern room and threw the switch for the auxiliary power. The great beam swept across the water, cutting through the fog like a blade.
+
+The boat’s captain looked up, saw the light, and jerked the wheel. The vessel veered away from the rocks, heading for the safer channel.
+
+Elias slumped against the glass, his chest heaving. He looked down at his hands. They were shaking. He looked back at the desk. The paper was still there.
+
+He picked it up again. Underneath the main message, in smaller, fainter letters, was a postscript he hadn’t noticed before.
+
+*&quot;P.S. I’m sorry I couldn’t stay. But I’m always here, in the light. — C.&quot;*
+
+Elias stared at the signature. He didn’t know if it was a trick of the mind, a cruel prank by a ghost, or something beyond his comprehension. But as he looked out at the sea, calm and vast, he realized something. The fear that had haunted him for two decades—the guilt of being alone, the fear of being forgotten—had vanished.
+
+He wasn’t alone. He never had been.
+
+He rolled the paper back up, placed it in the bottle, and walked to the window. He didn’t throw it back into the sea. Instead, he placed it on the windowsill, where the morning sun would hit it first. Then, he turned back to the lens, polished the glass, and watched the light sweep across the water, steady and sure.</mark></div></div><div class='o diff'><div class=oh><b>r2</b> &middot; differs from token 36 &middot; 1013 tokens</div><div class=ot><span class=ctx>The wind on Blackrock Island didn’t just blow; it screamed. It was a constant, ragged companion to Elias Thorne, who had spent the last twenty years as the</span><mark> sole guardian of the lighthouse that pierced the gray sky like a jagged finger.
+
+Elias knew the rhythm of the sea better than he knew his own heartbeat. He knew which waves crashed hardest against the northern cliffs and which tides retreated silently from the southern cove. But he did not know the bottle.
+
+It was a Tuesday, the kind of day where the fog was so thick it felt like walking through wet wool. Elias was descending the spiral stairs to check the supply hatch when he saw it. Resting on the wet cobblestones of the landing, untouched by the spray, was a bottle. It was old, the glass clouded with age, corked with wax that had long since hardened.
+
+He picked it up. It was heavy, filled with sand and water. He shook it gently, expecting the rattle of empty space, but heard a soft *shush*. Paper.
+
+Elias frowned. He hadn’t seen a boat in three weeks. The nearest mainland was forty miles away, across treacherous currents that usually swallowed small vessels whole. He took the bottle to his desk, the only warm place in the tower, and placed it under the heat lamp.
+
+With a pair of pliers, he carefully worked the cork loose. The wax cracked with a sound like a gunshot in the quiet room. He tipped the bottle, and a single sheet of cream-colored paper slid out. It was dry, preserved by the air trapped inside.
+
+Elias unfolded it. The handwriting was elegant, looping, and unmistakably familiar. It was the same slanted script he had practiced in school, the same way he crossed his &#x27;t&#x27;s.
+
+*Dear Elias,*
+
+*If you are reading this, the current has finally done its work. I know you think you are alone, but you are not. The storm is coming, not from the sky, but from within. Check the loose stone in the foundation of the old watchtower. You’ve been looking for answers in the sea, but they are in the earth.*
+
+*Yours, always,*
+*E.*
+
+Elias dropped the paper. His hands trembled. The signature was *E*. Not *Elizabeth*, his late wife who had died ten years ago. Just *E*.
+
+He had never told anyone about the loose stone. It was a quirk of the original construction, a flaw in the foundation of the old, abandoned watchtower that stood a hundred yards from the lighthouse. He had noticed it years ago, during a renovation, but had never fixed it. He had told no one. He had barely spoken to anyone in a decade.
+
+He looked out the window. The fog was lifting slightly, revealing the silhouette of the old watchtower. It stood dark and silent, a skeleton against the gray sky.
+
+Elias grabbed his coat and stepped out into the biting wind. The walk to the old tower was short, but it felt like a journey through time. The wind howled, but for the first time in years, it didn’t sound like a scream. It sounded like a whisper.
+
+He reached the base of the tower. The foundation was made of rough-hewn granite, slick with moss. He knelt, his knees cracking in the cold, and ran his fingers over the stones. There, near the base, was a stone that didn’t fit. It was slightly larger than the others, with a faint crack running through it.
+
+He pressed it.
+
+With a grinding sound, the stone shifted inward. Behind it was a small cavity, dry and dark. Inside lay a small, leather-bound journal. Elias opened it. The first page was dated twenty years ago, the day he had arrived on Blackrock.
+
+*Dear Elias,*
+
+*Welcome home. I know you chose isolation to escape the pain, but you cannot outrun yourself. I have been waiting for you to remember. The truth is not in the sea, but in the past. Open the book.*
+
+Elias stared at the page. He remembered that day. He remembered the grief that had driven him here, the promise he had made to himself to never speak of her again. He had buried his grief in the routine of the light, in the endless cycle of day and night.
+
+But the bottle had not come from the sea. It had come from the past.
+
+He looked back at the lighthouse, its beam cutting through the fog, steady and unyielding. For the first time in twenty years, Elias Thorne did not feel alone. He felt seen.
+
+He closed the journal, placed it in his pocket, and began the walk back. The wind still screamed, but now, Elias heard the words beneath it: *You are not forgotten.*</mark></div></div><div class='o diff'><div class=oh><b>r3&ndash;4</b> &middot; differs from token 36 &middot; 1024 tokens</div><div class=ot><span class=ctx>The wind on Blackrock Island didn’t just blow; it screamed. It was a constant, ragged companion to Elias Thorne, who had spent the last twenty years as the</span><mark> sole guardian of the lighthouse that pierced the gray sky like a jagged finger.
+
+Elias knew the rhythm of the sea better than he knew his own heartbeat. He knew which waves crashed hardest against the northern cliffs and which tides retreated silently from the southern cove. But he did not know the bottle.
+
+It was a Tuesday, the kind of day where the fog was so thick it felt like walking through wet wool. Elias was descending the spiral stairs to check the supply hatch when he saw it. Resting on the wet cobblestones of the landing, untouched by the spray, was a bottle. It was old, the glass clouded with age, corked with wax that had long since hardened.
+
+He picked it up. It was heavy, filled with sand and water. He shook it gently, expecting the rattle of empty space, but heard a soft *shush*. Paper.
+
+Elias frowned. He hadn’t seen a boat in three weeks. The nearest mainland was forty miles away, across treacherous currents that usually swallowed small vessels whole. He took the bottle to his desk, the only warm place in the tower, and placed it under the heat lamp.
+
+With a pair of pliers, he carefully worked the cork loose. The wax cracked with a sound like a gunshot in the quiet room. He tipped the bottle, and a single sheet of cream-colored paper slid out. It was dry, preserved by the air trapped inside.
+
+Elias unfolded it. The handwriting was elegant, looping, and unmistakably familiar. It was the same slanted script he had practiced in school, the same way he crossed his &#x27;t&#x27;s.
+
+*Dear Elias,*
+
+*If you are reading this, the current has finally done its work. I know you think you are alone, but you are not. The storm is coming, not from the sky, but from within. Check the loose stone in the foundation of the old watchtower. You’ve been looking for answers in the sea, but they are in the earth.*
+
+*Yours, always,*
+*E.*
+
+Elias dropped the paper. His hands trembled. The signature was *E*. Not *Elizabeth*, his late wife who had died ten years ago. Just *E*.
+
+He had never told anyone about the loose stone. It was a quirk of the original construction, a flaw in the foundation of the old, abandoned watchtower that stood a hundred yards from the lighthouse. He had noticed it years ago, during a renovation, but had never fixed it. He had told no one. He had barely spoken to anyone in a decade.
+
+He looked out the window. The fog was lifting slightly, revealing the silhouette of the old watchtower. It stood dark and silent, a skeleton against the gray sky.
+
+Elias grabbed his coat and stepped out into the biting wind. The walk to the old tower was short, but it felt like a journey through time. The wind howled, but for the first time in years, it didn’t sound like a scream. It sounded like a whisper.
+
+He reached the base of the tower. The foundation was made of rough-hewn granite, slick with moss. He knelt, his knees cracking in the cold, and ran his fingers over the stones. There, near the base, was a stone that didn’t fit. It was slightly larger than the others, with a faint crack running through it.
+
+He pressed it.
+
+With a grinding sound, the stone shifted inward. Behind it was a small cavity, dry and dark. Inside lay a small, leather-bound journal. Elias opened it. The first page was dated twenty years ago, the day he had arrived on Blackrock.
+
+*Dear Elias,*
+
+*Welcome home. I know you chose isolation to escape the pain, but you cannot outrun yourself. I have been waiting for you to remember. The sea is vast, but your heart is wider. Come back to me.*
+
+*Yours, always,*
+*E.*
+
+Elias stared at the words. He remembered that day. He remembered the grief that had driven him to this remote rock, the promise he had made to himself that he would never feel that pain again. He had buried his past, just as he had buried his wife.
+
+But the bottle hadn’t come from the sea. It had come from the earth. From the foundation of the tower he had built his life upon.
+
+He looked up at the lighthouse, its beam cutting through the fog, steady and unyielding. For the first time in twenty years, Elias Thorne didn’t feel alone. He felt seen.
+
+He closed the journal, placed it back in the cavity, and pushed the stone back into place. Then, he turned and walked back toward the</mark></div></div><div class='o diff'><div class=oh><b>r5</b> &middot; differs from token 36 &middot; 1020 tokens</div><div class=ot><span class=ctx>The wind on Blackrock Island didn’t just blow; it screamed. It was a constant, ragged companion to Elias Thorne, who had spent the last twenty years as the</span><mark> sole guardian of the lighthouse that pierced the gray sky like a jagged finger.
+
+Elias knew the rhythm of the sea better than he knew his own heartbeat. He knew which waves crashed hardest against the northern cliffs and which tides retreated silently from the southern cove. But he did not know the bottle.
+
+It was a Tuesday, the kind of day where the fog was so thick it felt like walking through wet wool. Elias was descending the spiral stairs to check the supply hatch when he saw it. Resting on the wet cobblestones of the landing, untouched by the spray, was a bottle. It was old, the glass clouded with age, corked with wax that had long since hardened.
+
+He picked it up. It was heavy, filled with sand and water. He shook it gently, expecting the rattle of empty space, but heard a soft *shush*. Paper.
+
+Elias frowned. He hadn’t seen a boat in three weeks. The nearest mainland was forty miles away, across treacherous currents that usually swallowed small vessels whole. He took the bottle to his desk, the only warm place in the tower, and placed it under the heat lamp.
+
+With a pair of pliers, he carefully worked the cork loose. The wax cracked with a sound like a gunshot in the quiet room. He tipped the bottle, and a single sheet of cream-colored paper slid out. It was dry, preserved by the air trapped inside.
+
+Elias unfolded it. The handwriting was elegant, looping, and unmistakably familiar. It was the same slanted script he had practiced in school, the same way he crossed his &#x27;t&#x27;s.
+
+*Dear Elias,*
+
+*If you are reading this, the current has finally done its work. I know you think you are alone, but you are not. The storm is coming, not from the sky, but from within. Check the loose stone in the foundation of the old watchtower. You’ve been looking for answers in the sea, but they are in the earth.*
+
+*Yours, always,*
+*E.*
+
+Elias dropped the paper. His hands trembled. The signature was *E*. Not *Elizabeth*, his late wife who had died ten years ago. Just *E*.
+
+He had never told anyone about the loose stone. It was a quirk of the original construction, a flaw in the foundation of the old, abandoned watchtower that stood a hundred yards from the lighthouse. He had noticed it years ago, during a renovation, but had never fixed it. He had told no one. He had barely spoken to anyone in a decade.
+
+He looked out the window. The fog was lifting slightly, revealing the silhouette of the old watchtower. It stood dark and silent, a skeleton against the gray sky.
+
+Elias grabbed his coat and stepped out into the biting wind. The walk to the old tower was short, but it felt like a journey through time. The wind howled, but for the first time in years, it didn’t sound like a scream. It sounded like a whisper.
+
+He reached the base of the tower. The foundation was made of rough-hewn granite, slick with moss. He knelt, his knees cracking in the cold, and ran his fingers over the stones. There, near the base, was a stone that didn’t fit. It was slightly larger than the others, with a faint crack running through it.
+
+He pressed it.
+
+With a grinding sound, the stone shifted inward. Behind it was a small cavity, dry and dark. Inside lay a small, leather-bound journal. Elias opened it. The first page was dated twenty years ago, the day he had arrived on Blackrock.
+
+*Dear Elias,*
+
+*Welcome home. I know you chose isolation to escape the pain, but you cannot outrun yourself. I have been waiting for you to remember. The sea is vast, but your heart is wider. Come back to me.*
+
+*Yours, always,*
+*E.*
+
+Elias sat back on his heels, the journal clutched to his chest. He looked up at the lighthouse, its beam cutting through the fog, steady and strong. He realized then that the message hadn’t come from the sea. It had come from the past, from a time before he had locked his heart away, from a version of himself that still believed in connection.
+
+The wind died down. The fog lifted completely, revealing a sky full of stars. Elias stood up, the journal in his hand, and began the walk back to the lighthouse. He didn’t know who had sent the bottle, or how it had survived the decades. But for the first time in twenty years, he didn’t feel alone. He felt found.</mark></div></div><div class='o diff'><div class=oh><b>r6</b> &middot; differs from token 36 &middot; 873 tokens</div><div class=ot><span class=ctx>The wind on Blackrock Island didn’t just blow; it screamed. It was a constant, ragged companion to Elias Thorne, who had spent the last twenty years as the</span><mark> sole guardian of the lighthouse that pierced the gray sky like a jagged finger.
+
+Elias knew the rhythm of the sea better than he knew his own heartbeat. He knew which waves crashed hardest against the northern cliffs and which currents whispered secrets near the southern cove. But he did not know the bottle.
+
+It was a Tuesday, the kind of day where the fog was so thick you could chew it. Elias had finished his rounds, checking the lens mechanism and polishing the brass until it shone like gold. As he descended the spiral stairs, his boot caught on something wedged between two rocks near the base of the tower.
+
+It wasn’t debris. It was glass, thick and green, corked with wax that had held firm against decades of salt and storm.
+
+Elias picked it up, turning it over in his calloused hands. There was no label, no address, no name. Just a faint, handwritten scrawl on a slip of paper inside, visible only when he held it up to the dim light of the lantern room.
+
+He broke the seal with a pocket knife. The paper was brittle, yellowed with age, but the ink was still dark, almost black.
+
+*“Elias,”* it read. *“If you are reading this, the storm has passed. The light is yours. Do not let it go out. – A Friend.”*
+
+Elias frowned. He had no friends. Not really. The supply boat came once a month, bringing canned goods and newspapers, but the captain never stayed for more than an hour. The other keepers before him had been strangers, passing through like ghosts.
+
+He read the note again. *A Friend.*
+
+He looked out the window. The fog was lifting, revealing the churning gray sea below. For the first time in years, the silence of the island felt heavy, expectant.
+
+He tucked the note into his pocket and continued his routine. But that night, as he climbed the stairs to tend the lamp, he felt a strange weight in his chest. He wasn’t just a keeper of a light; he was the recipient of a message.
+
+The next morning, the supply boat arrived. The captain, a gruff man named Miller, handed over the crates.
+
+“Rough night, Elias?” Miller asked, lighting a cigarette.
+
+“Quiet,” Elias replied. “Too quiet.”
+
+Miller shrugged. “Sea’s been calm. No storms for weeks.”
+
+Elias hesitated. He wanted to ask if Miller had ever seen a bottle like the one he’d found. But the words stuck in his throat. Instead, he asked, “Have you ever been to Blackrock before?”
+
+Miller paused, looking at the lighthouse. “No. First time. Heard it’s a lonely place.”
+
+“It is,” Elias said. “But not as lonely as it seems.”
+
+That evening, Elias sat by the window, the note resting on the table beside him. He stared at the words: *Do not let it go out.*
+
+He realized then that the message wasn’t about the light itself. It was about him. The light was a metaphor for his purpose, his vigilance, his humanity in a place designed to isolate. Someone, somewhere, had known him. Had known his name. Had sent a message across the sea, through time, to remind him that he was seen.
+
+Elias picked up his pen. He found a blank sheet of paper and began to write.
+
+*“To the Friend who sent the bottle: The light is bright. The storm has passed. I am here. And I am not alone.”*
+
+He rolled the paper, sealed it in a new bottle, and waited for the tide to carry it away. He didn’t know where it would go. He didn’t know if it would ever reach its destination. But for the first time in twenty years, Elias Thorne smiled as he watched the waves roll in, knowing that somewhere, in the vast, indifferent ocean, a connection had been made.
+
+And that was enough.</mark></div></div><div class='o diff'><div class=oh><b>r7</b> &middot; differs from token 37 &middot; 950 tokens</div><div class=ot><span class=ctx>&hellip;wind on Blackrock Island didn’t just blow; it screamed. It was a constant, ragged companion to Elias Thorne, who had spent the last twenty years as the solitary</span><mark> guardian of the lighthouse that pierced the gray sky like a jagged finger.
+
+Elias knew the rhythm of the sea better than he knew his own heartbeat. He knew which waves crashed hardest against the northern cliffs and which currents whispered secrets near the southern cove. But he did not know the bottle.
+
+It was a Tuesday, the kind of day where the fog was so thick it felt like walking through wet wool. Elias was descending the spiral stairs to check the supply hatch when he saw it. Wedged between two slick, black rocks at the base of the cliff, half-buried in kelp and driftwood, was a cylinder of green glass.
+
+He picked it up. It was heavy, sealed with wax that had held firm against decades of salt and storm. There was no label, no name, no postmark. Just a single word etched into the glass near the neck, in a script so fine it looked like spider silk: *Elias.*
+
+His breath hitched. He turned the bottle over in his calloused hands. The name was unmistakable. It was his name. Not a common name, but *his* name.
+
+&quot;Coincidence,&quot; he muttered, his voice rough from disuse. &quot;Someone named Elias found a bottle, wrote a message, and threw it into the current. The odds are...&quot;
+
+He trailed off. The odds were astronomical. He hadn’t spoken to another human being in three years. He hadn’t received mail in five. The supply boat came once a month, dropping crates and taking away trash, but never stopping for conversation.
+
+With trembling fingers, he broke the wax seal. The cork popped with a sound like a gunshot in the quiet cove. Inside was a single sheet of parchment, dry and crisp, smelling faintly of lavender and old paper.
+
+He unfolded it. The handwriting was elegant, looping, and familiar. Too familiar.
+
+*Dear Elias,*
+
+*If you are reading this, then the loop is closing. I know you think you are alone, but you are never truly alone. The light you keep is not just for the ships; it is for me. I have been watching from the other side of the world, waiting for the right tide. The storm is coming, Elias. Not the one in the sky, but the one in your mind. You have been waiting for a reason to leave. This is it. The boat arrives at dawn. Do not wait for the signal. Just go.*
+
+*Yours, always,*
+*Clara*
+
+Elias dropped the paper. His heart hammered against his ribs like a trapped bird. Clara. The name hit him with the force of a physical blow. Clara, who had vanished from his life ten years ago, the day he chose the lighthouse over the city, over her, over everything. He had assumed she had moved on, married, forgotten him. He had buried that grief under layers of routine and silence.
+
+He looked up at the lighthouse, its beam cutting through the fog in its eternal, lonely sweep. For twenty years, he had believed his duty was to stay, to protect, to endure. But the letter said *go*.
+
+He looked back at the bottle. The glass was cold, but his hands were burning.
+
+A sound broke the silence. Not the wind, not the waves. The low, mournful horn of a ship’s engine. It was faint, distant, but unmistakable. It was coming from the north, from the direction of the mainland.
+
+Elias stared at the horizon. The fog was thinning slightly, revealing the dark silhouette of a vessel cutting through the mist. It wasn’t the monthly supply boat. It was smaller, sleeker.
+
+He looked at the letter again. *The boat arrives at dawn.*
+
+It was only 4:00 AM.
+
+Elias Thorne, the man who had not left Blackrock Island in two decades, took a deep breath. The air tasted of salt and possibility. He folded the letter carefully and placed it in his pocket, right over his heart. Then, he turned his back on the lighthouse, on the light that had been his only companion, and began the long climb up the cliff path toward the dock.
+
+For the first time in twenty years, Elias didn’t look back. He walked toward the sound of the horn, into the fog, and into the unknown.</mark></div></div><div class='o diff'><div class=oh><b>r8</b> &middot; differs from token 36 &middot; 1022 tokens</div><div class=ot><span class=ctx>The wind on Blackrock Island didn’t just blow; it screamed. It was a constant, ragged companion to Elias Thorne, who had spent the last twenty years as the</span><mark> sole guardian of the lighthouse that pierced the gray sky like a jagged finger.
+
+Elias knew the rhythm of the sea better than he knew his own heartbeat. He knew which waves crashed hardest against the northern cliffs and which tides retreated silently from the southern cove. But he did not know the bottle.
+
+It was a Tuesday, the kind of day where the fog was so thick it felt like walking through wet wool. Elias was descending the spiral stairs to check the supply hatch when he saw it. Resting on the wet cobblestones of the landing, untouched by the spray, was a bottle. It was old, the glass clouded with age, corked with wax that had long since hardened.
+
+He picked it up. It was heavy, filled with sand and water. He shook it gently, expecting the rattle of empty space, but heard a soft *shush*. Paper.
+
+Elias frowned. He hadn’t seen a boat in three weeks. The nearest mainland was forty miles away, across treacherous currents that usually swallowed small vessels whole. He took the bottle to his desk, the only warm place in the tower, and placed it under the brass lamp.
+
+With a knife, he pried the cork. It gave way with a reluctant pop. Inside was a single sheet of parchment, folded tightly. The paper was brittle, yellowed, but the ink was dark and sharp, as if written only yesterday.
+
+Elias unfolded it. His breath hitched in his throat.
+
+The handwriting was elegant, looping, and unmistakably familiar. It was *his* handwriting.
+
+Not a forgery. Not a mimicry. It was the exact slant of his &#x27;E&#x27;, the sharp cross of his &#x27;t&#x27;, the way he always pressed hard on the final period.
+
+The message read:
+
+&gt; *Elias,*
+&gt;
+&gt; *Do not turn on the light tonight. The storm is not outside. It is in the glass. If you light the lamp, you will see what you have been running from. If you keep it dark, you remain safe. But you will be alone forever.*
+&gt;
+&gt; *— E.*
+
+Elias stared at the paper. The date at the bottom was today’s date.
+
+His hands trembled. He looked at the large Fresnel lens in the center of the lantern room, just above him. It was cold and dark. The storm outside was raging, waves hammering against the stone walls like fists.
+
+*The storm is not outside.*
+
+He laughed, a dry, brittle sound. &quot;Madness,&quot; he whispered. &quot;Isolation madness. I’ve been up here too long.&quot;
+
+He crumpled the paper and tossed it into the stove. He turned to the switch for the lamp. His finger hovered over the brass lever.
+
+*If you light the lamp, you will see what you have been running from.*
+
+What had he been running from? He had come to Blackrock to escape the noise of the city, the grief of losing his wife, the guilt of a life unlived. He had found peace in the solitude.
+
+But as he looked at the dark lens, he remembered the last thing he had seen before leaving home. A reflection in a window. A face. His own face, but older, broken, screaming silently.
+
+He hadn’t been running from grief. He had been running from himself.
+
+The wind howled, shaking the tower. The bottle sat on the desk, empty now, a silent witness.
+
+Elias closed his eyes. He thought of the warmth of the lamp, the duty he had sworn to uphold. He thought of the darkness, and the truth hidden within it.
+
+He reached out.
+
+His finger touched the lever.
+
+Outside, the lightning flashed, illuminating the room for a split second. In that flash, Elias didn’t see the sea. He didn’t see the rocks.
+
+He saw the bottle.
+
+And he saw that the paper inside wasn’t parchment.
+
+It was a mirror.
+
+Elias pulled his hand back, gasping. He looked at the desk. The bottle was there. The paper was gone. The stove was empty.
+
+He looked at his hands. They were shaking. He looked at the lamp. It was still dark.
+
+He sat down in his chair, the silence of the island pressing in on him, heavier than before. He didn’t know if the message was a warning, a curse, or a trick of the mind. But he knew one thing.
+
+He would not light the lamp tonight.
+
+And as the storm raged on, Elias Thorne sat in the dark, waiting for the morning, wondering if the sun would rise, or if the darkness had finally won.</mark></div></div><div class='o diff'><div class=oh><b>r9</b> &middot; differs from token 36 &middot; 972 tokens</div><div class=ot><span class=ctx>The wind on Blackrock Island didn’t just blow; it screamed. It was a constant, ragged companion to Elias Thorne, who had spent the last twenty years as the</span><mark> sole guardian of the lighthouse that pierced the gray sky like a jagged finger.
+
+Elias knew the rhythm of the sea better than he knew his own heartbeat. He knew which waves crashed hardest against the northern cliffs and which tides retreated silently from the southern cove. But he did not know the bottle.
+
+It was a Tuesday, the kind of day where the fog was so thick it felt like walking through wet wool. Elias was descending the spiral stairs to check the supply hatch when he saw it. Resting on the wet cobblestones of the landing, untouched by the spray, was a bottle. It was old, the glass clouded with age, corked with wax that had long since hardened.
+
+He picked it up. It was heavy, filled with sand and water. He shook it gently, expecting the rattle of empty space, but heard a soft *shush*. Paper.
+
+Elias frowned. He hadn’t seen a boat in three weeks. The nearest mainland was forty miles away, across treacherous currents that usually swallowed small vessels whole. He took the bottle to his desk, the only warm place in the tower, and placed it under the heat lamp.
+
+With a pair of pliers, he carefully worked the cork loose. It gave way with a reluctant pop. He tipped the bottle, and a single sheet of cream-colored paper slid out. It was dry. Impossibly dry.
+
+He unfolded it. The handwriting was elegant, looping, and unmistakably familiar. It was the same slanted script he had used in his youth, before the ink ran dry and his hand grew stiff with arthritis.
+
+*Dear Elias,*
+
+*If you are reading this, the current has finally done its work. I know you think you are alone, but you are never truly alone when you remember. The storm is coming. Not the one outside, but the one within. You have been waiting for a sign that you made the right choice. This is it. The light is not just for the ships; it is for you. Keep it burning.*
+
+*Yours, always,*
+*Clara*
+
+Elias dropped the paper. His breath hitched in his throat, a sharp, painful gasp. Clara. His wife. She had vanished ten years ago during a squall that had torn the roof off their cottage on the mainland. The coast guard had found nothing. No body, no wreckage. Just an empty house and a half-finished cup of tea.
+
+He had told himself she was dead. He had buried an empty coffin. He had come to Blackrock to escape the grief, to hide in the solitude where the only voices were the gulls and the wind.
+
+But this note… it was dated yesterday.
+
+He looked at the postmark, if there was one. There wasn’t. Just the ink, fresh and dark, as if written moments ago.
+
+Elias’s hands trembled as he picked up the paper again. He read it once, twice, ten times. The words blurred. *The light is not just for the ships; it is for you.*
+
+He looked out the window. The fog was lifting, just slightly, revealing the churning gray sea below. And there, in the distance, a faint glimmer. A ship’s light? No. It was too steady. It was the reflection of his own lighthouse beam, cutting through the mist, a beacon in the darkness.
+
+For the first time in twenty years, Elias didn’t feel the crushing weight of isolation. He felt a strange, quiet warmth. He didn’t know how the bottle had arrived. He didn’t know if Clara was alive, or if this was a trick of the mind, a final gift from a memory that refused to fade.
+
+But the note was real. The paper was real. The love was real.
+
+He walked to the window and placed his hand against the cold glass. &quot;I hear you,&quot; he whispered, his voice rough from disuse.
+
+He turned back to the desk, picked up the note, and folded it carefully. He didn’t throw it away. He placed it in the drawer next to his logbook, right beside his wedding ring.
+
+Then, Elias climbed the stairs. He checked the lens, polished the glass, and adjusted the wick. The beam swept out across the water, bright and unwavering. He wasn’t just keeping the ships safe anymore. He was keeping his promise. And for the first time in a decade, the lighthouse keeper smiled.</mark></div></div></div></section><section class=pr id=math><p class=pq><b>math</b><span>A train leaves Plzeň at 8:15 and travels toward Prague at an average speed of 72 km/h. A second train leaves Prague at 8:45 toward Plzeň at 90 km/h. The distance between the two cities along the track is 114 km. At what time do the trains meet, and how far from Plzeň? Solve it step by step and state the final answer clearly.</span></p><div class=outs><div class=o><div class=oh>reference: E1 greedy, r0 &middot; 1024 tokens &middot; <b>no run</b> identical</div><div class=ot>Here is the step-by-step solution to determine when and where the two trains meet.
+
+### Step 1: Analyze the initial conditions
+
+*   **Distance between Plzeň and Prague ($D$):** $114$ km.
+*   **Train A (Plzeň to Prague):**
+    *   Departure time: $8:15$
+    *   Speed ($v_A$): $72$ km/h
+*   **Train B (Prague to Plzeň):**
+    *   Departure time: $8:45$
+    *   Speed ($v_B$): $90$ km/h
+
+### Step 2: Calculate the head start of Train A
+
+Train A leaves at $8:15$, and Train B leaves at $8:45$. We need to find out how far Train A has traveled by the time Train B starts.
+
+*   Time difference ($\Delta t$): From $8:15$ to $8:45$ is $30$ minutes.
+*   Convert minutes to hours: $30 \text{ minutes} = 0.5 \text{ hours}$.
+*   Distance covered by Train A in this time ($d_{headstart}$):
+    $$d_{headstart} = v_A \times \Delta t$$
+    $$d_{headstart} = 72 \text{ km/h} \times 0.5 \text{ h} = 36 \text{ km}$$
+
+So, at $8:45$, Train A is $36$ km away from Plzeň, and the remaining distance between the two trains is:
+$$D_{remaining} = 114 \text{ km} - 36 \text{ km} = 78 \text{ km}$$
+
+### Step 3: Calculate the time until they meet after 8:45
+
+Now, both trains are moving towards each other. We calculate the time ($t$) it takes for them to cover the remaining $78$ km.
+
+*   Since they are moving towards each other, their relative speed ($v_{rel}$) is the sum of their individual speeds:
+    $$v_{rel} = v_A + v_B$$
+    $$v_{rel} = 72 \text{ km/h} + 90 \text{ km/h} = 162 \text{ km/h}$$
+
+*   Calculate the time ($t$) to cover the remaining distance:
+    $$t = \frac{D_{remaining}}{v_{rel}}$$
+    $$t = \frac{78 \text{ km}}{162 \text{ km/h}}$$
+
+    Simplifying the fraction:
+    $$t = \frac{78}{162} = \frac{13}{27} \text{ hours}$$
+
+*   Convert this time into minutes:
+    $$t_{minutes} = \frac{13}{27} \times 60 \text{ minutes}$$
+    $$t_{minutes} = \frac{780}{27} \approx 28.89 \text{ minutes}$$
+
+    Let&#x27;s keep it precise for the final calculation. $\frac{780}{27}$ minutes simplifies to $\frac{260}{9}$ minutes, which is $28$ minutes and $\frac{8}{9}$ of a minute.
+    $\frac{8}{9}$ of a minute is $\frac{8}{9} \times 60$ seconds $= \frac{480}{9} \approx 53.33$ seconds.
+
+    So, the travel time after 8:45 is approximately **28 minutes and 53 seconds**.
+
+### Step 4: Determine the meeting time
+
+*   Start time for the combined travel: $8:45$
+*   Duration: $28$ minutes and $53$ seconds (approx)
+
+$$8:45:00 + 28 \text{ min } 53 \text{ sec} = 9:13:53$$
+
+Rounding to the nearest minute, the trains meet at approximately **9:14**.
+
+### Step 5: Calculate the distance from Plzeň
+
+The question asks for the distance from Plzeň. This is the total distance Train A has traveled from its departure at 8:15 until the meeting time.
+
+*   Total time Train A traveled ($T_A$):
+    $$T_A = \text{Head start time} + \text{Combined travel time}$$
+    $$T_A = 0.5 \text{ hours} + \frac{1</div></div><div class='o diff'><div class=oh><b>r0</b> &middot; differs from token 706 &middot; 1024 tokens</div><div class=ot><span class=ctx>&hellip;27} \times 60 \text{ minutes}$$
+    $$t_{minutes} = \frac{780}{27} \approx 28.89 \text{ minutes}$$
+
+    Let&#x27;s keep it precise for the final calculation. $\frac{</span><mark>13}{27}$ hours is exactly $28$ minutes and $53.33$ seconds.
+
+### Step 4: Determine the meeting time
+
+The trains meet $t$ hours after Train B departs ($8:45$).
+
+*   Departure time of Train B: $8:45$
+*   Time elapsed: $\approx 28.89$ minutes
+
+$$8:45 + 28.89 \text{ minutes} = 8:73.89$$
+
+Since $60$ minutes make an hour, we subtract $60$ from the minutes and add $1$ hour to the hour:
+$$8 \text{ hours} + 1 \text{ hour} = 9 \text{ hours}$$
+$$73.89 \text{ minutes} - 60 \text{ minutes} = 13.89 \text{ minutes}$$
+
+So, the meeting time is approximately **9:13:53** (or roughly 9:14).
+
+### Step 5: Calculate the distance from Plzeň
+
+The question asks for the distance from Plzeň. This is the total distance traveled by Train A from its departure at 8:15 until the meeting time.
+
+*   Total time Train A traveled ($T_A$):
+    $$T_A = (\text{Head start time}) + (\text{Time together})$$
+    $$T_A = </mark></div></div><div class='o diff'><div class=oh><b>r1</b> &middot; differs from token 283 &middot; 1024 tokens</div><div class=ot><span class=ctx>&hellip;es to hours: $30 \text{ minutes} = 0.5 \text{ hours}$.
+*   Distance covered by Train A in this time ($d_{headstart}$):
+    $$d_{headstart} = v_A \times \Delta t</span><mark> = 72 \text{ km/h} \times 0.5 \text{ h} = 36 \text{ km}$$
+
+So, at $8:45$, Train A is $36$ km away from Plzeň, and Train B is just starting from Prague.
+
+### Step 3: Calculate the remaining distance between the trains at 8:45
+
+At $8:45$, the total distance between the two cities is $114$ km. Train A has already covered $36$ km.
+
+*   Remaining distance ($D_{remaining}$):
+    $$D_{remaining} = 114 \text{ km} - 36 \text{ km} = 78 \text{ km}$$
+
+Now, both trains are moving towards each other.
+
+### Step 4: Calculate the time until they meet
+
+Since the trains are moving towards each other, their relative speed is the sum of their individual speeds.
+
+*   Relative speed ($v_{rel}$):
+    $$v_{rel} = v_A + v_B = 72 \text{ km/h} + 90 \text{ km/h} = 162 \text{ km/h}$$
+
+*   Time required to cover the remaining distance ($t_{meet}$):
+    $$t_{meet} = \frac{D_{remaining}}{v_{rel}} = \frac{78 \text{ km}}{162 \text{ km/h}}$$
+
+    Simplifying the fraction:
+    $$t_{meet} = \frac{78}{162} \text{ hours}$$
+    Divide numerator and denominator by 6:
+    $$t_{meet} = \frac{13}{27} \text{ hours}$$
+
+    To convert this to minutes:
+    $$t_{meet} (\text{minutes}) = \frac{13}{27} \times 60 = \frac{780}{27} \approx 28.89 \text{ minutes}$$
+
+    Let&#x27;s keep it precise for the final calculation. $\frac{13}{27}$ hours is approximately $28$ minutes and $53$ seconds.
+
+### Step 5: Determine the meeting time
+
+The trains meet $\frac{13}{27}$ hours after Train B departs ($8:45$).
+
+*   Start time: $8:45$
+*   Duration: $\approx 28.89$ minutes
+
+Let&#x27;s add the minutes to $8:45$:
+$$8:45 + 28 \text{ minutes} = 9:13$$
+$$9:13 + 0.89 \text{ minutes} \approx 9:13 + 53 \text{ seconds}$$
+
+So, the meeting time is approximately **9:13:53**.
+
+*(Note: If we round to the nearest minute, it is 9:14. Let&#x27;s verify the exact minute calculation. $780/27 = 28.888...$ minutes. $0.888... \times 60 = 53.33...$ seconds. So, 9:13 and 53 seconds.)*
+
+### Step 6: Calculate the distance from Plzeň
+
+We need to find the distance of the meeting point from Pl</mark></div></div><div class='o diff'><div class=oh><b>r2</b> &middot; differs from token 527 &middot; 1024 tokens</div><div class=ot><span class=ctx>&hellip;speed ($v_{rel}$) is the sum of their individual speeds:
+    $$v_{rel} = v_A + v_B$$
+    $$v_{rel} = 72 \text{ km/h} + 90 \text{ km/h} = 162 \text{ km/h}$$
+
+*  </span><mark> Time ($t$) to meet:
+    $$t = \frac{D_{remaining}}{v_{rel}}$$
+    $$t = \frac{78 \text{ km}}{162 \text{ km/h}}$$
+
+    Simplifying the fraction:
+    $$t = \frac{78}{162} = \frac{13}{27} \text{ hours}$$
+
+*   Convert $\frac{13}{27}$ hours into minutes:
+    $$t_{minutes} = \frac{13}{27} \times 60 \text{ minutes}$$
+    $$t_{minutes} = \frac{780}{27} \approx 28.89 \text{ minutes}$$
+
+    Let&#x27;s keep it precise for the final calculation.
+    $28.89$ minutes is approximately $28$ minutes and $53$ seconds ($0.888... \times 60 \approx 53.33$).
+
+### Step 4: Determine the meeting time
+
+The trains meet $\frac{13}{27}$ hours after Train B departs at $8:45$.
+
+*   Start time: $8:45$
+*   Duration: $\approx 28.89$ minutes
+
+$$8:45 + 28.89 \text{ minutes} = 8:73.89$$
+
+Since $60$ minutes make an hour, we subtract $60$ from the minutes and add $1$ hour to the hour:
+$$8 \text{ hours} + 1 \text{ hour} = 9 \text{ hours}$$
+$$73.89 \text{ minutes} - 60 \text{ minutes} = 13.89 \text{ minutes}$$
+
+So, the time is approximately **9:13:53** (9 hours, 13 minutes, and 53 seconds).
+
+### Step 5: Calculate the distance from Plzeň
+
+The question asks for the distance from Plzeň. This is the total distance Train A has traveled from its start at $8:15$ until the meeting time.
+
+*   Total time Train A traveled ($T_A$):</mark></div></div><div class='o diff'><div class=oh><b>r3</b> &middot; differs from token 706 &middot; 1024 tokens</div><div class=ot><span class=ctx>&hellip;27} \times 60 \text{ minutes}$$
+    $$t_{minutes} = \frac{780}{27} \approx 28.89 \text{ minutes}$$
+
+    Let&#x27;s keep it precise for the final calculation. $\frac{</span><mark>13}{27}$ hours is exactly $28$ minutes and $53.33$ seconds.
+
+### Step 4: Determine the meeting time
+
+The trains meet $\frac{13}{27}$ hours after Train B departs ($8:45$).
+
+*   Start time: $8:45$
+*   Duration: $\approx 28.89$ minutes
+
+Let&#x27;s add the minutes to $8:45$:
+$$45 \text{ minutes} + 28.89 \text{ minutes} = 73.89 \text{ minutes}$$
+
+Since $60$ minutes make an hour:
+$$73.89 - 60 = 13.89 \text{ minutes past the next hour}$$
+
+So, the time is approximately **9:13:53** (9 hours, 13 minutes, and 53 seconds).
+
+### Step 5: Calculate the distance from Plzeň
+
+We need to find the distance of the meeting point from Plzeň. This is equal to the total distance Train A traveled from its departure at $8:15$ until the meeting time.
+
+*   Total time Train A traveled ($T_A$):
+    $$T_A = (\text{Head start time}) + (\text{Time together})$$
+    $$T_A = 0.5 \text{ hours} + \frac{13}{27} \</mark></div></div><div class='o diff'><div class=oh><b>r4</b> &middot; differs from token 527 &middot; 1024 tokens</div><div class=ot><span class=ctx>&hellip;speed ($v_{rel}$) is the sum of their individual speeds:
+    $$v_{rel} = v_A + v_B$$
+    $$v_{rel} = 72 \text{ km/h} + 90 \text{ km/h} = 162 \text{ km/h}$$
+
+*  </span><mark> Time ($t$) to meet:
+    $$t = \frac{D_{remaining}}{v_{rel}}$$
+    $$t = \frac{78 \text{ km}}{162 \text{ km/h}}$$
+
+    Simplifying the fraction:
+    $$t = \frac{78}{162} = \frac{13}{27} \text{ hours}$$
+
+    To convert this to minutes:
+    $$t_{minutes} = \frac{13}{27} \times 60 \text{ minutes}$$
+    $$t_{minutes} = \frac{780}{27} \approx 28.89 \text{ minutes}$$
+
+    Let&#x27;s keep it precise for the final calculation. $\frac{13}{27}$ hours is exactly $28$ minutes and $53.33$ seconds.
+
+### Step 4: Determine the meeting time
+
+The trains meet $\frac{13}{27}$ hours after Train B departs ($8:45$).
+
+*   Start time: $8:45$
+*   Duration: $\approx 28.89$ minutes
+
+Adding $28$ minutes to $8:45$:
+$$8:45 + 28 \text{ min} = 9:13$$
+
+Adding the remaining $0.89$ minutes ($\approx 53$ seconds):
+$$9:13:53$$
+
+So, the trains meet at approximately **9:13:53**.
+
+### Step 5: Calculate the distance from Plzeň
+
+We need to find the distance from Plzeň where they meet. This is equal to the total distance Train A has traveled from its start at $8:15$ until the meeting time.
+
+*   Total time Train A traveled ($T_A$):
+    $$T_A = (\text{Head start time}) + (\text{Time together})$$
+    $$T_A = 0.5 \text{ h} + \frac{13}{27} \text{ h}$$
+    
+    To add these, find a common denominator ($54$):
+    $$0.5 = \frac{1}{2} = \frac{2</mark></div></div><div class='o diff'><div class=oh><b>r5</b> &middot; differs from token 706 &middot; 1024 tokens</div><div class=ot><span class=ctx>&hellip;27} \times 60 \text{ minutes}$$
+    $$t_{minutes} = \frac{780}{27} \approx 28.89 \text{ minutes}$$
+
+    Let&#x27;s keep it precise for the final calculation. $\frac{</span><mark>13}{27}$ hours is exactly $28$ minutes and $53.33$ seconds.
+
+### Step 4: Determine the meeting time
+
+The trains meet $t$ hours after Train B departs ($8:45$).
+
+*   Departure time of Train B: $8:45$
+*   Time elapsed: $\approx 28.89$ minutes
+
+$$8:45 + 28.89 \text{ minutes} = 8:73.89$$
+
+Since $60$ minutes make an hour, we subtract $60$ from the minutes and add $1$ hour to the hour:
+$$8 \text{ hours} + 1 \text{ hour} = 9 \text{ hours}$$
+$$73.89 \text{ minutes} - 60 \text{ minutes} = 13.89 \text{ minutes}$$
+
+So, the meeting time is approximately **9:13:53** (or roughly 9:14).
+
+### Step 5: Calculate the distance from Plzeň
+
+The question asks for the distance from Plzeň. This is the total distance Train A has traveled from its start at $8:15$ until the meeting time.
+
+*   Total time Train A traveled ($T_A$):
+    $$T_A = (\text{Head start time}) + (\text{Time together})$$
+    $$T_A =</mark></div></div><div class='o diff'><div class=oh><b>r6, r8</b> &middot; differs from token 801 &middot; 1024 tokens</div><div class=ot><span class=ctx>&hellip;8$ minutes and $\frac{8}{9}$ of a minute.
+    $\frac{8}{9}$ of a minute is $\frac{8}{9} \times 60$ seconds $= \frac{480}{9} \approx 53.33$ seconds.
+
+    So, the</span><mark> time elapsed after $8:45$ is approximately **28 minutes and 53 seconds**.
+
+### Step 4: Determine the meeting time
+
+*   Start time for the calculation: $8:45$
+*   Add the travel time: $28$ minutes and $53$ seconds.
+    $$8:45:00 + 0:28:53 = 9:13:53$$
+
+Rounding to the nearest minute, the trains meet at approximately **9:14**.
+
+### Step 5: Calculate the distance from Plzeň
+
+The question asks for the distance from Plzeň. This is the total distance Train A has traveled from its departure at $8:15$ until the meeting time.
+
+*   Total time Train A traveled ($T_A$):
+    $$T_A = (\text{Head start time}) + (\text{Time together})$$
+    $$T_A = 0.5 \text{ hours} + \frac{13}{27} \</mark></div></div><div class='o diff'><div class=oh><b>r7</b> &middot; differs from token 706 &middot; 1024 tokens</div><div class=ot><span class=ctx>&hellip;27} \times 60 \text{ minutes}$$
+    $$t_{minutes} = \frac{780}{27} \approx 28.89 \text{ minutes}$$
+
+    Let&#x27;s keep it precise for the final calculation. $\frac{</span><mark>13}{27}$ hours is exactly $28$ minutes and $53.33$ seconds.
+
+### Step 4: Determine the meeting time
+
+The trains meet $\frac{13}{27}$ hours after Train B departs ($8:45$).
+
+*   Start time: $8:45$
+*   Duration: $\approx 28.89$ minutes
+
+Let&#x27;s add the minutes to $8:45$:
+$$45 \text{ minutes} + 28.89 \text{ minutes} = 73.89 \text{ minutes}$$
+
+Since $60$ minutes make an hour:
+$$73.89 - 60 = 13.89 \text{ minutes past the next hour}$$
+
+So, the time is approximately **9:13:53** (or roughly 9:14).
+
+### Step 5: Calculate the distance from Plzeň
+
+We need to find the distance of the meeting point from Plzeň. This is equal to the total distance Train A traveled from its departure at $8:15$ until the meeting time.
+
+*   Total time Train A traveled ($T_A$):
+    $$T_A = (\text{Head start time}) + (\text{Time together})$$
+    $$T_A = 0.5 \text{ hours} + \frac{13}{27} \text{ hours}$$
+</mark></div></div><div class='o diff'><div class=oh><b>r9</b> &middot; differs from token 527 &middot; 1024 tokens</div><div class=ot><span class=ctx>&hellip;speed ($v_{rel}$) is the sum of their individual speeds:
+    $$v_{rel} = v_A + v_B$$
+    $$v_{rel} = 72 \text{ km/h} + 90 \text{ km/h} = 162 \text{ km/h}$$
+
+*  </span><mark> Time ($t$) to meet:
+    $$t = \frac{D_{remaining}}{v_{rel}}$$
+    $$t = \frac{78 \text{ km}}{162 \text{ km/h}}$$
+
+    Simplifying the fraction:
+    $$t = \frac{78}{162} = \frac{13}{27} \text{ hours}$$
+
+    To convert this to minutes:
+    $$t_{minutes} = \frac{13}{27} \times 60 \text{ minutes}$$
+    $$t_{minutes} = \frac{780}{27} \approx 28.89 \text{ minutes}$$
+
+    Let&#x27;s keep it precise for the final calculation. $\frac{13}{27}$ hours is exactly $28$ minutes and $53.33$ seconds.
+
+### Step 4: Determine the meeting time
+
+The trains meet $\frac{13}{27}$ hours after Train B departs ($8:45$).
+
+*   Start time: $8:45$
+*   Duration: $\approx 28.89$ minutes
+
+Adding $28$ minutes to $8:45$:
+$$8:45 + 28 \text{ min} = 9:13$$
+
+Adding the remaining $0.89$ minutes ($\approx 53$ seconds):
+$$9:13:53$$
+
+So, the trains meet at approximately **9:13:53** (or roughly 9:14).
+
+### Step 5: Calculate the distance from Plzeň
+
+We need to find the distance from Plzeň where they meet. This is equal to the total distance Train A has traveled from its start at $8:15$ until the meeting time.
+
+*   Total time Train A traveled ($T_A$):
+    $$T_A = (\text{Head start time}) + (\text{Time together})$$
+    $$T_A = 0.5 \text{ h} + \frac{13}{27} \text{ h}$$
+    
+    To add these, find a common denominator ($54$):
+    $$0.5 = \frac{</mark></div></div></div></section><section class=pr id=code><p class=pq><b>code</b><span>Write a Python function `parse_iso8601(s: str)` that parses an ISO 8601 timestamp such as `2026-10-12T14:03:07.250+02:00` into a tuple (year, month, day, hour, minute, second, microsecond, utc_offset_minutes) without using the datetime module. Validate the input and raise ValueError on malformed strings. Include a few pytest test cases.</span></p><div class=outs><div class=o><div class=oh>reference: E1 greedy, r0 &middot; 1024 tokens &middot; <b>no run</b> identical</div><div class=ot>```python
+import re
+
+
+def parse_iso8601(s: str) -&gt; tuple:
+    &quot;&quot;&quot;
+    Parse an ISO 8601 timestamp string into a tuple:
+    (year, month, day, hour, minute, second, microsecond, utc_offset_minutes)
+    
+    Raises ValueError on malformed strings.
+    &quot;&quot;&quot;
+    if not isinstance(s, str):
+        raise ValueError(&quot;Input must be a string&quot;)
+    
+    # Pattern to match ISO 8601 format: YYYY-MM-DDTHH:MM:SS.ffffff±HH:MM or Z
+    # We need to handle various formats:
+    # - With timezone offset: +HH:MM or -HH:MM or Z
+    # - With fractional seconds: .fff, .fffff, etc.
+    # - Without fractional seconds
+    
+    pattern = r&#x27;^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(?:\.(\d+))?(Z|[+-]\d{2}:\d{2})$&#x27;
+    
+    match = re.match(pattern, s)
+    if not match:
+        raise ValueError(f&quot;Invalid ISO 8601 format: {s}&quot;)
+    
+    year = int(match.group(1))
+    month = int(match.group(2))
+    day = int(match.group(3))
+    hour = int(match.group(4))
+    minute = int(match.group(5))
+    second = int(match.group(6))
+    fractional = match.group(7)
+    tz_part = match.group(8)
+    
+    # Validate ranges
+    if not (1 &lt;= month &lt;= 12):
+        raise ValueError(f&quot;Invalid month: {month}&quot;)
+    if not (1 &lt;= day &lt;= 31):
+        raise ValueError(f&quot;Invalid day: {day}&quot;)
+    if not (0 &lt;= hour &lt;= 23):
+        raise ValueError(f&quot;Invalid hour: {hour}&quot;)
+    if not (0 &lt;= minute &lt;= 59):
+        raise ValueError(f&quot;Invalid minute: {minute}&quot;)
+    if not (0 &lt;= second &lt;= 59):
+        raise ValueError(f&quot;Invalid second: {second}&quot;)
+    
+    # Parse fractional seconds to microseconds
+    if fractional is not None:
+        # Pad or truncate to 6 digits for microseconds
+        frac_str = fractional.ljust(6, &#x27;0&#x27;)[:6]
+        microsecond = int(frac_str)
+    else:
+        microsecond = 0
+    
+    # Parse timezone offset
+    if tz_part == &#x27;Z&#x27;:
+        utc_offset_minutes = 0
+    else:
+        # tz_part is like +02:00 or -05:30
+        sign = 1 if tz_part[0] == &#x27;+&#x27; else -1
+        tz_hours = int(tz_part[1:3])
+        tz_minutes = int(tz_part[4:6])
+        if not (0 &lt;= tz_hours &lt;= 23):
+            raise ValueError(f&quot;Invalid timezone hours: {tz_hours}&quot;)
+        if not (0 &lt;= tz_minutes &lt;= 59):
+            raise ValueError(f&quot;Invalid timezone minutes: {tz_minutes}&quot;)
+        utc_offset_minutes = sign * (tz_hours * 60 + tz_minutes)
+    
+    return (year, month, day, hour, minute, second, microsecond, utc_offset_minutes)
+
+
+# Test cases
+if __name__ == &quot;__main__&quot;:
+    import pytest
+    
+    def test_basic_iso8601():
+        result = parse_iso8601(&quot;2026-10-12T14:03:07.250+02:00&quot;)
+        assert result == (2026, 10, 12, 14, 3, 7, 250000, 120)
+    
+    def test_utc_zulu():
+        result = parse_iso8601(&quot;2026-10-12T14:03:07Z&quot;)
+        assert result == (2026, 10, 12, 14, 3, 7, 0, 0)
+    
+    def test_negative_offset():
+        result = parse_iso8601(&quot;2026-10-12T14:03:07.123456-05:30&quot;)
+        assert result == (2026, 10, 12, 14, 3, 7, 123456, -330</div></div><div class='o diff'><div class=oh><b>r0</b> &middot; differs from token 132 &middot; 1024 tokens</div><div class=ot><span class=ctx>&hellip;):
+        raise ValueError(&quot;Input must be a string&quot;)
+    
+    # Pattern to match ISO 8601 format: YYYY-MM-DDTHH:MM:SS.ffffff±HH:MM or Z
+    # We need to handle</span><mark>:
+    # - Date part: YYYY-MM-DD
+    # - Time separator: T
+    # - Time part: HH:MM:SS[.ffffff]
+    # - Timezone: Z or ±HH:MM or ±HHMM or ±HH
+    
+    pattern = r&#x27;^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(?:\.(\d+))?(Z|[+-]\d{2}:\d{2}|[+-]\d{4}|[+-]\d{2})$&#x27;
+    
+    match = re.match(pattern, s)
+    if not match:
+        raise ValueError(f&quot;Invalid ISO 8601 format: {s}&quot;)
+    
+    year = int(match.group(1))
+    month = int(match.group(2))
+    day = int(match.group(3))
+    hour = int(match.group(4))
+    minute = int(match.group(5))
+    second = int(match.group(6))
+    microsecond_str = match.group(7)
+    tz_part = match.group(8)
+    
+    # Validate date components
+    if month &lt; 1 or month &gt; 12:
+        raise ValueError(f&quot;Invalid month: {month}&quot;)
+    if day &lt; 1 or day &gt; 31:
+        raise ValueError(f&quot;Invalid day: {day}&quot;)
+    # More precise day validation could be added, but basic range check is sufficient for most cases
+    
+    # Validate time components
+    if hour &lt; 0 or hour &gt; 23:
+        raise ValueError(f&quot;Invalid hour: {hour}&quot;)
+    if minute &lt; 0 or minute &gt; 59:
+        raise ValueError(f&quot;Invalid minute: {minute}&quot;)
+    if second &lt; 0 or second &gt; 59:
+        raise ValueError(f&quot;Invalid second: {second}&quot;)
+    
+    # Parse microseconds
+    if microsecond_str is not None:
+        # Pad or truncate to 6 digits
+        microsecond_str = microsecond_str.ljust(6, &#x27;0&#x27;)[:6]
+        microsecond = int(microsecond_str)
+    else:
+        microsecond = 0
+    
+    # Parse timezone offset
+    if tz_part == &#x27;Z&#x27;:
+        utc_offset_minutes = 0
+    else:
+        # Parse ±HH:MM, ±HHMM, or ±HH
+        sign = 1 if tz_part[0] == &#x27;+&#x27; else -1
+        tz_digits = tz_part[1:]
+        
+        if &#x27;:&#x27; in tz_digits:
+            # ±HH:MM
+            parts = tz_digits.split(&#x27;:&#x27;)
+            if len(parts) != 2:
+                raise ValueError(f&quot;Invalid timezone format: {tz_part}&quot;)
+            tz_hours = int(parts[0])
+            tz_minutes = int(parts[1])
+        elif len(tz_digits) == 4:
+            # ±HHMM
+            tz_hours = int(tz_digits[:2])
+            tz_minutes = int(tz_digits[2:])
+        elif len(tz_digits) == 2:
+            # ±HH
+            tz_hours = int(tz_digits)
+            tz_minutes = 0
+        else:
+            raise ValueError(f&quot;Invalid timezone format: {tz_part}&quot;)
+        
+        if tz_hours &lt; 0 or tz_hours &gt; 23:
+            raise ValueError(f&quot;Invalid timezone hours: {tz_hours}&quot;)
+        if tz_minutes &lt; 0 or tz_minutes &gt; 59:
+            raise ValueError(f&quot;Invalid timezone minutes: {tz_minutes}&quot;)
+        
+        utc_offset_minutes = sign * (tz_hours * 60 + tz_minutes)
+    
+    return (year, month, day, hour, minute, second, microsecond, utc_offset_minutes)
+
+
+# Test cases
+if __name__ == &quot;__main__&quot;:
+    import pytest
+    
+    def test_basic_iso8601():
+        result = parse_iso8601(&quot;2026-10-12T14:03:07.250+02:00&quot;)
+        assert result == (</mark></div></div><div class='o diff'><div class=oh><b>r1&ndash;7, r9</b> &middot; differs from token 127 &middot; 686 tokens</div><div class=ot><span class=ctx>&hellip;ot isinstance(s, str):
+        raise ValueError(&quot;Input must be a string&quot;)
+    
+    # Pattern to match ISO 8601 format: YYYY-MM-DDTHH:MM:SS.ffffff±HH:MM or Z
+   </span><mark> pattern = r&#x27;^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(?:\.(\d+))?(Z|[+-]\d{2}:\d{2})$&#x27;
+    
+    match = re.match(pattern, s)
+    if not match:
+        raise ValueError(f&quot;Invalid ISO 8601 format: {s}&quot;)
+    
+    year = int(match.group(1))
+    month = int(match.group(2))
+    day = int(match.group(3))
+    hour = int(match.group(4))
+    minute = int(match.group(5))
+    second = int(match.group(6))
+    
+    # Handle microseconds
+    if match.group(7):
+        microsecond_str = match.group(7)
+        # Pad or truncate to 6 digits
+        microsecond_str = microsecond_str.ljust(6, &#x27;0&#x27;)[:6]
+        microsecond = int(microsecond_str)
+    else:
+        microsecond = 0
+    
+    # Handle timezone offset
+    tz_part = match.group(8)
+    if tz_part == &#x27;Z&#x27;:
+        utc_offset_minutes = 0
+    else:
+        sign = 1 if tz_part[0] == &#x27;+&#x27; else -1
+        tz_hours = int(tz_part[1:3])
+        tz_minutes = int(tz_part[4:6])
+        utc_offset_minutes = sign * (tz_hours * 60 + tz_minutes)
+    
+    # Validate ranges
+    if not (1 &lt;= month &lt;= 12):
+        raise ValueError(f&quot;Invalid month: {month}&quot;)
+    if not (1 &lt;= day &lt;= 31):
+        raise ValueError(f&quot;Invalid day: {day}&quot;)
+    if not (0 &lt;= hour &lt;= 23):
+        raise ValueError(f&quot;Invalid hour: {hour}&quot;)
+    if not (0 &lt;= minute &lt;= 59):
+        raise ValueError(f&quot;Invalid minute: {minute}&quot;)
+    if not (0 &lt;= second &lt;= 59):
+        raise ValueError(f&quot;Invalid second: {second}&quot;)
+    if not (0 &lt;= microsecond &lt;= 999999):
+        raise ValueError(f&quot;Invalid microsecond: {microsecond}&quot;)
+    if not (-1440 &lt;= utc_offset_minutes &lt;= 1440):
+        raise ValueError(f&quot;Invalid utc_offset_minutes: {utc_offset_minutes}&quot;)
+    
+    return (year, month, day, hour, minute, second, microsecond, utc_offset_minutes)
+```</mark></div></div><div class='o diff'><div class=oh><b>r8</b> &middot; differs from token 132 &middot; 1024 tokens</div><div class=ot><span class=ctx>&hellip;):
+        raise ValueError(&quot;Input must be a string&quot;)
+    
+    # Pattern to match ISO 8601 format: YYYY-MM-DDTHH:MM:SS.ffffff±HH:MM or Z
+    # We need to handle</span><mark>:
+    # - Date part: YYYY-MM-DD
+    # - Time part: HH:MM:SS[.ffffff]
+    # - Timezone: Z or ±HH:MM or ±HHMM or ±HH
+    
+    pattern = r&#x27;^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(?:\.(\d+))?(Z|[+-]\d{2}(?::?\d{2})?)$&#x27;
+    
+    match = re.match(pattern, s)
+    if not match:
+        raise ValueError(f&quot;Invalid ISO 8601 format: {s}&quot;)
+    
+    year = int(match.group(1))
+    month = int(match.group(2))
+    day = int(match.group(3))
+    hour = int(match.group(4))
+    minute = int(match.group(5))
+    second = int(match.group(6))
+    microsecond_str = match.group(7)
+    tz_part = match.group(8)
+    
+    # Validate date components
+    if month &lt; 1 or month &gt; 12:
+        raise ValueError(f&quot;Invalid month: {month}&quot;)
+    if day &lt; 1 or day &gt; 31:
+        raise ValueError(f&quot;Invalid day: {day}&quot;)
+    # More precise day validation could be added, but basic range check is sufficient for most cases
+    
+    # Validate time components
+    if hour &lt; 0 or hour &gt; 23:
+        raise ValueError(f&quot;Invalid hour: {hour}&quot;)
+    if minute &lt; 0 or minute &gt; 59:
+        raise ValueError(f&quot;Invalid minute: {minute}&quot;)
+    if second &lt; 0 or second &gt; 59:
+        raise ValueError(f&quot;Invalid second: {second}&quot;)
+    
+    # Parse microseconds
+    if microsecond_str is not None:
+        # Pad or truncate to 6 digits
+        microsecond_str = microsecond_str.ljust(6, &#x27;0&#x27;)[:6]
+        microsecond = int(microsecond_str)
+    else:
+        microsecond = 0
+    
+    # Parse timezone offset
+    if tz_part == &#x27;Z&#x27;:
+        utc_offset_minutes = 0
+    else:
+        # Parse ±HH:MM or ±HHMM or ±HH
+        sign = 1 if tz_part[0] == &#x27;+&#x27; else -1
+        tz_digits = tz_part[1:]
+        if &#x27;:&#x27; in tz_digits:
+            parts = tz_digits.split(&#x27;:&#x27;)
+            tz_hours = int(parts[0])
+            tz_minutes = int(parts[1]) if len(parts) &gt; 1 else 0
+        else:
+            if len(tz_digits) == 2:
+                tz_hours = int(tz_digits)
+                tz_minutes = 0
+            elif len(tz_digits) == 4:
+                tz_hours = int(tz_digits[:2])
+                tz_minutes = int(tz_digits[2:])
+            else:
+                raise ValueError(f&quot;Invalid timezone format: {tz_part}&quot;)
+        
+        if tz_hours &lt; 0 or tz_hours &gt; 23:
+            raise ValueError(f&quot;Invalid timezone hours: {tz_hours}&quot;)
+        if tz_minutes &lt; 0 or tz_minutes &gt; 59:
+            raise ValueError(f&quot;Invalid timezone minutes: {tz_minutes}&quot;)
+        
+        utc_offset_minutes = sign * (tz_hours * 60 + tz_minutes)
+    
+    return (year, month, day, hour, minute, second, microsecond, utc_offset_minutes)
+
+
+# Test cases
+if __name__ == &quot;__main__&quot;:
+    import pytest
+    
+    def test_basic_iso8601():
+        result = parse_iso8601(&quot;2026-10-12T14:03:07.250+02:00&quot;)
+        assert result == (2026, 10, 12, 14, 3, 7, 250000, 120)
+    
+    def test_utc_zulu():
+        result =</mark></div></div></div></section><script>document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-theme-toggle]');if(!b)return;var d=document.documentElement,n=d.getAttribute('data-theme')==='dark'?'light':'dark';if(n==='dark')d.setAttribute('data-theme','dark');else d.removeAttribute('data-theme');try{localStorage.setItem('theme',n);}catch(err){}});</script></body></html>
